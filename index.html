@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>TunisianValues — Test politique tunisien</title>
+    <meta name="description" content="Un questionnaire politique tunisien avec 7 axes : Panarabisme, Coopération internationale, Économie, Religion, Sociétal, Démocratie, Gouvernance.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="shortcut icon" type="image/png" href="icon.png">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        'tunisia-red': '#E30613',
+                        'tunisia-white': '#FFFFFF',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #ea6666 0%, #9c1c1c 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .axis-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #ea6666 0%, #9c1c1c 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(151, 23, 23, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-sans">
+    <!-- Hero Section -->
+    <div class="gradient-bg min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="container mx-auto px-6 py-8">
+            <div class="text-center">
+                <h1 class="font-serif text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight">
+                    TunisianValues
+                </h1>
+                <div class="w-24 h-1 bg-white mx-auto rounded-full"></div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex items-center justify-center px-6">
+            <div class="text-center max-w-4xl mx-auto">
+                <p class="text-xl md:text-2xl text-white/90 mb-12 leading-relaxed font-light">
+                    Découvrez vos orientations politiques à travers un questionnaire adapté au contexte tunisien
+                </p>
+                
+                <button onclick="location.href='instructions.html';" 
+                        class="btn-primary inline-flex items-center px-12 py-6 text-xl font-semibold text-white rounded-full shadow-lg hover:shadow-xl transform transition-all duration-300">
+                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                    Commencer le test
+                </button>
+
+                <p class="text-white/70 mt-8 text-lg">
+                    <span id="numOfQuestions" class="font-semibold"></span> questions • 5 minutes
+                </p>
+            </div>
+        </main>
+
+        <!-- Scroll indicator -->
+        <div class="text-center pb-8">
+            <div class="animate-bounce">
+                <svg class="w-6 h-6 text-white/70 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    Qu'est-ce que TunisianValues ?
+                </h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-red-500 to-red-500 mx-auto rounded-full mb-8"></div>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-8 md:p-12 card-hover">
+                <p class="text-lg md:text-xl text-gray-700 leading-relaxed text-center">
+                    TunisianValues est un quiz politique adapté au contexte tunisien. 
+                    Vous répondrez à <span class="font-semibold text-red-600" id="numOfQuestions2"></span> affirmations selon votre degré d'accord, 
+                    de <span class="font-semibold">Tout à fait d'accord</span> à <span class="font-semibold">Pas du tout d'accord</span>.
+                    À la fin, vos réponses vous situeront sur <span class="font-semibold text-red-600">7 axes majeurs</span> 
+                    reflétant différentes visions politiques présentes en Tunisie.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Axes Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    Les 7 axes politiques
+                </h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-red-500 to-blue-500 mx-auto rounded-full mb-8"></div>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Chaque axe représente un spectre d'opinions politiques présentes dans le paysage tunisien
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Axe Panarabisme -->
+                <div class="axis-card rounded-2xl p-8 card-hover">
+                    <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                        <div class="flex-1 text-center lg:text-left">
+                            <h3 class="text-2xl font-bold text-red-600 mb-3">PANARABISME</h3>
+                            <p class="text-gray-600">Unité et coopération renforcée entre les pays arabes, vision régionaliste.</p>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span class="text-sm font-semibold text-gray-500 mb-2">NATION</span>
+                            <div class="flex items-center">
+                                <div class="w-8 h-0.5 bg-gray-400"></div>
+                                <svg class="w-6 h-6 text-gray-400 mx-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                    <path d="M6 18l8.5-6L6 6v12z"/>
+                                </svg>
+                                <div class="w-8 h-0.5 bg-gray-400"></div>
+                            </div>
+                        </div>
+                        <div class="flex-1 text-center lg:text-right">
+                            <h3 class="text-2xl font-bold text-teal-600 mb-3">NATIONALISME TUNISIEN</h3>
+                            <p class="text-gray-600">Priorité à l'identité, la souveraineté et les intérêts spécifiques de la Tunisie.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Axe Coopération -->
+                <div class="axis-card rounded-2xl p-8 card-hover">
+                    <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                        <div class="flex-1 text-center lg:text-left">
+                            <h3 class="text-2xl font-bold text-orange-600 mb-3">INTERNATIONALISME</h3>
+                            <p class="text-gray-600">Ouverture aux échanges, alliances et coopération multilatérale.</p>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span class="text-sm font-semibold text-gray-500 mb-2">POLITIQUE ÉTRANGÈRE</span>
+                            <div class="flex items-center">
+                                <div class="w-8 h-0.5 bg-gray-400"></div>
+                                <svg class="w-6 h-6 text-gray-400 mx-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                    <path d="M6 18l8.5-6L6 6v12z"/>
+                                </svg>
+                                <div class="w-8 h-0.5 bg-gray-400"></div>
+                            </div>
+                        </div>
+                        <div class="flex-1 text-center lg:text-right">
+                            <h3 class="text-2xl font-bold text-blue-600 mb-3">ISOLATIONNISME</h3>
+                            <p class="text-gray-600">Repli sur soi, autonomie maximale et méfiance envers les influences étrangères.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Axe Économie -->
+                <div class="axis-card rounded-2xl p-8 card-hover">
+                    <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                        <div class="flex-1 text-center lg:text-left">
+                            <h3 class="text-2xl font-bold text-red-600 mb-3">SOCIALISME</h3>
+                            <p class="text-gray-600">Intervention forte de l'État, redistribution, protection sociale.</p>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span class="text-sm font-semibold text-gray-500 mb-2">ÉCONOMIE</span>
+                            <div class="flex items-center">
+                                <div class="w-8 h-0.5 bg-gray-400"></div>
+                                <svg class="w-6 h-6 text-gray-400 mx-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                    <path d="M6 18l8.5-6L6 6v12z"/>
+                                </svg>
+                                <div class="w-8 h-0.5 bg-gray-400"></div>
+                            </div>
+                        </div>
+                        <div class="flex-1 text-center lg:text-right">
+                            <h3 class="text-2xl font-bold text-teal-600 mb-3">CAPITALISME</h3>
+                            <p class="text-gray-600">Libre marché, propriété privée, initiatives individuelles.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Axe Religion -->
+                <div class="axis-card rounded-2xl p-8 card-hover">
+                    <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                        <div class="flex-1 text-center lg:text-left">
+                            <h3 class="text-2xl font-bold text-red-600 mb-3">ISLAM POLITIQUE</h3>
+                            <p class="text-gray-600">Rôle central de la religion dans la société et la politique.</p>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span class="text-sm font-semibold text-gray-500 mb-2">RELIGION</span>
+                            <div class="flex items-center">
+                                <div class="w-8 h-0.5 bg-gray-400"></div>
+                                <svg class="w-6 h-6 text-gray-400 mx-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                    <path d="M6 18l8.5-6L6 6v12z"/>
+                                </svg>
+                                <div class="w-8 h-0.5 bg-gray-400"></div>
+                            </div>
+                        </div>
+                        <div class="flex-1 text-center lg:text-right">
+                            <h3 class="text-2xl font-bold text-teal-600 mb-3">LAÏCISME</h3>
+                            <p class="text-gray-600">Séparation stricte entre religion et politique, neutralité religieuse de l'État.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Axe Sociétal -->
+                <div class="axis-card rounded-2xl p-8 card-hover">
+                    <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                        <div class="flex-1 text-center lg:text-left">
+                            <h3 class="text-2xl font-bold text-red-600 mb-3">CONSERVATISME</h3>
+                            <p class="text-gray-600">Préservation des traditions, valeurs culturelles et sociales.</p>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span class="text-sm font-semibold text-gray-500 mb-2">SOCIÉTÉ</span>
+                            <div class="flex items-center">
+                                <div class="w-8 h-0.5 bg-gray-400"></div>
+                                <svg class="w-6 h-6 text-gray-400 mx-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                    <path d="M6 18l8.5-6L6 6v12z"/>
+                                </svg>
+                                <div class="w-8 h-0.5 bg-gray-400"></div>
+                            </div>
+                        </div>
+                        <div class="flex-1 text-center lg:text-right">
+                            <h3 class="text-2xl font-bold text-teal-600 mb-3">PROGRESSISME</h3>
+                            <p class="text-gray-600">Réformes sociales, égalité, ouverture aux changements culturels.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Axe Démocratie -->
+                <div class="axis-card rounded-2xl p-8 card-hover">
+                    <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                        <div class="flex-1 text-center lg:text-left">
+                            <h3 class="text-2xl font-bold text-red-600 mb-3">DÉMOCRATIE</h3>
+                            <p class="text-gray-600">Participation citoyenne, respect des libertés, institutions pluralistes.</p>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span class="text-sm font-semibold text-gray-500 mb-2">GOUVERNEMENT</span>
+                            <div class="flex items-center">
+                                <div class="w-8 h-0.5 bg-gray-400"></div>
+                                <svg class="w-6 h-6 text-gray-400 mx-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                    <path d="M6 18l8.5-6L6 6v12z"/>
+                                </svg>
+                                <div class="w-8 h-0.5 bg-gray-400"></div>
+                            </div>
+                        </div>
+                        <div class="flex-1 text-center lg:text-right">
+                            <h3 class="text-2xl font-bold text-teal-600 mb-3">AUTORITARISME</h3>
+                            <p class="text-gray-600">Pouvoir concentré, contrôle centralisé, restrictions des libertés.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Axe Gouvernance -->
+                <div class="axis-card rounded-2xl p-8 card-hover">
+                    <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                        <div class="flex-1 text-center lg:text-left">
+                            <h3 class="text-2xl font-bold text-red-600 mb-3">DÉCENTRALISATION</h3>
+                            <p class="text-gray-600">Autonomie locale, pouvoir partagé avec les régions.</p>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span class="text-sm font-semibold text-gray-500 mb-2">GOUVERNANCE</span>
+                            <div class="flex items-center">
+                                <div class="w-8 h-0.5 bg-gray-400"></div>
+                                <svg class="w-6 h-6 text-gray-400 mx-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                    <path d="M6 18l8.5-6L6 6v12z"/>
+                                </svg>
+                                <div class="w-8 h-0.5 bg-gray-400"></div>
+                            </div>
+                        </div>
+                        <div class="flex-1 text-center lg:text-right">
+                            <h3 class="text-2xl font-bold text-teal-600 mb-3">CENTRALISATION</h3>
+                            <p class="text-gray-600">Pouvoir concentré au centre, prise de décision centralisée.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-12">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    Le "profil le plus proche"
+                </h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-red-500 to-blue-500 mx-auto rounded-full mb-8"></div>
+            </div>
+
+            <div class="bg-gradient-to-br from-red-50 to-blue-50 rounded-2xl p-8 md:p-12 card-hover border border-red-100">
+                <p class="text-lg md:text-xl text-gray-700 leading-relaxed text-center">
+                    En plus des axes, le quiz compare vos résultats à des <span class="font-semibold text-red-600">profils politiques types tunisiens</span>. 
+                    C'est indicatif et non scientifique, mais cela vous donne une perspective sur votre positionnement dans le paysage politique tunisien.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="gradient-bg py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-6">
+                Prêt à découvrir vos orientations politiques ?
+            </h2>
+            <button onclick="location.href='instructions.html';" 
+                    class="btn-primary inline-flex items-center px-10 py-4 text-lg font-semibold text-white rounded-full shadow-lg hover:shadow-xl transform transition-all duration-300">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                </svg>
+                Commencer maintenant
+            </button>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="questions.js"></script>
+    <script>
+        // Afficher le nombre de questions
+        const numQuestions = questions ? questions.length : 0;
+        document.getElementById("numOfQuestions").textContent = numQuestions;
+        document.getElementById("numOfQuestions2").textContent = numQuestions;
+        
+        // Smooth scrolling pour les ancres
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

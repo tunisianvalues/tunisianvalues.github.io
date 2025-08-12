@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:400,700" rel="stylesheet">
+<link href="style.css" rel="stylesheet" type="text/css">
+<title>TunisianValues — Quiz</title>
+<link rel="icon" type="x-icon" href="icon.png">
+<link rel="shortcut icon" type="x-icon" href="icon.png">
+<meta charset="utf-8">
+</head>
+<body>
+<script type="application/javascript" src="questions.js"></script>
+
+<h1>TunisianValues</h1>
+<hr>
+<h2 style="text-align:center;" id="question-number">Chargement...</h2>
+<p class="question" id="question-text"></p>
+
+<button class="button stronglyAgree" onclick="next_question(1.0)">Tout à fait d’accord</button><br>
+<button class="button agree" onclick="next_question(0.5)">Plutôt d’accord</button><br>
+<button class="button neutral" onclick="next_question(0.0)">Neutre / Partagé</button><br>
+<button class="button disagree" onclick="next_question(-0.5)">Plutôt pas d’accord</button><br>
+<button class="button stronglyDisagree" onclick="next_question(-1.0)">Pas du tout d’accord</button><br>
+
+<button class="small_button" id="back_button" onclick="prev_question()">Précédent</button>
+<button class="small_button_off" id="back_button_off">Précédent</button><br>
+
+<script>
+    // Initialise les max pour chaque axe
+    var max_pana = 0, max_coop = 0, max_econ = 0, max_reli = 0, max_soci = 0, max_demo = 0, max_decent = 0;
+
+    // Tableaux pour stocker les scores par question
+    let pana_array = new Array(questions.length);
+    let coop_array = new Array(questions.length);
+    let econ_array = new Array(questions.length);
+    let reli_array = new Array(questions.length);
+    let soci_array = new Array(questions.length);
+    let demo_array = new Array(questions.length);
+    let decent_array = new Array(questions.length);
+
+    var qn = 0; // Index de la question courante
+
+    // Calcul des max possibles par axe (somme des valeurs absolues des effets)
+    for (var i = 0; i < questions.length; i++) {
+        max_pana += Math.abs(questions[i].effect.pana || 0);
+        max_coop += Math.abs(questions[i].effect.coop || 0);
+        max_econ += Math.abs(questions[i].effect.econ || 0);
+        max_reli += Math.abs(questions[i].effect.reli || 0);
+        max_soci += Math.abs(questions[i].effect.soci || 0);
+        max_demo += Math.abs(questions[i].effect.demo || 0);
+        max_decent += Math.abs(questions[i].effect.decent || 0);
+    }
+
+    function init_question() {
+        document.getElementById("question-text").innerHTML = questions[qn].question;
+        document.getElementById("question-number").innerHTML = "Question " + (qn + 1) + " sur " + questions.length;
+        if (qn === 0) {
+            document.getElementById("back_button").style.display = 'none';
+            document.getElementById("back_button_off").style.display = 'block';
+        } else {
+            document.getElementById("back_button").style.display = 'block';
+            document.getElementById("back_button_off").style.display = 'none';
+        }
+    }
+
+    init_question();
+
+    function next_question(mult) {
+        pana_array[qn] = mult * (questions[qn].effect.pana || 0);
+        coop_array[qn] = mult * (questions[qn].effect.coop || 0);
+        econ_array[qn] = mult * (questions[qn].effect.econ || 0);
+        reli_array[qn] = mult * (questions[qn].effect.reli || 0);
+        soci_array[qn] = mult * (questions[qn].effect.soci || 0);
+        demo_array[qn] = mult * (questions[qn].effect.demo || 0);
+        decent_array[qn] = mult * (questions[qn].effect.decent || 0);
+
+        qn++;
+        if (qn < questions.length) {
+            init_question();
+        } else {
+            results();
+        }
+    }
+
+    function prev_question() {
+        if (qn === 0) return;
+        qn--;
+        init_question();
+    }
+
+    function calc_score(score, max) {
+        if (max === 0) return (50).toFixed(1); // Évite la division par zéro
+        return (100 * (max + score) / (2 * max)).toFixed(1);
+    }
+
+    function results() {
+        let final_pana = pana_array.reduce((a, b) => a + b, 0);
+        let final_coop = coop_array.reduce((a, b) => a + b, 0);
+        let final_econ = econ_array.reduce((a, b) => a + b, 0);
+        let final_reli = reli_array.reduce((a, b) => a + b, 0);
+        let final_soci = soci_array.reduce((a, b) => a + b, 0);
+        let final_demo = demo_array.reduce((a, b) => a + b, 0);
+        let final_decent = decent_array.reduce((a, b) => a + b, 0);
+
+        // Redirection vers results.html avec tous les paramètres
+        location.href = `results.html`
+            + `?pana=${calc_score(final_pana, max_pana)}`
+            + `&coop=${calc_score(final_coop, max_coop)}`
+            + `&econ=${calc_score(final_econ, max_econ)}`
+            + `&reli=${calc_score(final_reli, max_reli)}`
+            + `&soci=${calc_score(final_soci, max_soci)}`
+            + `&demo=${calc_score(final_demo, max_demo)}`
+            + `&decent=${calc_score(final_decent, max_decent)}`;
+    }
+</script>
+</body>
+</html>

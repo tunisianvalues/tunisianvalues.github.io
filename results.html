@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:400,700" rel="stylesheet">
+<link href="style.css" rel="stylesheet" type="text/css">
+<title>TunisianValues — Résultats</title>
+<link rel="icon" type="x-icon" href="icon.png">
+<meta charset="utf-8">
+<script> version = "Bêta" </script>
+</head>
+
+<script type="application/javascript" src="ideologies.js"></script>
+
+<body>
+<h1>TunisianValues</h1>
+<hr>
+
+<h1>Résultats</h1>
+
+<!-- Axe Panarabisme ↔ Nationalisme tunisien -->
+<h2>Axe Panarabisme : <span class="weight-300" id="pana-label"></span></h2>
+<div class="axis">
+    <img id="img-left-pana" src="value_images/pan_arabisme.svg" height="128pt" alt="Panarabisme"/>
+    <div class="bar left-pana" id="bar-left-pana"><div class="text-wrapper" id="left-pana"></div></div>
+    <div class="bar right-pana" id="bar-right-pana"><div class="text-wrapper" id="right-pana"></div></div>
+    <img id="img-right-pana" src="value_images/nationalisme.svg" height="128pt" alt="Nationalisme tunisien"/>
+</div>
+
+<!-- Axe Coopération internationale ↔ Isolationnisme -->
+<h2>Axe Coopération internationale : <span class="weight-300" id="coop-label"></span></h2>
+<div class="axis">
+    <img id="img-left-coop" src="value_images/cooperation.svg" height="128pt" alt="Coopération internationale"/>
+    <div class="bar left-coop" id="bar-left-coop"><div class="text-wrapper" id="left-coop"></div></div>
+    <div class="bar right-coop" id="bar-right-coop"><div class="text-wrapper" id="right-coop"></div></div>
+    <img id="img-right-coop" src="value_images/isolation.svg" height="128pt" alt="Isolationnisme"/>
+</div>
+
+<!-- Axe Socialisme ↔ Capitalisme -->
+<h2>Axe Économie : <span class="weight-300" id="econ-label"></span></h2>
+<div class="axis">
+    <img id="img-left-econ" src="value_images/socialisme.svg" height="128pt" alt="Socialisme"/>
+    <div class="bar left-econ" id="bar-left-econ"><div class="text-wrapper" id="left-econ"></div></div>
+    <div class="bar right-econ" id="bar-right-econ"><div class="text-wrapper" id="right-econ"></div></div>
+    <img id="img-right-econ" src="value_images/capitalisme.svg" height="128pt" alt="Capitalisme"/>
+</div>
+
+<!-- Axe Islamisme ↔ Laïcisme -->
+<h2>Axe Religion : <span class="weight-300" id="reli-label"></span></h2>
+<div class="axis">
+    <img id="img-left-reli" src="value_images/islamisme.svg" height="128pt" alt="Islamisme"/>
+    <div class="bar left-reli" id="bar-left-reli"><div class="text-wrapper" id="left-reli"></div></div>
+    <div class="bar right-reli" id="bar-right-reli"><div class="text-wrapper" id="right-reli"></div></div>
+    <img id="img-right-reli" src="value_images/laicisme.svg" height="128pt" alt="Laïcisme"/>
+</div>
+
+<!-- Axe Conservatisme ↔ Progressisme -->
+<h2>Axe Sociétal : <span class="weight-300" id="soci-label"></span></h2>
+<div class="axis">
+    <img id="img-left-soci" src="value_images/conservatisme.svg" height="128pt" alt="Conservatisme"/>
+    <div class="bar left-soci" id="bar-left-soci"><div class="text-wrapper" id="left-soci"></div></div>
+    <div class="bar right-soci" id="bar-right-soci"><div class="text-wrapper" id="right-soci"></div></div>
+    <img id="img-right-soci" src="value_images/progressisme.svg" height="128pt" alt="Progressisme"/>
+</div>
+
+<!-- Axe Démocratie ↔ Autoritarisme -->
+<h2>Axe Gouvernance : <span class="weight-300" id="demo-label"></span></h2>
+<div class="axis">
+    <img id="img-left-demo" src="value_images/democratie.svg" height="128pt" alt="Démocratie"/>
+    <div class="bar left-demo" id="bar-left-demo"><div class="text-wrapper" id="left-demo"></div></div>
+    <div class="bar right-demo" id="bar-right-demo"><div class="text-wrapper" id="right-demo"></div></div>
+    <img id="img-right-demo" src="value_images/autoritarisme.svg" height="128pt" alt="Autoritarisme"/>
+</div>
+
+<!-- Axe Décentralisation ↔ Centralisation -->
+<h2>Axe Décentralisation : <span class="weight-300" id="decent-label"></span></h2>
+<div class="axis">
+    <img id="img-left-decent" src="value_images/decentralisation.svg" height="128pt" alt="Décentralisation"/>
+    <div class="bar left-decent" id="bar-left-decent"><div class="text-wrapper" id="left-decent"></div></div>
+    <div class="bar right-decent" id="bar-right-decent"><div class="text-wrapper" id="right-decent"></div></div>
+    <img id="img-right-decent" src="value_images/centralisation.svg" height="128pt" alt="Centralisation"/>
+</div>
+<hr/>
+<h2>Profil le plus proche : <span id="ideology-label" class="weight-300"></span></h2>
+<img src="" id="banner" alt="Bannière de résultats">
+<button class="button" onclick="location.href='index.html';">Retour</button> <br>
+
+<script type="text/javascript">
+var sc_project=11325211;
+var sc_invisible=1;
+var sc_security="fd9f0659";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web stats"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="//c.statcounter.com/11325211/0/fd9f0659/1/" alt="web
+stats"></a></div></noscript>
+
+<script>
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0; i<vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) { return parseFloat(pair[1]); }
+        }
+        return NaN;
+    }
+
+    function setBarValue(name, value) {
+        var innerel = document.getElementById(name);
+        var outerel = document.getElementById("bar-" + name);
+        if (!isNaN(value)) {
+            outerel.style.width = (value + "%");
+            innerel.innerHTML = (value + "%");
+            if (innerel.offsetWidth + 20 > outerel.offsetWidth) {
+                innerel.style.visibility = "hidden";
+            }
+        }
+    }
+
+// 1) Panarabisme ↔ Nationalisme tunisien (gauche → droite)
+var panaLabels = [
+  "Nationalisme Arabe",      // extrême panarabiste
+  "Panarabisme",    // pan-arabisme général
+  "Arabisme",       // identité culturelle arabe
+  "Patriotisme",    // attachement national modéré
+  "Nationalisme Tunisien"    // extrême nationaliste tunisien
+];
+
+// 2) Coopération internationale ↔ Isolationnisme
+var coopLabels = [
+  "Internationalisme",
+  "Multilatéralisme",
+  "Neutralité",
+  "Isolationnisme",
+  "Autarcie"
+];
+
+// 3) Économie : Socialisme ↔ Libéralisme (gauche → droite)
+var econLabels = [
+  "Socialisme",           // État fort, redistribution
+  "Social-démocratie",    // régulation sociale et marché
+  "Interventioniste",                // compromis / soc-lib (économie mixte)
+  "Social-Libéralisme",       // dérégulation + marché fort
+  "Libéralisme"           // marché et liberté économique
+];
+
+// 4) Religion : Islamisme ↔ Laïcité / Athéisme d'État
+// (gauche → droite : religieux → sécularisation forte)
+var reliLabels = [
+  "Islamisme",                // rôle fort de l'islam en politique
+  "Islam culturel",          // courant musulman organisé/politique
+  "Statut-Quo",   // sécularisme à la tunisienne (historique)
+  "Sécularisme",                  // séparation claire religion/politique
+  "Laïcité"           // laïcité d'État poussée / athéisme institutionnel
+];
+
+// 5) Sociétal : Conservatisme ↔ Progressisme
+// (gauche → droite ; Traditionalisme est plus conservateur qu'un conservatisme « normal »)
+var sociLabels = [
+  "Conservatisme",     // valeurs traditionnelles moins strictes
+  "Libéral-Conservateur",   // plus strict/conservateur
+  "Libéral", 
+  "Modernisme",        // centre sociétal
+  "Progressisme"      // réformes sociales      
+];
+
+// 6) Démocratie ↔ Autoritarisme (gauche → droite)
+// (pas de 'républicanisme' confondu avec démocratie)
+var demoLabels = [
+  "Démocratie participative",        // participation et droits
+  "Démocratie libérale",   // forme démocratique centrée sur parlement
+  "État de droit",     // institutions judiciaires et garanties
+  "Autoritarisme",     // pouvoir concentré, restrictions
+  "Totalitarisme"      // contrôle total de la société/politique
+];
+
+// 7) Décentralisation ↔ Centralisation
+var decentLabels = [
+  "Fédéralisme",  // pouvoirs locaux étendus
+  "Régionalisme",       // autonomie institutionnalisée des régions
+  "Décentralisation",         // autonomie locale pratique
+  "Centralisation",    // pouvoir concentré au centre
+  "Unitarisme"         // centralisation forte / État unitaire fort
+];
+
+
+    // Lecture des scores depuis URL (valeurs % côté gauche)
+    var pana = getQueryVariable("pana");
+    var coop = getQueryVariable("coop");
+    var econ = getQueryVariable("econ");
+    var reli = getQueryVariable("reli");
+    var soci = getQueryVariable("soci");
+    var demo = getQueryVariable("demo");
+    var decent = getQueryVariable("decent");
+
+    // Calcul des valeurs droites (100 - gauche)
+    var panaR = 100 - pana;
+    var coopR = 100 - coop;
+    var econR = 100 - econ;
+    var reliR = 100 - reli;
+    var sociR = 100 - soci;
+    var demoR = 100 - demo;
+    var decentR = 100 - decent;
+
+    // Affichage barres
+    setBarValue("left-pana", pana);
+    setBarValue("right-pana", panaR);
+    setBarValue("left-coop", coop);
+    setBarValue("right-coop", coopR);
+    setBarValue("left-econ", econ);
+    setBarValue("right-econ", econR);
+    setBarValue("left-reli", reli);
+    setBarValue("right-reli", reliR);
+    setBarValue("left-soci", soci);
+    setBarValue("right-soci", sociR);
+    setBarValue("left-demo", demo);
+    setBarValue("right-demo", demoR);
+    setBarValue("left-decent", decent);
+    setBarValue("right-decent", decentR);
+
+    // Fonction pour choisir label selon valeur (5 paliers)
+    function pickLabel(val, labels) {
+        if (val >= 80) return labels[0];
+        else if (val >= 60) return labels[1];
+        else if (val >= 40) return labels[2];
+        else if (val >= 20) return labels[3];
+        else return labels[4];
+    }
+
+    document.getElementById("pana-label").innerHTML = pickLabel(pana, panaLabels);
+    document.getElementById("coop-label").innerHTML = pickLabel(coop, coopLabels);
+    document.getElementById("econ-label").innerHTML = pickLabel(econ, econLabels);
+    document.getElementById("reli-label").innerHTML = pickLabel(reli, reliLabels);
+    document.getElementById("soci-label").innerHTML = pickLabel(soci, sociLabels);
+    document.getElementById("demo-label").innerHTML = pickLabel(demo, demoLabels);
+    document.getElementById("decent-label").innerHTML = pickLabel(decent, decentLabels);
+
+    // Calcul du profil le plus proche (adapter ideologies.js)
+    var ideology = "";
+    var ideodist = Infinity;
+    for (var i = 0; i < ideologies.length; i++) {
+        var dist = 0;
+        dist += Math.pow(Math.abs(ideologies[i].stats.pana - pana), 2);
+        dist += Math.pow(Math.abs(ideologies[i].stats.coop - coop), 2);
+        dist += Math.pow(Math.abs(ideologies[i].stats.econ - econ), 2);
+        dist += Math.pow(Math.abs(ideologies[i].stats.reli - reli), 2);
+        dist += Math.pow(Math.abs(ideologies[i].stats.soci - soci), 2);
+        dist += Math.pow(Math.abs(ideologies[i].stats.demo - demo), 2);
+        dist += Math.pow(Math.abs(ideologies[i].stats.decent - decent), 2);
+        if (dist < ideodist) {
+            ideology = ideologies[i].name;
+            ideodist = dist;
+        }
+    }
+    document.getElementById("ideology-label").innerHTML = ideology;
+
+window.onload = function() {
+    // helper : charge une image à partir d'un <img id="..."> et renvoie Promise<Image>
+    function loadImageFromDom(id) {
+        return new Promise(function(resolve) {
+            var dom = document.getElementById(id);
+            var img = new Image();
+            if (!dom || !dom.src) {
+                // fallback 1x1 transparent si image introuvable
+                img.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+                img.onload = function() { resolve(img); };
+                img.onerror = function() { resolve(img); };
+                return;
+            }
+            img.onload = function() { resolve(img); };
+            img.onerror = function() {
+                console.warn("Erreur chargement image:", dom.src);
+                resolve(img);
+            };
+            // Important : définir src **en dernier** pour déclencher onload correctement
+            img.src = dom.src;
+        });
+    }
+
+    // ids des images que tu dessines
+    var imageIds = [
+      "img-left-pana","img-right-pana",
+      "img-left-coop","img-right-coop",
+      "img-left-econ","img-right-econ",
+      "img-left-reli","img-right-reli",
+      "img-left-soci","img-right-soci",
+      "img-left-demo","img-right-demo",
+      "img-left-decent","img-right-decent"
+    ];
+
+    // Attendre fonts + images
+    var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+    var imgsPromises = imageIds.map(loadImageFromDom);
+
+    Promise.all([fontsReady, Promise.all(imgsPromises)]).then(function(results) {
+        var imagesArray = results[1];
+        var imgs = {};
+        for (var i = 0; i < imageIds.length; i++) imgs[imageIds[i]] = imagesArray[i];
+
+        // --- Ton code de dessin (adapté pour utiliser imgs["id"] au lieu de document.getElementById)
+        var c = document.createElement("canvas");
+        var ctx = c.getContext("2d");
+        c.width = 900;
+        c.height = 900;  // augmenté pour éviter la coupe en bas
+
+        // Fond gris clair
+        ctx.fillStyle = "#EEEEEE";
+        ctx.fillRect(0, 0, c.width, c.height);
+
+        // Fonction pour éviter largeur négative ou trop petite
+        function safeWidth(val) {
+            if (isNaN(val) || val < 0) return 0;
+            if (val < 4) return 4; // taille mini visible
+            return val;
+        }
+
+        // Images gauche/droite (ajuster coordonnées) — utilise les images chargées
+        ctx.drawImage(imgs["img-left-pana"], 20, 150, 100, 100);
+        ctx.drawImage(imgs["img-right-pana"], 780, 150, 100, 100);
+
+        ctx.drawImage(imgs["img-left-coop"], 20, 250, 100, 100);
+        ctx.drawImage(imgs["img-right-coop"], 780, 250, 100, 100);
+
+        ctx.drawImage(imgs["img-left-econ"], 20, 350, 100, 100);
+        ctx.drawImage(imgs["img-right-econ"], 780, 350, 100, 100);
+
+        ctx.drawImage(imgs["img-left-reli"], 20, 450, 100, 100);
+        ctx.drawImage(imgs["img-right-reli"], 780, 450, 100, 100);
+
+        ctx.drawImage(imgs["img-left-soci"], 20, 550, 100, 100);
+        ctx.drawImage(imgs["img-right-soci"], 780, 550, 100, 100);
+
+        ctx.drawImage(imgs["img-left-demo"], 20, 650, 100, 100);
+        ctx.drawImage(imgs["img-right-demo"], 780, 650, 100, 100);
+
+        ctx.drawImage(imgs["img-left-decent"], 20, 750, 100, 100);
+        ctx.drawImage(imgs["img-right-decent"], 780, 750, 100, 100);
+
+        // Fonds barres (fond gris foncé)
+        ctx.fillStyle = "#222222";
+        var startY = 170;
+        var barHeight = 50;
+        var gap = 100;
+        for (var i = 0; i < 7; i++) {
+            ctx.fillRect(130, startY + i * gap, 620, barHeight);
+        }
+
+        // Couleurs barres gauche/droite (utilise tes variables existantes)
+        ctx.fillStyle = "#f44336";
+        ctx.fillRect(130, 174 + 0 * gap, safeWidth(6.2 * pana - 4), barHeight - 8);
+        ctx.fillStyle = "#00897b";
+        ctx.fillRect(750 - safeWidth(6.2 * panaR), 174 + 0 * gap, safeWidth(6.2 * panaR) - 4, barHeight - 8);
+
+        ctx.fillStyle = "#ff9800";
+        ctx.fillRect(130, 174 + 1 * gap, safeWidth(6.2 * coop - 4), barHeight - 8);
+        ctx.fillStyle = "#03a9f4";
+        ctx.fillRect(750 - safeWidth(6.2 * coopR), 174 + 1 * gap, safeWidth(6.2 * coopR) - 4, barHeight - 8);
+
+        ctx.fillStyle = "#ffeb3b";
+        ctx.fillRect(130, 174 + 2 * gap, safeWidth(6.2 * econ - 4), barHeight - 8);
+        ctx.fillStyle = "#3f51b5";
+        ctx.fillRect(750 - safeWidth(6.2 * econR), 174 + 2 * gap, safeWidth(6.2 * econR) - 4, barHeight - 8);
+
+        ctx.fillStyle = "#9c27b0";
+        ctx.fillRect(130, 174 + 3 * gap, safeWidth(6.2 * reli - 4), barHeight - 8);
+        ctx.fillStyle = "#673ab7";
+        ctx.fillRect(750 - safeWidth(6.2 * reliR), 174 + 3 * gap, safeWidth(6.2 * reliR) - 4, barHeight - 8);
+
+        ctx.fillStyle = "#8bc34a";
+        ctx.fillRect(130, 174 + 4 * gap, safeWidth(6.2 * soci - 4), barHeight - 8);
+        ctx.fillStyle = "#4caf50";
+        ctx.fillRect(750 - safeWidth(6.2 * sociR), 174 + 4 * gap, safeWidth(6.2 * sociR) - 4, barHeight - 8);
+
+        ctx.fillStyle = "#ff5722";
+        ctx.fillRect(130, 174 + 5 * gap, safeWidth(6.2 * demo - 4), barHeight - 8);
+        ctx.fillStyle = "#795548";
+        ctx.fillRect(750 - safeWidth(6.2 * demoR), 174 + 5 * gap, safeWidth(6.2 * demoR) - 4, barHeight - 8);
+
+        ctx.fillStyle = "#00bcd4";
+        ctx.fillRect(130, 174 + 6 * gap, safeWidth(6.2 * decent - 4), barHeight - 8);
+        ctx.fillStyle = "#009688";
+        ctx.fillRect(750 - safeWidth(6.2 * decentR), 174 + 6 * gap, safeWidth(6.2 * decentR) - 4, barHeight - 8);
+
+        // Titres
+        ctx.fillStyle = "#222222";
+        ctx.font = "700 60px Montserrat";
+        ctx.textAlign = "left";
+        ctx.fillText("TunisianValues", 20, 100);
+        ctx.font = "50px Montserrat";
+        ctx.fillText(ideology, 20, 150);
+
+        // Pourcentages sur barres (gauche/droite) — arrondis pour éviter 87.9999999
+        ctx.font = "bold 20px Montserrat";
+        ctx.textAlign = "left";
+        var vals = [pana, coop, econ, reli, soci, demo, decent];
+        var valsR = [panaR, coopR, econR, reliR, sociR, demoR, decentR];
+        for (var i = 0; i < 7; i++) {
+            var leftVal = (isNaN(vals[i]) ? 0 : Math.round(vals[i]));
+            var rightVal = (isNaN(valsR[i]) ? 0 : Math.round(valsR[i]));
+            if (leftVal > 15) ctx.fillText(leftVal + "%", 140, 205 + i * gap);
+            if (rightVal > 15) ctx.fillText(rightVal + "%", 730, 205 + i * gap);
+        }
+
+        // Légendes axes
+        ctx.font = "300 28px Montserrat";
+        ctx.textAlign = "center";
+        ctx.fillText("Panarabisme vs Nationalisme tunisien", 450, 140);
+        ctx.fillText("Coopération internationale vs Isolationnisme", 450, 240);
+        ctx.fillText("Socialisme vs Capitalisme", 450, 340);
+        ctx.fillText("Islamisme vs Laïcisme", 450, 440);
+        ctx.fillText("Conservatisme vs Progressisme", 450, 540);
+        ctx.fillText("Démocratie vs Autoritarisme", 450, 640);
+        ctx.fillText("Décentralisation vs Centralisation", 450, 740);
+
+        // Signature
+        ctx.textAlign = "right";
+        ctx.fillText("tunisianvalues", 880, 60);
+        ctx.fillText(version, 880, 90);
+
+        // Export image finale
+        var bannerEl = document.getElementById("banner");
+        if (bannerEl) bannerEl.src = c.toDataURL();
+    }).catch(function(err) {
+        console.error("Erreur fonts/images:", err);
+        // tentative de fallback rapide : dessiner même si fonts/images posent problème
+        try {
+            // si échec, on tente un dessin basique rapide (pour éviter écran blanc)
+            var c = document.createElement("canvas");
+            var ctx = c.getContext("2d");
+            c.width = 900; c.height = 900;
+            ctx.fillStyle = "#EEEEEE"; ctx.fillRect(0,0,c.width,c.height);
+            ctx.fillStyle = "#222"; ctx.font = "20px sans-serif"; ctx.fillText("Erreur rendu bannière", 20, 40);
+            var bannerEl = document.getElementById("banner");
+            if (bannerEl) bannerEl.src = c.toDataURL();
+        } catch(e) { console.error(e); }
+    });
+};
+
+
+</script>
+</body>
+</html>
