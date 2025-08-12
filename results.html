@@ -80,6 +80,12 @@
     <img id="img-right-decent" src="value_images/centralisation.svg" height="128pt" alt="Centralisation"/>
 </div>
 <hr/>
+
+<!-- NOUVEAU : SECTION POUR LES ICÔNES SPÉCIALES -->
+<div id="special-icons-container" style="text-align:center; padding: 10px 0;">
+    <!-- Les icônes créées par le script apparaîtront ici -->
+</div>
+
 <h2>Profil le plus proche : <span id="ideology-label" class="weight-300"></span></h2>
 <img src="" id="banner" alt="Bannière de résultats">
 <button class="button" onclick="location.href='index.html';">Retour</button> <br>
@@ -88,27 +94,22 @@
 var sc_project=11325211;
 var sc_invisible=1;
 var sc_security="fd9f0659";
-var scJsHost = (("https:" == document.location.protocol) ?
-"https://secure." : "http://www.");
-document.write("<sc"+"ript type='text/javascript' src='" +
-scJsHost+
-"statcounter.com/counter/counter.js'></"+"script>");
+var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+ "statcounter.com/counter/counter.js'></"+"script>");
 </script>
-<noscript><div class="statcounter"><a title="web stats"
-href="http://statcounter.com/" target="_blank"><img
-class="statcounter"
-src="//c.statcounter.com/11325211/0/fd9f0659/1/" alt="web
-stats"></a></div></noscript>
+<noscript><div class="statcounter"><a title="web stats" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11325211/0/fd9f0659/1/" alt="web stats"></a></div></noscript>
 
 <script>
     function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
         var vars = query.split("&");
-        for (var i=0; i<vars.length; i++) {
+        for (var i = 0; i < vars.length; i++) {
             var pair = vars[i].split("=");
-            if (pair[0] == variable) { return parseFloat(pair[1]); }
+            if (decodeURIComponent(pair[0]) == variable) {
+                return decodeURIComponent(pair[1]);
+            }
         }
-        return NaN;
+        return null; // Renvoie null si la variable n'est pas trouvée
     }
 
     function setBarValue(name, value) {
@@ -123,108 +124,63 @@ stats"></a></div></noscript>
         }
     }
 
-// 1) Panarabisme ↔ Nationalisme tunisien (gauche → droite)
-var panaLabels = [
-  "Nationalisme Arabe",      // extrême panarabiste
-  "Panarabisme",    // pan-arabisme général
-  "Arabisme",       // identité culturelle arabe
-  "Patriotisme",    // attachement national modéré
-  "Nationalisme Tunisien"    // extrême nationaliste tunisien
-];
+    // Labels pour les axes
+    var panaLabels = ["Nationalisme Arabe","Panarabisme","Arabisme","Patriotisme","Nationalisme Tunisien"];
+    var coopLabels = ["Internationalisme","Multilatéralisme","Neutralité","Isolationnisme","Autarcie"];
+    var econLabels = ["Socialisme","Social-démocratie","Interventioniste","Social-Libéralisme","Libéralisme"];
+    var reliLabels = ["Islamisme","Islam culturel","Statut-Quo","Sécularisme","Laïcité"];
+    var sociLabels = ["Conservatisme","Libéral-Conservateur","Libéral","Modernisme","Progressisme"];
+    var demoLabels = ["Démocratie participative","Démocratie libérale","État de droit","Autoritarisme","Totalitarisme"];
+    var decentLabels = ["Fédéralisme","Régionalisme","Décentralisation","Centralisation","Unitarisme"];
 
-// 2) Coopération internationale ↔ Isolationnisme
-var coopLabels = [
-  "Internationalisme",
-  "Multilatéralisme",
-  "Neutralité",
-  "Isolationnisme",
-  "Autarcie"
-];
+    // Lecture des scores depuis URL
+    var pana = parseFloat(getQueryVariable("pana"));
+    var coop = parseFloat(getQueryVariable("coop"));
+    var econ = parseFloat(getQueryVariable("econ"));
+    var reli = parseFloat(getQueryVariable("reli"));
+    var soci = parseFloat(getQueryVariable("soci"));
+    var demo = parseFloat(getQueryVariable("demo"));
+    var decent = parseFloat(getQueryVariable("decent"));
 
-// 3) Économie : Socialisme ↔ Libéralisme (gauche → droite)
-var econLabels = [
-  "Socialisme",           // État fort, redistribution
-  "Social-démocratie",    // régulation sociale et marché
-  "Interventioniste",                // compromis / soc-lib (économie mixte)
-  "Social-Libéralisme",       // dérégulation + marché fort
-  "Libéralisme"           // marché et liberté économique
-];
+    // NOUVEAU : Lecture et affichage des icônes
+    const icons_param = getQueryVariable("icons");
+    if (icons_param && icons_param.length > 0) {
+        const container = document.getElementById("special-icons-container");
+        const icons = icons_param.split(',');
+        
+        const title = document.createElement('h2');
+        title.innerText = "Positions Particulières";
+        title.className = "weight-300";
+        container.appendChild(title);
 
-// 4) Religion : Islamisme ↔ Laïcité / Athéisme d'État
-// (gauche → droite : religieux → sécularisation forte)
-var reliLabels = [
-  "Islamisme",                // rôle fort de l'islam en politique
-  "Islam culturel",          // courant musulman organisé/politique
-  "Statut-Quo",   // sécularisme à la tunisienne (historique)
-  "Sécularisme",                  // séparation claire religion/politique
-  "Laïcité"           // laïcité d'État poussée / athéisme institutionnel
-];
+        icons.forEach(iconId => {
+            if (iconId) {
+                const img = document.createElement('img');
+                img.src = `icons/${iconId}.png`;
+                img.title = iconId;
+                img.style.height = '60px';
+                img.style.width = '60px';
+                img.style.margin = '5px 10px';
+                container.appendChild(img);
+            }
+        });
+    }
 
-// 5) Sociétal : Conservatisme ↔ Progressisme
-// (gauche → droite ; Traditionalisme est plus conservateur qu'un conservatisme « normal »)
-var sociLabels = [
-  "Conservatisme",     // valeurs traditionnelles moins strictes
-  "Libéral-Conservateur",   // plus strict/conservateur
-  "Libéral", 
-  "Modernisme",        // centre sociétal
-  "Progressisme"      // réformes sociales      
-];
-
-// 6) Démocratie ↔ Autoritarisme (gauche → droite)
-// (pas de 'républicanisme' confondu avec démocratie)
-var demoLabels = [
-  "Démocratie participative",        // participation et droits
-  "Démocratie libérale",   // forme démocratique centrée sur parlement
-  "État de droit",     // institutions judiciaires et garanties
-  "Autoritarisme",     // pouvoir concentré, restrictions
-  "Totalitarisme"      // contrôle total de la société/politique
-];
-
-// 7) Décentralisation ↔ Centralisation
-var decentLabels = [
-  "Fédéralisme",  // pouvoirs locaux étendus
-  "Régionalisme",       // autonomie institutionnalisée des régions
-  "Décentralisation",         // autonomie locale pratique
-  "Centralisation",    // pouvoir concentré au centre
-  "Unitarisme"         // centralisation forte / État unitaire fort
-];
-
-
-    // Lecture des scores depuis URL (valeurs % côté gauche)
-    var pana = getQueryVariable("pana");
-    var coop = getQueryVariable("coop");
-    var econ = getQueryVariable("econ");
-    var reli = getQueryVariable("reli");
-    var soci = getQueryVariable("soci");
-    var demo = getQueryVariable("demo");
-    var decent = getQueryVariable("decent");
-
-    // Calcul des valeurs droites (100 - gauche)
-    var panaR = 100 - pana;
-    var coopR = 100 - coop;
-    var econR = 100 - econ;
-    var reliR = 100 - reli;
-    var sociR = 100 - soci;
-    var demoR = 100 - demo;
+    // Calcul des valeurs droites
+    var panaR = 100 - pana; var coopR = 100 - coop; var econR = 100 - econ;
+    var reliR = 100 - reli; var sociR = 100 - soci; var demoR = 100 - demo;
     var decentR = 100 - decent;
 
-    // Affichage barres
-    setBarValue("left-pana", pana);
-    setBarValue("right-pana", panaR);
-    setBarValue("left-coop", coop);
-    setBarValue("right-coop", coopR);
-    setBarValue("left-econ", econ);
-    setBarValue("right-econ", econR);
-    setBarValue("left-reli", reli);
-    setBarValue("right-reli", reliR);
-    setBarValue("left-soci", soci);
-    setBarValue("right-soci", sociR);
-    setBarValue("left-demo", demo);
-    setBarValue("right-demo", demoR);
-    setBarValue("left-decent", decent);
-    setBarValue("right-decent", decentR);
+    // Affichage des barres
+    setBarValue("left-pana", pana); setBarValue("right-pana", panaR);
+    setBarValue("left-coop", coop); setBarValue("right-coop", coopR);
+    setBarValue("left-econ", econ); setBarValue("right-econ", econR);
+    setBarValue("left-reli", reli); setBarValue("right-reli", reliR);
+    setBarValue("left-soci", soci); setBarValue("right-soci", sociR);
+    setBarValue("left-demo", demo); setBarValue("right-demo", demoR);
+    setBarValue("left-decent", decent); setBarValue("right-decent", decentR);
 
-    // Fonction pour choisir label selon valeur (5 paliers)
+    // Fonction pour choisir le label
     function pickLabel(val, labels) {
         if (val >= 80) return labels[0];
         else if (val >= 60) return labels[1];
@@ -233,6 +189,7 @@ var decentLabels = [
         else return labels[4];
     }
 
+    // Affichage des labels
     document.getElementById("pana-label").innerHTML = pickLabel(pana, panaLabels);
     document.getElementById("coop-label").innerHTML = pickLabel(coop, coopLabels);
     document.getElementById("econ-label").innerHTML = pickLabel(econ, econLabels);
@@ -241,7 +198,7 @@ var decentLabels = [
     document.getElementById("demo-label").innerHTML = pickLabel(demo, demoLabels);
     document.getElementById("decent-label").innerHTML = pickLabel(decent, decentLabels);
 
-    // Calcul du profil le plus proche (adapter ideologies.js)
+    // Calcul du profil le plus proche
     var ideology = "";
     var ideodist = Infinity;
     for (var i = 0; i < ideologies.length; i++) {
@@ -260,6 +217,7 @@ var decentLabels = [
     }
     document.getElementById("ideology-label").innerHTML = ideology;
 
+// CETTE PARTIE EST MAINTENANT COMPLÈTE ET INTacte
 window.onload = function() {
     // helper : charge une image à partir d'un <img id="..."> et renvoie Promise<Image>
     function loadImageFromDom(id) {
@@ -441,8 +399,6 @@ window.onload = function() {
         } catch(e) { console.error(e); }
     });
 };
-
-
 </script>
 </body>
 </html>

@@ -4,7 +4,7 @@ questions = [
     question:
       "La Tunisie devrait prioriser les alliances avec les pays arabes plutôt qu’avec d’autres régions.",
     effect: {
-      pana: +8,
+      pana: +4,
       coop: 0,
       econ: 0,
       reli: 0,
@@ -27,9 +27,10 @@ questions = [
     },
   },
   {
-    question: "Plus d'événements culturels panarabes devraient être organisés.",
+    question:
+      "Des compétitions artistiques et culturelles à l'échelle du monde arabe devraient être développées.",
     effect: {
-      pana: +6,
+      pana: +4,
       coop: 0,
       econ: 0,
       reli: 0,
@@ -39,10 +40,9 @@ questions = [
     },
   },
   {
-    question:
-      "Les Tunisiens partagent une identité avant tout arabe, plutôt qu’uniquement tunisienne.",
+    question: "Les Tunisiens partagent principalement une identité arabe.",
     effect: {
-      pana: +8,
+      pana: +4,
       coop: 0,
       econ: 0,
       reli: 0,
@@ -55,7 +55,7 @@ questions = [
     question:
       "Une armée arabe commune serait bénéfique à la sécurité de la Tunisie.",
     effect: {
-      pana: +6,
+      pana: +8,
       coop: 0,
       econ: 0,
       reli: 0,
@@ -68,7 +68,7 @@ questions = [
     question:
       "La Tunisie devrait soutenir automatiquement ses voisins arabes en cas de conflit avec un pays non arabe.",
     effect: {
-      pana: +6,
+      pana: +8,
       coop: 0,
       econ: 0,
       reli: 0,
@@ -117,7 +117,7 @@ questions = [
   },
   {
     question:
-      "La culture tunisienne est distincte et doit être protégée des influences extérieures, y compris arabes.",
+      "La culture tunisienne est distincte et doit être protégée des influences extérieures, y compris du monde arabe.",
     effect: {
       pana: -6,
       coop: 0,
@@ -130,9 +130,21 @@ questions = [
   },
   {
     question:
-      "Les décisions diplomatiques de la Tunisie ne doivent pas être influencées par des causes arabes qui ne la concernent pas directement.",
+      "Les décisions diplomatiques de la Tunisie ne doivent pas être influencées par les causes arabes s'ils ne la concernent pas directement.",
     effect: {
       pana: -6,
+      coop: 0,
+      econ: 0,
+      reli: 0,
+      soci: 0,
+      demo: 0,
+      decent: 0,
+    },
+  },
+  {
+    question: "Le monde arabe n'existe pas.",
+    effect: {
+      pana: -8,
       coop: 0,
       econ: 0,
       reli: 0,
@@ -148,7 +160,7 @@ questions = [
       "La Tunisie doit participer activement aux organisations internationales.",
     effect: {
       pana: 0,
-      coop: +8,
+      coop: +4,
       econ: 0,
       reli: 0,
       soci: 0,
@@ -161,7 +173,7 @@ questions = [
       "Les traités internationaux sont nécessaires pour protéger les intérêts tunisiens.",
     effect: {
       pana: 0,
-      coop: +8,
+      coop: +4,
       econ: 0,
       reli: 0,
       soci: 0,
@@ -187,7 +199,7 @@ questions = [
       "L’ouverture aux investissements étrangers est essentielle au développement du pays.",
     effect: {
       pana: 0,
-      coop: +6,
+      coop: +4,
       econ: -4,
       reli: 0,
       soci: 0,
@@ -210,10 +222,10 @@ questions = [
   },
   {
     question:
-      "La diplomatie tunisienne doit se concentrer sur la coopération régionale et mondiale.",
+      "La Tunisie doit rester maître de ses choix politiques, quitte à faire face à un isolement international.",
     effect: {
       pana: 0,
-      coop: +6,
+      coop: -4,
       econ: 0,
       reli: 0,
       soci: 0,
@@ -223,23 +235,10 @@ questions = [
   },
   {
     question:
-      "Les décisions tunisiennes doivent être indépendantes, même si cela mène à un isolement international.",
+      "Les institutions internationales ne respectent pas la souveraineté de la Tunisie et ne protègent pas ses intérêts fondamentaux.",
     effect: {
       pana: 0,
-      coop: -6,
-      econ: 0,
-      reli: 0,
-      soci: 0,
-      demo: 0,
-      decent: 0,
-    },
-  },
-  {
-    question:
-      "Les institutions internationales ne servent pas les intérêts réels de la Tunisie.",
-    effect: {
-      pana: 0,
-      coop: -6,
+      coop: -8,
       econ: 0,
       reli: 0,
       soci: 0,
@@ -252,7 +251,7 @@ questions = [
       "La Tunisie devrait réduire sa dépendance envers les aides et partenariats étrangers.",
     effect: {
       pana: 0,
-      coop: -6,
+      coop: -4,
       econ: 0,
       reli: 0,
       soci: 0,
@@ -262,7 +261,7 @@ questions = [
   },
   {
     question:
-      "Il vaut mieux rester neutre et limiter nos engagements dans les conflits étrangers.",
+      "La Tunisie gagnerait à suivre la doctrine bourguibienne de neutralité et de non-ingérence dans les conflits extérieurs.",
     effect: {
       pana: 0,
       coop: -4,
@@ -277,7 +276,7 @@ questions = [
   // 3. SOCIALISME ↔ CAPITALISME
   {
     question:
-      "L’État tunisien doit contrôler les secteurs stratégiques de l’économie.",
+      "L'État tunisien doit contrôler les secteurs stratégiques de l'économie tels que l'énergie, les transports et les télécommunications.",
     effect: {
       pana: 0,
       coop: 0,
@@ -290,11 +289,11 @@ questions = [
   },
   {
     question:
-      "Les services publics doivent rester gratuits et accessibles à tous, même au prix d’impôts plus élevés.",
+      "Les services publics essentiels comme la santé et l'éducation doivent rester gratuits et accessibles à tous, même si cela nécessite une augmentation des impôts.",
     effect: {
       pana: 0,
       coop: 0,
-      econ: +8,
+      econ: +4,
       reli: 0,
       soci: 0,
       demo: 0,
@@ -320,7 +319,7 @@ questions = [
     effect: {
       pana: 0,
       coop: 0,
-      econ: +8,
+      econ: +6,
       reli: 0,
       soci: 0,
       demo: 0,
@@ -333,7 +332,7 @@ questions = [
     effect: {
       pana: 0,
       coop: 0,
-      econ: -8,
+      econ: -4,
       reli: 0,
       soci: 0,
       demo: 0,
@@ -346,7 +345,7 @@ questions = [
     effect: {
       pana: 0,
       coop: 0,
-      econ: -6,
+      econ: -8,
       reli: 0,
       soci: 0,
       demo: 0,
@@ -372,7 +371,7 @@ questions = [
     effect: {
       pana: 0,
       coop: 0,
-      econ: -8,
+      econ: -6,
       reli: 0,
       soci: 0,
       demo: 0,
@@ -384,7 +383,7 @@ questions = [
     effect: {
       pana: 0,
       coop: 0,
-      econ: -6,
+      econ: -8,
       reli: 0,
       soci: 0,
       demo: 0,
@@ -394,6 +393,32 @@ questions = [
   {
     question:
       "L’État doit subventionner massivement le pain, l’essence et l’électricité.",
+    effect: {
+      pana: 0,
+      coop: 0,
+      econ: +6,
+      reli: 0,
+      soci: 0,
+      demo: 0,
+      decent: 0,
+    },
+  },
+  {
+    question:
+      "L''État tunisien devrait procéder à un recrutement exceptionnel des docteurs au chômage pour résoudre la crise de l'emploi dans le secteur de l'enseignement supérieur.",
+    effect: {
+      pana: 0,
+      coop: 0,
+      econ: +8,
+      reli: 0,
+      soci: 0,
+      demo: 0,
+      decent: 0,
+    },
+  },
+  {
+    question:
+      "Le modèle economique tunisien pourrait fonctionner, mais il est pris en otage par une élite corrompue qui s’enrichit pendant que le peuple s’appauvrit.",
     effect: {
       pana: 0,
       coop: 0,
@@ -423,7 +448,7 @@ questions = [
       pana: 0,
       coop: 0,
       econ: 0,
-      reli: +8,
+      reli: +6,
       soci: 0,
       demo: 0,
       decent: 0,
@@ -436,7 +461,7 @@ questions = [
       pana: 0,
       coop: 0,
       econ: 0,
-      reli: +8,
+      reli: +6,
       soci: 0,
       demo: 0,
       decent: 0,
@@ -448,7 +473,7 @@ questions = [
       pana: 0,
       coop: 0,
       econ: 0,
-      reli: +6,
+      reli: +4,
       soci: 0,
       demo: 0,
       decent: 0,
@@ -462,7 +487,7 @@ questions = [
       econ: 0,
       reli: +6,
       soci: 0,
-      demo: 0,
+      demo: +2,
       decent: 0,
     },
   },
@@ -510,7 +535,7 @@ questions = [
       pana: 0,
       coop: 0,
       econ: 0,
-      reli: -6,
+      reli: -4,
       soci: 0,
       demo: 0,
       decent: 0,
@@ -523,19 +548,45 @@ questions = [
       pana: 0,
       coop: 0,
       econ: 0,
-      reli: -6,
+      reli: -4,
       soci: 0,
       demo: 0,
       decent: 0,
     },
   },
   {
-    question: "Il faut retirer la place de l’islam de la constitution.",
+    question: "Il faut retirer toute mention de l’islam de la constitution.",
     effect: {
       pana: 0,
       coop: 0,
       econ: 0,
       reli: -8,
+      soci: 0,
+      demo: 0,
+      decent: 0,
+    },
+  },
+  {
+    question:
+      "Le système éducatif tunisien doit s’aligner davantage sur les principes de l’islam, fondement moral et identitaire de l'individu.",
+    effect: {
+      pana: 0,
+      coop: 0,
+      econ: 0,
+      reli: +6,
+      soci: 0,
+      demo: 0,
+      decent: 0,
+    },
+  },
+  {
+    question:
+      "Mon identité religieuse prime sur mon appartenance nationale, je suis musulman avant d’être tunisien.",
+    effect: {
+      pana: 0,
+      coop: 0,
+      econ: 0,
+      reli: +4,
       soci: 0,
       demo: 0,
       decent: 0,
@@ -551,7 +602,7 @@ questions = [
       coop: 0,
       econ: 0,
       reli: 0,
-      soci: +8,
+      soci: +4,
       demo: 0,
       decent: 0,
     },
@@ -563,7 +614,7 @@ questions = [
       coop: 0,
       econ: 0,
       reli: 0,
-      soci: +6,
+      soci: +4,
       demo: 0,
       decent: 0,
     },
@@ -595,26 +646,13 @@ questions = [
   },
   {
     question:
-      "L’ordre social doit être maintenu, même au détriment de certains changements.",
-    effect: {
-      pana: 0,
-      coop: 0,
-      econ: 0,
-      reli: 0,
-      soci: +6,
-      demo: 0,
-      decent: 0,
-    },
-  },
-  {
-    question:
       "L’égalité totale entre hommes et femmes doit être garantie par la loi.",
     effect: {
       pana: 0,
       coop: 0,
       econ: 0,
       reli: 0,
-      soci: -8,
+      soci: -6,
       demo: 0,
       decent: 0,
     },
@@ -673,15 +711,14 @@ questions = [
 
   // 6. DÉMOCRATIE ↔ AUTORITARISME
   {
-    question:
-      "Les élections libres et régulières sont indispensables à la stabilité.",
+    question: "Des élections libres et régulières sont indispensables.",
     effect: {
       pana: 0,
       coop: 0,
       econ: 0,
       reli: 0,
       soci: 0,
-      demo: +8,
+      demo: +6,
       decent: 0,
     },
   },
@@ -694,7 +731,7 @@ questions = [
       econ: 0,
       reli: 0,
       soci: 0,
-      demo: +8,
+      demo: +6,
       decent: 0,
     },
   },
@@ -706,7 +743,7 @@ questions = [
       econ: 0,
       reli: 0,
       soci: 0,
-      demo: +6,
+      demo: +4,
       decent: 0,
     },
   },
@@ -718,7 +755,7 @@ questions = [
       econ: 0,
       reli: 0,
       soci: 0,
-      demo: +8,
+      demo: +6,
       decent: 0,
     },
   },
@@ -768,13 +805,13 @@ questions = [
       econ: 0,
       reli: 0,
       soci: 0,
-      demo: -6,
+      demo: -8,
       decent: 0,
     },
   },
   {
     question:
-      "Un gouvernement autoritaire est plus efficace qu’une démocratie instable.",
+      "Un gouvernement autoritaire est plus efficace qu’une démocratie libérale.",
     effect: {
       pana: 0,
       coop: 0,
@@ -794,7 +831,7 @@ questions = [
       econ: 0,
       reli: 0,
       soci: 0,
-      demo: -6,
+      demo: -4,
       decent: 0,
     },
   },
@@ -820,7 +857,7 @@ questions = [
       reli: 0,
       soci: 0,
       demo: 0,
-      decent: +6,
+      decent: +8,
     },
   },
   {
@@ -833,7 +870,7 @@ questions = [
       reli: 0,
       soci: 0,
       demo: 0,
-      decent: -6,
+      decent: -4,
     },
   },
   {
@@ -851,7 +888,7 @@ questions = [
   },
   {
     question:
-      "La gestion des ressources naturelles doit rester sous contrôle national.",
+      "La gestion des ressources naturelles doit rester sous contrôle du gouvernement central.",
     effect: {
       pana: 0,
       coop: 0,
@@ -887,65 +924,92 @@ questions = [
       decent: -6,
     },
   },
-
-  // QUESTIONS SPÉCIALES (icônes)
-  // 🏰 Monarchiste
   {
     question:
-      "La monarchie est une forme de gouvernement plus stable que la république.",
-    effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
+      "La décentralisation post-révolution est essentielle pour améliorer la gouvernance et rapprocher les décisions des citoyens.",
+    effect: {
+      pana: 0,
+      coop: 0,
+      econ: 0,
+      reli: 0,
+      soci: 0,
+      demo: +4,
+      decent: -6,
+    },
   },
+
+  // QUESTIONS SPÉCIALES (icônes)
   {
     question:
       "Il serait préférable pour la Tunisie de restaurer une monarchie constitutionnelle.",
     effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
-  },
-
-  // ✊ Syndicaliste
-  {
-    question:
-      "Les syndicats jouent un rôle essentiel dans la défense des travailleurs et doivent être renforcés.",
-    effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
+    special: "monarchie", // Clé "special" au bon niveau
   },
   {
     question:
       "L’UGTT a un rôle positif dans la vie politique et sociale tunisienne.",
-    effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
-  },
-
-  // 📅 Processus du 25 Juillet
-  {
-    question:
-      "Les mesures prises par Kaïs Saïed le 25 juillet 2021 étaient nécessaires pour sauver le pays.",
-    effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
-  },
-  {
-    question:
-      "La suspension du Parlement en 2021 était une décision justifiée.",
-    effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
-  },
-
-  // 👤 Pro Kaïs Saïed
-  {
-    question:
-      "Kaïs Saïed est un dirigeant intègre qui agit pour le bien du peuple.",
-    effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
+    effect: {
+      pana: 0,
+      coop: 0,
+      econ: +2,
+      reli: 0,
+      soci: 0,
+      demo: +2,
+      decent: 0,
+    },
+    special: "ugtt", // Clé "special" au bon niveau
   },
   {
     question:
-      "Il faudrait accorder plus de pouvoirs à Kaïs Saïed pour mettre en œuvre ses réformes.",
+      "Les mesures prises par Kaïs Saïed le 25 juillet 2021 étaient nécessaires et justifier pour sauver le pays.",
     effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
+    special: "25juillet", // Clé "special" au bon niveau
   },
-
-  // 🌪 Contre le “Réveil arabe” (2011)
   {
-    question:
-      "Les révolutions arabes de 2011 ont causé plus de torts que de bien aux pays concernés.",
-    effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
+    question: "Kaïs Saïed est un bon président.",
+    effect: {
+      pana: 0,
+      coop: 0,
+      econ: 0,
+      reli: 0,
+      soci: 0,
+      demo: -4,
+      decent: 0,
+    },
+    special: "ks", // Clé "special" au bon niveau
   },
   {
     question:
       "La Tunisie aurait dû éviter le processus révolutionnaire de 2011.",
+    effect: {
+      pana: 0,
+      coop: 0,
+      econ: 0,
+      reli: 0,
+      soci: 0,
+      demo: -4,
+      decent: 0,
+    },
+    special: "2011", // Clé "special" au bon niveau
+  },
+  {
+    question:
+      "L’avenir de la Tunisie passe par un Maghreb unie, fondée sur nos liens historiques et culturels.",
     effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
+    special: "maghreb", // Clé "special" au bon niveau
+  },
+  {
+    question:
+      "La Tunisie fait partie de l’Afrique et doit assumer un rôle moteur dans la construction d’une union africaine forte et souveraine.",
+    effect: {
+      pana: -2,
+      coop: 0,
+      econ: 0,
+      reli: 0,
+      soci: 0,
+      demo: 0,
+      decent: 0,
+    },
+    special: "afrique", // Clé "special" au bon niveau
   },
 ];

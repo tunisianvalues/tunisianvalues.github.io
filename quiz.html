@@ -1,3 +1,4 @@
+<!-- quiz.html (CODE COMPLET) -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -26,21 +27,33 @@
 <button class="small_button_off" id="back_button_off">Précédent</button><br>
 
 <script>
+    // Mélange aléatoire des questions (Fisher–Yates)
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+    shuffle(questions); // On mélange dès le début
+
     // Initialise les max pour chaque axe
     var max_pana = 0, max_coop = 0, max_econ = 0, max_reli = 0, max_soci = 0, max_demo = 0, max_decent = 0;
 
     // Tableaux pour stocker les scores par question
-    let pana_array = new Array(questions.length);
-    let coop_array = new Array(questions.length);
-    let econ_array = new Array(questions.length);
-    let reli_array = new Array(questions.length);
-    let soci_array = new Array(questions.length);
-    let demo_array = new Array(questions.length);
-    let decent_array = new Array(questions.length);
+    let pana_array = new Array(questions.length).fill(0);
+    let coop_array = new Array(questions.length).fill(0);
+    let econ_array = new Array(questions.length).fill(0);
+    let reli_array = new Array(questions.length).fill(0);
+    let soci_array = new Array(questions.length).fill(0);
+    let demo_array = new Array(questions.length).fill(0);
+    let decent_array = new Array(questions.length).fill(0);
+
+    // Tableau pour stocker les réponses de l'utilisateur (valeurs -1.0 à 1.0)
+    let user_answers = new Array(questions.length).fill(null);
 
     var qn = 0; // Index de la question courante
 
-    // Calcul des max possibles par axe (somme des valeurs absolues des effets)
+    // Calcul des max possibles par axe
     for (var i = 0; i < questions.length; i++) {
         max_pana += Math.abs(questions[i].effect.pana || 0);
         max_coop += Math.abs(questions[i].effect.coop || 0);
@@ -66,6 +79,10 @@
     init_question();
 
     function next_question(mult) {
+        // Enregistre la réponse de l'utilisateur
+        user_answers[qn] = mult;
+
+        // Calcule les scores pour les axes
         pana_array[qn] = mult * (questions[qn].effect.pana || 0);
         coop_array[qn] = mult * (questions[qn].effect.coop || 0);
         econ_array[qn] = mult * (questions[qn].effect.econ || 0);
@@ -89,11 +106,12 @@
     }
 
     function calc_score(score, max) {
-        if (max === 0) return (50).toFixed(1); // Évite la division par zéro
+        if (max === 0) return (50).toFixed(1);
         return (100 * (max + score) / (2 * max)).toFixed(1);
     }
 
     function results() {
+        // Calcule les scores finaux pour chaque axe
         let final_pana = pana_array.reduce((a, b) => a + b, 0);
         let final_coop = coop_array.reduce((a, b) => a + b, 0);
         let final_econ = econ_array.reduce((a, b) => a + b, 0);
@@ -102,7 +120,17 @@
         let final_demo = demo_array.reduce((a, b) => a + b, 0);
         let final_decent = decent_array.reduce((a, b) => a + b, 0);
 
-        // Redirection vers results.html avec tous les paramètres
+        // Crée la liste des icônes à afficher
+        let special_icons = [];
+        for (let i = 0; i < questions.length; i++) {
+            // Si la question a une icône spéciale et que l'utilisateur est d'accord (réponse > 0)
+            if (questions[i].special && user_answers[i] > 0) {
+                special_icons.push(questions[i].special);
+            }
+        }
+        const icons_param = special_icons.join(',');
+
+        // Redirection vers results.html avec tous les paramètres (scores + icônes)
         location.href = `results.html`
             + `?pana=${calc_score(final_pana, max_pana)}`
             + `&coop=${calc_score(final_coop, max_coop)}`
@@ -110,7 +138,8 @@
             + `&reli=${calc_score(final_reli, max_reli)}`
             + `&soci=${calc_score(final_soci, max_soci)}`
             + `&demo=${calc_score(final_demo, max_demo)}`
-            + `&decent=${calc_score(final_decent, max_decent)}`;
+            + `&decent=${calc_score(final_decent, max_decent)}`
+            + `&icons=${icons_param}`;
     }
 </script>
 </body>
