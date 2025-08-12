@@ -17,7 +17,6 @@
 
 <h1>Résultats</h1>
 
-<!-- Axe Panarabisme ↔ Nationalisme tunisien -->
 <h2>Axe Panarabisme : <span class="weight-300" id="pana-label"></span></h2>
 <div class="axis">
     <img id="img-left-pana" src="value_images/pan_arabisme.svg" height="128pt" alt="Panarabisme"/>
@@ -26,7 +25,6 @@
     <img id="img-right-pana" src="value_images/nationalisme.svg" height="128pt" alt="Nationalisme tunisien"/>
 </div>
 
-<!-- Axe Coopération internationale ↔ Isolationnisme -->
 <h2>Axe Coopération internationale : <span class="weight-300" id="coop-label"></span></h2>
 <div class="axis">
     <img id="img-left-coop" src="value_images/cooperation.svg" height="128pt" alt="Coopération internationale"/>
@@ -35,7 +33,6 @@
     <img id="img-right-coop" src="value_images/isolation.svg" height="128pt" alt="Isolationnisme"/>
 </div>
 
-<!-- Axe Socialisme ↔ Capitalisme -->
 <h2>Axe Économie : <span class="weight-300" id="econ-label"></span></h2>
 <div class="axis">
     <img id="img-left-econ" src="value_images/socialisme.svg" height="128pt" alt="Socialisme"/>
@@ -44,7 +41,6 @@
     <img id="img-right-econ" src="value_images/capitalisme.svg" height="128pt" alt="Capitalisme"/>
 </div>
 
-<!-- Axe Islamisme ↔ Laïcisme -->
 <h2>Axe Religion : <span class="weight-300" id="reli-label"></span></h2>
 <div class="axis">
     <img id="img-left-reli" src="value_images/islamisme.svg" height="128pt" alt="Islamisme"/>
@@ -53,7 +49,6 @@
     <img id="img-right-reli" src="value_images/laicisme.svg" height="128pt" alt="Laïcisme"/>
 </div>
 
-<!-- Axe Conservatisme ↔ Progressisme -->
 <h2>Axe Sociétal : <span class="weight-300" id="soci-label"></span></h2>
 <div class="axis">
     <img id="img-left-soci" src="value_images/conservatisme.svg" height="128pt" alt="Conservatisme"/>
@@ -71,7 +66,6 @@
     <img id="img-right-demo" src="value_images/autoritarisme.svg" height="128pt" alt="Autoritarisme"/>
 </div>
 
-<!-- Axe Décentralisation ↔ Centralisation -->
 <h2>Axe Décentralisation : <span class="weight-300" id="decent-label"></span></h2>
 <div class="axis">
     <img id="img-left-decent" src="value_images/decentralisation.svg" height="128pt" alt="Décentralisation"/>
@@ -81,9 +75,7 @@
 </div>
 <hr/>
 
-<!-- NOUVEAU : SECTION POUR LES ICÔNES SPÉCIALES -->
 <div id="special-icons-container" style="text-align:center; padding: 10px 0;">
-    <!-- Les icônes créées par le script apparaîtront ici -->
 </div>
 
 <h2>Profil le plus proche : <span id="ideology-label" class="weight-300"></span></h2>
@@ -109,7 +101,7 @@ document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+ "statcounte
                 return decodeURIComponent(pair[1]);
             }
         }
-        return null; // Renvoie null si la variable n'est pas trouvée
+        return null;
     }
 
     function setBarValue(name, value) {
@@ -124,7 +116,6 @@ document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+ "statcounte
         }
     }
 
-    // Labels pour les axes
     var panaLabels = ["Nationalisme Arabe","Arabisme","Neutre","Patriotisme","Nationalisme Tunisien"];
     var coopLabels = ["Internationalisme","Multilatéralisme","Neutralité","Isolationnisme","Autarcie"];
     var econLabels = ["Socialisme","Social-démocratie","Balancé","Social-Libéralisme","Libéralisme"];
@@ -133,7 +124,6 @@ document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+ "statcounte
     var demoLabels = ["Démocratie participative","Démocratie libérale","État de droit","Autoritarisme","Totalitarisme"];
     var decentLabels = ["Fédéralisme","Régionalisme","Décentralisme","Centralisme","Unitarisme"];
 
-    // Lecture des scores depuis URL
     var pana = parseFloat(getQueryVariable("pana"));
     var coop = parseFloat(getQueryVariable("coop"));
     var econ = parseFloat(getQueryVariable("econ"));
@@ -142,7 +132,6 @@ document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+ "statcounte
     var demo = parseFloat(getQueryVariable("demo"));
     var decent = parseFloat(getQueryVariable("decent"));
 
-    // NOUVEAU : Lecture et affichage des icônes
     const icons_param = getQueryVariable("icons");
     if (icons_param && icons_param.length > 0) {
         const container = document.getElementById("special-icons-container");
@@ -198,7 +187,6 @@ document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+ "statcounte
     document.getElementById("demo-label").innerHTML = pickLabel(demo, demoLabels);
     document.getElementById("decent-label").innerHTML = pickLabel(decent, decentLabels);
 
-    // Calcul du profil le plus proche
     var ideology = "";
     var ideodist = Infinity;
     for (var i = 0; i < ideologies.length; i++) {
@@ -217,9 +205,7 @@ document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+ "statcounte
     }
     document.getElementById("ideology-label").innerHTML = ideology;
 
-// CETTE PARTIE EST MAINTENANT COMPLÈTE ET INTacte
 window.onload = function() {
-    // Helper to load images from the DOM, essential for canvas drawing.
     function loadImageFromDom(id) {
         return new Promise(function(resolve) {
             var dom = document.getElementById(id);
@@ -247,22 +233,19 @@ window.onload = function() {
       "img-left-decent", "img-right-decent"
     ];
 
-    // Wait for fonts and images to be fully loaded before drawing
     Promise.all([document.fonts.ready, Promise.all(imageIds.map(loadImageFromDom))]).then(function(results) {
         var imagesArray = results[1];
         var imgs = {};
         for (var i = 0; i < imageIds.length; i++) imgs[imageIds[i]] = imagesArray[i];
 
-        // --- CANVAS SETUP ---
         var c = document.createElement("canvas");
         var ctx = c.getContext("2d");
         c.width = 900;
-        c.height = 950; // Increased height for better spacing
+        c.height = 950; 
 
         ctx.fillStyle = "#EEEEEE";
         ctx.fillRect(0, 0, c.width, c.height);
 
-        // --- LAYOUT CONSTANTS (METICULOUSLY ADJUSTED) ---
         var iconSize = 80; // Reduced icon size
         var barHeight = 40; // Adjusted bar height
         var barStartX = 135;
@@ -270,7 +253,6 @@ window.onload = function() {
         var startY = 220; // Pushed everything down
         var gap = 100; // Space between each axis
 
-        // --- MAIN TITLES ---
         ctx.fillStyle = "#222222";
         ctx.font = "700 60px Montserrat";
         ctx.textAlign = "left";
@@ -278,49 +260,40 @@ window.onload = function() {
         ctx.font = "50px Montserrat";
         ctx.fillText(ideology, 20, 145);
 
-        // --- FOOTER TEXT ---
         ctx.textAlign = "right";
         ctx.font = "300 25px Montserrat";
-        ctx.fillText("tunisianvalues", 880, 60);
+        ctx.fillText("TunisianValues", 880, 60);
         ctx.font = "300 25px Montserrat";
         ctx.fillText("Bêta", 880, 90);
 
-        // --- TEXT LABELS FOR ICONS (THIS WAS MISSING) ---
         const leftLabels = ["PANARABISME", "MULTILATERALISME", "SOCIALISME", "ISLAM POLITIQUE", "CONSERVATISME", "DEMOCRATIE", "DECENTRALISATION"];
         const rightLabels = ["NATIONALISME", "ISOLATIONNISME", "CAPITALISME", "SÉCULARISME", "PROGRESSISME", "AUTORITARISME", "CENTRALISME"];
 
-        // Arrays of values and colors for looping
         const vals = [pana, coop, econ, reli, soci, demo, decent];
         const valsR = [panaR, coopR, econR, reliR, sociR, demoR, decentR];
         const leftColors = ["#f44336", "#ff9800", "#ffeb3b", "#9c27b0", "#8bc34a", "#ff5722", "#00bcd4"];
         const rightColors = ["#00897b", "#03a9f4", "#3f51b5", "#673ab7", "#e91e63", "#795548", "#009688"]; // Corrected Progressisme color to pink
 
-        // --- MASTER LOOP TO DRAW EVERYTHING ---
         for (let i = 0; i < 7; i++) {
             let currentY = startY + i * gap;
 
-            // 1. Draw Axis Title (e.g., "Panarabisme vs Nationalisme tunisien")
             ctx.fillStyle = "#222222";
             ctx.font = "300 28px Montserrat";
             ctx.textAlign = "center";
             ctx.fillText(document.querySelectorAll("h2")[i].textContent.split(':')[1].trim(), 450, currentY - 30);
 
-            // 2. Draw Icons
             ctx.drawImage(imgs[imageIds[i*2]], 30, currentY - iconSize/2, iconSize, iconSize);
             ctx.drawImage(imgs[imageIds[i*2+1]], 790, currentY - iconSize/2, iconSize, iconSize);
 
-            // 3. Draw Icon Labels (The missing part)
             ctx.fillStyle = "#222222";
             ctx.font = "bold 12px Montserrat";
             ctx.textAlign = "center";
             ctx.fillText(leftLabels[i], 30 + iconSize/2, currentY + iconSize/2 + 15);
             ctx.fillText(rightLabels[i], 790 + iconSize/2, currentY + iconSize/2 + 15);
             
-            // 4. Draw Background Bar
             ctx.fillStyle = "#222222";
             ctx.fillRect(barStartX, currentY - barHeight/2, barTotalWidth, barHeight);
 
-            // 5. Draw Left and Right Value Bars
             let leftWidth = (vals[i] / 100) * barTotalWidth;
             let rightWidth = (valsR[i] / 100) * barTotalWidth;
             
@@ -329,7 +302,6 @@ window.onload = function() {
             ctx.fillStyle = rightColors[i];
             ctx.fillRect(barStartX + leftWidth + 2, currentY - barHeight/2 + 2, rightWidth - 4, barHeight - 4);
             
-            // 6. Draw Percentage Text (Correctly centered)
             ctx.fillStyle = "#FFFFFF";
             ctx.font = "bold 24px Montserrat";
             ctx.textAlign = "left";
@@ -342,7 +314,6 @@ window.onload = function() {
             }
         }
 
-        // --- FINAL EXPORT ---
         document.getElementById("banner").src = c.toDataURL();
 
     }).catch(function(err) {
