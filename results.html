@@ -219,184 +219,134 @@ document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+ "statcounte
 
 // CETTE PARTIE EST MAINTENANT COMPLÈTE ET INTacte
 window.onload = function() {
-    // helper : charge une image à partir d'un <img id="..."> et renvoie Promise<Image>
+    // Helper to load images from the DOM, essential for canvas drawing.
     function loadImageFromDom(id) {
         return new Promise(function(resolve) {
             var dom = document.getElementById(id);
             var img = new Image();
             if (!dom || !dom.src) {
-                // fallback 1x1 transparent si image introuvable
-                img.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
-                img.onload = function() { resolve(img); };
-                img.onerror = function() { resolve(img); };
+                console.warn("Image element not found or has no src:", id);
+                img.src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="; // Fallback
+                img.onload = () => resolve(img);
+                img.onerror = () => resolve(img);
                 return;
             }
-            img.onload = function() { resolve(img); };
-            img.onerror = function() {
-                console.warn("Erreur chargement image:", dom.src);
+            img.onload = () => resolve(img);
+            img.onerror = () => {
+                console.error("Failed to load image:", dom.src);
                 resolve(img);
             };
-            // Important : définir src **en dernier** pour déclencher onload correctement
             img.src = dom.src;
         });
     }
 
-    // ids des images que tu dessines
     var imageIds = [
-      "img-left-pana","img-right-pana",
-      "img-left-coop","img-right-coop",
-      "img-left-econ","img-right-econ",
-      "img-left-reli","img-right-reli",
-      "img-left-soci","img-right-soci",
-      "img-left-demo","img-right-demo",
-      "img-left-decent","img-right-decent"
+      "img-left-pana", "img-right-pana", "img-left-coop", "img-right-coop",
+      "img-left-econ", "img-right-econ", "img-left-reli", "img-right-reli",
+      "img-left-soci", "img-right-soci", "img-left-demo", "img-right-demo",
+      "img-left-decent", "img-right-decent"
     ];
 
-    // Attendre fonts + images
-    var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
-    var imgsPromises = imageIds.map(loadImageFromDom);
-
-    Promise.all([fontsReady, Promise.all(imgsPromises)]).then(function(results) {
+    // Wait for fonts and images to be fully loaded before drawing
+    Promise.all([document.fonts.ready, Promise.all(imageIds.map(loadImageFromDom))]).then(function(results) {
         var imagesArray = results[1];
         var imgs = {};
         for (var i = 0; i < imageIds.length; i++) imgs[imageIds[i]] = imagesArray[i];
 
-        // --- Ton code de dessin (adapté pour utiliser imgs["id"] au lieu de document.getElementById)
+        // --- CANVAS SETUP ---
         var c = document.createElement("canvas");
         var ctx = c.getContext("2d");
         c.width = 900;
-        c.height = 900;  // augmenté pour éviter la coupe en bas
+        c.height = 950; // Increased height for better spacing
 
-        // Fond gris clair
         ctx.fillStyle = "#EEEEEE";
         ctx.fillRect(0, 0, c.width, c.height);
 
-        // Fonction pour éviter largeur négative ou trop petite
-        function safeWidth(val) {
-            if (isNaN(val) || val < 0) return 0;
-            if (val < 4) return 4; // taille mini visible
-            return val;
-        }
+        // --- LAYOUT CONSTANTS (METICULOUSLY ADJUSTED) ---
+        var iconSize = 80; // Reduced icon size
+        var barHeight = 40; // Adjusted bar height
+        var barStartX = 135;
+        var barTotalWidth = 630;
+        var startY = 220; // Pushed everything down
+        var gap = 100; // Space between each axis
 
-        // Images gauche/droite (ajuster coordonnées) — utilise les images chargées
-        ctx.drawImage(imgs["img-left-pana"], 20, 150, 100, 100);
-        ctx.drawImage(imgs["img-right-pana"], 780, 150, 100, 100);
-
-        ctx.drawImage(imgs["img-left-coop"], 20, 250, 100, 100);
-        ctx.drawImage(imgs["img-right-coop"], 780, 250, 100, 100);
-
-        ctx.drawImage(imgs["img-left-econ"], 20, 350, 100, 100);
-        ctx.drawImage(imgs["img-right-econ"], 780, 350, 100, 100);
-
-        ctx.drawImage(imgs["img-left-reli"], 20, 450, 100, 100);
-        ctx.drawImage(imgs["img-right-reli"], 780, 450, 100, 100);
-
-        ctx.drawImage(imgs["img-left-soci"], 20, 550, 100, 100);
-        ctx.drawImage(imgs["img-right-soci"], 780, 550, 100, 100);
-
-        ctx.drawImage(imgs["img-left-demo"], 20, 650, 100, 100);
-        ctx.drawImage(imgs["img-right-demo"], 780, 650, 100, 100);
-
-        ctx.drawImage(imgs["img-left-decent"], 20, 750, 100, 100);
-        ctx.drawImage(imgs["img-right-decent"], 780, 750, 100, 100);
-
-        // Fonds barres (fond gris foncé)
-        ctx.fillStyle = "#222222";
-        var startY = 170;
-        var barHeight = 50;
-        var gap = 100;
-        for (var i = 0; i < 7; i++) {
-            ctx.fillRect(130, startY + i * gap, 620, barHeight);
-        }
-
-        // Couleurs barres gauche/droite (utilise tes variables existantes)
-        ctx.fillStyle = "#f44336";
-        ctx.fillRect(130, 174 + 0 * gap, safeWidth(6.2 * pana - 4), barHeight - 8);
-        ctx.fillStyle = "#00897b";
-        ctx.fillRect(750 - safeWidth(6.2 * panaR), 174 + 0 * gap, safeWidth(6.2 * panaR - 4), barHeight - 8);
-
-        ctx.fillStyle = "#ff9800";
-        ctx.fillRect(130, 174 + 1 * gap, safeWidth(6.2 * coop - 4), barHeight - 8);
-        ctx.fillStyle = "#03a9f4";
-        ctx.fillRect(750 - safeWidth(6.2 * coopR), 174 + 1 * gap, safeWidth(6.2 * coopR - 4), barHeight - 8);
-
-        ctx.fillStyle = "#ffeb3b";
-        ctx.fillRect(130, 174 + 2 * gap, safeWidth(6.2 * econ - 4), barHeight - 8);
-        ctx.fillStyle = "#3f51b5";
-        ctx.fillRect(750 - safeWidth(6.2 * econR), 174 + 2 * gap, safeWidth(6.2 * econR - 4), barHeight - 8);
-
-        ctx.fillStyle = "#9c27b0";
-        ctx.fillRect(130, 174 + 3 * gap, safeWidth(6.2 * reli - 4), barHeight - 8);
-        ctx.fillStyle = "#673ab7";
-        ctx.fillRect(750 - safeWidth(6.2 * reliR), 174 + 3 * gap, safeWidth(6.2 * reliR - 4), barHeight - 8);
-
-        ctx.fillStyle = "#8bc34a";
-        ctx.fillRect(130, 174 + 4 * gap, safeWidth(6.2 * soci - 4), barHeight - 8);
-        ctx.fillStyle = "#4caf50";
-        ctx.fillRect(750 - safeWidth(6.2 * sociR), 174 + 4 * gap, safeWidth(6.2 * sociR - 4), barHeight - 8);
-
-        ctx.fillStyle = "#ff5722";
-        ctx.fillRect(130, 174 + 5 * gap, safeWidth(6.2 * demo - 4), barHeight - 8);
-        ctx.fillStyle = "#795548";
-        ctx.fillRect(750 - safeWidth(6.2 * demoR), 174 + 5 * gap, safeWidth(6.2 * demoR - 4), barHeight - 8);
-
-        ctx.fillStyle = "#00bcd4";
-        ctx.fillRect(130, 174 + 6 * gap, safeWidth(6.2 * decent - 4), barHeight - 8);
-        ctx.fillStyle = "#009688";
-        ctx.fillRect(750 - safeWidth(6.2 * decentR), 174 + 6 * gap, safeWidth(6.2 * decentR - 4), barHeight - 8);
-
-        // Titres
+        // --- MAIN TITLES ---
         ctx.fillStyle = "#222222";
         ctx.font = "700 60px Montserrat";
         ctx.textAlign = "left";
-        ctx.fillText("TunisianValues", 20, 100);
+        ctx.fillText("TunisianValues", 20, 80);
         ctx.font = "50px Montserrat";
-        ctx.fillText(ideology, 20, 150);
+        ctx.fillText(ideology, 20, 145);
 
-        // Pourcentages sur barres (gauche/droite) — arrondis pour éviter 87.9999999
-        ctx.font = "bold 20px Montserrat";
-        ctx.textAlign = "left";
-        var vals = [pana, coop, econ, reli, soci, demo, decent];
-        var valsR = [panaR, coopR, econR, reliR, sociR, demoR, decentR];
-        for (var i = 0; i < 7; i++) {
-            var leftVal = (isNaN(vals[i]) ? 0 : Math.round(vals[i]));
-            var rightVal = (isNaN(valsR[i]) ? 0 : Math.round(valsR[i]));
-            if (leftVal > 15) ctx.fillText(leftVal + "%", 140, 205 + i * gap);
-            if (rightVal > 15) ctx.fillText(rightVal + "%", 730, 205 + i * gap);
+        // --- FOOTER TEXT ---
+        ctx.textAlign = "right";
+        ctx.font = "300 25px Montserrat";
+        ctx.fillText("tunisianvalues", 880, 60);
+        ctx.font = "300 25px Montserrat";
+        ctx.fillText("Bêta", 880, 90);
+
+        // --- TEXT LABELS FOR ICONS (THIS WAS MISSING) ---
+        const leftLabels = ["PANARABISME", "MULTILATERALISME", "SOCIALISME", "ISLAM POLITIQUE", "CONSERVATISME", "DEMOCRATIE", "DECENTRALISATION"];
+        const rightLabels = ["NATIONALISME", "ISOLATIONNISME", "CAPITALISME", "SÉCULARISME", "PROGRESSISME", "AUTORITARISME", "CENTRALISME"];
+
+        // Arrays of values and colors for looping
+        const vals = [pana, coop, econ, reli, soci, demo, decent];
+        const valsR = [panaR, coopR, econR, reliR, sociR, demoR, decentR];
+        const leftColors = ["#f44336", "#ff9800", "#ffeb3b", "#9c27b0", "#8bc34a", "#ff5722", "#00bcd4"];
+        const rightColors = ["#00897b", "#03a9f4", "#3f51b5", "#673ab7", "#e91e63", "#795548", "#009688"]; // Corrected Progressisme color to pink
+
+        // --- MASTER LOOP TO DRAW EVERYTHING ---
+        for (let i = 0; i < 7; i++) {
+            let currentY = startY + i * gap;
+
+            // 1. Draw Axis Title (e.g., "Panarabisme vs Nationalisme tunisien")
+            ctx.fillStyle = "#222222";
+            ctx.font = "300 28px Montserrat";
+            ctx.textAlign = "center";
+            ctx.fillText(document.querySelectorAll("h2")[i].textContent.split(':')[1].trim(), 450, currentY - 30);
+
+            // 2. Draw Icons
+            ctx.drawImage(imgs[imageIds[i*2]], 30, currentY - iconSize/2, iconSize, iconSize);
+            ctx.drawImage(imgs[imageIds[i*2+1]], 790, currentY - iconSize/2, iconSize, iconSize);
+
+            // 3. Draw Icon Labels (The missing part)
+            ctx.fillStyle = "#222222";
+            ctx.font = "bold 12px Montserrat";
+            ctx.textAlign = "center";
+            ctx.fillText(leftLabels[i], 30 + iconSize/2, currentY + iconSize/2 + 15);
+            ctx.fillText(rightLabels[i], 790 + iconSize/2, currentY + iconSize/2 + 15);
+            
+            // 4. Draw Background Bar
+            ctx.fillStyle = "#222222";
+            ctx.fillRect(barStartX, currentY - barHeight/2, barTotalWidth, barHeight);
+
+            // 5. Draw Left and Right Value Bars
+            let leftWidth = (vals[i] / 100) * barTotalWidth;
+            let rightWidth = (valsR[i] / 100) * barTotalWidth;
+            
+            ctx.fillStyle = leftColors[i];
+            ctx.fillRect(barStartX + 2, currentY - barHeight/2 + 2, leftWidth - 4, barHeight - 4);
+            ctx.fillStyle = rightColors[i];
+            ctx.fillRect(barStartX + leftWidth + 2, currentY - barHeight/2 + 2, rightWidth - 4, barHeight - 4);
+            
+            // 6. Draw Percentage Text (Correctly centered)
+            ctx.fillStyle = "#FFFFFF";
+            ctx.font = "bold 24px Montserrat";
+            ctx.textAlign = "left";
+            if (leftWidth > 50) {
+                 ctx.fillText(Math.round(vals[i]) + "%", barStartX + 10, currentY + 8);
+            }
+            ctx.textAlign = "right";
+            if (rightWidth > 50) {
+                ctx.fillText(Math.round(valsR[i]) + "%", barStartX + barTotalWidth - 10, currentY + 8);
+            }
         }
 
-        // Légendes axes
-        ctx.font = "300 28px Montserrat";
-        ctx.textAlign = "center";
-        ctx.fillText("Panarabisme vs Nationalisme tunisien", 450, 140);
-        ctx.fillText("Coopération internationale vs Isolationnisme", 450, 240);
-        ctx.fillText("Socialisme vs Capitalisme", 450, 340);
-        ctx.fillText("Islamisme vs Laïcisme", 450, 440);
-        ctx.fillText("Conservatisme vs Progressisme", 450, 540);
-        ctx.fillText("Démocratie vs Autoritarisme", 450, 640);
-        ctx.fillText("Décentralisation vs Centralisation", 450, 740);
+        // --- FINAL EXPORT ---
+        document.getElementById("banner").src = c.toDataURL();
 
-        // Signature
-        ctx.textAlign = "right";
-        ctx.fillText("tunisianvalues", 880, 60);
-        ctx.fillText(version, 880, 90);
-
-        // Export image finale
-        var bannerEl = document.getElementById("banner");
-        if (bannerEl) bannerEl.src = c.toDataURL();
     }).catch(function(err) {
-        console.error("Erreur fonts/images:", err);
-        // tentative de fallback rapide : dessiner même si fonts/images posent problème
-        try {
-            // si échec, on tente un dessin basique rapide (pour éviter écran blanc)
-            var c = document.createElement("canvas");
-            var ctx = c.getContext("2d");
-            c.width = 900; c.height = 900;
-            ctx.fillStyle = "#EEEEEE"; ctx.fillRect(0,0,c.width,c.height);
-            ctx.fillStyle = "#222"; ctx.font = "20px sans-serif"; ctx.fillText("Erreur rendu bannière", 20, 40);
-            var bannerEl = document.getElementById("banner");
-            if (bannerEl) bannerEl.src = c.toDataURL();
-        } catch(e) { console.error(e); }
+        console.error("Fatal error during canvas rendering:", err);
     });
 };
 </script>
