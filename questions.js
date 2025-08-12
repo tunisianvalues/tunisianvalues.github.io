@@ -1,5 +1,4 @@
 questions = [
-  // 1. PANARABISME ↔ NATIONALISME TUNISIEN
   {
     question:
       "La Tunisie devrait prioriser les alliances avec les pays arabes plutôt qu’avec d’autres régions.",
@@ -153,8 +152,6 @@ questions = [
       decent: 0,
     },
   },
-
-  // 2. COOPÉRATION INTERNATIONALE ↔ ISOLATIONNISME
   {
     question:
       "La Tunisie doit participer activement aux organisations internationales.",
@@ -272,8 +269,6 @@ questions = [
       decent: 0,
     },
   },
-
-  // 3. SOCIALISME ↔ CAPITALISME
   {
     question:
       "L'État tunisien doit contrôler les secteurs stratégiques de l'économie tels que l'énergie, les transports et les télécommunications.",
@@ -429,7 +424,6 @@ questions = [
       decent: 0,
     },
   },
-  // 4. ISLAMISME ↔ LAÏCISME
   {
     question: "La charia devrait inspirer la législation tunisienne.",
     effect: {
@@ -592,8 +586,6 @@ questions = [
       decent: 0,
     },
   },
-
-  // 5. CONSERVATISME ↔ PROGRESSISME
   {
     question:
       "Les valeurs et coutumes traditionnelles tunisiennes doivent être préservées.",
@@ -708,8 +700,6 @@ questions = [
       decent: 0,
     },
   },
-
-  // 6. DÉMOCRATIE ↔ AUTORITARISME
   {
     question: "Des élections libres et régulières sont indispensables.",
     effect: {
@@ -938,12 +928,12 @@ questions = [
     },
   },
 
-  // QUESTIONS SPÉCIALES (icônes)
+  // QUESTIONS SPÉCIALES
   {
     question:
       "Il serait préférable pour la Tunisie de restaurer une monarchie constitutionnelle.",
     effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
-    special: "monarchie", // Clé "special" au bon niveau
+    special: "monarchie",
   },
   {
     question:
@@ -957,13 +947,13 @@ questions = [
       demo: +2,
       decent: 0,
     },
-    special: "ugtt", // Clé "special" au bon niveau
+    special: "ugtt", 
   },
   {
     question:
       "Les mesures prises par Kaïs Saïed le 25 juillet 2021 étaient nécessaires et justifier pour sauver le pays.",
     effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
-    special: "25juillet", // Clé "special" au bon niveau
+    special: "25juillet", 
   },
   {
     question: "Kaïs Saïed est un bon président.",
@@ -976,7 +966,7 @@ questions = [
       demo: -4,
       decent: 0,
     },
-    special: "ks", // Clé "special" au bon niveau
+    special: "ks",
   },
   {
     question:
@@ -990,13 +980,13 @@ questions = [
       demo: -4,
       decent: 0,
     },
-    special: "2011", // Clé "special" au bon niveau
+    special: "2011",
   },
   {
     question:
       "L’avenir de la Tunisie passe par un Maghreb unie, fondée sur nos liens historiques et culturels.",
     effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
-    special: "maghreb", // Clé "special" au bon niveau
+    special: "maghreb", 
   },
   {
     question:
@@ -1010,6 +1000,7 @@ questions = [
       demo: 0,
       decent: 0,
     },
-    special: "afrique", // Clé "special" au bon niveau
+    special: "afrique",
   },
 ];
+
