@@ -1,0 +1,134 @@
+ideologies = [
+  {
+    "name": "Ennahdha",
+    "stats": {
+      "pana": 50,  
+      "coop": 65,  
+      "econ": 50,  
+      "reli": 75,  
+      "soci": 80,  
+      "demo": 60,  
+      "decent": 55
+    }
+  },
+  {
+    "name": "Nidaa Tounes (2014)",
+    "stats": {
+      "pana": 40,  
+      "coop": 70,  
+      "econ": 50,  
+      "reli": 40,  
+      "soci": 50,  
+      "demo": 60,  
+      "decent": 40
+    }
+  },
+  {
+    "name": "Courant Démocrate (Attayar)",
+    "stats": {
+      "pana": 30,  
+      "coop": 75,  
+      "econ": 65,  
+      "reli": 25,  
+      "soci": 40,  
+      "demo": 85,  
+      "decent": 60 
+    }
+  },
+  {
+    "name": "Parti Destourien Libre (PDL)",
+    "stats": {
+      "pana": 10,  
+      "coop": 20,  
+      "econ": 50,  
+      "reli": 25,  
+      "soci": 65,  
+      "demo": 20,  
+      "decent": 30
+    }
+  },
+  {
+    "name": "Afek Tounes",
+    "stats": {
+      "pana": 30, 
+      "coop": 85,  
+      "econ": 25,  
+      "reli": 25,  
+      "soci": 25,  
+      "demo": 80,  
+      "decent": 75 
+    }
+  },
+  {
+    "name": "Al Joumhouri",
+    "stats": {
+      "pana": 35,  
+      "coop": 70,  
+      "econ": 60,  
+      "reli": 25,  
+      "soci": 35,
+      "demo": 70, 
+      "decent": 65
+    }
+  },
+  {
+    "name": "Ettakatol (FDTL)",
+    "stats": {
+      "pana": 40, 
+      "coop": 80,  
+      "econ": 60,  
+      "reli": 20, 
+      "soci": 20,  
+      "demo": 80, 
+      "decent": 70 
+    }
+  },
+  {
+    "name": "Mouvement Echaâb",
+    "stats": {
+      "pana": 70,
+      "coop": 30,  
+      "econ": 70,  
+      "reli": 30, 
+      "soci": 80,  
+      "demo": 35, 
+      "decent": 25 
+    }
+  },
+  {
+    "name": "Coalition Al Karama",
+    "stats": {
+      "pana": 60, 
+      "coop": 15,  
+      "econ": 60, 
+      "reli": 90,  
+      "soci": 95,  
+      "demo": 15,  
+      "decent": 30
+    }
+  },
+  {
+    "name": "Parti des Travailleurs",
+    "stats": {
+      "pana": 60, 
+      "coop": 70, 
+      "econ": 90,  
+      "reli": 10,
+      "soci": 10,
+      "demo": 70,
+      "decent": 50.
+    }
+  },
+  {
+    "name": "Parti Baath Tunisien",
+    "stats": {
+      "pana": 80,  
+      "coop": 25,  
+      "econ": 85,  
+      "reli": 30,  
+      "soci": 50,  
+      "demo": 10,  
+      "decent": 10
+    }
+  }
+];
