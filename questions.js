@@ -296,6 +296,18 @@ questions = [
     },
   },
   {
+    question: "Les entreprises privées doivent être abolies.",
+    effect: {
+      pana: 0,
+      coop: 0,
+      econ: +8,
+      reli: 0,
+      soci: 0,
+      demo: 0,
+      decent: 0,
+    },
+  },
+  {
     question:
       "Les grandes entreprises privées doivent être régulées pour éviter les abus.",
     effect: {
@@ -340,7 +352,7 @@ questions = [
     effect: {
       pana: 0,
       coop: 0,
-      econ: -8,
+      econ: -6,
       reli: 0,
       soci: 0,
       demo: 0,
@@ -366,7 +378,7 @@ questions = [
     effect: {
       pana: 0,
       coop: 0,
-      econ: -6,
+      econ: -4,
       reli: 0,
       soci: 0,
       demo: 0,
@@ -400,11 +412,11 @@ questions = [
   },
   {
     question:
-      "L''État tunisien devrait procéder à un recrutement exceptionnel des docteurs au chômage pour résoudre la crise de l'emploi dans le secteur de l'enseignement supérieur.",
+      "L'État tunisien devrait procéder à un recrutement exceptionnel des docteurs au chômage pour résoudre la crise de l'emploi dans le secteur de l'enseignement supérieur.",
     effect: {
       pana: 0,
       coop: 0,
-      econ: +8,
+      econ: +6,
       reli: 0,
       soci: 0,
       demo: 0,
@@ -947,13 +959,13 @@ questions = [
       demo: +2,
       decent: 0,
     },
-    special: "ugtt", 
+    special: "ugtt",
   },
   {
     question:
       "Les mesures prises par Kaïs Saïed le 25 juillet 2021 étaient nécessaires et justifier pour sauver le pays.",
     effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
-    special: "25juillet", 
+    special: "25juillet",
   },
   {
     question: "Kaïs Saïed est un bon président.",
@@ -986,7 +998,7 @@ questions = [
     question:
       "L’avenir de la Tunisie passe par un Maghreb unie, fondée sur nos liens historiques et culturels.",
     effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
-    special: "maghreb", 
+    special: "maghreb",
   },
   {
     question:
@@ -1003,4 +1015,3 @@ questions = [
     special: "afrique",
   },
 ];
-
