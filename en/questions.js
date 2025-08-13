@@ -628,13 +628,14 @@ questions = [
     },
   },
   {
-    question: "Ancient cultural norms still have their place today.",
+    question:
+      "Tunisia should take Western societies as a model to structure its own.",
     effect: {
       pana: 0,
       coop: 0,
       econ: 0,
       reli: 0,
-      soci: +6,
+      soci: -8,
       demo: 0,
       decent: 0,
     },
@@ -664,13 +665,14 @@ questions = [
     },
   },
   {
-    question: "Laws must evolve with mindsets.",
+    question:
+      "Derja should replace Arabic as the official language of Tunisia.",
     effect: {
-      pana: 0,
+      pana: -6,
       coop: 0,
       econ: 0,
       reli: 0,
-      soci: -6,
+      soci: -4,
       demo: 0,
       decent: 0,
     },
@@ -688,7 +690,8 @@ questions = [
     },
   },
   {
-    question: "Cultural innovation is more important than preserving customs.",
+    question:
+      "It is appropriate for Tunisia to integrate foreign languages into its society.",
     effect: {
       pana: 0,
       coop: 0,
@@ -885,18 +888,19 @@ questions = [
       reli: 0,
       soci: 0,
       demo: 0,
-      decent: -6,
+      decent: -4,
     },
   },
   {
-    question: "Too much local power can weaken national unity.",
+    question:
+      "The creation of the National Council of Regions and Districts to represent territories and streamline parliamentary power is fundamentally a positive initiative.",
     effect: {
       pana: 0,
       coop: 0,
       econ: 0,
       reli: 0,
       soci: 0,
-      demo: 0,
+      demo: +4,
       decent: -6,
     },
   },
@@ -922,7 +926,7 @@ questions = [
       reli: 0,
       soci: 0,
       demo: +4,
-      decent: -6,
+      decent: +6,
     },
   },
 
