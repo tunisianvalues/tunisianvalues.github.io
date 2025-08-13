@@ -637,13 +637,13 @@ questions = [
   },
   {
     question:
-      "Les normes culturelles anciennes ont encore leur place aujourd’hui.",
+      "La Tunisie devrait prendre modèle sur les sociétés occidentales pour structurer la sienne.",
     effect: {
       pana: 0,
       coop: 0,
       econ: 0,
       reli: 0,
-      soci: +6,
+      soci: -8,
       demo: 0,
       decent: 0,
     },
@@ -675,13 +675,14 @@ questions = [
     },
   },
   {
-    question: "Les lois doivent évoluer avec les mentalités.",
+    question:
+      "Le Derja devrait remplacer l’arabe en tant que langue officielle de la Tunisie.",
     effect: {
-      pana: 0,
+      pana: -6,
       coop: 0,
       econ: 0,
       reli: 0,
-      soci: -6,
+      soci: -4,
       demo: 0,
       decent: 0,
     },
@@ -701,7 +702,7 @@ questions = [
   },
   {
     question:
-      "L’innovation culturelle est plus importante que la préservation des coutumes.",
+      "Il est approprié que la Tunisie intègre des langues étrangères dans sa société.",
     effect: {
       pana: 0,
       coop: 0,
@@ -898,18 +899,19 @@ questions = [
       reli: 0,
       soci: 0,
       demo: 0,
-      decent: -6,
+      decent: -4,
     },
   },
   {
-    question: "Trop de pouvoir local peut affaiblir l’unité nationale.",
+    question:
+      "La création du Conseil national des régions et districts pour représenter les territoires et rationaliser le pouvoir parlementaire est une initiative fondamentalement positive.",
     effect: {
       pana: 0,
       coop: 0,
       econ: 0,
       reli: 0,
       soci: 0,
-      demo: 0,
+      demo: +4,
       decent: -6,
     },
   },
@@ -936,7 +938,7 @@ questions = [
       reli: 0,
       soci: 0,
       demo: +4,
-      decent: -6,
+      decent: +6,
     },
   },
 
