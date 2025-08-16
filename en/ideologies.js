@@ -1,4 +1,4 @@
-const ideologies = [
+ideologies = [
   {
     name: "Ennahdha",
     stats: {
@@ -12,25 +12,25 @@ const ideologies = [
     },
   },
   {
-    name: "Democratic Current (Attayar)",
+    name: "Courant Démocrate (Attayar)",
     stats: {
       pana: 30,
       coop: 75,
-      econ: 65,
-      reli: 25,
+      econ: 70,
+      reli: 30,
       soci: 40,
       demo: 85,
       decent: 60,
     },
   },
   {
-    name: "Free Destourian Party (PDL)",
+    name: "Parti Destourien Libre (PDL)",
     stats: {
-      pana: 10,
+      pana: 20,
       coop: 20,
       econ: 50,
       reli: 25,
-      soci: 65,
+      soci: 70,
       demo: 20,
       decent: 30,
     },
@@ -43,7 +43,7 @@ const ideologies = [
       econ: 25,
       reli: 25,
       soci: 25,
-      demo: 80,
+      demo: 85,
       decent: 75,
     },
   },
@@ -51,8 +51,8 @@ const ideologies = [
     name: "Al Joumhouri",
     stats: {
       pana: 35,
-      coop: 70,
-      econ: 60,
+      coop: 65,
+      econ: 55,
       reli: 25,
       soci: 35,
       demo: 70,
@@ -66,37 +66,37 @@ const ideologies = [
       coop: 80,
       econ: 60,
       reli: 20,
-      soci: 20,
-      demo: 80,
-      decent: 70,
+      soci: 25,
+      demo: 85,
+      decent: 65,
     },
   },
   {
-    name: "People's Movement",
+    name: "Mouvement Echaâb",
     stats: {
       pana: 70,
       coop: 30,
-      econ: 70,
+      econ: 65,
       reli: 30,
-      soci: 80,
-      demo: 35,
+      soci: 70,
+      demo: 30,
       decent: 25,
     },
   },
   {
-    name: "Al Karama Coalition",
+    name: "Coalition Al Karama",
     stats: {
       pana: 60,
       coop: 15,
       econ: 60,
       reli: 90,
       soci: 95,
-      demo: 15,
-      decent: 30,
+      demo: 25,
+      decent: 25,
     },
   },
   {
-    name: "Workers' Party",
+    name: "Parti des Travailleurs",
     stats: {
       pana: 60,
       coop: 70,
@@ -108,7 +108,7 @@ const ideologies = [
     },
   },
   {
-    name: "Tunisian Baath Party",
+    name: "Parti Baath Tunisien",
     stats: {
       pana: 80,
       coop: 25,
@@ -117,6 +117,18 @@ const ideologies = [
       soci: 50,
       demo: 10,
       decent: 10,
+    },
+  },
+  {
+    name: "Al Massar (ex-Ettajadid)",
+    stats: {
+      pana: 35,
+      coop: 80,
+      econ: 60,
+      reli: 20,
+      soci: 70,
+      demo: 85,
+      decent: 70,
     },
   },
 ];
