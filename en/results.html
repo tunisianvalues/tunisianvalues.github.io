@@ -18,11 +18,9 @@
             }
         }
     </script>
-    
 </head>
 <body class="font-oswald antialiased">
     <script type="application/javascript" src="ideologies.js"></script>
-
     <div class="min-h-screen bg-gradient-to-br from-red-600 to-red-700">
         <div class="min-h-screen bg-gradient-to-br from-red-600 to-red-700 flex flex-col">
             <header class="border-b border-red-500/30 bg-red-600/90 backdrop-blur-sm">
@@ -60,6 +58,7 @@
                                 <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner">
                                     <div class="flex h-full rounded-full">
                                         <div id="bar-left-pana" style="background-color: #c52a2a;" class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"><span id="left-pana"></span></div>
+                                        <div id="bar-neutral-pana" style="background-color: #eeeeee;" class="flex items-center justify-center text-black text-sm font-bold pb-0.5"><span id="neutral-pana"></span></div>
                                         <div id="bar-right-pana" style="background-color: #4b5563;" class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"><span id="right-pana"></span></div>
                                     </div>
                                 </div>
@@ -67,7 +66,6 @@
                             <span class="hidden md:block text-sm font-bold text-slate-700 w-28 text-center">Nationalism</span>
                         </div>
                     </div>
-
                     <div>
                         <h3 class="text-xl font-bold text-gray-800 mb-2">Cooperation Axis: <span id="coop-label" class="font-semibold text-gray-600"></span></h3>
                         <div class="md:flex md:items-center md:gap-3">
@@ -80,6 +78,7 @@
                                 <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner">
                                     <div class="flex h-full rounded-full">
                                         <div id="bar-left-coop" style="background-color: #ea580c;" class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"><span id="left-coop"></span></div>
+                                        <div id="bar-neutral-coop" style="background-color: #eeeeee;" class="flex items-center justify-center text-black text-sm font-bold pb-0.5"><span id="neutral-coop"></span></div>
                                         <div id="bar-right-coop" style="background-color: #3b82f6;" class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"><span id="right-coop"></span></div>
                                     </div>
                                 </div>
@@ -87,9 +86,8 @@
                             <span class="hidden md:block text-sm font-bold text-blue-600 w-28 text-center">Isolationism</span>
                         </div>
                     </div>
-
                     <div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Economic Axis: <span id="econ-label" class="font-semibold text-gray-600"></span></h3>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Economy Axis: <span id="econ-label" class="font-semibold text-gray-600"></span></h3>
                         <div class="md:flex md:items-center md:gap-3">
                             <span class="hidden md:block text-sm font-bold text-red-600 w-28 text-center">Socialism</span>
                             <div class="w-full">
@@ -100,6 +98,7 @@
                                 <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner">
                                     <div class="flex h-full rounded-full">
                                         <div id="bar-left-econ" style="background-color: #c52a2a;" class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"><span id="left-econ"></span></div>
+                                        <div id="bar-neutral-econ" style="background-color: #eeeeee;" class="flex items-center justify-center text-black text-sm font-bold pb-0.5"><span id="neutral-econ"></span></div>
                                         <div id="bar-right-econ" style="background-color: #16a34a;" class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"><span id="right-econ"></span></div>
                                     </div>
                                 </div>
@@ -107,7 +106,6 @@
                             <span class="hidden md:block text-sm font-bold text-green-600 w-28 text-center">Capitalism</span>
                         </div>
                     </div>
-
                     <div>
                         <h3 class="text-xl font-bold text-gray-800 mb-2">Religion Axis: <span id="reli-label" class="font-semibold text-gray-600"></span></h3>
                         <div class="md:flex md:items-center md:gap-3">
@@ -120,6 +118,7 @@
                                 <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner">
                                     <div class="flex h-full rounded-full">
                                         <div id="bar-left-reli" style="background-color: #059669;" class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"><span id="left-reli"></span></div>
+                                        <div id="bar-neutral-reli" style="background-color: #eeeeee;" class="flex items-center justify-center text-black text-sm font-bold pb-0.5"><span id="neutral-reli"></span></div>
                                         <div id="bar-right-reli" style="background-color: #9333ea;" class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"><span id="right-reli"></span></div>
                                     </div>
                                 </div>
@@ -127,7 +126,6 @@
                             <span class="hidden md:block text-sm font-bold text-purple-600 w-28 text-center">Secularism</span>
                         </div>
                     </div>
-
                     <div>
                         <h3 class="text-xl font-bold text-gray-800 mb-2">Societal Axis: <span id="soci-label" class="font-semibold text-gray-600"></span></h3>
                         <div class="md:flex md:items-center md:gap-3">
@@ -140,6 +138,7 @@
                                 <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner">
                                     <div class="flex h-full rounded-full">
                                         <div id="bar-left-soci" style="background-color: #d97706;" class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"><span id="left-soci"></span></div>
+                                        <div id="bar-neutral-soci" style="background-color: #eeeeee;" class="flex items-center justify-center text-black text-sm font-bold pb-0.5"><span id="neutral-soci"></span></div>
                                         <div id="bar-right-soci" style="background-color: #db2777;" class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"><span id="right-soci"></span></div>
                                     </div>
                                 </div>
@@ -147,7 +146,6 @@
                             <span class="hidden md:block text-sm font-bold text-pink-600 w-28 text-center">Progressivism</span>
                         </div>
                     </div>
-
                     <div>
                         <h3 class="text-xl font-bold text-gray-800 mb-2">Democracy Axis: <span id="demo-label" class="font-semibold text-gray-600"></span></h3>
                         <div class="md:flex md:items-center md:gap-3">
@@ -160,6 +158,7 @@
                                 <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner">
                                     <div class="flex h-full rounded-full">
                                         <div id="bar-left-demo" style="background-color: #2563eb;" class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"><span id="left-demo"></span></div>
+                                        <div id="bar-neutral-demo" style="background-color: #eeeeee;" class="flex items-center justify-center text-black text-sm font-bold pb-0.5"><span id="neutral-demo"></span></div>
                                         <div id="bar-right-demo" style="background-color: #c52a2a;" class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"><span id="right-demo"></span></div>
                                     </div>
                                 </div>
@@ -167,7 +166,6 @@
                             <span class="hidden md:block text-sm font-bold text-red-700 w-28 text-center">Authoritarianism</span>
                         </div>
                     </div>
-
                     <div>
                         <h3 class="text-xl font-bold text-gray-800 mb-2">Governance Axis: <span id="decent-label" class="font-semibold text-gray-600"></span></h3>
                         <div class="md:flex md:items-center md:gap-3">
@@ -180,6 +178,7 @@
                                 <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner">
                                     <div class="flex h-full rounded-full">
                                         <div id="bar-left-decent" style="background-color: #4f46e5;" class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"><span id="left-decent"></span></div>
+                                        <div id="bar-neutral-decent" style="background-color: #eeeeee;" class="flex items-center justify-center text-black text-sm font-bold pb-0.5"><span id="neutral-decent"></span></div>
                                         <div id="bar-right-decent" style="background-color: #64748b;" class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"><span id="right-decent"></span></div>
                                     </div>
                                 </div>
@@ -194,12 +193,12 @@
                 <div id="banner-container" class="mt-12 text-center">
                     <h3 class="text-2xl font-bold text-gray-800 mb-4">Your Results Banner</h3>
                     <div class="flex justify-center">
-                        <img id="banner" src="" alt="Results banner" class="rounded-lg shadow-lg max-w-full h-auto">
+                        <img id="banner" src="" alt="Results Banner" class="rounded-lg shadow-lg max-w-full h-auto">
                     </div>
                 </div>
 
                 <div id="button-container" class="mt-12 text-center">
-                    <button onclick="location.href='../index.html';" class="bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-3 rounded-lg transition-colors">
+                    <button onclick="location.href='index.html';" class="bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-3 rounded-lg transition-colors">
                         Back to Home
                     </button>
                 </div>
@@ -214,40 +213,108 @@
             for (var i = 0; i < vars.length; i++) {
                 var pair = vars[i].split("=");
                 if (decodeURIComponent(pair[0]) == variable) {
-                    return decodeURIComponent(pair[1]);
+                    if (variable === "icons") return decodeURIComponent(pair[1]);
+                    return parseFloat(decodeURIComponent(pair[1]));
                 }
             }
             return null;
         }
 
-        function setBarValue(name, value) {
-            var innerel = document.getElementById(name);
-            var outerel = document.getElementById("bar-" + name);
-            if (innerel && outerel && !isNaN(value)) {
-                outerel.style.width = value + "%";
-                if (value > 15) {
-                    innerel.innerHTML = Math.round(value) + "%";
-                } else {
-                    innerel.innerHTML = "";
-                }
+        const axes = ["pana", "coop", "econ", "reli", "soci", "demo", "decent"];
+        const final_pct = {};
+
+        axes.forEach(axis => {
+            const s = getQueryVariable("s_" + axis);
+            const n = getQueryVariable("n_" + axis);
+            const m = getQueryVariable("m_" + axis);
+            
+            if (m === 0) {
+                final_pct[axis] = { left: 0, neutral: 100, right: 0 };
+                return;
             }
+
+            const neutral_pct = (n / m) * 100;
+            const decided_weight = m - n;
+            const positive_score = (s + decided_weight) / 2;
+            const left_pct = (positive_score / m) * 100;
+            const right_pct = 100 - left_pct - neutral_pct;
+
+            final_pct[axis] = { left: left_pct, neutral: neutral_pct, right: right_pct };
+
+            document.getElementById(`bar-left-${axis}`).style.width = left_pct + "%";
+            document.getElementById(`bar-neutral-${axis}`).style.width = neutral_pct + "%";
+            document.getElementById(`bar-right-${axis}`).style.width = right_pct + "%";
+
+            if (left_pct > 12) document.getElementById(`left-${axis}`).innerText = Math.round(left_pct) + "%";
+            if (neutral_pct > 12) document.getElementById(`neutral-${axis}`).innerText = Math.round(neutral_pct) + "%";
+            if (right_pct > 12) document.getElementById(`right-${axis}`).innerText = Math.round(right_pct) + "%";
+        });
+
+        var panaLabels = ["Arab Nationalism","Arabism","Neutral","Patriotism","Tunisian Nationalism"];
+        var coopLabels = ["Internationalism","Multilateralism","Neutrality","Isolationism","Autarky"];
+        var econLabels = ["Socialism","Social Democracy","Balanced","Social Liberalism","Liberalism"];
+        var reliLabels = ["Islamism","Cultural Islam","Status-Quo","Secularism","Laicism"];
+        var sociLabels = ["Traditionalism","Conservatism","Neutral","Modernism","Progressivism"];
+        var demoLabels = ["Liberal Democracy","Rule of Law","Neutral","Authoritarianism","Totalitarianism"];
+        var decentLabels = ["Regionalism","Decentralism","Neutral","Centralism","Unitarism"];
+
+        function pickLabel(val, labels) {
+            if (val >= 80) return labels[0];
+            else if (val >= 60) return labels[1];
+            else if (val >= 40) return labels[2];
+            else if (val >= 20) return labels[3];
+            else return labels[4];
         }
 
-        var panaLabels = ["Arab Nationalism", "Arabism", "Neutral", "Patriotism", "Tunisian Nationalism"];
-        var coopLabels = ["Internationalism", "Multilateralism", "Neutrality", "Isolationism", "Autarky"];
-        var econLabels = ["Socialism", "Social Democracy", "Neutral", "Social Liberalism", "Liberalism"];
-        var reliLabels = ["Islamism", "Cultural Islam", "Status-Quo", "Secularism", "Laïcism"];
-        var sociLabels = ["Traditionalism", "Conservatism", "Neutral", "Modernism", "Progressivism"];
-        var demoLabels = ["Liberal Democracy", "Rule of Law", "Neutral", "Authoritarianism", "Totalitarianism"];
-        var decentLabels = ["Regionalism", "Decentralism", "Neutral", "Centralism", "Unitarism"];
+        document.getElementById("pana-label").innerHTML = pickLabel(final_pct.pana.left, panaLabels);
+        document.getElementById("coop-label").innerHTML = pickLabel(final_pct.coop.left, coopLabels);
+        document.getElementById("econ-label").innerHTML = pickLabel(final_pct.econ.left, econLabels);
+        document.getElementById("reli-label").innerHTML = pickLabel(final_pct.reli.left, reliLabels);
+        document.getElementById("soci-label").innerHTML = pickLabel(final_pct.soci.left, sociLabels);
+        document.getElementById("demo-label").innerHTML = pickLabel(final_pct.demo.left, demoLabels);
+        document.getElementById("decent-label").innerHTML = pickLabel(final_pct.decent.left, decentLabels);
 
-        var pana = parseFloat(getQueryVariable("pana"));
-        var coop = parseFloat(getQueryVariable("coop"));
-        var econ = parseFloat(getQueryVariable("econ"));
-        var reli = parseFloat(getQueryVariable("reli"));
-        var soci = parseFloat(getQueryVariable("soci"));
-        var demo = parseFloat(getQueryVariable("demo"));
-        var decent = parseFloat(getQueryVariable("decent"));
+        let totalNeutrality = 0;
+        axes.forEach(axis => {
+            totalNeutrality += final_pct[axis].neutral;
+        });
+        const averageNeutrality = totalNeutrality / axes.length;
+        const NEUTRALITY_THRESHOLD = 55.0;
+
+        const ideologyLabelElement = document.getElementById("ideology-label");
+
+        if (averageNeutrality >= NEUTRALITY_THRESHOLD) {
+            ideologyLabelElement.innerHTML = "Undetermined Profile (too many neutral answers)";
+            ideologyLabelElement.style.color = '#6B7280';
+        } else {
+            var ideology = "";
+            var ideodist = Infinity;
+
+            for (var i = 0; i < ideologies.length; i++) {
+                var dist = 0;
+                
+                axes.forEach(axis => {
+                    const user_profile = final_pct[axis];
+                    const ideology_profile = ideologies[i].stats[axis];
+                    const weight = ideologies[i].weights[axis] || 1;
+
+                    if (!ideology_profile) return;
+
+                    let axis_dist = 0;
+                    axis_dist += Math.pow(user_profile.left - ideology_profile.left, 2);
+                    axis_dist += Math.pow(user_profile.neutral - ideology_profile.neutral, 2);
+                    axis_dist += Math.pow(user_profile.right - ideology_profile.right, 2);
+                    
+                    dist += axis_dist * weight;
+                });
+
+                if (dist < ideodist) {
+                    ideology = ideologies[i].name;
+                    ideodist = dist;
+                }
+            }
+            ideologyLabelElement.innerHTML = ideology;
+        }
         
         const icons_param = getQueryVariable("icons");
         if (icons_param && icons_param.length > 0) {
@@ -255,7 +322,7 @@
             const icons = icons_param.split(',');
             
             const title = document.createElement('h3');
-            title.innerText = "Special Stances";
+            title.innerText = "Specific Stances";
             title.className = "text-2xl font-bold text-gray-800 mb-4";
             container.appendChild(title);
 
@@ -266,61 +333,14 @@
             icons.forEach(iconId => {
                 if (iconId) {
                     const img = document.createElement('img');
-                    img.src = `../icons/${iconId}.png`;
+                    img.src = `icons/${iconId}.png`;
                     img.title = iconId;
                     img.className = 'h-16 w-16 transition-transform hover:scale-110';
                     iconWrapper.appendChild(img);
                 }
             });
         }
-
-        var panaR = 100 - pana; var coopR = 100 - coop; var econR = 100 - econ;
-        var reliR = 100 - reli; var sociR = 100 - soci; var demoR = 100 - demo;
-        var decentR = 100 - decent;
-
-        setBarValue("left-pana", pana); setBarValue("right-pana", panaR);
-        setBarValue("left-coop", coop); setBarValue("right-coop", coopR);
-        setBarValue("left-econ", econ); setBarValue("right-econ", econR);
-        setBarValue("left-reli", reli); setBarValue("right-reli", reliR);
-        setBarValue("left-soci", soci); setBarValue("right-soci", sociR);
-        setBarValue("left-demo", demo); setBarValue("right-demo", demoR);
-        setBarValue("left-decent", decent); setBarValue("right-decent", decentR);
-
-        function pickLabel(val, labels) {
-            if (val >= 80) return labels[0];
-            else if (val >= 60) return labels[1];
-            else if (val >= 40) return labels[2];
-            else if (val >= 20) return labels[3];
-            else return labels[4];
-        }
-
-        document.getElementById("pana-label").innerHTML = pickLabel(pana, panaLabels);
-        document.getElementById("coop-label").innerHTML = pickLabel(coop, coopLabels);
-        document.getElementById("econ-label").innerHTML = pickLabel(econ, econLabels);
-        document.getElementById("reli-label").innerHTML = pickLabel(reli, reliLabels);
-        document.getElementById("soci-label").innerHTML = pickLabel(soci, sociLabels);
-        document.getElementById("demo-label").innerHTML = pickLabel(demo, demoLabels);
-        document.getElementById("decent-label").innerHTML = pickLabel(decent, decentLabels);
-
-        var ideology = "";
-        var ideodist = Infinity;
-        for (var i = 0; i < ideologies.length; i++) {
-            var dist = 0;
-            dist += Math.pow(Math.abs(ideologies[i].stats.pana - pana), 2);
-            dist += Math.pow(Math.abs(ideologies[i].stats.coop - coop), 2);
-            dist += Math.pow(Math.abs(ideologies[i].stats.econ - econ), 2);
-            dist += Math.pow(Math.abs(ideologies[i].stats.reli - reli), 2);
-            dist += Math.pow(Math.abs(ideologies[i].stats.soci - soci), 2);
-            dist += Math.pow(Math.abs(ideologies[i].stats.demo - demo), 2);
-            dist += Math.pow(Math.abs(ideologies[i].stats.decent - decent), 2);
-            if (dist < ideodist) {
-                ideology = ideologies[i].name;
-                ideodist = dist;
-            }
-        }
-        document.getElementById("ideology-label").innerHTML = ideology;
-
-
+        
         window.onload = function() {
             const resultsContainer = document.getElementById("results-container");
             const bannerImage = document.getElementById("banner");
@@ -338,5 +358,4 @@
         }
     </script>
 </body>
-
 </html>
