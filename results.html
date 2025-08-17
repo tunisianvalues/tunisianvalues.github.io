@@ -295,7 +295,7 @@
         const ideologyLabelElement = document.getElementById("ideology-label");
         const shareIdeologyElement = document.getElementById("share-ideology");
         const averageNeutrality = total_max_score > 0 ? (total_neutral_score / total_max_score) * 100 : 100;
-        const NEUTRALITY_THRESHOLD = 70.0;
+        const NEUTRALITY_THRESHOLD = 60.0;
 
         if (averageNeutrality >= NEUTRALITY_THRESHOLD) {
              const undeterminedProfile = "Profil Indéterminé (trop de réponses neutres)";
