@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TunisianValues — Quiz</title>
+    <title>TunisianValues — Résultats</title>
     <link rel="icon" type="image/png" href="icon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styless.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -17,11 +17,16 @@
             }
         }
     </script>
+    <style>
+        /* Ajout d'un petit style pour les ombres des barres de la bannière */
+        .bar-shadow {
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.4));
+        }
+    </style>
 </head>
 <body class="font-oswald antialiased">
-    <script type="application/javascript" src="questions.js"></script>
-        <div class="min-h-screen bg-gradient-to-br from-red-600 to-red-700 flex flex-col">
-            <header class="border-b border-red-500/30 bg-red-600/90 backdrop-blur-sm">
+    <div class="min-h-screen bg-gradient-to-br from-red-600 to-red-700">
+        <header class="border-b border-red-500/30 bg-red-600/90 backdrop-blur-sm">
             <div class="container mx-auto px-4 py-4">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
@@ -29,180 +34,441 @@
                     </div>
                     <div class="flex items-center gap-4">
                         <a href="https://discord.gg/V24sBgJVCe" target="_blank" rel="noopener noreferrer" class="text-white/80 hover:text-white transition-colors">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-                            </svg>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
                         </a>
                     </div>
                 </div>
             </div>
         </header>
-
-    <div class="min-h-screen bg-gradient-to-br from-red-600 to-red-700 flex flex-col justify-center items-center px-4 py-8">
-        <main class="w-full max-w-3xl">
-            <div class="bg-white/95 backdrop-blur-sm rounded-xl p-6 md:p-10 shadow-2xl">
-                <div class="text-center mb-6">
-                    <h2 id="question-number" class="text-xl font-semibold text-red-600 tracking-wider">Chargement...</h2>
-                </div>
-
-                <p id="question-text" class="text-2xl md:text-3xl font-bold text-gray-800 text-center mb-8 min-h-[120px] flex items-center justify-center"></p>
-
-                <div class="space-y-3 mb-8">
-                    <button class="w-full text-lg font-bold py-4 px-6 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 shadow-md bg-green-700 hover:bg-green-800 text-white" onclick="next_question(1.0)">Tout à fait d’accord</button>
-                    <button class="w-full text-lg font-bold py-3 px-6 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 shadow-md bg-green-500 hover:bg-green-600 text-white" onclick="next_question(0.5)">Plutôt d’accord</button>
-                    <button class="w-full text-lg font-bold py-3 px-6 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 shadow-md bg-gray-400 hover:bg-gray-500 text-white" onclick="next_question(0.0)">Neutre / Partagé</button>
-                    <button class="w-full text-lg font-bold py-3 px-6 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 shadow-md bg-red-500 hover:bg-red-600 text-white" onclick="next_question(-0.5)">Plutôt pas d’accord</button>
-                    <button class="w-full text-lg font-bold py-4 px-6 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 shadow-md bg-red-700 hover:bg-red-800 text-white" onclick="next_question(-1.0)">Pas du tout d’accord</button>
+        <main class="container mx-auto px-4 py-12">
+            <div id="results-container" class="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-xl p-6 md:p-8 shadow-2xl">
+                <div class="text-center mb-10">
+                    <h1 class="text-5xl font-bold text-red-700">Vos Résultats</h1>
+                    <p class="text-lg text-slate-600 mt-2">Profil le plus proche : <span id="ideology-label" class="font-bold text-red-600"></span></p>
                 </div>
                 
-                <div class="text-center">
-                    <button id="back_button" onclick="prev_question()" class="text-gray-600 hover:text-red-700 font-semibold py-2 px-5 rounded-lg transition-colors">← Précédent</button>
-                    <button id="back_button_off" class="text-gray-400 font-semibold py-2 px-5 rounded-lg cursor-not-allowed">← Précédent</button>
+                <div class="space-y-8">
+                    <!-- Les barres de résultats ici n'ont pas changé -->
+                     <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Axe Panarabisme</h3>
+                        <div class="md:flex md:items-center md:gap-3">
+                            <span class="hidden md:block text-sm font-bold text-red-600 w-28 text-center">Unité Arabe</span>
+                            <div class="w-full">
+                                <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner"><div class="flex h-full rounded-full"><div id="bar-left-pana" style="background-color: #c52a2a;" class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"><span id="left-pana"></span></div><div id="bar-neutral-pana" style="background-color: #eeeeee;" class="flex items-center justify-center text-black text-sm font-bold pb-0.5"><span id="neutral-pana"></span></div><div id="bar-right-pana" style="background-color: #4b5563;" class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"><span id="right-pana"></span></div></div></div>
+                            </div>
+                            <span class="hidden md:block text-sm font-bold text-slate-700 w-28 text-center">Nationalisme</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Axe Coopération</h3>
+                        <div class="md:flex md:items-center md:gap-3">
+                            <span class="hidden md:block text-sm font-bold text-orange-600 w-28 text-center">Internationalisme</span>
+                            <div class="w-full">
+                                <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner"><div class="flex h-full rounded-full"><div id="bar-left-coop" style="background-color: #ea580c;" class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"><span id="left-coop"></span></div><div id="bar-neutral-coop" style="background-color: #eeeeee;" class="flex items-center justify-center text-black text-sm font-bold pb-0.5"><span id="neutral-coop"></span></div><div id="bar-right-coop" style="background-color: #3b82f6;" class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"><span id="right-coop"></span></div></div></div>
+                            </div>
+                            <span class="hidden md:block text-sm font-bold text-blue-600 w-28 text-center">Isolationnisme</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Axe Économie</h3>
+                        <div class="md:flex md:items-center md:gap-3">
+                            <span class="hidden md:block text-sm font-bold text-red-600 w-28 text-center">Socialisme</span>
+                            <div class="w-full">
+                                <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner"><div class="flex h-full rounded-full"><div id="bar-left-econ" style="background-color: #c52a2a;" class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"><span id="left-econ"></span></div><div id="bar-neutral-econ" style="background-color: #eeeeee;" class="flex items-center justify-center text-black text-sm font-bold pb-0.5"><span id="neutral-econ"></span></div><div id="bar-right-econ" style="background-color: #16a34a;" class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"><span id="right-econ"></span></div></div></div>
+                            </div>
+                            <span class="hidden md:block text-sm font-bold text-green-600 w-28 text-center">Capitalisme</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Axe Religion</h3>
+                        <div class="md:flex md:items-center md:gap-3">
+                            <span class="hidden md:block text-sm font-bold text-emerald-600 w-28 text-center">Islam Politique</span>
+                            <div class="w-full">
+                                <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner"><div class="flex h-full rounded-full"><div id="bar-left-reli" style="background-color: #059669;" class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"><span id="left-reli"></span></div><div id="bar-neutral-reli" style="background-color: #eeeeee;" class="flex items-center justify-center text-black text-sm font-bold pb-0.5"><span id="neutral-reli"></span></div><div id="bar-right-reli" style="background-color: #9333ea;" class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"><span id="right-reli"></span></div></div></div>
+                            </div>
+                            <span class="hidden md:block text-sm font-bold text-purple-600 w-28 text-center">Laïcisme</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Axe Sociétal</h3>
+                        <div class="md:flex md:items-center md:gap-3">
+                            <span class="hidden md:block text-sm font-bold text-amber-600 w-28 text-center">Conservatisme</span>
+                            <div class="w-full">
+                                <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner"><div class="flex h-full rounded-full"><div id="bar-left-soci" style="background-color: #d97706;" class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"><span id="left-soci"></span></div><div id="bar-neutral-soci" style="background-color: #eeeeee;" class="flex items-center justify-center text-black text-sm font-bold pb-0.5"><span id="neutral-soci"></span></div><div id="bar-right-soci" style="background-color: #db2777;" class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"><span id="right-soci"></span></div></div></div>
+                            </div>
+                            <span class="hidden md:block text-sm font-bold text-pink-600 w-28 text-center">Progressisme</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Axe Démocratie</h3>
+                        <div class="md:flex md:items-center md:gap-3">
+                            <span class="hidden md:block text-sm font-bold text-blue-600 w-28 text-center">Démocratie</span>
+                            <div class="w-full">
+                                <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner"><div class="flex h-full rounded-full"><div id="bar-left-demo" style="background-color: #2563eb;" class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"><span id="left-demo"></span></div><div id="bar-neutral-demo" style="background-color: #eeeeee;" class="flex items-center justify-center text-black text-sm font-bold pb-0.5"><span id="neutral-demo"></span></div><div id="bar-right-demo" style="background-color: #c52a2a;" class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"><span id="right-demo"></span></div></div></div>
+                            </div>
+                            <span class="hidden md:block text-sm font-bold text-red-700 w-28 text-center">Autoritarisme</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Axe Gouvernance</h3>
+                        <div class="md:flex md:items-center md:gap-3">
+                            <span class="hidden md:block text-sm font-bold text-indigo-600 w-28 text-center">Décentralisation</span>
+                            <div class="w-full">
+                                <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner"><div class="flex h-full rounded-full"><div id="bar-left-decent" style="background-color: #4f46e5;" class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"><span id="left-decent"></span></div><div id="bar-neutral-decent" style="background-color: #eeeeee;" class="flex items-center justify-center text-black text-sm font-bold pb-0.5"><span id="neutral-decent"></span></div><div id="bar-right-decent" style="background-color: #64748b;" class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"><span id="right-decent"></span></div></div></div>
+                            </div>
+                            <span class="hidden md:block text-sm font-bold text-slate-600 w-28 text-center">Centralisation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="special-icons-container" class="text-center mt-10"></div>
+                
+                <div class="mt-12 text-center flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <button id="download-button" onclick="downloadResults();" class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-bold text-lg px-8 py-3 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                        Télécharger la Bannière
+                    </button>
+                    <button onclick="location.href='quiz.html';" class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-3 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                        Refaire le Quiz
+                    </button>
                 </div>
             </div>
         </main>
     </div>
-
-    <script>
-        function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
-        shuffle(questions);
-
-        var max_pana = 0, max_coop = 0, max_econ = 0, max_reli = 0, max_soci = 0, max_demo = 0, max_decent = 0;
-
-        let pana_array = new Array(questions.length).fill(0);
-        let coop_array = new Array(questions.length).fill(0);
-        let econ_array = new Array(questions.length).fill(0);
-        let reli_array = new Array(questions.length).fill(0);
-        let soci_array = new Array(questions.length).fill(0);
-        let demo_array = new Array(questions.length).fill(0);
-        let decent_array = new Array(questions.length).fill(0);
-        
-        let neutral_pana_array = new Array(questions.length).fill(0);
-        let neutral_coop_array = new Array(questions.length).fill(0);
-        let neutral_econ_array = new Array(questions.length).fill(0);
-        let neutral_reli_array = new Array(questions.length).fill(0);
-        let neutral_soci_array = new Array(questions.length).fill(0);
-        let neutral_demo_array = new Array(questions.length).fill(0);
-        let neutral_decent_array = new Array(questions.length).fill(0);
-
-        let user_answers = new Array(questions.length).fill(null);
-        var qn = 0; 
-
-        for (var i = 0; i < questions.length; i++) {
-            max_pana += Math.abs(questions[i].effect.pana || 0);
-            max_coop += Math.abs(questions[i].effect.coop || 0);
-            max_econ += Math.abs(questions[i].effect.econ || 0);
-            max_reli += Math.abs(questions[i].effect.reli || 0);
-            max_soci += Math.abs(questions[i].effect.soci || 0);
-            max_demo += Math.abs(questions[i].effect.demo || 0);
-            max_decent += Math.abs(questions[i].effect.decent || 0);
-        }
-
-        function init_question() {
-            document.getElementById("question-text").innerHTML = questions[qn].question;
-            document.getElementById("question-number").innerHTML = "Question " + (qn + 1) + " sur " + questions.length;
-            if (qn === 0) {
-                document.getElementById("back_button").style.display = 'none';
-                document.getElementById("back_button_off").style.display = 'block';
-            } else {
-                document.getElementById("back_button").style.display = 'block';
-                document.getElementById("back_button_off").style.display = 'none';
-            }
-        }
-
-        init_question();
-
-        function next_question(mult) {
-            user_answers[qn] = mult;
-
-            if (mult === 0.0) {
-                pana_array[qn] = 0;
-                coop_array[qn] = 0;
-                econ_array[qn] = 0;
-                reli_array[qn] = 0;
-                soci_array[qn] = 0;
-                demo_array[qn] = 0;
-                decent_array[qn] = 0;
-                
-                neutral_pana_array[qn] = Math.abs(questions[qn].effect.pana || 0);
-                neutral_coop_array[qn] = Math.abs(questions[qn].effect.coop || 0);
-                neutral_econ_array[qn] = Math.abs(questions[qn].effect.econ || 0);
-                neutral_reli_array[qn] = Math.abs(questions[qn].effect.reli || 0);
-                neutral_soci_array[qn] = Math.abs(questions[qn].effect.soci || 0);
-                neutral_demo_array[qn] = Math.abs(questions[qn].effect.demo || 0);
-                neutral_decent_array[qn] = Math.abs(questions[qn].effect.decent || 0);
-            } else {
-                pana_array[qn] = mult * (questions[qn].effect.pana || 0);
-                coop_array[qn] = mult * (questions[qn].effect.coop || 0);
-                econ_array[qn] = mult * (questions[qn].effect.econ || 0);
-                reli_array[qn] = mult * (questions[qn].effect.reli || 0);
-                soci_array[qn] = mult * (questions[qn].effect.soci || 0);
-                demo_array[qn] = mult * (questions[qn].effect.demo || 0);
-                decent_array[qn] = mult * (questions[qn].effect.decent || 0);
-
-                neutral_pana_array[qn] = 0;
-                neutral_coop_array[qn] = 0;
-                neutral_econ_array[qn] = 0;
-                neutral_reli_array[qn] = 0;
-                neutral_soci_array[qn] = 0;
-                neutral_demo_array[qn] = 0;
-                neutral_decent_array[qn] = 0;
-            }
-
-            qn++;
-            if (qn < questions.length) {
-                init_question();
-            } else {
-                results();
-            }
-        }
-
-        function prev_question() {
-            if (qn === 0) return;
-            qn--;
-            init_question();
-        }
-
-        function results() {
-            let final_pana = pana_array.reduce((a, b) => a + b, 0);
-            let final_coop = coop_array.reduce((a, b) => a + b, 0);
-            let final_econ = econ_array.reduce((a, b) => a + b, 0);
-            let final_reli = reli_array.reduce((a, b) => a + b, 0);
-            let final_soci = soci_array.reduce((a, b) => a + b, 0);
-            let final_demo = demo_array.reduce((a, b) => a + b, 0);
-            let final_decent = decent_array.reduce((a, b) => a + b, 0);
+    
+    <!-- ================================================================== -->
+    <!-- NOUVEAU DESIGN DE LA BANNIÈRE (AVEC VOS AJUSTEMENTS) -->
+    <!-- ================================================================== -->
+    <div id="share-card-container" class="fixed top-0 w-[1200px] h-[630px] z-[-1]" style="left: -9999px;">
+        <div id="share-card" class="w-full h-full p-14 flex flex-col font-oswald relative text-white bg-zinc-900" style="font-family: 'Oswald', sans-serif; background-image: radial-gradient(circle at top, rgba(153, 27, 27, 0.3), transparent 70%);">
             
-            let final_n_pana = neutral_pana_array.reduce((a, b) => a + b, 0);
-            let final_n_coop = neutral_coop_array.reduce((a, b) => a + b, 0);
-            let final_n_econ = neutral_econ_array.reduce((a, b) => a + b, 0);
-            let final_n_reli = neutral_reli_array.reduce((a, b) => a + b, 0);
-            let final_n_soci = neutral_soci_array.reduce((a, b) => a + b, 0);
-            let final_n_demo = neutral_demo_array.reduce((a, b) => a + b, 0);
-            let final_n_decent = neutral_decent_array.reduce((a, b) => a + b, 0);
+            <!-- EN-TÊTE -->
+            <header class="flex justify-between items-start border-b-2 border-white/20 pb-4">
+                <div>
+                    <!-- MODIFICATION : Marge en bas (mb-2) pour espacer le titre du profil -->
+                    <h1 class="text-6xl font-bold uppercase tracking-widest mb-2" style="text-shadow: 0 0 15px rgba(255, 50, 50, 0.5);">Mes Résultats</h1>
+                    <h2 class="text-4xl font-light text-white/80">Profil : <span id="share-ideology" class="font-bold text-red-400"></span></h2>
+                </div>
+                <img src="TUNISIAN VALUES.png" alt="Logo" class="h-24 w-auto">
+            </header>
 
-            let special_icons = [];
-            for (let i = 0; i < questions.length; i++) {
-                if (questions[i].special && user_answers[i] > 0) {
-                    special_icons.push(questions[i].special);
+            <!-- AXES -->
+            <main class="flex-grow grid grid-cols-2 gap-x-12 gap-y-4 content-center mt-2">
+                
+                <!-- Colonne 1 -->
+                <div class="space-y-4">
+                    <div class="axis-item">
+                        <div class="flex justify-between items-baseline mb-1 text-lg">
+                            <span class="font-semibold text-white/80">Unité Arabe</span><span class="font-semibold text-white/80">Nationalisme</span>
+                        </div>
+                        <div class="w-full bg-black/40 rounded-full h-5 shadow-inner bar-shadow"><div class="flex rounded-full h-full text-sm font-bold items-center"><div id="share-bar-left-pana" class="bg-gradient-to-r from-red-500 to-red-600 rounded-l-full h-full flex items-center justify-center pl-2"><span id="share-val-left-pana" class="block pb-0.5"></span></div><div id="share-bar-neutral-pana" class="bg-gray-500/50 h-full flex items-center justify-center text-black"><span id="share-val-neutral-pana" class="block pb-0.5"></span></div><div id="share-bar-right-pana" class="bg-gradient-to-l from-slate-600 to-slate-700 rounded-r-full h-full flex items-center justify-center pr-2"><span id="share-val-right-pana" class="block pb-0.5"></span></div></div></div>
+                    </div>
+                    <div class="axis-item">
+                        <div class="flex justify-between items-baseline mb-1 text-lg">
+                            <span class="font-semibold text-white/80">Internationalisme</span><span class="font-semibold text-white/80">Isolationnisme</span>
+                        </div>
+                        <div class="w-full bg-black/40 rounded-full h-5 shadow-inner bar-shadow"><div class="flex rounded-full h-full text-sm font-bold items-center"><div id="share-bar-left-coop" class="bg-gradient-to-r from-orange-400 to-orange-500 rounded-l-full h-full flex items-center justify-center pl-2"><span id="share-val-left-coop" class="block pb-0.5"></span></div><div id="share-bar-neutral-coop" class="bg-gray-500/50 h-full flex items-center justify-center text-black"><span id="share-val-neutral-coop" class="block pb-0.5"></span></div><div id="share-bar-right-coop" class="bg-gradient-to-l from-sky-500 to-sky-600 rounded-r-full h-full flex items-center justify-center pr-2"><span id="share-val-right-coop" class="block pb-0.5"></span></div></div></div>
+                    </div>
+                    <div class="axis-item">
+                        <div class="flex justify-between items-baseline mb-1 text-lg">
+                            <span class="font-semibold text-white/80">Socialisme</span><span class="font-semibold text-white/80">Capitalisme</span>
+                        </div>
+                        <div class="w-full bg-black/40 rounded-full h-5 shadow-inner bar-shadow"><div class="flex rounded-full h-full text-sm font-bold items-center"><div id="share-bar-left-econ" class="bg-gradient-to-r from-red-500 to-red-600 rounded-l-full h-full flex items-center justify-center pl-2"><span id="share-val-left-econ" class="block pb-0.5"></span></div><div id="share-bar-neutral-econ" class="bg-gray-500/50 h-full flex items-center justify-center text-black"><span id="share-val-neutral-econ" class="block pb-0.5"></span></div><div id="share-bar-right-econ" class="bg-gradient-to-l from-green-500 to-green-600 rounded-r-full h-full flex items-center justify-center pr-2"><span id="share-val-right-econ" class="block pb-0.5"></span></div></div></div>
+                    </div>
+                     <div class="axis-item">
+                        <div class="flex justify-between items-baseline mb-1 text-lg">
+                            <span class="font-semibold text-white/80">Décentralisation</span><span class="font-semibold text-white/80">Centralisation</span>
+                        </div>
+                        <div class="w-full bg-black/40 rounded-full h-5 shadow-inner bar-shadow"><div class="flex rounded-full h-full text-sm font-bold items-center"><div id="share-bar-left-decent" class="bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-l-full h-full flex items-center justify-center pl-2"><span id="share-val-left-decent" class="block pb-0.5"></span></div><div id="share-bar-neutral-decent" class="bg-gray-500/50 h-full flex items-center justify-center text-black"><span id="share-val-neutral-decent" class="block pb-0.5"></span></div><div id="share-bar-right-decent" class="bg-gradient-to-l from-slate-500 to-slate-600 rounded-r-full h-full flex items-center justify-center pr-2"><span id="share-val-right-decent" class="block pb-0.5"></span></div></div></div>
+                    </div>
+                </div>
+                
+                <!-- Colonne 2 -->
+                <div class="space-y-4">
+                    <div class="axis-item">
+                        <div class="flex justify-between items-baseline mb-1 text-lg">
+                            <span class="font-semibold text-white/80">Islam Politique</span><span class="font-semibold text-white/80">Laïcisme</span>
+                        </div>
+                        <div class="w-full bg-black/40 rounded-full h-5 shadow-inner bar-shadow"><div class="flex rounded-full h-full text-sm font-bold items-center"><div id="share-bar-left-reli" class="bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-l-full h-full flex items-center justify-center pl-2"><span id="share-val-left-reli" class="block pb-0.5"></span></div><div id="share-bar-neutral-reli" class="bg-gray-500/50 h-full flex items-center justify-center text-black"><span id="share-val-neutral-reli" class="block pb-0.5"></span></div><div id="share-bar-right-reli" class="bg-gradient-to-l from-purple-500 to-purple-600 rounded-r-full h-full flex items-center justify-center pr-2"><span id="share-val-right-reli" class="block pb-0.5"></span></div></div></div>
+                    </div>
+                    <div class="axis-item">
+                        <div class="flex justify-between items-baseline mb-1 text-lg">
+                            <span class="font-semibold text-white/80">Conservatisme</span><span class="font-semibold text-white/80">Progressisme</span>
+                        </div>
+                        <div class="w-full bg-black/40 rounded-full h-5 shadow-inner bar-shadow"><div class="flex rounded-full h-full text-sm font-bold items-center"><div id="share-bar-left-soci" class="bg-gradient-to-r from-amber-500 to-amber-600 rounded-l-full h-full flex items-center justify-center pl-2"><span id="share-val-left-soci" class="block pb-0.5"></span></div><div id="share-bar-neutral-soci" class="bg-gray-500/50 h-full flex items-center justify-center text-black"><span id="share-val-neutral-soci" class="block pb-0.5"></span></div><div id="share-bar-right-soci" class="bg-gradient-to-l from-pink-500 to-pink-600 rounded-r-full h-full flex items-center justify-center pr-2"><span id="share-val-right-soci" class="block pb-0.5"></span></div></div></div>
+                    </div>
+                    <div class="axis-item">
+                        <div class="flex justify-between items-baseline mb-1 text-lg">
+                            <span class="font-semibold text-white/80">Démocratie</span><span class="font-semibold text-white/80">Autoritarisme</span>
+                        </div>
+                        <div class="w-full bg-black/40 rounded-full h-5 shadow-inner bar-shadow"><div class="flex rounded-full h-full text-sm font-bold items-center"><div id="share-bar-left-demo" class="bg-gradient-to-r from-sky-500 to-sky-600 rounded-l-full h-full flex items-center justify-center pl-2"><span id="share-val-left-demo" class="block pb-0.5"></span></div><div id="share-bar-neutral-demo" class="bg-gray-500/50 h-full flex items-center justify-center text-black"><span id="share-val-neutral-demo" class="block pb-0.5"></span></div><div id="share-bar-right-demo" class="bg-gradient-to-l from-red-500 to-red-600 rounded-r-full h-full flex items-center justify-center pr-2"><span id="share-val-right-demo" class="block pb-0.5"></span></div></div></div>
+                    </div>
+                </div>
+            </main>
+            
+            <!-- PIED DE PAGE -->
+            <footer class="mt-auto pt-4 flex justify-between items-end">
+                <div id="share-special-icons-wrapper" class="max-w-[60%]">
+                    <h3 class="font-bold text-xl uppercase text-red-300">Positions Notables</h3>
+                     <!-- MODIFICATION : Marge en haut (mt-2) pour descendre les icônes -->
+                    <div id="share-special-icons" class="flex gap-3 h-16 items-end flex-wrap mt-2">
+                        <!-- Les icônes seront injectées ici par le JS -->
+                    </div>
+                </div>
+                <p class="text-2xl text-white/70 font-semibold">Faites le test sur <span class="font-bold text-white tracking-wider">tunisianvalues.github.io</span></p>
+            </footer>
+        </div>
+    </div>
+    
+    <script>
+    // Le JS pour le calcul des idéologies reste le même
+    const ideologies = [
+      {
+        name: "Ennahdha",
+        stats: { pana: { left: 45, neutral: 20, right: 35 }, coop: { left: 70, neutral: 20, right: 10 }, econ: { left: 40, neutral: 20, right: 40 }, reli: { left: 85, neutral: 10, right: 5 }, soci: { left: 80, neutral: 15, right: 5 }, demo: { left: 50, neutral: 20, right: 30 }, decent: { left: 40, neutral: 30, right: 20 }, },
+        weights: { pana: 1.5, coop: 1, econ: 2, reli: 3, soci: 3, demo: 1, decent: 1, },
+      },
+      {
+        name: "Parti Destourien Libre (PDL)",
+        stats: { pana: { left: 35, neutral: 0, right: 65 }, coop: { left: 25, neutral: 10, right: 65 }, econ: { left: 45, neutral: 5, right: 40 }, reli: { left: 10, neutral: 15, right: 75 }, soci: { left: 70, neutral: 10, right: 20 }, demo: { left: 10, neutral: 15, right: 75 }, decent: { left: 15, neutral: 10, right: 75 }, },
+        weights: { pana: 3, coop: 2, econ: 1, reli: 3, soci: 2, demo: 3, decent: 2, },
+      },
+      {
+        name: "Mouvement Echaâb",
+        stats: { pana: { left: 70, neutral: 20, right: 10 }, coop: { left: 25, neutral: 0, right: 65 }, econ: { left: 65, neutral: 10, right: 15 }, reli: { left: 10, neutral: 20, right: 70 }, soci: { left: 70, neutral: 10, right: 20 }, demo: { left: 15, neutral: 25, right: 60 }, decent: { left: 20, neutral: 10, right: 70 }, },
+        weights: { pana: 3, coop: 1, econ: 2, reli: 3, soci: 3, demo: 3, decent: 1, },
+      },
+      {
+        name: "Afek Tounes",
+        stats: { pana: { left: 20, neutral: 20, right: 60 }, coop: { left: 80, neutral: 0, right: 20 }, econ: { left: 25, neutral: 15, right: 60 }, reli: { left: 5, neutral: 25, right: 70 }, soci: { left: 5, neutral: 15, right: 80 }, demo: { left: 85, neutral: 10, right: 5 }, decent: { left: 40, neutral: 30, right: 30 }, },
+        weights: { pana: 1, coop: 2, econ: 3, reli: 2, soci: 2, demo: 3, decent: 1, },
+      },
+      {
+        name: "Parti des Travailleurs",
+        stats: { pana: { left: 40, neutral: 20, right: 40 }, coop: { left: 40, neutral: 20, right: 40 }, econ: { left: 85, neutral: 10, right: 0 }, reli: { left: 5, neutral: 5, right: 90 }, soci: { left: 5, neutral: 10, right: 85 }, demo: { left: 50, neutral: 30, right: 20 }, decent: { left: 35, neutral: 30, right: 35 }, },
+        weights: { pana: 1, coop: 1, econ: 3, reli: 3, soci: 3, demo: 2, decent: 1, },
+      },
+      {
+        name: "Coalition Al Karama",
+        stats: { pana: { left: 70, neutral: 20, right: 10 }, coop: { left: 25, neutral: 10, right: 65 }, econ: { left: 40, neutral: 20, right: 40 }, reli: { left: 95, neutral: 5, right: 0 }, soci: { left: 95, neutral: 5, right: 0 }, demo: { left: 20, neutral: 10, right: 70 }, decent: { left: 15, neutral: 15, right: 70 }, },
+        weights: { pana: 2, coop: 1, econ: 0.5, reli: 3, soci: 3, demo: 3, decent: 1, },
+      },
+      {
+        name: "Courant Démocrate (Attayar)",
+        stats: { pana: { left: 35, neutral: 10, right: 55 }, coop: { left: 75, neutral: 20, right: 5 }, econ: { left: 70, neutral: 5, right: 25 }, reli: { left: 15, neutral: 25, right: 60 }, soci: { left: 20, neutral: 30, right: 50 }, demo: { left: 70, neutral: 10, right: 20 }, decent: { left: 55, neutral: 10, right: 35 }, },
+        weights: { pana: 1, coop: 2, econ: 3, reli: 2, soci: 2, demo: 3, decent: 1, },
+      },
+      {
+        name: "Parti Baath Tunisien",
+        stats: { pana: { left: 95, neutral: 5, right: 0 }, coop: { left: 20, neutral: 5, right: 75 }, econ: { left: 70, neutral: 20, right: 10 }, reli: { left: 15, neutral: 20, right: 65 }, soci: { left: 60, neutral: 20, right: 20 }, demo: { left: 5, neutral: 10, right: 85 }, decent: { left: 5, neutral: 5, right: 90 }, },
+        weights: { pana: 3, coop: 2, econ: 1, reli: 1, soci: 1, demo: 3, decent: 2, },
+      },
+      {
+        name: "Ettakatol (FDTL)",
+        stats: { pana: { left: 25, neutral: 45, right: 30 }, coop: { left: 70, neutral: 5, right: 25 }, econ: { left: 45, neutral: 10, right: 45 }, reli: { left: 10, neutral: 20, right: 70 }, soci: { left: 25, neutral: 15, right: 60 }, demo: { left: 85, neutral: 10, right: 5 }, decent: { left: 40, neutral: 30, right: 30 }, },
+        weights: { pana: 1, coop: 2, econ: 2, reli: 3, soci: 2, demo: 3, decent: 1, },
+      },
+      {
+        name: "Al Joumhouri",
+        stats: { pana: { left: 20, neutral: 50, right: 30 }, coop: { left: 60, neutral: 10, right: 30 }, econ: { left: 30, neutral: 10, right: 55 }, reli: { left: 15, neutral: 25, right: 60 }, soci: { left: 25, neutral: 35, right: 40 }, demo: { left: 70, neutral: 15, right: 15 }, decent: { left: 55, neutral: 25, right: 20 }, },
+        weights: { pana: 1, coop: 1, econ: 3, reli: 2, soci: 2, demo: 3, decent: 1, },
+      },
+    ];
+
+    window.onload = function() {
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (decodeURIComponent(pair[0]) == variable) {
+                    if (variable === "icons") return decodeURIComponent(pair[1]);
+                    return parseFloat(decodeURIComponent(pair[1]));
                 }
             }
-            const icons_param = special_icons.join(',');
-
-            location.href = `results.html`
-                + `?s_pana=${final_pana}&n_pana=${final_n_pana}&m_pana=${max_pana}`
-                + `&s_coop=${final_coop}&n_coop=${final_n_coop}&m_coop=${max_coop}`
-                + `&s_econ=${final_econ}&n_econ=${final_n_econ}&m_econ=${max_econ}`
-                + `&s_reli=${final_reli}&n_reli=${final_n_reli}&m_reli=${max_reli}`
-                + `&s_soci=${final_soci}&n_soci=${final_n_soci}&m_soci=${max_soci}`
-                + `&s_demo=${final_demo}&n_demo=${final_n_demo}&m_demo=${max_demo}`
-                + `&s_decent=${final_decent}&n_decent=${final_n_decent}&m_decent=${max_decent}`
-                + `&icons=${icons_param}`;
+            return null;
         }
+
+        const axes = ["pana", "coop", "econ", "reli", "soci", "demo", "decent"];
+        const final_pct = {};
+        let total_neutral_score = 0;
+        let total_max_score = 0;
+
+        axes.forEach(axis => {
+            const s = getQueryVariable("s_" + axis) || 0;
+            const n = getQueryVariable("n_" + axis) || 0;
+            const m = getQueryVariable("m_" + axis) || 0;
+            
+            total_neutral_score += n;
+            total_max_score += m;
+
+            let neutral_pct = 0, left_pct = 0, right_pct = 0;
+
+            if (m > 0) {
+                neutral_pct = (n / m) * 100;
+                const max_decided_score = m - n;
+                
+                if (max_decided_score > 0) {
+                    const decided_pct = 100 - neutral_pct;
+                    const normalized_s = (s + max_decided_score) / (2 * max_decided_score);
+                    left_pct = normalized_s * decided_pct;
+                    right_pct = (1 - normalized_s) * decided_pct;
+                } else {
+                    left_pct = 0;
+                    right_pct = 0;
+                }
+            } else {
+                neutral_pct = 100;
+            }
+            
+            final_pct[axis] = { left: left_pct, neutral: neutral_pct, right: right_pct };
+            
+            // Mise à jour de la page principale
+            document.getElementById(`bar-left-${axis}`).style.width = left_pct + "%";
+            document.getElementById(`bar-neutral-${axis}`).style.width = neutral_pct + "%";
+            document.getElementById(`bar-right-${axis}`).style.width = right_pct + "%";
+
+            if (left_pct > 12) document.getElementById(`left-${axis}`).innerText = Math.round(left_pct) + "%";
+            if (neutral_pct > 12) document.getElementById(`neutral-${axis}`).innerText = Math.round(neutral_pct) + "%";
+            if (right_pct > 12) document.getElementById(`right-${axis}`).innerText = Math.round(right_pct) + "%";
+            
+            // Mise à jour de la bannière à partager
+            document.getElementById(`share-bar-left-${axis}`).style.width = left_pct + "%";
+            document.getElementById(`share-bar-neutral-${axis}`).style.width = neutral_pct + "%";
+            document.getElementById(`share-bar-right-${axis}`).style.width = right_pct + "%";
+            
+            // Ajout des pourcentages sur la bannière (si > 10% pour la lisibilité)
+            if (left_pct > 10) document.getElementById(`share-val-left-${axis}`).innerText = Math.round(left_pct) + "%";
+            if (neutral_pct > 10) document.getElementById(`share-val-neutral-${axis}`).innerText = Math.round(neutral_pct) + "%";
+            if (right_pct > 10) document.getElementById(`share-val-right-${axis}`).innerText = Math.round(right_pct) + "%";
+        });
+
+        const ideologyLabelElement = document.getElementById("ideology-label");
+        const shareIdeologyElement = document.getElementById("share-ideology");
+        const averageNeutrality = total_max_score > 0 ? (total_neutral_score / total_max_score) * 100 : 100;
+        const NEUTRALITY_THRESHOLD = 60.0;
+
+        if (averageNeutrality >= NEUTRALITY_THRESHOLD) {
+             const undeterminedProfile = "Profil Indéterminé (trop de réponses neutres)";
+             ideologyLabelElement.innerHTML = undeterminedProfile;
+             shareIdeologyElement.innerHTML = "Indéterminé";
+        } else {
+            var ideology = "";
+            var ideodist = Infinity;
+
+            for (var i = 0; i < ideologies.length; i++) {
+                var dist = 0;
+                axes.forEach(axis => {
+                    const user_profile = final_pct[axis];
+                    const ideology_profile = ideologies[i].stats[axis];
+                    const weight = ideologies[i].weights[axis] || 1;
+                    if (!ideology_profile) return;
+                    let axis_dist = Math.pow(user_profile.left - ideology_profile.left, 2) + Math.pow(user_profile.neutral - ideology_profile.neutral, 2) + Math.pow(user_profile.right - ideology_profile.right, 2);
+                    dist += axis_dist * weight;
+                });
+
+                if (dist < ideodist) {
+                    ideology = ideologies[i].name;
+                    ideodist = dist;
+                }
+            }
+            ideologyLabelElement.innerHTML = ideology;
+            shareIdeologyElement.innerHTML = ideology;
+        }
+
+        const icons_param = getQueryVariable("icons");
+        if (icons_param && icons_param.length > 0) {
+            const container = document.getElementById("special-icons-container");
+            const shareIconContainer = document.getElementById("share-special-icons");
+            const icons = icons_param.split(',');
+            
+            const title = document.createElement('h3');
+            title.innerText = "Positions Particulières";
+            title.className = "text-2xl font-bold text-gray-800 mb-4";
+            container.appendChild(title);
+
+            const iconWrapper = document.createElement('div');
+            iconWrapper.className = 'flex justify-center items-center gap-4 flex-wrap';
+            container.appendChild(iconWrapper);
+
+            icons.forEach(iconId => {
+                if (iconId) {
+                    const img = document.createElement('img');
+                    img.src = `icons/${iconId}.png`;
+                    img.title = iconId;
+                    img.className = 'h-20 w-20 object-contain transition-transform hover:scale-110';
+                    iconWrapper.appendChild(img);
+
+                    const shareImg = img.cloneNode(true);
+                    shareImg.className = 'h-16 w-16 object-contain'; // Taille ajustée pour la bannière
+                    shareIconContainer.appendChild(shareImg);
+                }
+            });
+        }
+    }
+
+    async function imageToBase64(imgElement) {
+        try {
+            if (!imgElement.src || imgElement.src.startsWith('data:')) {
+                return imgElement.src;
+            }
+            const response = await fetch(imgElement.src);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const blob = await response.blob();
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(blob);
+            });
+        } catch (error) {
+            console.error(`Impossible de charger l'image ${imgElement.src}:`, error);
+            return null;
+        }
+    }
+
+    async function downloadResults() {
+        const downloadButton = document.getElementById('download-button');
+        downloadButton.disabled = true;
+        downloadButton.innerText = "Génération en cours...";
+
+        const card = document.getElementById('share-card');
+        const imagesToConvert = Array.from(card.getElementsByTagName('img'));
+        
+        try {
+            // S'assurer que les polices web sont chargées
+            await document.fonts.ready;
+            
+            await Promise.all(imagesToConvert.map(async (img) => {
+                const base64Src = await imageToBase64(img);
+                if (base64Src) {
+                    img.src = base64Src;
+                }
+            }));
+
+            const canvas = await html2canvas(card, {
+                scale: 2,
+                useCORS: true,
+                width: 1200,
+                height: 630,
+                logging: false,
+                backgroundColor: '#18181B' // Fond au cas où
+            });
+
+            const link = document.createElement('a');
+            link.download = 'Mes-Resultats-TunisianValues.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+
+        } catch (err) {
+            console.error("Erreur lors de la génération de l'image:", err);
+            alert("Désolé, une erreur est survenue lors de la création de l'image. Veuillez réessayer.");
+        } finally {
+            downloadButton.disabled = false;
+            downloadButton.innerText = "Télécharger la Bannière";
+        }
+    }
     </script>
 </body>
 </html>
