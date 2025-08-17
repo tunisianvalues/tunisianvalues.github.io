@@ -1,7 +1,7 @@
 questions = [
   {
     question:
-      "La Tunisie devrait prioriser les alliances avec les pays arabes plutôt qu’avec d’autres régions.",
+      "Tunisia should prioritize alliances with Arab countries over other regions.",
     effect: {
       pana: +4,
       coop: 0,
@@ -14,7 +14,7 @@ questions = [
   },
   {
     question:
-      "L’unité politique et économique du monde arabe est un objectif prioritaire.",
+      "The political and economic unity of the Arab world is a priority objective.",
     effect: {
       pana: +8,
       coop: 0,
@@ -27,7 +27,7 @@ questions = [
   },
   {
     question:
-      "Des compétitions artistiques et culturelles à l'échelle du monde arabe devraient être développées.",
+      "Artistic and cultural competitions on the scale of the Arab world should be developed.",
     effect: {
       pana: +4,
       coop: 0,
@@ -39,7 +39,7 @@ questions = [
     },
   },
   {
-    question: "Les Tunisiens partagent principalement une identité arabe.",
+    question: "Tunisians primarily share an Arab identity.",
     effect: {
       pana: +4,
       coop: 0,
@@ -51,8 +51,7 @@ questions = [
     },
   },
   {
-    question:
-      "Une armée arabe commune serait bénéfique à la sécurité de la Tunisie.",
+    question: "A common Arab army would be beneficial to Tunisia's security.",
     effect: {
       pana: +8,
       coop: 0,
@@ -65,7 +64,7 @@ questions = [
   },
   {
     question:
-      "La Tunisie devrait soutenir automatiquement ses voisins arabes en cas de conflit avec un pays non arabe.",
+      "Tunisia should automatically support its Arab neighbors in case of conflict with a non-Arab country.",
     effect: {
       pana: +8,
       coop: 0,
@@ -77,7 +76,7 @@ questions = [
     },
   },
   {
-    question: "La Tunisie est plus arabe qu’africaine.",
+    question: "Tunisia is more Arab than African.",
     effect: {
       pana: +6,
       coop: 0,
@@ -90,7 +89,7 @@ questions = [
   },
   {
     question:
-      "La Tunisie doit avant tout défendre ses intérêts nationaux, même contre des pays arabes.",
+      "Tunisia must above all defend its national interests, even against Arab countries.",
     effect: {
       pana: -8,
       coop: 0,
@@ -103,7 +102,7 @@ questions = [
   },
   {
     question:
-      "Les politiques tunisiennes devraient être pensées indépendamment des priorités du monde arabe.",
+      "Tunisian policies should be designed independently of the priorities of the Arab world.",
     effect: {
       pana: -8,
       coop: 0,
@@ -116,7 +115,7 @@ questions = [
   },
   {
     question:
-      "La culture tunisienne est distincte et doit être protégée des influences extérieures, y compris du monde arabe.",
+      "Tunisian culture is distinct and must be protected from external influences, including from the Arab world.",
     effect: {
       pana: -6,
       coop: 0,
@@ -129,7 +128,7 @@ questions = [
   },
   {
     question:
-      "Les décisions diplomatiques de la Tunisie ne doivent pas être influencées par les causes arabes s'ils ne la concernent pas directement.",
+      "Tunisia's diplomatic decisions should not be influenced by Arab causes if they do not directly concern it.",
     effect: {
       pana: -6,
       coop: 0,
@@ -141,7 +140,7 @@ questions = [
     },
   },
   {
-    question: "Le monde arabe n'existe pas.",
+    question: "The Arab world does not exist.",
     effect: {
       pana: -8,
       coop: 0,
@@ -154,7 +153,7 @@ questions = [
   },
   {
     question:
-      "La Tunisie doit participer activement aux organisations internationales.",
+      "Tunisia must actively participate in international organizations.",
     effect: {
       pana: 0,
       coop: +4,
@@ -167,7 +166,7 @@ questions = [
   },
   {
     question:
-      "Les traités internationaux sont nécessaires pour protéger les intérêts tunisiens.",
+      "International treaties are necessary to protect Tunisian interests.",
     effect: {
       pana: 0,
       coop: +4,
@@ -180,7 +179,7 @@ questions = [
   },
   {
     question:
-      "La Tunisie devrait renforcer ses partenariats avec des puissances comme l’UE, les États-Unis ou la Chine.",
+      "Tunisia should strengthen its partnerships with powers like the EU, the United States, or China.",
     effect: {
       pana: 0,
       coop: +6,
@@ -193,7 +192,7 @@ questions = [
   },
   {
     question:
-      "L’ouverture aux investissements étrangers est essentielle au développement du pays.",
+      "Opening up to foreign investment is essential for the country's development.",
     effect: {
       pana: 0,
       coop: +4,
@@ -206,7 +205,7 @@ questions = [
   },
   {
     question:
-      "La Tunisie devrait s’engager dans des missions humanitaires et de maintien de la paix à l’étranger.",
+      "Tunisia should engage in humanitarian and peacekeeping missions abroad.",
     effect: {
       pana: 0,
       coop: +6,
@@ -219,7 +218,7 @@ questions = [
   },
   {
     question:
-      "La Tunisie doit rester maître de ses choix politiques, quitte à faire face à un isolement international.",
+      "Tunisia must remain in control of its political choices, even if it means facing international isolation.",
     effect: {
       pana: 0,
       coop: -4,
@@ -232,7 +231,7 @@ questions = [
   },
   {
     question:
-      "Les institutions internationales ne respectent pas la souveraineté de la Tunisie et ne protègent pas ses intérêts fondamentaux.",
+      "International institutions do not respect Tunisia's sovereignty and do not protect its fundamental interests.",
     effect: {
       pana: 0,
       coop: -8,
@@ -245,7 +244,7 @@ questions = [
   },
   {
     question:
-      "La Tunisie devrait réduire sa dépendance envers les aides et partenariats étrangers.",
+      "Tunisia should reduce its dependence on foreign aid and partnerships.",
     effect: {
       pana: 0,
       coop: -4,
@@ -258,7 +257,7 @@ questions = [
   },
   {
     question:
-      "La Tunisie gagnerait à suivre la doctrine bourguibienne de neutralité et de non-ingérence dans les conflits extérieurs.",
+      "Tunisia would benefit from following the Bourguibist doctrine of neutrality and non-interference in external conflicts.",
     effect: {
       pana: 0,
       coop: -4,
@@ -271,7 +270,7 @@ questions = [
   },
   {
     question:
-      "L'État tunisien doit contrôler les secteurs stratégiques de l'économie tels que l'énergie, les transports et les télécommunications.",
+      "The Tunisian state must control strategic sectors of the economy such as energy, transport, and telecommunications.",
     effect: {
       pana: 0,
       coop: 0,
@@ -284,7 +283,7 @@ questions = [
   },
   {
     question:
-      "Les services publics essentiels comme la santé et l'éducation doivent rester gratuits et accessibles à tous, même si cela nécessite une augmentation des impôts.",
+      "Essential public services like health and education must remain free and accessible to all, even if it requires a tax increase.",
     effect: {
       pana: 0,
       coop: 0,
@@ -296,7 +295,7 @@ questions = [
     },
   },
   {
-    question: "Les entreprises privées doivent être abolies.",
+    question: "Private companies must be abolished.",
     effect: {
       pana: 0,
       coop: 0,
@@ -308,8 +307,7 @@ questions = [
     },
   },
   {
-    question:
-      "Les grandes entreprises privées doivent être régulées pour éviter les abus.",
+    question: "Large private companies must be regulated to avoid abuses.",
     effect: {
       pana: 0,
       coop: 0,
@@ -322,7 +320,7 @@ questions = [
   },
   {
     question:
-      "La redistribution des richesses est essentielle pour réduire les inégalités.",
+      "The redistribution of wealth is essential to reduce inequalities.",
     effect: {
       pana: 0,
       coop: 0,
@@ -334,8 +332,7 @@ questions = [
     },
   },
   {
-    question:
-      "La concurrence libre stimule l’innovation et la croissance économique.",
+    question: "Free competition stimulates innovation and economic growth.",
     effect: {
       pana: 0,
       coop: 0,
@@ -347,8 +344,7 @@ questions = [
     },
   },
   {
-    question:
-      "Les impôts sur les entreprises devraient être réduits pour encourager l’investissement.",
+    question: "Taxes on businesses should be reduced to encourage investment.",
     effect: {
       pana: 0,
       coop: 0,
@@ -361,7 +357,7 @@ questions = [
   },
   {
     question:
-      "Le secteur privé est plus efficace que l’État dans la gestion économique.",
+      "The private sector is more efficient than the state in economic management.",
     effect: {
       pana: 0,
       coop: 0,
@@ -374,7 +370,7 @@ questions = [
   },
   {
     question:
-      "La privatisation de certaines entreprises publiques serait bénéfique.",
+      "The privatization of certain public companies would be beneficial.",
     effect: {
       pana: 0,
       coop: 0,
@@ -386,7 +382,7 @@ questions = [
     },
   },
   {
-    question: "Les inégalités sont inévitables dans une économie prospère.",
+    question: "Inequalities are inevitable in a prosperous economy.",
     effect: {
       pana: 0,
       coop: 0,
@@ -399,7 +395,7 @@ questions = [
   },
   {
     question:
-      "L’État doit subventionner massivement le pain, l’essence et l’électricité.",
+      "The state must massively subsidize bread, gasoline, and electricity.",
     effect: {
       pana: 0,
       coop: 0,
@@ -412,7 +408,7 @@ questions = [
   },
   {
     question:
-      "L'État tunisien devrait procéder à un recrutement exceptionnel des docteurs au chômage pour résoudre la crise de l'emploi dans le secteur de l'enseignement supérieur.",
+      "The Tunisian state should carry out an exceptional recruitment of unemployed PhD holders to solve the employment crisis in the higher education sector.",
     effect: {
       pana: 0,
       coop: 0,
@@ -425,7 +421,7 @@ questions = [
   },
   {
     question:
-      "Le modèle economique tunisien pourrait fonctionner, mais il est pris en otage par une élite corrompue qui s’enrichit pendant que le peuple s’appauvrit.",
+      "The Tunisian economic model could work, but it is held hostage by a corrupt elite that enriches itself while the people become poorer.",
     effect: {
       pana: 0,
       coop: 0,
@@ -437,7 +433,7 @@ questions = [
     },
   },
   {
-    question: "La charia devrait inspirer la législation tunisienne.",
+    question: "Sharia should inspire Tunisian legislation.",
     effect: {
       pana: 0,
       coop: 0,
@@ -449,7 +445,7 @@ questions = [
     },
   },
   {
-    question: "La religion doit jouer un rôle central dans la vie politique.",
+    question: "Religion must play a central role in political life.",
     effect: {
       pana: 0,
       coop: 0,
@@ -461,8 +457,7 @@ questions = [
     },
   },
   {
-    question:
-      "Les valeurs islamiques sont indispensables pour guider la société.",
+    question: "Islamic values are essential to guide society.",
     effect: {
       pana: 0,
       coop: 0,
@@ -474,7 +469,7 @@ questions = [
     },
   },
   {
-    question: "L’État doit soutenir activement les institutions religieuses.",
+    question: "The state must actively support religious institutions.",
     effect: {
       pana: 0,
       coop: 0,
@@ -486,7 +481,7 @@ questions = [
     },
   },
   {
-    question: "Les partis politiques islamistes doivent être autorisés.",
+    question: "Islamist political parties must be allowed.",
     effect: {
       pana: 0,
       coop: 0,
@@ -498,7 +493,7 @@ questions = [
     },
   },
   {
-    question: "La religion et la politique doivent être totalement séparées.",
+    question: "Religion and politics must be completely separate.",
     effect: {
       pana: 0,
       coop: 0,
@@ -511,7 +506,7 @@ questions = [
   },
   {
     question:
-      "Les lois doivent être basées uniquement sur des principes civils, pas religieux.",
+      "Laws must be based solely on civil principles, not religious ones.",
     effect: {
       pana: 0,
       coop: 0,
@@ -523,8 +518,7 @@ questions = [
     },
   },
   {
-    question:
-      "Les institutions publiques doivent être neutres vis-à-vis de toutes les croyances.",
+    question: "Public institutions must be neutral towards all beliefs.",
     effect: {
       pana: 0,
       coop: 0,
@@ -536,7 +530,7 @@ questions = [
     },
   },
   {
-    question: "La liberté de culte doit inclure la liberté de ne pas croire.",
+    question: "Freedom of worship must include the freedom not to believe.",
     effect: {
       pana: 0,
       coop: 0,
@@ -548,8 +542,7 @@ questions = [
     },
   },
   {
-    question:
-      "Les discours religieux ne doivent pas influencer les décisions politiques.",
+    question: "Religious discourse should not influence political decisions.",
     effect: {
       pana: 0,
       coop: 0,
@@ -561,7 +554,7 @@ questions = [
     },
   },
   {
-    question: "Il faut retirer toute mention de l’islam de la constitution.",
+    question: "All mention of Islam must be removed from the constitution.",
     effect: {
       pana: 0,
       coop: 0,
@@ -574,7 +567,7 @@ questions = [
   },
   {
     question:
-      "Le système éducatif tunisien doit s’aligner davantage sur les principes de l’islam, fondement moral et identitaire de l'individu.",
+      "The Tunisian education system must align more with the principles of Islam, the moral and identity foundation of the individual.",
     effect: {
       pana: 0,
       coop: 0,
@@ -587,7 +580,7 @@ questions = [
   },
   {
     question:
-      "Mon identité religieuse prime sur mon appartenance nationale, je suis musulman avant d’être tunisien.",
+      "My religious identity takes precedence over my national affiliation; I am a Muslim before being Tunisian.",
     effect: {
       pana: 0,
       coop: 0,
@@ -599,8 +592,7 @@ questions = [
     },
   },
   {
-    question:
-      "Les valeurs et coutumes traditionnelles tunisiennes doivent être préservées.",
+    question: "Traditional Tunisian values and customs must be preserved.",
     effect: {
       pana: 0,
       coop: 0,
@@ -613,7 +605,7 @@ questions = [
   },
   {
     question:
-      "La société tunisienne requiert des réformes sociales rapides et significatives.",
+      "The Tunisian society requires rapid and significant social reforms.",
     effect: {
       pana: 0,
       coop: 0,
@@ -625,7 +617,7 @@ questions = [
     },
   },
   {
-    question: "Le rôle traditionnel de la famille doit être protégé.",
+    question: "The traditional role of the family must be protected.",
     effect: {
       pana: 0,
       coop: 0,
@@ -638,7 +630,7 @@ questions = [
   },
   {
     question:
-      "La Tunisie devrait prendre modèle sur les sociétés occidentales pour structurer la sienne.",
+      "Tunisia should take Western societies as a model to structure its own.",
     effect: {
       pana: 0,
       coop: 0,
@@ -650,8 +642,7 @@ questions = [
     },
   },
   {
-    question:
-      "L’égalité totale entre hommes et femmes doit être garantie par la loi.",
+    question: "Total equality between men and women must be guaranteed by law.",
     effect: {
       pana: 0,
       coop: 0,
@@ -663,8 +654,7 @@ questions = [
     },
   },
   {
-    question:
-      "Les minorités sexuelles doivent avoir les mêmes droits que les autres citoyens.",
+    question: "Sexual minorities must have the same rights as other citizens.",
     effect: {
       pana: 0,
       coop: 0,
@@ -677,7 +667,7 @@ questions = [
   },
   {
     question:
-      "Le Derja devrait remplacer l’arabe en tant que langue officielle de la Tunisie.",
+      "Derja should replace Arabic as the official language of Tunisia.",
     effect: {
       pana: -6,
       coop: 0,
@@ -689,8 +679,7 @@ questions = [
     },
   },
   {
-    question:
-      "Les traditions qui limitent les libertés individuelles doivent être abolies.",
+    question: "Traditions that limit individual freedoms must be abolished.",
     effect: {
       pana: 0,
       coop: 0,
@@ -703,7 +692,7 @@ questions = [
   },
   {
     question:
-      "Il est approprié que la Tunisie intègre des langues étrangères dans sa société.",
+      "It is appropriate for Tunisia to integrate foreign languages into its society.",
     effect: {
       pana: 0,
       coop: 0,
@@ -715,7 +704,7 @@ questions = [
     },
   },
   {
-    question: "Des élections libres et régulières sont indispensables.",
+    question: "Free and regular elections are essential.",
     effect: {
       pana: 0,
       coop: 0,
@@ -728,7 +717,7 @@ questions = [
   },
   {
     question:
-      "Les contre-pouvoirs (justice, parlement, médias) doivent être protégés.",
+      "Checks and balances (justice, parliament, media) must be protected.",
     effect: {
       pana: 0,
       coop: 0,
@@ -740,7 +729,7 @@ questions = [
     },
   },
   {
-    question: "Les manifestations pacifiques sont un droit fondamental.",
+    question: "Peaceful demonstrations are a fundamental right.",
     effect: {
       pana: 0,
       coop: 0,
@@ -752,7 +741,7 @@ questions = [
     },
   },
   {
-    question: "Le pluralisme politique est essentiel à la démocratie.",
+    question: "Political pluralism is essential for democracy.",
     effect: {
       pana: 0,
       coop: 0,
@@ -764,7 +753,7 @@ questions = [
     },
   },
   {
-    question: "La transparence gouvernementale est une priorité.",
+    question: "Government transparency is a priority.",
     effect: {
       pana: 0,
       coop: 0,
@@ -777,7 +766,7 @@ questions = [
   },
   {
     question:
-      "Un leader fort est parfois nécessaire, même au détriment des libertés politiques.",
+      "A strong leader is sometimes necessary, even at the expense of political freedoms.",
     effect: {
       pana: 0,
       coop: 0,
@@ -790,7 +779,7 @@ questions = [
   },
   {
     question:
-      "Dans certaines situations, il est acceptable de limiter la liberté de la presse.",
+      "In certain situations, it is acceptable to limit freedom of the press.",
     effect: {
       pana: 0,
       coop: 0,
@@ -802,7 +791,7 @@ questions = [
     },
   },
   {
-    question: "Les opposants politiques menacent la stabilité du pays.",
+    question: "Political opponents threaten the country's stability.",
     effect: {
       pana: 0,
       coop: 0,
@@ -815,7 +804,7 @@ questions = [
   },
   {
     question:
-      "Un gouvernement autoritaire est plus efficace qu’une démocratie libérale.",
+      "An authoritarian government is more effective than a liberal democracy.",
     effect: {
       pana: 0,
       coop: 0,
@@ -828,7 +817,7 @@ questions = [
   },
   {
     question:
-      "Les décisions importantes doivent être prises rapidement, même sans débat public.",
+      "Important decisions must be made quickly, even without public debate.",
     effect: {
       pana: 0,
       coop: 0,
@@ -841,7 +830,7 @@ questions = [
   },
   {
     question:
-      "Les autorités locales comprennent mieux les besoins de leur population.",
+      "Local authorities better understand the needs of their population.",
     effect: {
       pana: 0,
       coop: 0,
@@ -853,7 +842,7 @@ questions = [
     },
   },
   {
-    question: "Les gouverneurs devraient être élus localement.",
+    question: "Governors should be elected locally.",
     effect: {
       pana: 0,
       coop: 0,
@@ -866,7 +855,7 @@ questions = [
   },
   {
     question:
-      "Un pouvoir central fort est nécessaire pour éviter les divisions régionales.",
+      "A strong central power is necessary to avoid regional divisions.",
     effect: {
       pana: 0,
       coop: 0,
@@ -879,7 +868,7 @@ questions = [
   },
   {
     question:
-      "Les décisions économiques doivent rester entre les mains du gouvernement central.",
+      "Economic decisions must remain in the hands of the central government.",
     effect: {
       pana: 0,
       coop: 0,
@@ -892,7 +881,7 @@ questions = [
   },
   {
     question:
-      "La gestion des ressources naturelles doit rester sous contrôle du gouvernement central.",
+      "The management of natural resources must remain under the control of the central government.",
     effect: {
       pana: 0,
       coop: 0,
@@ -905,7 +894,7 @@ questions = [
   },
   {
     question:
-      "La création du Conseil national des régions et districts pour représenter les territoires et rationaliser le pouvoir parlementaire est une initiative fondamentalement positive.",
+      "The creation of the National Council of Regions and Districts to represent territories and streamline parliamentary power is fundamentally a positive initiative.",
     effect: {
       pana: 0,
       coop: 0,
@@ -917,8 +906,7 @@ questions = [
     },
   },
   {
-    question:
-      "Les mêmes lois doivent s’appliquer uniformément sur tout le territoire.",
+    question: "The same laws must apply uniformly throughout the territory.",
     effect: {
       pana: 0,
       coop: 0,
@@ -931,7 +919,7 @@ questions = [
   },
   {
     question:
-      "La décentralisation post-révolution est essentielle pour améliorer la gouvernance et rapprocher les décisions des citoyens.",
+      "Post-revolution decentralization is essential to improve governance and bring decisions closer to the citizens.",
     effect: {
       pana: 0,
       coop: 0,
@@ -943,16 +931,16 @@ questions = [
     },
   },
 
-  // QUESTIONS SPÉCIALES
+  // SPECIAL QUESTIONS
   {
     question:
-      "Il serait préférable pour la Tunisie de restaurer une monarchie constitutionnelle.",
+      "It would be better for Tunisia to restore a constitutional monarchy.",
     effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
     special: "monarchie",
   },
   {
     question:
-      "L’UGTT a un rôle positif dans la vie politique et sociale tunisienne.",
+      "The UGTT (Tunisian General Labour Union) has a positive role in Tunisian political and social life.",
     effect: {
       pana: 0,
       coop: 0,
@@ -966,12 +954,12 @@ questions = [
   },
   {
     question:
-      "Les mesures prises par Kaïs Saïed le 25 juillet 2021 étaient nécessaires et justifier pour sauver le pays.",
+      "The measures taken by Kaïs Saïed on July 25, 2021, were necessary and justified to save the country.",
     effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
     special: "25juillet",
   },
   {
-    question: "Kaïs Saïed est un bon président.",
+    question: "Kaïs Saïed is a good president.",
     effect: {
       pana: 0,
       coop: 0,
@@ -984,8 +972,7 @@ questions = [
     special: "ks",
   },
   {
-    question:
-      "La Tunisie aurait dû éviter le processus révolutionnaire de 2011.",
+    question: "Tunisia should have avoided the revolutionary process of 2011.",
     effect: {
       pana: 0,
       coop: 0,
@@ -999,13 +986,13 @@ questions = [
   },
   {
     question:
-      "L’avenir de la Tunisie passe par un Maghreb unie, fondée sur nos liens historiques et culturels.",
+      "The future of Tunisia lies in a united Maghreb, founded on our historical and cultural ties.",
     effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
     special: "maghreb",
   },
   {
     question:
-      "La Tunisie fait partie de l’Afrique et doit assumer un rôle moteur dans la construction d’une union africaine forte et souveraine.",
+      "Tunisia is part of Africa and must take a leading role in building a strong and sovereign African union.",
     effect: {
       pana: -2,
       coop: 0,
