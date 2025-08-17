@@ -18,7 +18,6 @@
         }
     </script>
     <style>
-        /* Ajout d'un petit style pour les ombres des barres de la bannière */
         .bar-shadow {
             filter: drop-shadow(0 2px 3px rgba(0,0,0,0.4));
         }
@@ -48,7 +47,6 @@
                 </div>
                 
                 <div class="space-y-8">
-                    <!-- Les barres de résultats ici n'ont pas changé -->
                      <div>
                         <h3 class="text-xl font-bold text-gray-800 mb-2">Axe Panarabisme</h3>
                         <div class="md:flex md:items-center md:gap-3">
@@ -135,26 +133,19 @@
         </main>
     </div>
     
-    <!-- ================================================================== -->
-    <!-- NOUVEAU DESIGN DE LA BANNIÈRE (AVEC VOS AJUSTEMENTS) -->
-    <!-- ================================================================== -->
     <div id="share-card-container" class="fixed top-0 w-[1200px] h-[630px] z-[-1]" style="left: -9999px;">
         <div id="share-card" class="w-full h-full p-14 flex flex-col font-oswald relative text-white bg-zinc-900" style="font-family: 'Oswald', sans-serif; background-image: radial-gradient(circle at top, rgba(153, 27, 27, 0.3), transparent 70%);">
             
-            <!-- EN-TÊTE -->
             <header class="flex justify-between items-start border-b-2 border-white/20 pb-4">
                 <div>
-                    <!-- MODIFICATION : Marge en bas (mb-2) pour espacer le titre du profil -->
                     <h1 class="text-6xl font-bold uppercase tracking-widest mb-2" style="text-shadow: 0 0 15px rgba(255, 50, 50, 0.5);">Mes Résultats</h1>
                     <h2 class="text-4xl font-light text-white/80">Profil : <span id="share-ideology" class="font-bold text-red-400"></span></h2>
                 </div>
                 <img src="TUNISIAN VALUES.png" alt="Logo" class="h-24 w-auto">
             </header>
 
-            <!-- AXES -->
             <main class="flex-grow grid grid-cols-2 gap-x-12 gap-y-4 content-center mt-2">
                 
-                <!-- Colonne 1 -->
                 <div class="space-y-4">
                     <div class="axis-item">
                         <div class="flex justify-between items-baseline mb-1 text-lg">
@@ -182,7 +173,6 @@
                     </div>
                 </div>
                 
-                <!-- Colonne 2 -->
                 <div class="space-y-4">
                     <div class="axis-item">
                         <div class="flex justify-between items-baseline mb-1 text-lg">
@@ -205,7 +195,6 @@
                 </div>
             </main>
             
-            <!-- PIED DE PAGE -->
             <footer class="mt-auto pt-4 flex justify-between items-end">
                 <div id="share-special-icons-wrapper" class="max-w-[60%]">
                     <h3 class="font-bold text-xl uppercase text-red-300">Positions Notables</h3>
@@ -220,7 +209,6 @@
     </div>
     
     <script>
-    // Le JS pour le calcul des idéologies reste le même
     const ideologies = [
       {
         name: "Ennahdha",
@@ -322,7 +310,6 @@
             
             final_pct[axis] = { left: left_pct, neutral: neutral_pct, right: right_pct };
             
-            // Mise à jour de la page principale
             document.getElementById(`bar-left-${axis}`).style.width = left_pct + "%";
             document.getElementById(`bar-neutral-${axis}`).style.width = neutral_pct + "%";
             document.getElementById(`bar-right-${axis}`).style.width = right_pct + "%";
@@ -331,12 +318,10 @@
             if (neutral_pct > 12) document.getElementById(`neutral-${axis}`).innerText = Math.round(neutral_pct) + "%";
             if (right_pct > 12) document.getElementById(`right-${axis}`).innerText = Math.round(right_pct) + "%";
             
-            // Mise à jour de la bannière à partager
             document.getElementById(`share-bar-left-${axis}`).style.width = left_pct + "%";
             document.getElementById(`share-bar-neutral-${axis}`).style.width = neutral_pct + "%";
             document.getElementById(`share-bar-right-${axis}`).style.width = right_pct + "%";
             
-            // Ajout des pourcentages sur la bannière (si > 10% pour la lisibilité)
             if (left_pct > 10) document.getElementById(`share-val-left-${axis}`).innerText = Math.round(left_pct) + "%";
             if (neutral_pct > 10) document.getElementById(`share-val-neutral-${axis}`).innerText = Math.round(neutral_pct) + "%";
             if (right_pct > 10) document.getElementById(`share-val-right-${axis}`).innerText = Math.round(right_pct) + "%";
@@ -399,7 +384,7 @@
                     iconWrapper.appendChild(img);
 
                     const shareImg = img.cloneNode(true);
-                    shareImg.className = 'h-16 w-16 object-contain'; // Taille ajustée pour la bannière
+                    shareImg.className = 'h-16 w-16 object-contain';
                     shareIconContainer.appendChild(shareImg);
                 }
             });
@@ -437,7 +422,6 @@
         const imagesToConvert = Array.from(card.getElementsByTagName('img'));
         
         try {
-            // S'assurer que les polices web sont chargées
             await document.fonts.ready;
             
             await Promise.all(imagesToConvert.map(async (img) => {
@@ -453,7 +437,7 @@
                 width: 1200,
                 height: 630,
                 logging: false,
-                backgroundColor: '#18181B' // Fond au cas où
+                backgroundColor: '#18181B'
             });
 
             const link = document.createElement('a');
