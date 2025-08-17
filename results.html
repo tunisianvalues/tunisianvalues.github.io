@@ -134,13 +134,13 @@
             
             <div class="flex justify-between items-start z-10">
                 <div>
-                    <h1 class="text-7xl font-bold uppercase tracking-wider">Mes Résultats</h1>
+                    <h1 class="text-7xl font-bold uppercase tracking-wider">MES RÉSULTATS</h1>
                     <h2 class="text-5xl font-light text-white/80 -mt-2">Profil : <span id="share-ideology" class="font-bold"></span></h2>
                 </div>
-                <img src="TUNISIAN VALUES.png" alt="Logo" class="h-24">
+                <img src="TUNISIAN VALUES.png" alt="Logo" class="h-24 -mt-2">
             </div>
 
-            <div id="share-card-content" class="flex-grow grid grid-cols-2 gap-x-16 gap-y-5 content-center z-10 -mt-4">
+            <div id="share-card-content" class="flex-grow grid grid-cols-2 gap-x-16 gap-y-5 content-center z-10 -mt-8">
                 <div class="axis-item">
                     <div class="text-3xl font-semibold mb-1">Panarabisme</div>
                     <div class="w-full bg-black/20 rounded-full h-7"><div class="flex rounded-full h-full"><div id="share-bar-left-pana" class="bg-[#F87171]"></div><div id="share-bar-neutral-pana" class="bg-gray-300"></div><div id="share-bar-right-pana" class="bg-[#4B5563]"></div></div></div>
@@ -171,7 +171,7 @@
                 </div>
             </div>
             
-             <div id="share-special-icons" class="absolute bottom-12 right-12 flex gap-4 z-10"></div>
+             <div id="share-special-icons" class="absolute bottom-11 right-11 flex gap-4 z-10"></div>
 
             <p class="text-center text-2xl text-white/80 w-full mt-auto z-10">Faites le test sur tunisianvalues.com</p>
         </div>
@@ -286,7 +286,7 @@
             if (left_pct > 12) document.getElementById(`left-${axis}`).innerText = Math.round(left_pct) + "%";
             if (neutral_pct > 12) document.getElementById(`neutral-${axis}`).innerText = Math.round(neutral_pct) + "%";
             if (right_pct > 12) document.getElementById(`right-${axis}`).innerText = Math.round(right_pct) + "%";
-
+            
             document.getElementById(`share-bar-left-${axis}`).style.width = left_pct + "%";
             document.getElementById(`share-bar-neutral-${axis}`).style.width = neutral_pct + "%";
             document.getElementById(`share-bar-right-${axis}`).style.width = right_pct + "%";
