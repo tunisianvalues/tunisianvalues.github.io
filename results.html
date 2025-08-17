@@ -7,7 +7,6 @@
     <link rel="icon" type="image/png" href="icon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styless.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         tailwind.config = {
@@ -18,11 +17,16 @@
             }
         }
     </script>
+    <style>
+        /* Ajout d'un petit style pour les ombres des barres de la bannière */
+        .bar-shadow {
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.4));
+        }
+    </style>
 </head>
 <body class="font-oswald antialiased">
     <div class="min-h-screen bg-gradient-to-br from-red-600 to-red-700">
-        <div class="min-h-screen bg-gradient-to-br from-red-600 to-red-700 flex flex-col">
-            <header class="border-b border-red-500/30 bg-red-600/90 backdrop-blur-sm">
+        <header class="border-b border-red-500/30 bg-red-600/90 backdrop-blur-sm">
             <div class="container mx-auto px-4 py-4">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
@@ -35,6 +39,7 @@
                     </div>
                 </div>
             </div>
+        </header>
         <main class="container mx-auto px-4 py-12">
             <div id="results-container" class="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-xl p-6 md:p-8 shadow-2xl">
                 <div class="text-center mb-10">
@@ -42,6 +47,7 @@
                     <p class="text-lg text-slate-600 mt-2">Profil le plus proche : <span id="ideology-label" class="font-bold text-red-600"></span></p>
                 </div>
                 
+                <!-- Les barres de résultats restent identiques -->
                 <div class="space-y-8">
                     <div>
                         <h3 class="text-xl font-bold text-gray-800 mb-2">Axe Panarabisme</h3>
@@ -118,10 +124,10 @@
                 <div id="special-icons-container" class="text-center mt-10"></div>
                 
                 <div class="mt-12 text-center flex flex-col sm:flex-row justify-center items-center gap-4">
-                    <button id="download-button" onclick="downloadResults();" class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-bold text-lg px-8 py-3 rounded-lg transition-colors">
-                        Télécharger les Résultats
+                    <button id="download-button" onclick="downloadResults();" class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-bold text-lg px-8 py-3 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                        Télécharger la Bannière
                     </button>
-                    <button onclick="location.href='quiz.html';" class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-3 rounded-lg transition-colors">
+                    <button onclick="location.href='quiz.html';" class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-3 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                         Refaire le Quiz
                     </button>
                 </div>
@@ -129,108 +135,95 @@
         </main>
     </div>
     
+    <!-- ================================================================== -->
+    <!-- NOUVEAU DESIGN MAGNIFIQUE DE LA BANNIÈRE À PARTAGER -->
+    <!-- ================================================================== -->
     <div id="share-card-container" class="fixed top-0 w-[1200px] h-[630px] z-[-1]" style="left: -9999px;">
-    <!-- NOUVEAU DESIGN DE LA CARTE À PARTAGER -->
-    <div id="share-card" class="w-full h-full p-14 flex flex-col font-oswald relative text-white" style="font-family: 'Oswald', sans-serif; background-color: #1a0000; background-image: radial-gradient(circle at center, rgba(204, 38, 38, 0.25) 0%, rgba(0,0,0,0.3) 60%), url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E&quot;); background-size: cover; background-repeat: no-repeat;">
-        
-        <!-- EN-TÊTE -->
-        <header class="flex justify-between items-center border-b-2 border-white/20 pb-4">
-            <div>
-                <h1 class="text-6xl font-bold uppercase tracking-widest" style="text-shadow: 0 0 15px rgba(255, 199, 102, 0.4);">Mes Résultats</h1>
-                <h2 class="text-4xl font-light text-white/80">Profil le plus proche : <span id="share-ideology" class="font-bold text-yellow-300"></span></h2>
-            </div>
-            <img src="TUNISIAN VALUES.png" alt="Logo" class="h-24 w-auto">
-        </header>
-
-        <!-- AXES -->
-        <main id="share-card-content" class="flex-grow flex flex-col justify-center gap-y-3.5 mt-2">
+        <div id="share-card" class="w-full h-full p-14 flex flex-col font-oswald relative text-white bg-[#1C1C1C]" style="font-family: 'Oswald', sans-serif; background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22%3E%3Cg fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.04%22%3E%3Cpath opacity=%22.5%22 d=%22M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z%22/%3E%3Cpath d=%22M6 5V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h9V0h1v5h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h-1v-9h-9v9h-1v-9h-9v9h-1v-9h-9v9h-1v-9h-9v9h-1v-9h-9v9h-1v-9h-9v9h-1v-9h-9v9h-1v-9h-9v9H0v-1h5v-9H0v-1h5v-9H0v-1h5v-9H0v-1h5v-9H0v-1h5v-9H0v-1h5v-9H0v-1h5v-9H0v-1h5V0h1z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
             
-            <!-- Axe Panarabisme -->
-            <div class="axis-item">
-                <div class="flex justify-between items-baseline mb-1 text-lg">
-                    <span class="font-semibold text-white/80">Unité Arabe <span id="share-val-left-pana" class="font-mono font-bold text-xl"></span></span>
-                    <span class="font-bold text-2xl uppercase text-red-300">Panarabisme</span>
-                    <span class="font-semibold text-white/80"><span id="share-val-right-pana" class="font-mono font-bold text-xl"></span> Nationalisme</span>
-                </div>
-                <div class="w-full bg-black/40 rounded-full h-5 shadow-inner"><div class="flex rounded-full h-full"><div id="share-bar-left-pana" class="bg-gradient-to-r from-red-500 to-red-600 rounded-l-full"></div><div id="share-bar-neutral-pana" class="bg-gray-500/50"></div><div id="share-bar-right-pana" class="bg-gradient-to-l from-slate-600 to-slate-700 rounded-r-full"></div></div></div>
-            </div>
-
-            <!-- Axe Coopération -->
-            <div class="axis-item">
-                <div class="flex justify-between items-baseline mb-1 text-lg">
-                    <span class="font-semibold text-white/80">Internationalisme <span id="share-val-left-coop" class="font-mono font-bold text-xl"></span></span>
-                    <span class="font-bold text-2xl uppercase text-red-300">Coopération</span>
-                    <span class="font-semibold text-white/80"><span id="share-val-right-coop" class="font-mono font-bold text-xl"></span> Isolationnisme</span>
-                </div>
-                <div class="w-full bg-black/40 rounded-full h-5 shadow-inner"><div class="flex rounded-full h-full"><div id="share-bar-left-coop" class="bg-gradient-to-r from-orange-400 to-orange-500 rounded-l-full"></div><div id="share-bar-neutral-coop" class="bg-gray-500/50"></div><div id="share-bar-right-coop" class="bg-gradient-to-l from-sky-500 to-sky-600 rounded-r-full"></div></div></div>
-            </div>
-
-            <!-- Axe Économie -->
-            <div class="axis-item">
-                <div class="flex justify-between items-baseline mb-1 text-lg">
-                    <span class="font-semibold text-white/80">Socialisme <span id="share-val-left-econ" class="font-mono font-bold text-xl"></span></span>
-                    <span class="font-bold text-2xl uppercase text-red-300">Économie</span>
-                    <span class="font-semibold text-white/80"><span id="share-val-right-econ" class="font-mono font-bold text-xl"></span> Capitalisme</span>
-                </div>
-                <div class="w-full bg-black/40 rounded-full h-5 shadow-inner"><div class="flex rounded-full h-full"><div id="share-bar-left-econ" class="bg-gradient-to-r from-red-500 to-red-600 rounded-l-full"></div><div id="share-bar-neutral-econ" class="bg-gray-500/50"></div><div id="share-bar-right-econ" class="bg-gradient-to-l from-green-500 to-green-600 rounded-r-full"></div></div></div>
-            </div>
-
-            <!-- Axe Religion -->
-            <div class="axis-item">
-                <div class="flex justify-between items-baseline mb-1 text-lg">
-                    <span class="font-semibold text-white/80">Islam Politique <span id="share-val-left-reli" class="font-mono font-bold text-xl"></span></span>
-                    <span class="font-bold text-2xl uppercase text-red-300">Religion</span>
-                    <span class="font-semibold text-white/80"><span id="share-val-right-reli" class="font-mono font-bold text-xl"></span> Laïcisme</span>
-                </div>
-                <div class="w-full bg-black/40 rounded-full h-5 shadow-inner"><div class="flex rounded-full h-full"><div id="share-bar-left-reli" class="bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-l-full"></div><div id="share-bar-neutral-reli" class="bg-gray-500/50"></div><div id="share-bar-right-reli" class="bg-gradient-to-l from-purple-500 to-purple-600 rounded-r-full"></div></div></div>
-            </div>
-
-            <!-- Axe Sociétal -->
-            <div class="axis-item">
-                <div class="flex justify-between items-baseline mb-1 text-lg">
-                    <span class="font-semibold text-white/80">Conservatisme <span id="share-val-left-soci" class="font-mono font-bold text-xl"></span></span>
-                    <span class="font-bold text-2xl uppercase text-red-300">Sociétal</span>
-                    <span class="font-semibold text-white/80"><span id="share-val-right-soci" class="font-mono font-bold text-xl"></span> Progressisme</span>
-                </div>
-                <div class="w-full bg-black/40 rounded-full h-5 shadow-inner"><div class="flex rounded-full h-full"><div id="share-bar-left-soci" class="bg-gradient-to-r from-amber-500 to-amber-600 rounded-l-full"></div><div id="share-bar-neutral-soci" class="bg-gray-500/50"></div><div id="share-bar-right-soci" class="bg-gradient-to-l from-pink-500 to-pink-600 rounded-r-full"></div></div></div>
-            </div>
-
-            <!-- Axe Démocratie -->
-            <div class="axis-item">
-                <div class="flex justify-between items-baseline mb-1 text-lg">
-                    <span class="font-semibold text-white/80">Démocratie <span id="share-val-left-demo" class="font-mono font-bold text-xl"></span></span>
-                    <span class="font-bold text-2xl uppercase text-red-300">Démocratie</span>
-                    <span class="font-semibold text-white/80"><span id="share-val-right-demo" class="font-mono font-bold text-xl"></span> Autoritarisme</span>
-                </div>
-                <div class="w-full bg-black/40 rounded-full h-5 shadow-inner"><div class="flex rounded-full h-full"><div id="share-bar-left-demo" class="bg-gradient-to-r from-sky-500 to-sky-600 rounded-l-full"></div><div id="share-bar-neutral-demo" class="bg-gray-500/50"></div><div id="share-bar-right-demo" class="bg-gradient-to-l from-red-500 to-red-600 rounded-r-full"></div></div></div>
-            </div>
+            <!-- Superposition de dégradé rouge -->
+            <div class="absolute inset-0 bg-gradient-to-br from-red-800/50 to-black/70"></div>
             
-            <!-- Axe Gouvernance -->
-            <div class="axis-item">
-                <div class="flex justify-between items-baseline mb-1 text-lg">
-                    <span class="font-semibold text-white/80">Décentralisation <span id="share-val-left-decent" class="font-mono font-bold text-xl"></span></span>
-                    <span class="font-bold text-2xl uppercase text-red-300">Gouvernance</span>
-                    <span class="font-semibold text-white/80"><span id="share-val-right-decent" class="font-mono font-bold text-xl"></span> Centralisation</span>
-                </div>
-                <div class="w-full bg-black/40 rounded-full h-5 shadow-inner"><div class="flex rounded-full h-full"><div id="share-bar-left-decent" class="bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-l-full"></div><div id="share-bar-neutral-decent" class="bg-gray-500/50"></div><div id="share-bar-right-decent" class="bg-gradient-to-l from-slate-500 to-slate-600 rounded-r-full"></div></div></div>
-            </div>
+            <div class="relative z-10 flex flex-col h-full">
+                <!-- EN-TÊTE -->
+                <header class="flex justify-between items-start border-b-2 border-white/20 pb-4">
+                    <div>
+                        <h1 class="text-6xl font-bold uppercase tracking-widest" style="text-shadow: 0 0 15px rgba(255, 50, 50, 0.5);">Mes Résultats</h1>
+                        <h2 class="text-4xl font-light text-white/80">Profil : <span id="share-ideology" class="font-bold text-red-400"></span></h2>
+                    </div>
+                    <img src="TUNISIAN VALUES.png" alt="Logo" class="h-24 w-auto">
+                </header>
 
-        </main>
-        
-        <!-- PIED DE PAGE -->
-        <footer class="mt-auto pt-4 flex justify-between items-end">
-             <div id="share-special-icons-wrapper">
-                <h3 class="font-bold text-xl uppercase text-red-300 mb-1">Positions Notables</h3>
-                <div id="share-special-icons" class="flex gap-3 h-16 items-end">
-                    <!-- Les icônes seront injectées ici par le JS -->
-                </div>
+                <!-- AXES -->
+                <main class="flex-grow grid grid-cols-2 gap-x-12 gap-y-4 content-center mt-2">
+                    
+                    <!-- Colonne 1 -->
+                    <div class="space-y-4">
+                        <div class="axis-item">
+                            <div class="flex justify-between items-baseline mb-1 text-lg">
+                                <span class="font-semibold text-white/80">Unité Arabe</span><span class="font-semibold text-white/80">Nationalisme</span>
+                            </div>
+                            <div class="w-full bg-black/40 rounded-full h-5 shadow-inner bar-shadow"><div class="flex rounded-full h-full text-sm font-bold items-center"><div id="share-bar-left-pana" class="bg-gradient-to-r from-red-500 to-red-600 rounded-l-full h-full flex items-center justify-center pl-2"><span id="share-val-left-pana"></span></div><div id="share-bar-neutral-pana" class="bg-gray-500/50 h-full flex items-center justify-center text-black"><span id="share-val-neutral-pana"></span></div><div id="share-bar-right-pana" class="bg-gradient-to-l from-slate-600 to-slate-700 rounded-r-full h-full flex items-center justify-center pr-2"><span id="share-val-right-pana"></span></div></div></div>
+                        </div>
+                        <div class="axis-item">
+                            <div class="flex justify-between items-baseline mb-1 text-lg">
+                                <span class="font-semibold text-white/80">Internationalisme</span><span class="font-semibold text-white/80">Isolationnisme</span>
+                            </div>
+                            <div class="w-full bg-black/40 rounded-full h-5 shadow-inner bar-shadow"><div class="flex rounded-full h-full text-sm font-bold items-center"><div id="share-bar-left-coop" class="bg-gradient-to-r from-orange-400 to-orange-500 rounded-l-full h-full flex items-center justify-center pl-2"><span id="share-val-left-coop"></span></div><div id="share-bar-neutral-coop" class="bg-gray-500/50 h-full flex items-center justify-center text-black"><span id="share-val-neutral-coop"></span></div><div id="share-bar-right-coop" class="bg-gradient-to-l from-sky-500 to-sky-600 rounded-r-full h-full flex items-center justify-center pr-2"><span id="share-val-right-coop"></span></div></div></div>
+                        </div>
+                        <div class="axis-item">
+                            <div class="flex justify-between items-baseline mb-1 text-lg">
+                                <span class="font-semibold text-white/80">Socialisme</span><span class="font-semibold text-white/80">Capitalisme</span>
+                            </div>
+                            <div class="w-full bg-black/40 rounded-full h-5 shadow-inner bar-shadow"><div class="flex rounded-full h-full text-sm font-bold items-center"><div id="share-bar-left-econ" class="bg-gradient-to-r from-red-500 to-red-600 rounded-l-full h-full flex items-center justify-center pl-2"><span id="share-val-left-econ"></span></div><div id="share-bar-neutral-econ" class="bg-gray-500/50 h-full flex items-center justify-center text-black"><span id="share-val-neutral-econ"></span></div><div id="share-bar-right-econ" class="bg-gradient-to-l from-green-500 to-green-600 rounded-r-full h-full flex items-center justify-center pr-2"><span id="share-val-right-econ"></span></div></div></div>
+                        </div>
+                         <div class="axis-item">
+                            <div class="flex justify-between items-baseline mb-1 text-lg">
+                                <span class="font-semibold text-white/80">Décentralisation</span><span class="font-semibold text-white/80">Centralisation</span>
+                            </div>
+                            <div class="w-full bg-black/40 rounded-full h-5 shadow-inner bar-shadow"><div class="flex rounded-full h-full text-sm font-bold items-center"><div id="share-bar-left-decent" class="bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-l-full h-full flex items-center justify-center pl-2"><span id="share-val-left-decent"></span></div><div id="share-bar-neutral-decent" class="bg-gray-500/50 h-full flex items-center justify-center text-black"><span id="share-val-neutral-decent"></span></div><div id="share-bar-right-decent" class="bg-gradient-to-l from-slate-500 to-slate-600 rounded-r-full h-full flex items-center justify-center pr-2"><span id="share-val-right-decent"></span></div></div></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Colonne 2 -->
+                    <div class="space-y-4">
+                        <div class="axis-item">
+                            <div class="flex justify-between items-baseline mb-1 text-lg">
+                                <span class="font-semibold text-white/80">Islam Politique</span><span class="font-semibold text-white/80">Laïcisme</span>
+                            </div>
+                            <div class="w-full bg-black/40 rounded-full h-5 shadow-inner bar-shadow"><div class="flex rounded-full h-full text-sm font-bold items-center"><div id="share-bar-left-reli" class="bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-l-full h-full flex items-center justify-center pl-2"><span id="share-val-left-reli"></span></div><div id="share-bar-neutral-reli" class="bg-gray-500/50 h-full flex items-center justify-center text-black"><span id="share-val-neutral-reli"></span></div><div id="share-bar-right-reli" class="bg-gradient-to-l from-purple-500 to-purple-600 rounded-r-full h-full flex items-center justify-center pr-2"><span id="share-val-right-reli"></span></div></div></div>
+                        </div>
+                        <div class="axis-item">
+                            <div class="flex justify-between items-baseline mb-1 text-lg">
+                                <span class="font-semibold text-white/80">Conservatisme</span><span class="font-semibold text-white/80">Progressisme</span>
+                            </div>
+                            <div class="w-full bg-black/40 rounded-full h-5 shadow-inner bar-shadow"><div class="flex rounded-full h-full text-sm font-bold items-center"><div id="share-bar-left-soci" class="bg-gradient-to-r from-amber-500 to-amber-600 rounded-l-full h-full flex items-center justify-center pl-2"><span id="share-val-left-soci"></span></div><div id="share-bar-neutral-soci" class="bg-gray-500/50 h-full flex items-center justify-center text-black"><span id="share-val-neutral-soci"></span></div><div id="share-bar-right-soci" class="bg-gradient-to-l from-pink-500 to-pink-600 rounded-r-full h-full flex items-center justify-center pr-2"><span id="share-val-right-soci"></span></div></div></div>
+                        </div>
+                        <div class="axis-item">
+                            <div class="flex justify-between items-baseline mb-1 text-lg">
+                                <span class="font-semibold text-white/80">Démocratie</span><span class="font-semibold text-white/80">Autoritarisme</span>
+                            </div>
+                            <div class="w-full bg-black/40 rounded-full h-5 shadow-inner bar-shadow"><div class="flex rounded-full h-full text-sm font-bold items-center"><div id="share-bar-left-demo" class="bg-gradient-to-r from-sky-500 to-sky-600 rounded-l-full h-full flex items-center justify-center pl-2"><span id="share-val-left-demo"></span></div><div id="share-bar-neutral-demo" class="bg-gray-500/50 h-full flex items-center justify-center text-black"><span id="share-val-neutral-demo"></span></div><div id="share-bar-right-demo" class="bg-gradient-to-l from-red-500 to-red-600 rounded-r-full h-full flex items-center justify-center pr-2"><span id="share-val-right-demo"></span></div></div></div>
+                        </div>
+                    </div>
+                </main>
+                
+                <!-- PIED DE PAGE -->
+                <footer class="mt-auto pt-4 flex justify-between items-end">
+                    <div id="share-special-icons-wrapper" class="max-w-[60%]">
+                        <h3 class="font-bold text-xl uppercase text-red-300 mb-1">Positions Notables</h3>
+                        <div id="share-special-icons" class="flex gap-3 h-16 items-end flex-wrap">
+                            <!-- Les icônes seront injectées ici par le JS -->
+                        </div>
+                    </div>
+                    <p class="text-2xl text-white/70 font-semibold">Faites le test sur <span class="font-bold text-white tracking-wider">tunisianvalues.github.io</span></p>
+                </footer>
             </div>
-            <p class="text-2xl text-white/70 font-semibold">Faites le test sur <span class="font-bold text-white tracking-wider">tunisianvalues.github.io</span></p>
-        </footer>
+        </div>
     </div>
-</div>
     
     <script>
+    // Le JS pour le calcul des idéologies reste le même
     const ideologies = [
       {
         name: "Ennahdha",
@@ -332,6 +325,7 @@
             
             final_pct[axis] = { left: left_pct, neutral: neutral_pct, right: right_pct };
             
+            // Mise à jour de la page principale
             document.getElementById(`bar-left-${axis}`).style.width = left_pct + "%";
             document.getElementById(`bar-neutral-${axis}`).style.width = neutral_pct + "%";
             document.getElementById(`bar-right-${axis}`).style.width = right_pct + "%";
@@ -340,9 +334,15 @@
             if (neutral_pct > 12) document.getElementById(`neutral-${axis}`).innerText = Math.round(neutral_pct) + "%";
             if (right_pct > 12) document.getElementById(`right-${axis}`).innerText = Math.round(right_pct) + "%";
             
+            // Mise à jour de la bannière à partager
             document.getElementById(`share-bar-left-${axis}`).style.width = left_pct + "%";
             document.getElementById(`share-bar-neutral-${axis}`).style.width = neutral_pct + "%";
             document.getElementById(`share-bar-right-${axis}`).style.width = right_pct + "%";
+            
+            // Ajout des pourcentages sur la bannière (si > 10% pour la lisibilité)
+            if (left_pct > 10) document.getElementById(`share-val-left-${axis}`).innerText = Math.round(left_pct) + "%";
+            if (neutral_pct > 10) document.getElementById(`share-val-neutral-${axis}`).innerText = Math.round(neutral_pct) + "%";
+            if (right_pct > 10) document.getElementById(`share-val-right-${axis}`).innerText = Math.round(right_pct) + "%";
         });
 
         const ideologyLabelElement = document.getElementById("ideology-label");
@@ -402,13 +402,14 @@
                     iconWrapper.appendChild(img);
 
                     const shareImg = img.cloneNode(true);
-                    shareImg.className = 'h-20 w-20 object-contain';
+                    shareImg.className = 'h-16 w-16 object-contain'; // Taille ajustée pour la bannière
                     shareIconContainer.appendChild(shareImg);
                 }
             });
         }
     }
 
+    // Le JS pour le téléchargement reste presque identique, mais on peut ajouter une gestion des polices
     async function imageToBase64(imgElement) {
         try {
             if (!imgElement.src || imgElement.src.startsWith('data:')) {
@@ -434,12 +435,15 @@
     async function downloadResults() {
         const downloadButton = document.getElementById('download-button');
         downloadButton.disabled = true;
-        downloadButton.innerText = "Génération...";
+        downloadButton.innerText = "Génération en cours...";
 
         const card = document.getElementById('share-card');
         const imagesToConvert = Array.from(card.getElementsByTagName('img'));
         
         try {
+            // S'assurer que les polices web sont chargées
+            await document.fonts.ready;
+            
             await Promise.all(imagesToConvert.map(async (img) => {
                 const base64Src = await imageToBase64(img);
                 if (base64Src) {
@@ -452,11 +456,12 @@
                 useCORS: true,
                 width: 1200,
                 height: 630,
-                logging: false
+                logging: false,
+                backgroundColor: '#1C1C1C' // Fond au cas où
             });
 
             const link = document.createElement('a');
-            link.download = 'TunisianValues_Results.png';
+            link.download = 'Mes-Resultats-TunisianValues.png';
             link.href = canvas.toDataURL('image/png');
             link.click();
 
@@ -465,7 +470,7 @@
             alert("Désolé, une erreur est survenue lors de la création de l'image. Veuillez réessayer.");
         } finally {
             downloadButton.disabled = false;
-            downloadButton.innerText = "Télécharger les Résultats";
+            downloadButton.innerText = "Télécharger la Bannière";
         }
     }
     </script>
