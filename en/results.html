@@ -20,7 +20,6 @@
     </script>
 </head>
 <body class="font-oswald antialiased">
-    <script type="application/javascript" src="ideologies.js"></script>
     <div class="min-h-screen bg-gradient-to-br from-red-600 to-red-700">
         <div class="min-h-screen bg-gradient-to-br from-red-600 to-red-700 flex flex-col">
             <header class="border-b border-red-500/30 bg-red-600/90 backdrop-blur-sm">
@@ -193,7 +192,7 @@
                 <div id="banner-container" class="mt-12 text-center">
                     <h3 class="text-2xl font-bold text-gray-800 mb-4">Your Results Banner</h3>
                     <div class="flex justify-center">
-                        <img id="banner" src="" alt="Results Banner" class="rounded-lg shadow-lg max-w-full h-auto">
+                        <img id="banner" src="" alt="Results banner" class="rounded-lg shadow-lg max-w-full h-auto">
                     </div>
                 </div>
 
@@ -207,6 +206,60 @@
     </div>
     
     <script>
+    const ideologies = [
+      {
+        name: "Ennahdha",
+        stats: { pana: { left: 45, neutral: 20, right: 35 }, coop: { left: 70, neutral: 20, right: 10 }, econ: { left: 40, neutral: 20, right: 40 }, reli: { left: 85, neutral: 10, right: 5 }, soci: { left: 80, neutral: 15, right: 5 }, demo: { left: 50, neutral: 20, right: 30 }, decent: { left: 40, neutral: 30, right: 20 }, },
+        weights: { pana: 1.5, coop: 1, econ: 2, reli: 3, soci: 3, demo: 1, decent: 1, },
+      },
+      {
+        name: "Parti Destourien Libre (PDL)",
+        stats: { pana: { left: 35, neutral: 0, right: 65 }, coop: { left: 25, neutral: 10, right: 65 }, econ: { left: 45, neutral: 5, right: 40 }, reli: { left: 10, neutral: 15, right: 75 }, soci: { left: 70, neutral: 10, right: 20 }, demo: { left: 10, neutral: 15, right: 75 }, decent: { left: 15, neutral: 10, right: 75 }, },
+        weights: { pana: 3, coop: 2, econ: 1, reli: 3, soci: 2, demo: 3, decent: 2, },
+      },
+      {
+        name: "Mouvement Echaâb",
+        stats: { pana: { left: 70, neutral: 20, right: 10 }, coop: { left: 25, neutral: 0, right: 65 }, econ: { left: 65, neutral: 10, right: 15 }, reli: { left: 10, neutral: 20, right: 70 }, soci: { left: 70, neutral: 10, right: 20 }, demo: { left: 15, neutral: 25, right: 60 }, decent: { left: 20, neutral: 10, right: 70 }, },
+        weights: { pana: 3, coop: 1, econ: 2, reli: 3, soci: 3, demo: 3, decent: 1, },
+      },
+      {
+        name: "Afek Tounes",
+        stats: { pana: { left: 20, neutral: 20, right: 60 }, coop: { left: 80, neutral: 0, right: 20 }, econ: { left: 25, neutral: 15, right: 60 }, reli: { left: 5, neutral: 25, right: 70 }, soci: { left: 5, neutral: 15, right: 80 }, demo: { left: 85, neutral: 10, right: 5 }, decent: { left: 40, neutral: 30, right: 30 }, },
+        weights: { pana: 1, coop: 2, econ: 3, reli: 2, soci: 2, demo: 3, decent: 1, },
+      },
+      {
+        name: "Parti des Travailleurs",
+        stats: { pana: { left: 40, neutral: 20, right: 40 }, coop: { left: 40, neutral: 20, right: 40 }, econ: { left: 85, neutral: 10, right: 0 }, reli: { left: 5, neutral: 5, right: 90 }, soci: { left: 5, neutral: 10, right: 85 }, demo: { left: 50, neutral: 30, right: 20 }, decent: { left: 35, neutral: 30, right: 35 }, },
+        weights: { pana: 1, coop: 1, econ: 3, reli: 3, soci: 3, demo: 2, decent: 1, },
+      },
+      {
+        name: "Coalition Al Karama",
+        stats: { pana: { left: 70, neutral: 20, right: 10 }, coop: { left: 25, neutral: 10, right: 65 }, econ: { left: 40, neutral: 20, right: 40 }, reli: { left: 95, neutral: 5, right: 0 }, soci: { left: 95, neutral: 5, right: 0 }, demo: { left: 20, neutral: 10, right: 70 }, decent: { left: 15, neutral: 15, right: 70 }, },
+        weights: { pana: 2, coop: 1, econ: 0.5, reli: 3, soci: 3, demo: 3, decent: 1, },
+      },
+      {
+        name: "Courant Démocrate (Attayar)",
+        stats: { pana: { left: 35, neutral: 10, right: 55 }, coop: { left: 75, neutral: 20, right: 5 }, econ: { left: 70, neutral: 5, right: 25 }, reli: { left: 15, neutral: 25, right: 60 }, soci: { left: 20, neutral: 30, right: 50 }, demo: { left: 70, neutral: 10, right: 20 }, decent: { left: 55, neutral: 10, right: 35 }, },
+        weights: { pana: 1, coop: 2, econ: 3, reli: 2, soci: 2, demo: 3, decent: 1, },
+      },
+      {
+        name: "Parti Baath Tunisien",
+        stats: { pana: { left: 95, neutral: 5, right: 0 }, coop: { left: 20, neutral: 5, right: 75 }, econ: { left: 70, neutral: 20, right: 10 }, reli: { left: 15, neutral: 20, right: 65 }, soci: { left: 60, neutral: 20, right: 20 }, demo: { left: 5, neutral: 10, right: 85 }, decent: { left: 5, neutral: 5, right: 90 }, },
+        weights: { pana: 3, coop: 2, econ: 1, reli: 1, soci: 1, demo: 3, decent: 2, },
+      },
+      {
+        name: "Ettakatol (FDTL)",
+        stats: { pana: { left: 25, neutral: 45, right: 30 }, coop: { left: 70, neutral: 5, right: 25 }, econ: { left: 45, neutral: 10, right: 45 }, reli: { left: 10, neutral: 20, right: 70 }, soci: { left: 25, neutral: 15, right: 60 }, demo: { left: 85, neutral: 10, right: 5 }, decent: { left: 40, neutral: 30, right: 30 }, },
+        weights: { pana: 1, coop: 2, econ: 2, reli: 3, soci: 2, demo: 3, decent: 1, },
+      },
+      {
+        name: "Al Joumhouri",
+        stats: { pana: { left: 20, neutral: 50, right: 30 }, coop: { left: 60, neutral: 10, right: 30 }, econ: { left: 30, neutral: 10, right: 55 }, reli: { left: 15, neutral: 25, right: 60 }, soci: { left: 25, neutral: 35, right: 40 }, demo: { left: 70, neutral: 15, right: 15 }, decent: { left: 55, neutral: 25, right: 20 }, },
+        weights: { pana: 1, coop: 1, econ: 2, reli: 2, soci: 2, demo: 3, decent: 1, },
+      },
+    ];
+
+    window.onload = function() {
         function getQueryVariable(variable) {
             var query = window.location.search.substring(1);
             var vars = query.split("&");
@@ -250,13 +303,13 @@
             if (right_pct > 12) document.getElementById(`right-${axis}`).innerText = Math.round(right_pct) + "%";
         });
 
-        var panaLabels = ["Arab Nationalism","Arabism","Neutral","Patriotism","Tunisian Nationalism"];
-        var coopLabels = ["Internationalism","Multilateralism","Neutrality","Isolationism","Autarky"];
-        var econLabels = ["Socialism","Social Democracy","Balanced","Social Liberalism","Liberalism"];
-        var reliLabels = ["Islamism","Cultural Islam","Status-Quo","Secularism","Laicism"];
-        var sociLabels = ["Traditionalism","Conservatism","Neutral","Modernism","Progressivism"];
-        var demoLabels = ["Liberal Democracy","Rule of Law","Neutral","Authoritarianism","Totalitarianism"];
-        var decentLabels = ["Regionalism","Decentralism","Neutral","Centralism","Unitarism"];
+        var panaLabels = ["Arab Nationalism", "Arabism", "Neutral", "Patriotism", "Tunisian Nationalism"];
+        var coopLabels = ["Internationalism", "Multilateralism", "Neutrality", "Isolationism", "Autarky"];
+        var econLabels = ["Socialism", "Social Democracy", "Balanced", "Social Liberalism", "Liberalism"];
+        var reliLabels = ["Islamism", "Cultural Islam", "Status Quo", "Secularism", "Laïcité"];
+        var sociLabels = ["Traditionalism", "Conservatism", "Neutral", "Modernism", "Progressivism"];
+        var demoLabels = ["Liberal Democracy", "Rule of Law", "Neutral", "Authoritarianism", "Totalitarianism"];
+        var decentLabels = ["Regionalism", "Decentralism", "Neutral", "Centralism", "Unitarianism"];
 
         function pickLabel(val, labels) {
             if (val >= 80) return labels[0];
@@ -274,47 +327,35 @@
         document.getElementById("demo-label").innerHTML = pickLabel(final_pct.demo.left, demoLabels);
         document.getElementById("decent-label").innerHTML = pickLabel(final_pct.decent.left, decentLabels);
 
-        let totalNeutrality = 0;
-        axes.forEach(axis => {
-            totalNeutrality += final_pct[axis].neutral;
-        });
-        const averageNeutrality = totalNeutrality / axes.length;
-        const NEUTRALITY_THRESHOLD = 55.0;
-
         const ideologyLabelElement = document.getElementById("ideology-label");
+        
+        var ideology = "";
+        var ideodist = Infinity;
 
-        if (averageNeutrality >= NEUTRALITY_THRESHOLD) {
-            ideologyLabelElement.innerHTML = "Undetermined Profile (too many neutral answers)";
-            ideologyLabelElement.style.color = '#6B7280';
-        } else {
-            var ideology = "";
-            var ideodist = Infinity;
+        for (var i = 0; i < ideologies.length; i++) {
+            var dist = 0;
+            
+            axes.forEach(axis => {
+                const user_profile = final_pct[axis];
+                const ideology_profile = ideologies[i].stats[axis];
+                const weight = ideologies[i].weights[axis] || 1;
 
-            for (var i = 0; i < ideologies.length; i++) {
-                var dist = 0;
+                if (!ideology_profile) return;
+
+                let axis_dist = 0;
+                axis_dist += Math.pow(user_profile.left - ideology_profile.left, 2);
+                axis_dist += Math.pow(user_profile.neutral - ideology_profile.neutral, 2);
+                axis_dist += Math.pow(user_profile.right - ideology_profile.right, 2);
                 
-                axes.forEach(axis => {
-                    const user_profile = final_pct[axis];
-                    const ideology_profile = ideologies[i].stats[axis];
-                    const weight = ideologies[i].weights[axis] || 1;
+                dist += axis_dist * weight;
+            });
 
-                    if (!ideology_profile) return;
-
-                    let axis_dist = 0;
-                    axis_dist += Math.pow(user_profile.left - ideology_profile.left, 2);
-                    axis_dist += Math.pow(user_profile.neutral - ideology_profile.neutral, 2);
-                    axis_dist += Math.pow(user_profile.right - ideology_profile.right, 2);
-                    
-                    dist += axis_dist * weight;
-                });
-
-                if (dist < ideodist) {
-                    ideology = ideologies[i].name;
-                    ideodist = dist;
-                }
+            if (dist < ideodist) {
+                ideology = ideologies[i].name;
+                ideodist = dist;
             }
-            ideologyLabelElement.innerHTML = ideology;
         }
+        ideologyLabelElement.innerHTML = ideology;
         
         const icons_param = getQueryVariable("icons");
         if (icons_param && icons_param.length > 0) {
@@ -322,7 +363,7 @@
             const icons = icons_param.split(',');
             
             const title = document.createElement('h3');
-            title.innerText = "Specific Stances";
+            title.innerText = "Special Stances";
             title.className = "text-2xl font-bold text-gray-800 mb-4";
             container.appendChild(title);
 
@@ -341,21 +382,20 @@
             });
         }
         
-        window.onload = function() {
-            const resultsContainer = document.getElementById("results-container");
-            const bannerImage = document.getElementById("banner");
+        const resultsContainer = document.getElementById("results-container");
+        const bannerImage = document.getElementById("banner");
 
-            html2canvas(resultsContainer, {
-                scale: 2,
-                onclone: (document) => {
-                    document.getElementById('banner-container').style.display = 'none';
-                    document.getElementById('button-container').style.display = 'none';
-                }
-            }).then(canvas => {
-                bannerImage.src = canvas.toDataURL('image/png');
-                bannerImage.style.border = '4px solid white';
-            });
-        }
+        html2canvas(resultsContainer, {
+            scale: 2,
+            onclone: (document) => {
+                document.getElementById('banner-container').style.display = 'none';
+                document.getElementById('button-container').style.display = 'none';
+            }
+        }).then(canvas => {
+            bannerImage.src = canvas.toDataURL('image/png');
+            bannerImage.style.border = '4px solid white';
+        });
+    }
     </script>
 </body>
 </html>
