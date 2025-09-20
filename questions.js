@@ -999,7 +999,7 @@ questions = [
   },
   {
     question:
-      "L’avenir de la Tunisie passe par un Maghreb unie, fondée sur nos liens historiques et culturels.",
+      "L’avenir de la Tunisie passe par un Maghreb uni, fondée sur nos liens historiques et culturels.",
     effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
     special: "maghreb",
   },
@@ -1018,3 +1018,4 @@ questions = [
     special: "afrique",
   },
 ];
+
