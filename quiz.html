@@ -64,6 +64,7 @@
     </div>
 
     <script>
+        // Shuffle ensuring we don't lose the ID reference
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -74,6 +75,7 @@
 
         var max_pana = 0, max_coop = 0, max_econ = 0, max_reli = 0, max_soci = 0, max_demo = 0, max_decent = 0;
 
+        // Arrays to calculate bar scores
         let pana_array = new Array(questions.length).fill(0);
         let coop_array = new Array(questions.length).fill(0);
         let econ_array = new Array(questions.length).fill(0);
@@ -82,6 +84,7 @@
         let demo_array = new Array(questions.length).fill(0);
         let decent_array = new Array(questions.length).fill(0);
         
+        // Neutral arrays
         let neutral_pana_array = new Array(questions.length).fill(0);
         let neutral_coop_array = new Array(questions.length).fill(0);
         let neutral_econ_array = new Array(questions.length).fill(0);
@@ -90,7 +93,9 @@
         let neutral_demo_array = new Array(questions.length).fill(0);
         let neutral_decent_array = new Array(questions.length).fill(0);
 
-        let user_answers = new Array(questions.length).fill(null);
+        // Store answers by ID for the advanced result logic
+        let answers_map = {}; 
+
         var qn = 0; 
 
         for (var i = 0; i < questions.length; i++) {
@@ -118,16 +123,15 @@
         init_question();
 
         function next_question(mult) {
-            user_answers[qn] = mult;
+            // Map the specific answer to the question ID
+            if(questions[qn].id) {
+                answers_map[questions[qn].id] = mult;
+            }
 
+            // Standard scoring logic for the bars
             if (mult === 0.0) {
-                pana_array[qn] = 0;
-                coop_array[qn] = 0;
-                econ_array[qn] = 0;
-                reli_array[qn] = 0;
-                soci_array[qn] = 0;
-                demo_array[qn] = 0;
-                decent_array[qn] = 0;
+                pana_array[qn] = 0; coop_array[qn] = 0; econ_array[qn] = 0;
+                reli_array[qn] = 0; soci_array[qn] = 0; demo_array[qn] = 0; decent_array[qn] = 0;
                 
                 neutral_pana_array[qn] = Math.abs(questions[qn].effect.pana || 0);
                 neutral_coop_array[qn] = Math.abs(questions[qn].effect.coop || 0);
@@ -145,13 +149,8 @@
                 demo_array[qn] = mult * (questions[qn].effect.demo || 0);
                 decent_array[qn] = mult * (questions[qn].effect.decent || 0);
 
-                neutral_pana_array[qn] = 0;
-                neutral_coop_array[qn] = 0;
-                neutral_econ_array[qn] = 0;
-                neutral_reli_array[qn] = 0;
-                neutral_soci_array[qn] = 0;
-                neutral_demo_array[qn] = 0;
-                neutral_decent_array[qn] = 0;
+                neutral_pana_array[qn] = 0; neutral_coop_array[qn] = 0; neutral_econ_array[qn] = 0;
+                neutral_reli_array[qn] = 0; neutral_soci_array[qn] = 0; neutral_demo_array[qn] = 0; neutral_decent_array[qn] = 0;
             }
 
             qn++;
@@ -185,14 +184,25 @@
             let final_n_demo = neutral_demo_array.reduce((a, b) => a + b, 0);
             let final_n_decent = neutral_decent_array.reduce((a, b) => a + b, 0);
 
+            // Special icons logic
             let special_icons = [];
             for (let i = 0; i < questions.length; i++) {
-                if (questions[i].special && user_answers[i] > 0) {
+                if (questions[i].special && answers_map[questions[i].id] > 0) {
                     special_icons.push(questions[i].special);
                 }
             }
             const icons_param = special_icons.join(',');
 
+            // Compress answers for URL
+            let ans_str = "";
+            for(let key in answers_map) {
+                // simple serialization: key:val,key:val
+                ans_str += key + ":" + answers_map[key] + ",";
+            }
+            // Remove trailing comma
+            ans_str = ans_str.slice(0, -1);
+
+            // Construct URL
             location.href = `results.html`
                 + `?s_pana=${final_pana}&n_pana=${final_n_pana}&m_pana=${max_pana}`
                 + `&s_coop=${final_coop}&n_coop=${final_n_coop}&m_coop=${max_coop}`
@@ -201,9 +211,9 @@
                 + `&s_soci=${final_soci}&n_soci=${final_n_soci}&m_soci=${max_soci}`
                 + `&s_demo=${final_demo}&n_demo=${final_n_demo}&m_demo=${max_demo}`
                 + `&s_decent=${final_decent}&n_decent=${final_n_decent}&m_decent=${max_decent}`
-                + `&icons=${icons_param}`;
+                + `&icons=${icons_param}`
+                + `&ans=${encodeURIComponent(ans_str)}`;
         }
     </script>
 </body>
 </html>
-
