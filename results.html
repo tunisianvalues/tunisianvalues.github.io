@@ -841,7 +841,7 @@
                 scores.forEach(s => {
                     let color = s.veto ? "bg-gray-400" : (s.score > 85 ? "bg-green-600" : (s.score > 65 ? "bg-green-500" : (s.score > 45 ? "bg-yellow-500" : "bg-red-500")));
                     let width = s.veto ? 100 : s.score;
-                    let text = s.veto ? "Incompatible (Veto)" : s.score + "%";
+                    let text = s.veto ? "Incompatible" : s.score + "%";
                     let opacity = s.veto ? "opacity-50" : "opacity-100";
                     let imgHtml = s.image ? `<img src="${s.image}" class="h-10 w-10 object-contain mr-4 rounded-md bg-white p-1 shadow-sm border border-gray-100" onerror="this.style.display='none'">` : `<div class="h-10 w-10 mr-4 bg-gray-200 rounded-full flex items-center justify-center text-xs">?</div>`;
 
