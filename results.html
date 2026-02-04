@@ -62,14 +62,13 @@
             background-color: #cbd5e1;
             border-radius: 4px;
         }
+
         /* Styles pour la génération d'image (Invisible pour l'utilisateur) */
-        
         #capture-area {
             position: fixed;
             left: -9999px;
             top: 0;
-            width: 1080px;
-            /* Largeur fixe pour haute qualité */
+            width: 1080px; /* Largeur fixe pour haute qualité */
             height: auto;
             z-index: -1;
         }
@@ -95,7 +94,9 @@
                     <div class="my-8 p-6 bg-slate-50 border border-slate-200 rounded-xl shadow-sm flex flex-col items-center">
                         <p class="text-lg text-slate-600 uppercase tracking-widest font-medium mb-4">Profil le plus proche</p>
 
+                        <!-- Winner Image Container -->
                         <div id="winner-image-container" class="h-32 w-32 mb-4 flex items-center justify-center">
+                            <!-- Image injected via JS -->
                         </div>
 
                         <p id="ideology-label" class="text-4xl font-bold text-red-600">Calcul en cours...</p>
@@ -108,11 +109,15 @@
                     </div>
                 </div>
 
+                <!-- AXES BARS -->
                 <div class="space-y-8" id="bars-container">
+                    <!-- Bars generated via JS with new colors -->
                 </div>
 
+                <!-- SPECIAL ICONS -->
                 <div id="special-icons-container" class="text-center mt-12 pt-8 border-t border-gray-200"></div>
 
+                <!-- REFINEMENT & RANKING UI -->
                 <div class="border-t-2 border-gray-200 mt-10 pt-6 space-y-4">
                     <div>
                         <button id="toggle-refinement" class="w-full flex justify-between items-center text-left py-2 px-1 hover:bg-gray-50 rounded-lg transition-colors">
@@ -143,7 +148,7 @@
                 </div>
 
                 <div class="mt-12 text-center flex flex-col sm:flex-row justify-center items-center gap-4">
-                    <button id="download-btn" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-900 text-white font-bold text-lg px-8 py-3 rounded-lg transition-colors shadow-lg flex items-center justify-center gap-2">
+                     <button id="download-btn" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-900 text-white font-bold text-lg px-8 py-3 rounded-lg transition-colors shadow-lg flex items-center justify-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
@@ -155,8 +160,10 @@
         </main>
     </div>
 
+    <!-- HIDDEN CAPTURE AREA FOR IMAGE GENERATION -->
     <div id="capture-area" class="bg-slate-50 p-12">
         <div class="bg-white rounded-3xl shadow-xl overflow-hidden border-4 border-red-600">
+            <!-- Header -->
             <div class="bg-red-600 p-8 flex justify-between items-center text-white">
                 <div>
                     <h1 class="text-6xl font-bold uppercase tracking-tighter">Tunisian Values</h1>
@@ -168,8 +175,10 @@
             </div>
 
             <div class="p-10">
+                <!-- Winner Section -->
                 <div class="flex items-center justify-center gap-8 mb-12 bg-slate-50 rounded-2xl p-6 border border-slate-200">
                     <div id="capture-winner-img" class="h-48 w-48 flex-shrink-0 flex items-center justify-center bg-white rounded-full shadow-md border-4 border-white overflow-hidden">
+                        <!-- Img injected -->
                     </div>
                     <div class="text-left">
                         <p class="text-2xl text-slate-500 font-medium uppercase tracking-widest">Résultat Principal</p>
@@ -178,10 +187,13 @@
                     </div>
                 </div>
 
+                <!-- Bars Section -->
                 <div id="capture-bars" class="space-y-6">
+                    <!-- Bars injected -->
                 </div>
             </div>
 
+            <!-- Footer -->
             <div class="bg-slate-800 text-white p-6 text-center">
                 <p class="text-xl font-light tracking-widest">TUNISIANVALUES.GITHUB.IO</p>
             </div>
@@ -189,8 +201,10 @@
     </div>
 
     <script>
+        // --- CONFIGURATION ---
         const axes = ["pana", "coop", "econ", "reli", "soci", "demo", "decent"];
 
+        // Configuration visuelle et textuelle des axes
         const axesConfig = {
             pana: {
                 name: "Panarabisme",
@@ -246,266 +260,69 @@
         const ideologies = [{
             name: "Ennahdha",
             image: "images/ennahdha.png",
-            vector: {
-                pana: -20,
-                coop: 40,
-                econ: -10,
-                reli: -80,
-                soci: -80,
-                demo: -20,
-                decent: -50
-            },
+            vector: { pana: -20, coop: 40, econ: -10, reli: -80, soci: -80, demo: -20, decent: -50 },
             populism: 40,
-            vetos: {
-                "reli_separation": {
-                    val: 0.9,
-                    type: "greater"
-                },
-                "spec_25jul": {
-                    val: 0.4,
-                    type: "greater"
-                },
-                "soci_lgbt": {
-                    val: 0.4,
-                    type: "greater"
-                }
-            }
+            vetos: { "reli_separation": { val: 0.9, type: "greater" }, "spec_25jul": { val: 0.4, type: "greater" }, "soci_lgbt": { val: 0.4, type: "greater" } }
         }, {
             name: "Parti Destourien Libre (PDL)",
             image: "images/pdl.png",
-            vector: {
-                pana: 30,
-                coop: 30,
-                econ: 10,
-                reli: 60,
-                soci: -40,
-                demo: 60,
-                decent: 60
-            },
+            vector: { pana: 30, coop: 30, econ: 10, reli: 60, soci: -40, demo: 60, decent: 60 },
             populism: 80,
-            vetos: {
-                "spec_2011": {
-                    val: -0.1,
-                    type: "less"
-                },
-                "reli_parties": {
-                    val: 0.4,
-                    type: "greater"
-                },
-                "decent_election_gov": {
-                    val: 0.4,
-                    type: "greater"
-                },
-                "soci_lgbt": {
-                    val: 0.4,
-                    type: "greater"
-                }
-            }
+            vetos: { "spec_2011": { val: -0.1, type: "less" }, "reli_parties": { val: 0.4, type: "greater" }, "decent_election_gov": { val: 0.4, type: "greater" }, "soci_lgbt": { val: 0.4, type: "greater" } }
         }, {
             name: "Mouvement Echaâb",
             image: "images/echaab.png",
-            vector: {
-                pana: -80,
-                coop: 30,
-                econ: -50,
-                reli: -20,
-                soci: -40,
-                demo: 30,
-                decent: 40
-            },
+            vector: { pana: -80, coop: 30, econ: -50, reli: -20, soci: -40, demo: 30, decent: 40 },
             populism: 70,
-            vetos: {
-                "pana_no_arab": {
-                    val: 0.4,
-                    type: "greater"
-                },
-                "soci_lgbt": {
-                    val: 0.4,
-                    type: "greater"
-                }
-            }
+            vetos: { "pana_no_arab": { val: 0.4, type: "greater" }, "soci_lgbt": { val: 0.4, type: "greater" } }
         }, {
             name: "Afek Tounes",
             image: "images/afektounes.png",
-            vector: {
-                pana: 40,
-                coop: -60,
-                econ: 50,
-                reli: 50,
-                soci: 70,
-                demo: -80,
-                decent: -10
-            },
+            vector: { pana: 40, coop: -60, econ: 50, reli: 50, soci: 70, demo: -80, decent: -10 },
             populism: 10,
-            vetos: {
-                "econ_no_private": {
-                    val: 0.4,
-                    type: "greater"
-                },
-                "econ_corrupt_elite": {
-                    val: 0.9,
-                    type: "greater"
-                }
-            }
+            vetos: { "econ_no_private": { val: 0.4, type: "greater" }, "econ_corrupt_elite": { val: 0.9, type: "greater" } }
         }, {
             name: "Parti des Travailleurs",
             image: "images/pt.png",
-            vector: {
-                pana: 0,
-                coop: 0,
-                econ: -90,
-                reli: 80,
-                soci: 80,
-                demo: -30,
-                decent: 0
-            },
+            vector: { pana: 0, coop: 0, econ: -90, reli: 80, soci: 80, demo: -30, decent: 0 },
             populism: 60,
-            vetos: {
-                "econ_competition": {
-                    val: 0.4,
-                    type: "greater"
-                },
-                "econ_privatization": {
-                    val: 0.4,
-                    type: "greater"
-                },
-                "spec_ugtt": {
-                    val: -0.1,
-                    type: "less"
-                },
-                "soci_lgbt": {
-                    val: 0.4,
-                    type: "greater"
-                }
-            }
+            vetos: { "econ_competition": { val: 0.4, type: "greater" }, "econ_privatization": { val: 0.4, type: "greater" }, "spec_ugtt": { val: -0.1, type: "less" }, "soci_lgbt": { val: 0.4, type: "greater" } }
         }, {
             name: "Coalition Al Karama",
             image: "images/alkarama.png",
-            vector: {
-                pana: -60,
-                coop: 30,
-                econ: 0,
-                reli: -95,
-                soci: -95,
-                demo: -40,
-                decent: -60
-            },
+            vector: { pana: -60, coop: 30, econ: 0, reli: -95, soci: -95, demo: -40, decent: -60 },
             populism: 90,
-            vetos: {
-                "reli_separation": {
-                    val: 0.4,
-                    type: "greater"
-                },
-                "spec_25jul": {
-                    val: 0.4,
-                    type: "greater"
-                },
-                "spec_ugtt": {
-                    val: 0.4,
-                    type: "greater"
-                },
-                "soci_lgbt": {
-                    val: 0.4,
-                    type: "greater"
-                }
-            }
+            vetos: { "reli_separation": { val: 0.4, type: "greater" }, "spec_25jul": { val: 0.4, type: "greater" }, "spec_ugtt": { val: 0.4, type: "greater" }, "soci_lgbt": { val: 0.4, type: "greater" } }
         }, {
             name: "Courant Démocrate (Attayar)",
             image: "images/attayar.png",
-            vector: {
-                pana: 20,
-                coop: -40,
-                econ: -30,
-                reli: 30,
-                soci: 30,
-                demo: -60,
-                decent: -20
-            },
+            vector: { pana: 20, coop: -40, econ: -30, reli: 30, soci: 30, demo: -60, decent: -20 },
             populism: 20,
             vetos: {}
         }, {
             name: "Ettakatol (FDTL)",
             image: "images/ettakatol.png",
-            vector: {
-                pana: 25,
-                coop: -50,
-                econ: -20,
-                reli: 40,
-                soci: 60,
-                demo: -80,
-                decent: -40
-            },
+            vector: { pana: 25, coop: -50, econ: -20, reli: 40, soci: 60, demo: -80, decent: -40 },
             populism: 10,
-            vetos: {
-                "demo_strong_leader": {
-                    val: 0.4,
-                    type: "greater"
-                },
-                "econ_corrupt_elite": {
-                    val: 0.9,
-                    type: "greater"
-                }
-            }
+            vetos: { "demo_strong_leader": { val: 0.4, type: "greater" }, "econ_corrupt_elite": { val: 0.9, type: "greater" } }
         }, {
             name: "Al Joumhouri",
             image: "images/aljoumhouri.png",
-            vector: {
-                pana: 20,
-                coop: -20,
-                econ: -10,
-                reli: 40,
-                soci: 40,
-                demo: -70,
-                decent: -30
-            },
+            vector: { pana: 20, coop: -20, econ: -10, reli: 40, soci: 40, demo: -70, decent: -30 },
             populism: 15,
             vetos: {}
         }, {
             name: "Parti Baath",
             image: "images/baath.png",
-            vector: {
-                pana: -100,
-                coop: 40,
-                econ: -60,
-                reli: 10,
-                soci: -20,
-                demo: 50,
-                decent: 80
-            },
+            vector: { pana: -100, coop: 40, econ: -60, reli: 10, soci: -20, demo: 50, decent: 80 },
             populism: 50,
-            vetos: {
-                "pana_no_arab": {
-                    val: 0.4,
-                    type: "greater"
-                },
-                "soci_lgbt": {
-                    val: 0.4,
-                    type: "greater"
-                }
-            }
+            vetos: { "pana_no_arab": { val: 0.4, type: "greater" }, "soci_lgbt": { val: 0.4, type: "greater" } }
         }, {
             name: "Processus du 25-Juillet",
             image: "images/almassar.png",
-            vector: {
-                pana: 10,
-                coop: 30,
-                econ: -20,
-                reli: 0,
-                soci: -10,
-                demo: 70,
-                decent: 30
-            },
+            vector: { pana: 10, coop: 30, econ: -20, reli: 0, soci: -10, demo: 70, decent: 30 },
             populism: 95,
-            vetos: {
-                "spec_25jul": {
-                    val: -0.1,
-                    type: "less"
-                },
-                "decent_election_gov": {
-                    val: 0.4,
-                    type: "greater"
-                }
-            }
+            vetos: { "spec_25jul": { val: -0.1, type: "less" }, "decent_election_gov": { val: 0.4, type: "greater" } }
         }];
 
         const specialLabels = {
@@ -518,6 +335,7 @@
             "afrique": "Union Africaine"
         };
 
+        // --- HELPER FUNCTIONS ---
         function getQueryVariable(variable) {
             const query = window.location.search.substring(1);
             const vars = query.split("&");
@@ -571,10 +389,12 @@
             return Math.round((rawAvg + 1) * 50);
         }
 
+        // --- MAIN LOGIC ---
         window.onload = function() {
             const final_pct = {};
             const userVector = {};
 
+            // 1. Draw Bars & Build User Vector
             const barsContainer = document.getElementById("bars-container");
             const wContainer = document.getElementById("weights-container");
             const captureBars = document.getElementById("capture-bars");
@@ -585,9 +405,7 @@
                 const n = parseFloat(getQueryVariable("n_" + axis) || 0);
                 const m = parseFloat(getQueryVariable("m_" + axis) || 0);
 
-                let neutral = 0,
-                    left = 0,
-                    right = 0;
+                let neutral = 0, left = 0, right = 0;
                 if (m > 0) {
                     neutral = (n / m) * 100;
                     const decided_max = m - n;
@@ -601,13 +419,10 @@
                     neutral = 100;
                 }
 
-                final_pct[axis] = {
-                    left,
-                    neutral,
-                    right
-                };
+                final_pct[axis] = { left, neutral, right };
                 userVector[axis] = pctToVector(left, right);
 
+                // --- UI BAR HTML ---
                 const barHtml = `
                     <div class="mb-2">
                       <div class="flex justify-between items-end mb-1">
@@ -631,9 +446,11 @@
                       </div>
                     </div>
                 `;
-
+                
+                // Add to standard container
                 barsContainer.innerHTML += barHtml;
 
+                // Add to CAPTURE container (simplified styling if needed, here reusing mostly)
                 captureBars.innerHTML += `
                     <div class="mb-4">
                         <div class="flex justify-between items-end mb-2">
@@ -651,6 +468,7 @@
                     </div>
                 `;
 
+                // Weights Input
                 wContainer.innerHTML += `
                     <div class="flex flex-col">
                        <label class="font-bold text-gray-700">${config.name}</label>
@@ -664,6 +482,7 @@
             const userPopulism = calculatePopulismScore(userAnswers, questions);
             document.getElementById("populism-meter").innerHTML = `Populisme: <span class="font-bold text-${userPopulism > 60 ? 'red' : 'blue'}-600">${userPopulism}%</span>`;
 
+            // Icons Logic
             const icons_param = getQueryVariable("icons");
             if (icons_param) {
                 const container = document.getElementById("special-icons-container");
@@ -687,6 +506,7 @@
                 }
             }
 
+            // 5. Matching Algorithm
             function calculateMatch() {
                 let scores = [];
 
@@ -704,12 +524,7 @@
                     }
 
                     if (isVetoed) {
-                        scores.push({
-                            name: party.name,
-                            score: 0,
-                            veto: true,
-                            image: party.image
-                        });
+                        scores.push({ name: party.name, score: 0, veto: true, image: party.image });
                         return;
                     }
 
@@ -727,29 +542,27 @@
                     let finalScore = simPct - popPenalty;
                     if (finalScore < 0) finalScore = 0;
 
-                    scores.push({
-                        name: party.name,
-                        score: Math.round(finalScore),
-                        veto: false,
-                        image: party.image
-                    });
+                    scores.push({ name: party.name, score: Math.round(finalScore), veto: false, image: party.image });
                 });
 
                 scores.sort((a, b) => b.score - a.score);
 
+                // --- LOGIQUE INDÉPENDANT ---
                 let top = scores[0];
                 let isIndependent = false;
 
+                // Si le score est < 50% OU si tous sont veto/0
                 if (!top || top.score < 50) {
                     isIndependent = true;
                     top = {
                         name: "Indépendant / Sans Affiliation",
-                        score: top ? top.score : 0,
+                        score: top ? top.score : 0, // On garde le score technique mais on l'affiche différemment
                         veto: false,
-                        image: null
+                        image: null // Pas d'image de parti
                     };
                 }
 
+                // Update UI Display
                 const labelEl = document.getElementById("ideology-label");
                 const imgContainer = document.getElementById("winner-image-container");
                 const captureName = document.getElementById("capture-winner-name");
@@ -760,9 +573,11 @@
                     labelEl.innerText = "Indépendant / Sans Affiliation";
                     labelEl.classList.remove("text-red-600");
                     labelEl.classList.add("text-gray-600");
-
+                    
+                    // Emoji ou icône neutre
                     imgContainer.innerHTML = `<span class="text-7xl">🤷‍♂️</span>`;
-
+                    
+                    // Update Capture Data
                     captureName.innerText = "Indépendant";
                     captureImg.innerHTML = `<span class="text-8xl">🤷‍♂️</span>`;
                     captureScore.innerText = "Aucun parti proche (>50%)";
@@ -771,7 +586,7 @@
                     labelEl.innerText = top.name;
                     labelEl.classList.add("text-red-600");
                     labelEl.classList.remove("text-gray-600");
-
+                    
                     if (top.image) {
                         imgContainer.innerHTML = `<img src="${top.image}" alt="${top.name}" class="h-full w-full object-contain drop-shadow-xl">`;
                         captureImg.innerHTML = `<img src="${top.image}" class="h-full w-full object-contain">`;
@@ -779,17 +594,18 @@
                         imgContainer.innerHTML = `<span class="text-6xl">🏛️</span>`;
                         captureImg.innerHTML = `<span class="text-8xl">🏛️</span>`;
                     }
-
+                    
                     captureName.innerText = top.name;
                     captureScore.innerText = `Correspondance : ${top.score}%`;
                     captureScore.className = "mt-2 inline-block px-4 py-1 bg-red-100 text-red-700 rounded-lg font-bold text-2xl";
                 }
 
+                // Update Ranking List
                 let html = "";
                 scores.forEach(s => {
                     let color = s.veto ? "bg-gray-400" : (s.score > 85 ? "bg-green-600" : (s.score > 65 ? "bg-green-500" : (s.score > 45 ? "bg-yellow-500" : "bg-red-500")));
                     let width = s.veto ? 100 : s.score;
-                    let text = s.veto ? "Incompatible" : s.score + "%";
+                    let text = s.veto ? "Incompatible (Veto)" : s.score + "%";
                     let opacity = s.veto ? "opacity-50" : "opacity-100";
                     let imgHtml = s.image ? `<img src="${s.image}" class="h-10 w-10 object-contain mr-4 rounded-md bg-white p-1 shadow-sm border border-gray-100" onerror="this.style.display='none'">` : `<div class="h-10 w-10 mr-4 bg-gray-200 rounded-full flex items-center justify-center text-xs">?</div>`;
 
@@ -813,6 +629,7 @@
 
             calculateMatch();
 
+            // --- EVENTS ---
             document.getElementById("recalculate-button").addEventListener("click", calculateMatch);
             document.getElementById("toggle-refinement").onclick = () => {
                 const content = document.getElementById("refinement-content");
@@ -827,18 +644,21 @@
                 arrow.classList.toggle("rotate-180");
             };
 
+            // --- DOWNLOAD FEATURE ---
             document.getElementById("download-btn").addEventListener("click", function() {
                 const captureArea = document.getElementById("capture-area");
                 const btn = this;
-
+                
+                // Feedback visuel
                 const originalText = btn.innerHTML;
                 btn.innerHTML = `<span class="animate-pulse">Génération...</span>`;
-
+                
+                // Mise à jour de la date
                 document.getElementById("capture-date").innerText = new Date().toLocaleDateString('fr-FR');
 
                 html2canvas(captureArea, {
-                    scale: 2,
-                    useCORS: true,
+                    scale: 2, // Haute résolution
+                    useCORS: true, // Pour charger les images locales/externes
                     allowTaint: true,
                     backgroundColor: "#f8fafc"
                 }).then(canvas => {
@@ -846,7 +666,7 @@
                     link.download = 'mes-resultats-tunisianvalues.png';
                     link.href = canvas.toDataURL("image/png");
                     link.click();
-
+                    
                     btn.innerHTML = originalText;
                 }).catch(err => {
                     console.error(err);
@@ -857,5 +677,4 @@
         };
     </script>
 </body>
-
 </html>
