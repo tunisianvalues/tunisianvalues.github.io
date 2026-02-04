@@ -62,13 +62,13 @@
             background-color: #cbd5e1;
             border-radius: 4px;
         }
-
-        /* Styles pour la génération d'image (Invisible pour l'utilisateur) */
+        /* Zone de capture invisible pour l'utilisateur */
+        
         #capture-area {
             position: fixed;
             left: -9999px;
             top: 0;
-            width: 1080px; /* Largeur fixe pour haute qualité */
+            width: 1080px;
             height: auto;
             z-index: -1;
         }
@@ -101,6 +101,12 @@
 
                         <p id="ideology-label" class="text-4xl font-bold text-red-600">Calcul en cours...</p>
 
+                        <!-- AVERTISSEMENT NEUTRALITÉ (Caché par défaut) -->
+                        <div id="neutrality-warning" class="hidden mt-4 max-w-lg p-4 bg-amber-50 border-l-4 border-amber-500 text-amber-800 text-sm text-left rounded shadow-sm">
+                            <p class="font-bold mb-1">⚠️ Résultat incertain</p>
+                            <p>Vous avez répondu "Neutre" ou "Sans Opinion" à une majorité de questions. Le résultat affiché ci-dessus risque de ne pas d'être représentatif.</p>
+                        </div>
+
                         <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-gray-500">
                             <div id="populism-meter" class="px-4 py-2 bg-white rounded-lg border border-gray-300 shadow-sm">
                                 Score Populisme: <span class="font-bold text-gray-800">--%</span>
@@ -111,7 +117,7 @@
 
                 <!-- AXES BARS -->
                 <div class="space-y-8" id="bars-container">
-                    <!-- Bars generated via JS with new colors -->
+                    <!-- Bars generated via JS -->
                 </div>
 
                 <!-- SPECIAL ICONS -->
@@ -148,7 +154,7 @@
                 </div>
 
                 <div class="mt-12 text-center flex flex-col sm:flex-row justify-center items-center gap-4">
-                     <button id="download-btn" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-900 text-white font-bold text-lg px-8 py-3 rounded-lg transition-colors shadow-lg flex items-center justify-center gap-2">
+                    <button id="download-btn" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-900 text-white font-bold text-lg px-8 py-3 rounded-lg transition-colors shadow-lg flex items-center justify-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
@@ -204,7 +210,6 @@
         // --- CONFIGURATION ---
         const axes = ["pana", "coop", "econ", "reli", "soci", "demo", "decent"];
 
-        // Configuration visuelle et textuelle des axes
         const axesConfig = {
             pana: {
                 name: "Panarabisme",
@@ -260,69 +265,266 @@
         const ideologies = [{
             name: "Ennahdha",
             image: "images/ennahdha.png",
-            vector: { pana: -20, coop: 40, econ: -10, reli: -80, soci: -80, demo: -20, decent: -50 },
+            vector: {
+                pana: -20,
+                coop: 40,
+                econ: -10,
+                reli: -80,
+                soci: -80,
+                demo: -20,
+                decent: -50
+            },
             populism: 40,
-            vetos: { "reli_separation": { val: 0.9, type: "greater" }, "spec_25jul": { val: 0.4, type: "greater" }, "soci_lgbt": { val: 0.4, type: "greater" } }
+            vetos: {
+                "reli_separation": {
+                    val: 0.9,
+                    type: "greater"
+                },
+                "spec_25jul": {
+                    val: 0.4,
+                    type: "greater"
+                },
+                "soci_lgbt": {
+                    val: 0.4,
+                    type: "greater"
+                }
+            }
         }, {
             name: "Parti Destourien Libre (PDL)",
             image: "images/pdl.png",
-            vector: { pana: 30, coop: 30, econ: 10, reli: 60, soci: -40, demo: 60, decent: 60 },
+            vector: {
+                pana: 30,
+                coop: 30,
+                econ: 10,
+                reli: 60,
+                soci: -40,
+                demo: 60,
+                decent: 60
+            },
             populism: 80,
-            vetos: { "spec_2011": { val: -0.1, type: "less" }, "reli_parties": { val: 0.4, type: "greater" }, "decent_election_gov": { val: 0.4, type: "greater" }, "soci_lgbt": { val: 0.4, type: "greater" } }
+            vetos: {
+                "spec_2011": {
+                    val: -0.1,
+                    type: "less"
+                },
+                "reli_parties": {
+                    val: 0.4,
+                    type: "greater"
+                },
+                "decent_election_gov": {
+                    val: 0.4,
+                    type: "greater"
+                },
+                "soci_lgbt": {
+                    val: 0.4,
+                    type: "greater"
+                }
+            }
         }, {
             name: "Mouvement Echaâb",
             image: "images/echaab.png",
-            vector: { pana: -80, coop: 30, econ: -50, reli: -20, soci: -40, demo: 30, decent: 40 },
+            vector: {
+                pana: -80,
+                coop: 30,
+                econ: -50,
+                reli: -20,
+                soci: -40,
+                demo: 30,
+                decent: 40
+            },
             populism: 70,
-            vetos: { "pana_no_arab": { val: 0.4, type: "greater" }, "soci_lgbt": { val: 0.4, type: "greater" } }
+            vetos: {
+                "pana_no_arab": {
+                    val: 0.4,
+                    type: "greater"
+                },
+                "soci_lgbt": {
+                    val: 0.4,
+                    type: "greater"
+                }
+            }
         }, {
             name: "Afek Tounes",
             image: "images/afektounes.png",
-            vector: { pana: 40, coop: -60, econ: 50, reli: 50, soci: 70, demo: -80, decent: -10 },
+            vector: {
+                pana: 40,
+                coop: -60,
+                econ: 50,
+                reli: 50,
+                soci: 70,
+                demo: -80,
+                decent: -10
+            },
             populism: 10,
-            vetos: { "econ_no_private": { val: 0.4, type: "greater" }, "econ_corrupt_elite": { val: 0.9, type: "greater" } }
+            vetos: {
+                "econ_no_private": {
+                    val: 0.4,
+                    type: "greater"
+                },
+                "econ_corrupt_elite": {
+                    val: 0.9,
+                    type: "greater"
+                }
+            }
         }, {
             name: "Parti des Travailleurs",
             image: "images/pt.png",
-            vector: { pana: 0, coop: 0, econ: -90, reli: 80, soci: 80, demo: -30, decent: 0 },
+            vector: {
+                pana: 0,
+                coop: 0,
+                econ: -90,
+                reli: 80,
+                soci: 80,
+                demo: -30,
+                decent: 0
+            },
             populism: 60,
-            vetos: { "econ_competition": { val: 0.4, type: "greater" }, "econ_privatization": { val: 0.4, type: "greater" }, "spec_ugtt": { val: -0.1, type: "less" }, "soci_lgbt": { val: 0.4, type: "greater" } }
+            vetos: {
+                "econ_competition": {
+                    val: 0.4,
+                    type: "greater"
+                },
+                "econ_privatization": {
+                    val: 0.4,
+                    type: "greater"
+                },
+                "spec_ugtt": {
+                    val: -0.1,
+                    type: "less"
+                },
+                "soci_lgbt": {
+                    val: 0.4,
+                    type: "greater"
+                }
+            }
         }, {
             name: "Coalition Al Karama",
             image: "images/alkarama.png",
-            vector: { pana: -60, coop: 30, econ: 0, reli: -95, soci: -95, demo: -40, decent: -60 },
+            vector: {
+                pana: -60,
+                coop: 30,
+                econ: 0,
+                reli: -95,
+                soci: -95,
+                demo: -40,
+                decent: -60
+            },
             populism: 90,
-            vetos: { "reli_separation": { val: 0.4, type: "greater" }, "spec_25jul": { val: 0.4, type: "greater" }, "spec_ugtt": { val: 0.4, type: "greater" }, "soci_lgbt": { val: 0.4, type: "greater" } }
+            vetos: {
+                "reli_separation": {
+                    val: 0.4,
+                    type: "greater"
+                },
+                "spec_25jul": {
+                    val: 0.4,
+                    type: "greater"
+                },
+                "spec_ugtt": {
+                    val: 0.4,
+                    type: "greater"
+                },
+                "soci_lgbt": {
+                    val: 0.4,
+                    type: "greater"
+                }
+            }
         }, {
             name: "Courant Démocrate (Attayar)",
             image: "images/attayar.png",
-            vector: { pana: 20, coop: -40, econ: -30, reli: 30, soci: 30, demo: -60, decent: -20 },
+            vector: {
+                pana: 20,
+                coop: -40,
+                econ: -30,
+                reli: 30,
+                soci: 30,
+                demo: -60,
+                decent: -20
+            },
             populism: 20,
             vetos: {}
         }, {
             name: "Ettakatol (FDTL)",
             image: "images/ettakatol.png",
-            vector: { pana: 25, coop: -50, econ: -20, reli: 40, soci: 60, demo: -80, decent: -40 },
+            vector: {
+                pana: 25,
+                coop: -50,
+                econ: -20,
+                reli: 40,
+                soci: 60,
+                demo: -80,
+                decent: -40
+            },
             populism: 10,
-            vetos: { "demo_strong_leader": { val: 0.4, type: "greater" }, "econ_corrupt_elite": { val: 0.9, type: "greater" } }
+            vetos: {
+                "demo_strong_leader": {
+                    val: 0.4,
+                    type: "greater"
+                },
+                "econ_corrupt_elite": {
+                    val: 0.9,
+                    type: "greater"
+                }
+            }
         }, {
             name: "Al Joumhouri",
             image: "images/aljoumhouri.png",
-            vector: { pana: 20, coop: -20, econ: -10, reli: 40, soci: 40, demo: -70, decent: -30 },
+            vector: {
+                pana: 20,
+                coop: -20,
+                econ: -10,
+                reli: 40,
+                soci: 40,
+                demo: -70,
+                decent: -30
+            },
             populism: 15,
             vetos: {}
         }, {
             name: "Parti Baath",
             image: "images/baath.png",
-            vector: { pana: -100, coop: 40, econ: -60, reli: 10, soci: -20, demo: 50, decent: 80 },
+            vector: {
+                pana: -100,
+                coop: 40,
+                econ: -60,
+                reli: 10,
+                soci: -20,
+                demo: 50,
+                decent: 80
+            },
             populism: 50,
-            vetos: { "pana_no_arab": { val: 0.4, type: "greater" }, "soci_lgbt": { val: 0.4, type: "greater" } }
+            vetos: {
+                "pana_no_arab": {
+                    val: 0.4,
+                    type: "greater"
+                },
+                "soci_lgbt": {
+                    val: 0.4,
+                    type: "greater"
+                }
+            }
         }, {
             name: "Processus du 25-Juillet",
             image: "images/almassar.png",
-            vector: { pana: 10, coop: 30, econ: -20, reli: 0, soci: -10, demo: 70, decent: 30 },
+            vector: {
+                pana: 10,
+                coop: 30,
+                econ: -20,
+                reli: 0,
+                soci: -10,
+                demo: 70,
+                decent: 30
+            },
             populism: 95,
-            vetos: { "spec_25jul": { val: -0.1, type: "less" }, "decent_election_gov": { val: 0.4, type: "greater" } }
+            vetos: {
+                "spec_25jul": {
+                    val: -0.1,
+                    type: "less"
+                },
+                "decent_election_gov": {
+                    val: 0.4,
+                    type: "greater"
+                }
+            }
         }];
 
         const specialLabels = {
@@ -363,9 +565,9 @@
         }
 
         function cosineSimilarity(vecA, vecB) {
-            let dotProduct = 0;
-            let normA = 0;
-            let normB = 0;
+            let dotProduct = 0,
+                normA = 0,
+                normB = 0;
             for (let key in vecA) {
                 dotProduct += vecA[key] * vecB[key];
                 normA += vecA[key] * vecA[key];
@@ -378,13 +580,19 @@
         function calculatePopulismScore(answers, questionsMeta) {
             let total = 0;
             let count = 0;
+            let absTotal = 0;
+
             questionsMeta.forEach(q => {
                 if (q.tags && q.tags.includes('is_populist') && answers[q.id] !== undefined) {
                     total += answers[q.id];
+                    absTotal += Math.abs(answers[q.id]);
                     count++;
                 }
             });
+
             if (count === 0) return 0;
+            if (absTotal === 0) return 0;
+
             let rawAvg = total / count;
             return Math.round((rawAvg + 1) * 50);
         }
@@ -393,8 +601,8 @@
         window.onload = function() {
             const final_pct = {};
             const userVector = {};
+            let totalNeutralitySum = 0;
 
-            // 1. Draw Bars & Build User Vector
             const barsContainer = document.getElementById("bars-container");
             const wContainer = document.getElementById("weights-container");
             const captureBars = document.getElementById("capture-bars");
@@ -405,7 +613,9 @@
                 const n = parseFloat(getQueryVariable("n_" + axis) || 0);
                 const m = parseFloat(getQueryVariable("m_" + axis) || 0);
 
-                let neutral = 0, left = 0, right = 0;
+                let neutral = 0,
+                    left = 0,
+                    right = 0;
                 if (m > 0) {
                     neutral = (n / m) * 100;
                     const decided_max = m - n;
@@ -419,7 +629,13 @@
                     neutral = 100;
                 }
 
-                final_pct[axis] = { left, neutral, right };
+                totalNeutralitySum += neutral;
+
+                final_pct[axis] = {
+                    left,
+                    neutral,
+                    right
+                };
                 userVector[axis] = pctToVector(left, right);
 
                 // --- UI BAR HTML ---
@@ -446,11 +662,9 @@
                       </div>
                     </div>
                 `;
-                
-                // Add to standard container
                 barsContainer.innerHTML += barHtml;
 
-                // Add to CAPTURE container (simplified styling if needed, here reusing mostly)
+                // --- CAPTURE BAR HTML ---
                 captureBars.innerHTML += `
                     <div class="mb-4">
                         <div class="flex justify-between items-end mb-2">
@@ -468,7 +682,6 @@
                     </div>
                 `;
 
-                // Weights Input
                 wContainer.innerHTML += `
                     <div class="flex flex-col">
                        <label class="font-bold text-gray-700">${config.name}</label>
@@ -524,7 +737,12 @@
                     }
 
                     if (isVetoed) {
-                        scores.push({ name: party.name, score: 0, veto: true, image: party.image });
+                        scores.push({
+                            name: party.name,
+                            score: 0,
+                            veto: true,
+                            image: party.image
+                        });
                         return;
                     }
 
@@ -542,23 +760,42 @@
                     let finalScore = simPct - popPenalty;
                     if (finalScore < 0) finalScore = 0;
 
-                    scores.push({ name: party.name, score: Math.round(finalScore), veto: false, image: party.image });
+                    scores.push({
+                        name: party.name,
+                        score: Math.round(finalScore),
+                        veto: false,
+                        image: party.image
+                    });
                 });
 
                 scores.sort((a, b) => b.score - a.score);
 
-                // --- LOGIQUE INDÉPENDANT ---
+                // --- LOGIQUE INDÉPENDANT & NEUTRALITÉ ---
                 let top = scores[0];
                 let isIndependent = false;
 
-                // Si le score est < 50% OU si tous sont veto/0
-                if (!top || top.score < 50) {
+                // Calcul de la neutralité globale
+                const avgNeutrality = totalNeutralitySum / axes.length;
+
+                // Afficher/Masquer l'avertissement de neutralité (Seuil > 60%)
+                const warningEl = document.getElementById("neutrality-warning");
+                if (avgNeutrality > 60) {
+                    warningEl.classList.remove("hidden");
+                } else {
+                    warningEl.classList.add("hidden");
+                }
+
+                // Détection Indépendant (Seuil > 85% de neutralité OU Score < 50%)
+                if (avgNeutrality > 85 || !top || top.score < 50) {
                     isIndependent = true;
+                }
+
+                if (isIndependent) {
                     top = {
                         name: "Indépendant / Sans Affiliation",
-                        score: top ? top.score : 0, // On garde le score technique mais on l'affiche différemment
+                        score: top ? top.score : 0,
                         veto: false,
-                        image: null // Pas d'image de parti
+                        image: null
                     };
                 }
 
@@ -573,20 +810,19 @@
                     labelEl.innerText = "Indépendant / Sans Affiliation";
                     labelEl.classList.remove("text-red-600");
                     labelEl.classList.add("text-gray-600");
-                    
-                    // Emoji ou icône neutre
-                    imgContainer.innerHTML = `<span class="text-7xl">🤷‍♂️</span>`;
-                    
-                    // Update Capture Data
+
+                    // Drapeau Tunisien comme symbole
+                    imgContainer.innerHTML = `<span class="text-7xl">🇹🇳</span>`;
+
                     captureName.innerText = "Indépendant";
-                    captureImg.innerHTML = `<span class="text-8xl">🤷‍♂️</span>`;
+                    captureImg.innerHTML = `<span class="text-8xl">🇹🇳</span>`;
                     captureScore.innerText = "Aucun parti proche (>50%)";
                     captureScore.className = "mt-2 inline-block px-4 py-1 bg-gray-200 text-gray-700 rounded-lg font-bold text-2xl";
                 } else {
                     labelEl.innerText = top.name;
                     labelEl.classList.add("text-red-600");
                     labelEl.classList.remove("text-gray-600");
-                    
+
                     if (top.image) {
                         imgContainer.innerHTML = `<img src="${top.image}" alt="${top.name}" class="h-full w-full object-contain drop-shadow-xl">`;
                         captureImg.innerHTML = `<img src="${top.image}" class="h-full w-full object-contain">`;
@@ -594,7 +830,7 @@
                         imgContainer.innerHTML = `<span class="text-6xl">🏛️</span>`;
                         captureImg.innerHTML = `<span class="text-8xl">🏛️</span>`;
                     }
-                    
+
                     captureName.innerText = top.name;
                     captureScore.innerText = `Correspondance : ${top.score}%`;
                     captureScore.className = "mt-2 inline-block px-4 py-1 bg-red-100 text-red-700 rounded-lg font-bold text-2xl";
@@ -648,17 +884,14 @@
             document.getElementById("download-btn").addEventListener("click", function() {
                 const captureArea = document.getElementById("capture-area");
                 const btn = this;
-                
-                // Feedback visuel
+
                 const originalText = btn.innerHTML;
                 btn.innerHTML = `<span class="animate-pulse">Génération...</span>`;
-                
-                // Mise à jour de la date
                 document.getElementById("capture-date").innerText = new Date().toLocaleDateString('fr-FR');
 
                 html2canvas(captureArea, {
-                    scale: 2, // Haute résolution
-                    useCORS: true, // Pour charger les images locales/externes
+                    scale: 2,
+                    useCORS: true,
                     allowTaint: true,
                     backgroundColor: "#f8fafc"
                 }).then(canvas => {
@@ -666,7 +899,6 @@
                     link.download = 'mes-resultats-tunisianvalues.png';
                     link.href = canvas.toDataURL("image/png");
                     link.click();
-                    
                     btn.innerHTML = originalText;
                 }).catch(err => {
                     console.error(err);
@@ -677,4 +909,5 @@
         };
     </script>
 </body>
+
 </html>
