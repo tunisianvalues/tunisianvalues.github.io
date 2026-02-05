@@ -211,10 +211,6 @@
         // --- CONFIGURATION ---
         const axes = ["pana", "coop", "econ", "reli", "soci", "demo", "decent"];
 
-        // Configuration pour la Magnitude (7 axes, max 100 par axe)
-        // Magnitude Max = sqrt(7 * 100^2) = sqrt(70000) ≈ 264.57
-        const MAX_MAGNITUDE = Math.sqrt(axes.length * 100 * 100);
-
         const axesConfig = {
             pana: {
                 name: "Panarabisme",
@@ -270,14 +266,14 @@
         const ideologies = [{
             name: "Ennahdha",
             image: "images/ennahdha.png",
-            vector: {
-                pana: -20,
-                coop: -40,
-                econ: -10,
-                reli: -80,
-                soci: -80,
-                demo: -40,
-                decent: -20
+            range_vector: {
+                pana: [-30, 10],
+                coop: [-60, -10],
+                econ: [-10, 20],
+                reli: [-90, -60],
+                soci: [-90, -60],
+                demo: [-60, -10],
+                decent: [-40, 10]
             },
             populism: 70,
             vetos: {
@@ -293,14 +289,14 @@
         }, {
             name: "Parti Destourien Libre (PDL)",
             image: "images/pdl.png",
-            vector: {
-                pana: 70,
-                coop: -20,
-                econ: -10,
-                reli: 70,
-                soci: -80,
-                demo: 60,
-                decent: 60
+            range_vector: {
+                pana: [60, 100],
+                coop: [-20, 20],
+                econ: [-20, 30],
+                reli: [40, 90],
+                soci: [-60, 20],
+                demo: [40, 90],
+                decent: [40, 90]
             },
             populism: 70,
             vetos: {
@@ -315,31 +311,23 @@
                 "decent_election_gov": {
                     val: 0.4,
                     type: "greater"
-                },
-                "soci_lgbt": {
-                    val: 0.4,
-                    type: "greater"
                 }
             }
         }, {
             name: "Mouvement Echaâb",
             image: "images/echaab.png",
-            vector: {
-                pana: -70,
-                coop: 5,
-                econ: -40,
-                reli: 50,
-                soci: -70,
-                demo: 20,
-                decent: 40
+            range_vector: {
+                pana: [-90, -60],
+                coop: [-10, 20],
+                econ: [-80, -20],
+                reli: [30, 80],
+                soci: [-60, 20],
+                demo: [20, 60],
+                decent: [-10, 20]
             },
-            populism: 60,
+            populism: 70,
             vetos: {
                 "pana_no_arab": {
-                    val: 0.4,
-                    type: "greater"
-                },
-                "soci_lgbt": {
                     val: 0.4,
                     type: "greater"
                 }
@@ -347,14 +335,14 @@
         }, {
             name: "Afek Tounes",
             image: "images/afektounes.png",
-            vector: {
-                pana: 40,
-                coop: -80,
-                econ: 85,
-                reli: 80,
-                soci: 70,
-                demo: -80,
-                decent: -40
+            range_vector: {
+                pana: [20, 100],
+                coop: [-100, -60],
+                econ: [60, 100],
+                reli: [60, 100],
+                soci: [60, 100],
+                demo: [-100, -60],
+                decent: [-80, -20]
             },
             populism: 10,
             vetos: {
@@ -370,14 +358,14 @@
         }, {
             name: "Parti des Travailleurs",
             image: "images/pt.png",
-            vector: {
-                pana: -20,
-                coop: 20,
-                econ: 95,
-                reli: 85,
-                soci: 80,
-                demo: -65,
-                decent: -20
+            range_vector: {
+                pana: [-50, 0],
+                coop: [-10, 50],
+                econ: [-100, -80],
+                reli: [80, 100],
+                soci: [70, 100],
+                demo: [-80, -30],
+                decent: [-40, 0]
             },
             populism: 60,
             vetos: {
@@ -392,31 +380,23 @@
                 "spec_ugtt": {
                     val: -0.1,
                     type: "less"
-                },
-                "soci_lgbt": {
-                    val: 0.4,
-                    type: "greater"
                 }
             }
         }, {
             name: "Coalition Al Karama",
             image: "images/alkarama.png",
-            vector: {
-                pana: -70,
-                coop: 30,
-                econ: -80,
-                reli: -100,
-                soci: -100,
-                demo: 30,
-                decent: -30
+            range_vector: {
+                pana: [-90, -50],
+                coop: [-20, 20],
+                econ: [-5, 30],
+                reli: [-100, -80],
+                soci: [-100, -80],
+                demo: [-30, 0],
+                decent: [-40, 0]
             },
             populism: 70,
             vetos: {
                 "reli_separation": {
-                    val: 0.4,
-                    type: "greater"
-                },
-                "spec_ugtt": {
                     val: 0.4,
                     type: "greater"
                 },
@@ -428,28 +408,28 @@
         }, {
             name: "Courant Démocrate (Attayar)",
             image: "images/attayar.png",
-            vector: {
-                pana: 0,
-                coop: -10,
-                econ: -40,
-                reli: 60,
-                soci: 60,
-                demo: -95,
-                decent: 30
+            range_vector: {
+                pana: [-20, 20],
+                coop: [-20, 10],
+                econ: [-80, -20],
+                reli: [40, 70],
+                soci: [20, 70],
+                demo: [-100, -80],
+                decent: [-40, 10]
             },
             populism: 50,
             vetos: {}
         }, {
             name: "Ettakatol (FDTL)",
             image: "images/ettakatol.png",
-            vector: {
-                pana: 10,
-                coop: -40,
-                econ: -20,
-                reli: 80,
-                soci: 75,
-                demo: -90,
-                decent: -40
+            range_vector: {
+                pana: [-10, 30],
+                coop: [-100, -20],
+                econ: [-40, 15],
+                reli: [60, 100],
+                soci: [60, 100],
+                demo: [-100, -70],
+                decent: [-80, -20]
             },
             populism: 15,
             vetos: {
@@ -461,36 +441,32 @@
         }, {
             name: "Al Joumhouri",
             image: "images/aljoumhouri.png",
-            vector: {
-                pana: 20,
-                coop: -20,
-                econ: 25,
-                reli: 60,
-                soci: 40,
-                demo: -70,
-                decent: -20
+            range_vector: {
+                pana: [0, 40],
+                coop: [-30, 10],
+                econ: [-20, 20],
+                reli: [40, 80],
+                soci: [20, 60],
+                demo: [-90, -50],
+                decent: [-30, 10]
             },
             populism: 25,
             vetos: {}
         }, {
             name: "Parti Baath",
             image: "images/baath.png",
-            vector: {
-                pana: -100,
-                coop: 40,
-                econ: -70,
-                reli: 60,
-                soci: -70,
-                demo: 80,
-                decent: 80
+            range_vector: {
+                pana: [-100, -80],
+                coop: [20, 100],
+                econ: [-80, -40],
+                reli: [0, 80],
+                soci: [-50, 50],
+                demo: [80, 100],
+                decent: [50, 100]
             },
             populism: 70,
             vetos: {
                 "pana_no_arab": {
-                    val: 0.4,
-                    type: "greater"
-                },
-                "soci_lgbt": {
                     val: 0.4,
                     type: "greater"
                 }
@@ -498,14 +474,14 @@
         }, {
             name: "Processus du 25-Juillet",
             image: "images/almassar.png",
-            vector: {
-                pana: -20,
-                coop: 60,
-                econ: -30,
-                reli: 0,
-                soci: -70,
-                demo: 80,
-                decent: -20
+            range_vector: {
+                pana: [-60, 20],
+                coop: [40, 100],
+                econ: [-60, 10],
+                reli: [-20, 30],
+                soci: [-80, -30],
+                demo: [70, 100],
+                decent: [-60, 60]
             },
             populism: 90,
             vetos: {
@@ -554,8 +530,6 @@
         }
 
         function pctToVector(leftPct, rightPct) {
-            // Transforme le % gauche/droite en une valeur entre -100 et +100
-            // Gauche = Négatif, Droite = Positif
             return rightPct - leftPct;
         }
 
@@ -580,38 +554,29 @@
         }
 
         /**
-         * Calcule une "Similitude Pondérée" : Cosinus * Magnitude
-         * @param {object} vecA - Vecteur utilisateur pondéré.
-         * @param {object} vecB - Vecteur du parti (non pondéré).
-         * @param {number} userMagnitude - La force du vecteur utilisateur.
-         * @param {number} penaltyExponent - La force de la pénalité de modération.
+         * Similitude Cosinus Pondérée
+         * Compare la "Direction" (Angle) de deux vecteurs
+         * @returns {number} -1 (opposé) à 1 (identique)
          */
-        function calculateWeightedSimilarity(vecA, vecB, userMagnitude, penaltyExponent = 1.0) {
-            let dotProduct = 0,
-                normA = 0,
-                normB = 0;
+        function cosineSimilarity(vecA, vecB, weights) {
+            let dot = 0;
+            let magA = 0;
+            let magB = 0;
 
-            // 1. Calcul du Cosinus
             for (let key in vecA) {
-                dotProduct += vecA[key] * vecB[key];
-                normA += vecA[key] * vecA[key];
-                normB += vecB[key] * vecB[key];
+                // Application du poids de l'utilisateur sur l'axe
+                let w = weights ? weights[key] : 1;
+
+                let valA = vecA[key] * w;
+                let valB = vecB[key] * w;
+
+                dot += valA * valB;
+                magA += valA * valA;
+                magB += valB * valB;
             }
 
-            if (normA === 0 || normB === 0) return 0;
-
-            // Similitude Cosinus : [-1, 1]
-            let cosSim = dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
-
-            // 2. Calcul du Facteur de Pénalité (Magnitude Facteur)
-            // Plus la Magnitude est faible (utilisateur neutre), plus ce facteur est petit.
-            let magnitudeFactor = Math.pow(userMagnitude / MAX_MAGNITUDE, penaltyExponent);
-
-            // 3. Score Final
-            // On garde la direction du Cosinus, mais on réduit son intensité selon la conviction.
-            let finalSim = cosSim * magnitudeFactor;
-
-            return finalSim;
+            if (magA === 0 || magB === 0) return 0;
+            return dot / (Math.sqrt(magA) * Math.sqrt(magB));
         }
 
         // --- MAIN LOGIC ---
@@ -740,29 +705,51 @@
                 }
             }
 
-            // 4. Fonction de MATCHING (Hybride)
+            // 4. Fonction de MATCHING (FUSION INTELLIGENTE V3)
             function calculateMatch() {
                 let scores = [];
 
-                // A. Calcul de la magnitude globale de l'utilisateur (Force des convictions)
-                // On utilise le vecteur brut (sans poids utilisateur pour l'instant)
-                let userMagnitude = 0;
+                // Récupération des poids utilisateur
+                let userWeights = {};
                 axes.forEach(ax => {
-                    userMagnitude += userVector[ax] * userVector[ax];
+                    userWeights[ax] = parseFloat(document.getElementById(`weight-${ax}`).value);
                 });
-                userMagnitude = Math.sqrt(userMagnitude);
+
+                // Helper pour obtenir le point central d'un parti
+                const getPartyMidpoint = (range) => {
+                    let midpoint = {};
+                    for (let ax in range) {
+                        midpoint[ax] = (range[ax][0] + range[ax][1]) / 2;
+                    }
+                    return midpoint;
+                };
 
                 ideologies.forEach(party => {
-                    // B. Système de Veto
                     let isVetoed = false;
+                    const partyMidpoint = getPartyMidpoint(party.range_vector);
+
+                    // --- 1. SYSTÈME DE RUPTURE (VETO) ---
+                    // "Rupture Idéologique" : Si la distance est extrême (>100) sur des axes critiques, c'est incompatible.
+                    const criticalAxes = ["demo", "reli", "econ"];
+                    const ruptureThreshold = 100;
+
+                    criticalAxes.forEach(ax => {
+                        const uPos = userVector[ax];
+                        const [pMin, pMax] = party.range_vector[ax];
+                        let dist = 0;
+                        if (uPos < pMin) dist = pMin - uPos;
+                        else if (uPos > pMax) dist = uPos - pMax;
+
+                        if (dist > ruptureThreshold) isVetoed = true;
+                    });
+
+                    // Vetos sur questions spécifiques
                     if (party.vetos) {
                         for (let qId in party.vetos) {
                             const rule = party.vetos[qId];
-                            const userVal = userAnswers[qId];
-                            if (userVal !== undefined) {
-                                if (rule.type === "greater" && userVal > rule.val) isVetoed = true;
-                                if (rule.type === "less" && userVal < rule.val) isVetoed = true;
-                            }
+                            const userVal = userAnswers[qId] || 0;
+                            if ((rule.type === "greater" && userVal > rule.val) ||
+                                (rule.type === "less" && userVal < rule.val)) isVetoed = true;
                         }
                     }
 
@@ -776,25 +763,47 @@
                         return;
                     }
 
-                    // C. Calcul du Cosinus Pondéré
-                    let weightedUser = {};
+                    // --- 2. CALCUL DU SCORE HYBRIDE ---
+
+                    // A. La Similitude de Direction (V1)
+                    // On compare la direction du vecteur utilisateur avec celle du parti.
+                    // On passe les userWeights pour que l'option "Affiner" fonctionne sur l'angle aussi.
+                    let sim = cosineSimilarity(userVector, partyMidpoint, userWeights);
+                    // Transformation de -1..1 vers 0..100
+                    let baseScore = (sim + 1) * 50;
+
+                    // B. Ajustement par la Zone (V2 Douce)
+                    // On ne baisse le score que si l'utilisateur sort de l'intervalle.
+                    // Si on est DANS l'intervalle, aucune pénalité (bonus implicite).
+                    let totalDistPenalty = 0;
                     axes.forEach(ax => {
-                        let w = parseFloat(document.getElementById(`weight-${ax}`).value);
-                        weightedUser[ax] = userVector[ax] * w;
+                        const uPos = userVector[ax];
+                        const [pMin, pMax] = party.range_vector[ax];
+                        const weight = userWeights[ax];
+
+                        let dist = 0;
+                        if (uPos < pMin) {
+                            dist = pMin - uPos;
+                        } else if (uPos > pMax) {
+                            dist = uPos - pMax;
+                        }
+
+                        // Pénalité douce : on multiplie par 0.2
+                        // Exemple: si on est à 20 points hors de la zone, on perd 4 points.
+                        totalDistPenalty += (dist * 0.2) * weight;
                     });
 
-                    // Appel de la nouvelle fonction hybride
-                    let sim = calculateWeightedSimilarity(weightedUser, party.vector, userMagnitude);
+                    // C. Score Final
+                    // Base (Direction) - Pénalité (Zone)
+                    let finalScore = Math.round(baseScore - totalDistPenalty);
 
-                    // Transformation en pourcentage (Sim va de -1 à 1 => 0 à 100)
-                    let simPct = (sim + 1) * 50;
-
-                    // D. Pénalité de Populisme
+                    // D. Pénalité Populisme
                     let popDiff = Math.abs(userPopulism - party.populism);
-                    let popPenalty = popDiff * 0.3;
+                    finalScore -= Math.round(popDiff * 0.2); // Pénalité légère
 
-                    let finalScore = Math.round(simPct - popPenalty);
+                    // Bornage
                     if (finalScore < 0) finalScore = 0;
+                    if (finalScore > 100) finalScore = 100;
 
                     scores.push({
                         name: party.name,
@@ -820,8 +829,8 @@
                     warningEl.classList.add("hidden");
                 }
 
-                // Détection Indépendant : Neutralité > 50% OU meilleur score < 55%
-                if (avgNeutrality > 50 || !top || top.score < 55) {
+                // Détection Indépendant : Neutralité > 60% OU meilleur score < 50%
+                if (avgNeutrality > 60 || !top || top.score < 50) {
                     isIndependent = true;
                 }
 
@@ -849,7 +858,7 @@
                     imgContainer.innerHTML = `<span class="text-7xl">🇹🇳</span>`;
                     captureName.innerText = "Indépendant";
                     captureImg.innerHTML = `<span class="text-8xl">🇹🇳</span>`;
-                    captureScore.innerText = "Aucun parti proche (>55%)";
+                    captureScore.innerText = "Aucun parti proche (>50%)";
                     captureScore.className = "mt-2 inline-block px-4 py-1 bg-gray-200 text-gray-700 rounded-lg font-bold text-2xl";
                 } else {
                     labelEl.innerText = top.name;
