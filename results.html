@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Assurez-vous que questions.js est dans le même dossier -->
     <script src="questions.js"></script>
     <script>
         tailwind.config = {
@@ -101,10 +102,10 @@
 
                         <p id="ideology-label" class="text-4xl font-bold text-red-600">Calcul en cours...</p>
 
-                        <!-- AVERTISSEMENT NEUTRALITÉ (Caché par défaut) -->
+                        <!-- AVERTISSEMENT NEUTRALITÉ -->
                         <div id="neutrality-warning" class="hidden mt-4 max-w-lg p-4 bg-amber-50 border-l-4 border-amber-500 text-amber-800 text-sm text-left rounded shadow-sm">
                             <p class="font-bold mb-1">⚠️ Résultat incertain</p>
-                            <p>Vous avez répondu "Neutre" ou "Sans Opinion" à une majorité de questions. Le résultat affiché ci-dessus risque de ne pas d'être représentatif.</p>
+                            <p>Vous avez répondu "Neutre" ou "Sans Opinion" à une majorité de questions (>50%). Le résultat affiché ci-dessus est indicatif, mais vous êtes probablement politiquement <strong>Indépendant</strong>.</p>
                         </div>
 
                         <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-gray-500">
@@ -134,7 +135,7 @@
                         </button>
                         <div id="refinement-content" class="hidden mt-4 p-6 bg-gray-100/80 rounded-xl border border-gray-200 overflow-hidden">
                             <p class="text-center text-slate-600 mb-8 max-w-2xl mx-auto">
-                                Attribuez une importance à chaque axe.
+                                Attribuez une importance à chaque axe. Cela ajustera le calcul de proximité.
                             </p>
                             <div id="weights-container" class="space-y-5"></div>
                             <div class="text-center mt-8">
@@ -209,6 +210,10 @@
     <script>
         // --- CONFIGURATION ---
         const axes = ["pana", "coop", "econ", "reli", "soci", "demo", "decent"];
+
+        // Configuration pour la Magnitude (7 axes, max 100 par axe)
+        // Magnitude Max = sqrt(7 * 100^2) = sqrt(70000) ≈ 264.57
+        const MAX_MAGNITUDE = Math.sqrt(axes.length * 100 * 100);
 
         const axesConfig = {
             pana: {
@@ -428,9 +433,9 @@
                 coop: -10,
                 econ: -40,
                 reli: 60,
-                soci: 60, // Progressive
-                demo: -95, // Very Democratic (Rule of Law focus)
-                decent: 30 // Decentralist
+                soci: 60,
+                demo: -95,
+                decent: 30
             },
             populism: 50,
             vetos: {}
@@ -549,20 +554,9 @@
         }
 
         function pctToVector(leftPct, rightPct) {
+            // Transforme le % gauche/droite en une valeur entre -100 et +100
+            // Gauche = Négatif, Droite = Positif
             return rightPct - leftPct;
-        }
-
-        function cosineSimilarity(vecA, vecB) {
-            let dotProduct = 0,
-                normA = 0,
-                normB = 0;
-            for (let key in vecA) {
-                dotProduct += vecA[key] * vecB[key];
-                normA += vecA[key] * vecA[key];
-                normB += vecB[key] * vecB[key];
-            }
-            if (normA === 0 || normB === 0) return 0;
-            return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
         }
 
         function calculatePopulismScore(answers, questionsMeta) {
@@ -585,16 +579,52 @@
             return Math.round((rawAvg + 1) * 50);
         }
 
+        /**
+         * Calcule une "Similitude Pondérée" : Cosinus * Magnitude
+         * @param {object} vecA - Vecteur utilisateur pondéré.
+         * @param {object} vecB - Vecteur du parti (non pondéré).
+         * @param {number} userMagnitude - La force du vecteur utilisateur.
+         * @param {number} penaltyExponent - La force de la pénalité de modération.
+         */
+        function calculateWeightedSimilarity(vecA, vecB, userMagnitude, penaltyExponent = 1.0) {
+            let dotProduct = 0,
+                normA = 0,
+                normB = 0;
+
+            // 1. Calcul du Cosinus
+            for (let key in vecA) {
+                dotProduct += vecA[key] * vecB[key];
+                normA += vecA[key] * vecA[key];
+                normB += vecB[key] * vecB[key];
+            }
+
+            if (normA === 0 || normB === 0) return 0;
+
+            // Similitude Cosinus : [-1, 1]
+            let cosSim = dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+
+            // 2. Calcul du Facteur de Pénalité (Magnitude Facteur)
+            // Plus la Magnitude est faible (utilisateur neutre), plus ce facteur est petit.
+            let magnitudeFactor = Math.pow(userMagnitude / MAX_MAGNITUDE, penaltyExponent);
+
+            // 3. Score Final
+            // On garde la direction du Cosinus, mais on réduit son intensité selon la conviction.
+            let finalSim = cosSim * magnitudeFactor;
+
+            return finalSim;
+        }
+
         // --- MAIN LOGIC ---
         window.onload = function() {
             const final_pct = {};
-            const userVector = {};
+            const userVector = {}; // Valeurs de -100 à +100 pour chaque axe
             let totalNeutralitySum = 0;
 
             const barsContainer = document.getElementById("bars-container");
             const wContainer = document.getElementById("weights-container");
             const captureBars = document.getElementById("capture-bars");
 
+            // 1. Reconstruction des scores utilisateur
             axes.forEach((axis) => {
                 const config = axesConfig[axis];
                 const s = parseFloat(getQueryVariable("s_" + axis) || 0);
@@ -604,6 +634,7 @@
                 let neutral = 0,
                     left = 0,
                     right = 0;
+
                 if (m > 0) {
                     neutral = (n / m) * 100;
                     const decided_max = m - n;
@@ -624,6 +655,7 @@
                     neutral,
                     right
                 };
+
                 userVector[axis] = pctToVector(left, right);
 
                 // --- UI BAR HTML ---
@@ -678,12 +710,13 @@
                 `;
             });
 
+            // 2. Populisme
             const ansStr = getQueryVariable("ans");
             const userAnswers = parseAnswers(ansStr);
             const userPopulism = calculatePopulismScore(userAnswers, questions);
             document.getElementById("populism-meter").innerHTML = `Populisme: <span class="font-bold text-${userPopulism > 60 ? 'red' : 'blue'}-600">${userPopulism}%</span>`;
 
-            // Icons Logic
+            // 3. Icônes Spéciales
             const icons_param = getQueryVariable("icons");
             if (icons_param) {
                 const container = document.getElementById("special-icons-container");
@@ -707,11 +740,20 @@
                 }
             }
 
-            // 5. Matching Algorithm
+            // 4. Fonction de MATCHING (Hybride)
             function calculateMatch() {
                 let scores = [];
 
+                // A. Calcul de la magnitude globale de l'utilisateur (Force des convictions)
+                // On utilise le vecteur brut (sans poids utilisateur pour l'instant)
+                let userMagnitude = 0;
+                axes.forEach(ax => {
+                    userMagnitude += userVector[ax] * userVector[ax];
+                });
+                userMagnitude = Math.sqrt(userMagnitude);
+
                 ideologies.forEach(party => {
+                    // B. Système de Veto
                     let isVetoed = false;
                     if (party.vetos) {
                         for (let qId in party.vetos) {
@@ -734,47 +776,52 @@
                         return;
                     }
 
+                    // C. Calcul du Cosinus Pondéré
                     let weightedUser = {};
                     axes.forEach(ax => {
                         let w = parseFloat(document.getElementById(`weight-${ax}`).value);
                         weightedUser[ax] = userVector[ax] * w;
                     });
 
-                    let sim = cosineSimilarity(weightedUser, party.vector);
+                    // Appel de la nouvelle fonction hybride
+                    let sim = calculateWeightedSimilarity(weightedUser, party.vector, userMagnitude);
+
+                    // Transformation en pourcentage (Sim va de -1 à 1 => 0 à 100)
                     let simPct = (sim + 1) * 50;
+
+                    // D. Pénalité de Populisme
                     let popDiff = Math.abs(userPopulism - party.populism);
                     let popPenalty = popDiff * 0.3;
 
-                    let finalScore = simPct - popPenalty;
+                    let finalScore = Math.round(simPct - popPenalty);
                     if (finalScore < 0) finalScore = 0;
 
                     scores.push({
                         name: party.name,
-                        score: Math.round(finalScore),
+                        score: finalScore,
                         veto: false,
                         image: party.image
                     });
                 });
 
+                // Tri
                 scores.sort((a, b) => b.score - a.score);
 
                 // --- LOGIQUE INDÉPENDANT & NEUTRALITÉ ---
                 let top = scores[0];
                 let isIndependent = false;
-
-                // Calcul de la neutralité globale
                 const avgNeutrality = totalNeutralitySum / axes.length;
 
-                // Afficher/Masquer l'avertissement de neutralité (Seuil > 60%)
+                // Affichage Warning si Neutralité > 50%
                 const warningEl = document.getElementById("neutrality-warning");
-                if (avgNeutrality > 60) {
+                if (avgNeutrality > 50) {
                     warningEl.classList.remove("hidden");
                 } else {
                     warningEl.classList.add("hidden");
                 }
 
-                // Détection Indépendant (Seuil > 85% de neutralité OU Score < 50%)
-                if (avgNeutrality > 85 || !top || top.score < 50) {
+                // Détection Indépendant : Neutralité > 50% OU meilleur score < 55%
+                if (avgNeutrality > 50 || !top || top.score < 55) {
                     isIndependent = true;
                 }
 
@@ -787,7 +834,7 @@
                     };
                 }
 
-                // Update UI Display
+                // Affichage UI
                 const labelEl = document.getElementById("ideology-label");
                 const imgContainer = document.getElementById("winner-image-container");
                 const captureName = document.getElementById("capture-winner-name");
@@ -799,12 +846,10 @@
                     labelEl.classList.remove("text-red-600");
                     labelEl.classList.add("text-gray-600");
 
-                    // Drapeau Tunisien comme symbole
                     imgContainer.innerHTML = `<span class="text-7xl">🇹🇳</span>`;
-
                     captureName.innerText = "Indépendant";
                     captureImg.innerHTML = `<span class="text-8xl">🇹🇳</span>`;
-                    captureScore.innerText = "Aucun parti proche (>50%)";
+                    captureScore.innerText = "Aucun parti proche (>55%)";
                     captureScore.className = "mt-2 inline-block px-4 py-1 bg-gray-200 text-gray-700 rounded-lg font-bold text-2xl";
                 } else {
                     labelEl.innerText = top.name;
@@ -824,7 +869,7 @@
                     captureScore.className = "mt-2 inline-block px-4 py-1 bg-red-100 text-red-700 rounded-lg font-bold text-2xl";
                 }
 
-                // Update Ranking List
+                // Liste détaillée
                 let html = "";
                 scores.forEach(s => {
                     let color = s.veto ? "bg-gray-400" : (s.score > 85 ? "bg-green-600" : (s.score > 65 ? "bg-green-500" : (s.score > 45 ? "bg-yellow-500" : "bg-red-500")));
