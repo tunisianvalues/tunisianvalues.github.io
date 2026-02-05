@@ -472,7 +472,7 @@
                 }
             }
         }, {
-            name: "Processus du 25-Juillet",
+            name: "Mouvement du 25-Juillet",
             image: "images/almassar.png",
             range_vector: {
                 pana: [-60, 20],
@@ -493,6 +493,81 @@
                     val: 0.4,
                     type: "greater"
                 }
+            }
+        }, {
+            name: "Parti Nationaliste Tunisien",
+            image: "images/tnp.png",
+            range_vector: {
+                pana: [80, 100],
+                coop: [60, 100],
+                econ: [-60, -20],
+                reli: [-20, 30],
+                soci: [-80, -30],
+                demo: [80, 100],
+                decent: [0, 80]
+            },
+            populism: 90,
+            vetos: {
+                "spec_25jul": {
+                    val: -0.1,
+                    type: "less"
+                },
+                "pana_unity": {
+                    val: -0.1,
+                    type: "less"
+                },
+                "pana_afro": {
+                    val: 0.4,
+                    type: "greater"
+                }
+            }
+        }, {
+            name: "Union Patriotique Libre",
+            image: "images/upl.png",
+            range_vector: {
+                pana: [20, 100],
+                coop: [-40, 20],
+                econ: [40, 80],
+                reli: [40, 80],
+                soci: [20, 70],
+                demo: [-40, 0],
+                decent: [-40, 20]
+            },
+            populism: 50,
+        }, {
+            name: "Parti Libéral Tunisien",
+            image: "images/pl.png",
+            range_vector: {
+                pana: [80, 100],
+                coop: [-100, -90],
+                econ: [80, 100],
+                reli: [80, 100],
+                soci: [80, 100],
+                demo: [-100, -80],
+                decent: [-30, 30]
+            },
+            populism: 10,
+            vetos: {
+                "pana_diplo": {
+                    val: -0.1,
+                    type: "less"
+                },
+                "pana_national_interest": {
+                    val: -0.1,
+                    type: "less"
+                },
+                "pana_unity": {
+                    val: 0.9,
+                    type: "greater"
+                },
+                "pana_conflict": {
+                    val: 0.9,
+                    type: "greater"
+                },
+                "pana_alliances": {
+                    val: 0.9,
+                    type: "greater"
+                },
             }
         }];
 
