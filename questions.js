@@ -379,7 +379,6 @@ const questions = [
         id: "decent_council_regions",
         question: "La création du Conseil national des régions et districts pour représenter les territoires et rationaliser le pouvoir parlementaire est une initiative fondamentalement positive.",
         effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: +4, decent: -6 },
-        tags: ["is_populist"]
     },
     {
         id: "decent_uniform_laws",
@@ -410,7 +409,6 @@ const questions = [
         question: "Les mesures prises par Kaïs Saïed le 25 juillet 2021 étaient nécessaires et justifier pour sauver le pays.",
         effect: { pana: 0, coop: 0, econ: 0, reli: 0, soci: 0, demo: 0, decent: 0 },
         special: "25juillet",
-        tags: ["is_populist"]
     },
     {
         id: "spec_ks",

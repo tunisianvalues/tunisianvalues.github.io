@@ -267,21 +267,17 @@
             image: "images/ennahdha.png",
             vector: {
                 pana: -20,
-                coop: 40,
+                coop: -40,
                 econ: -10,
                 reli: -80,
                 soci: -80,
-                demo: -20,
-                decent: -50
+                demo: -40,
+                decent: -20
             },
-            populism: 40,
+            populism: 70,
             vetos: {
                 "reli_separation": {
                     val: 0.9,
-                    type: "greater"
-                },
-                "spec_25jul": {
-                    val: 0.4,
                     type: "greater"
                 },
                 "soci_lgbt": {
@@ -293,15 +289,15 @@
             name: "Parti Destourien Libre (PDL)",
             image: "images/pdl.png",
             vector: {
-                pana: 30,
-                coop: 30,
-                econ: 10,
-                reli: 60,
-                soci: -40,
+                pana: 70,
+                coop: -20,
+                econ: -10,
+                reli: 70,
+                soci: -80,
                 demo: 60,
                 decent: 60
             },
-            populism: 80,
+            populism: 70,
             vetos: {
                 "spec_2011": {
                     val: -0.1,
@@ -324,15 +320,15 @@
             name: "Mouvement Echaâb",
             image: "images/echaab.png",
             vector: {
-                pana: -80,
-                coop: 30,
-                econ: -50,
-                reli: -20,
-                soci: -40,
-                demo: 30,
+                pana: -70,
+                coop: 5,
+                econ: -40,
+                reli: 50,
+                soci: -70,
+                demo: 20,
                 decent: 40
             },
-            populism: 70,
+            populism: 60,
             vetos: {
                 "pana_no_arab": {
                     val: 0.4,
@@ -348,12 +344,12 @@
             image: "images/afektounes.png",
             vector: {
                 pana: 40,
-                coop: -60,
-                econ: 50,
-                reli: 50,
+                coop: -80,
+                econ: 85,
+                reli: 80,
                 soci: 70,
                 demo: -80,
-                decent: -10
+                decent: -40
             },
             populism: 10,
             vetos: {
@@ -370,13 +366,13 @@
             name: "Parti des Travailleurs",
             image: "images/pt.png",
             vector: {
-                pana: 0,
-                coop: 0,
-                econ: -90,
-                reli: 80,
+                pana: -20,
+                coop: 20,
+                econ: 95,
+                reli: 85,
                 soci: 80,
-                demo: -30,
-                decent: 0
+                demo: -65,
+                decent: -20
             },
             populism: 60,
             vetos: {
@@ -401,21 +397,17 @@
             name: "Coalition Al Karama",
             image: "images/alkarama.png",
             vector: {
-                pana: -60,
+                pana: -70,
                 coop: 30,
-                econ: 0,
-                reli: -95,
-                soci: -95,
-                demo: -40,
-                decent: -60
+                econ: -80,
+                reli: -100,
+                soci: -100,
+                demo: 30,
+                decent: -30
             },
-            populism: 90,
+            populism: 70,
             vetos: {
                 "reli_separation": {
-                    val: 0.4,
-                    type: "greater"
-                },
-                "spec_25jul": {
                     val: 0.4,
                     type: "greater"
                 },
@@ -432,13 +424,13 @@
             name: "Courant Démocrate (Attayar)",
             image: "images/attayar.png",
             vector: {
-                pana: 20,
-                coop: -40,
-                econ: -35,
-                reli: 30,
-                soci: 15,
-                demo: -60,
-                decent: -20
+                pana: 0,
+                coop: -10,
+                econ: -40,
+                reli: 60,
+                soci: 60, // Progressive
+                demo: -95, // Very Democratic (Rule of Law focus)
+                decent: 30 // Decentralist
             },
             populism: 50,
             vetos: {}
@@ -446,24 +438,20 @@
             name: "Ettakatol (FDTL)",
             image: "images/ettakatol.png",
             vector: {
-                pana: 15,
-                coop: -50,
-                econ: -10,
-                reli: 60,
-                soci: 60,
-                demo: -80,
+                pana: 10,
+                coop: -40,
+                econ: -20,
+                reli: 80,
+                soci: 75,
+                demo: -90,
                 decent: -40
             },
-            populism: 20,
+            populism: 15,
             vetos: {
                 "demo_strong_leader": {
-                    val: 0.4,
-                    type: "greater"
-                },
-                "econ_corrupt_elite": {
                     val: 0.9,
                     type: "greater"
-                }
+                },
             }
         }, {
             name: "Al Joumhouri",
@@ -471,13 +459,13 @@
             vector: {
                 pana: 20,
                 coop: -20,
-                econ: 0,
-                reli: 40,
+                econ: 25,
+                reli: 60,
                 soci: 40,
                 demo: -70,
-                decent: -30
+                decent: -20
             },
-            populism: 35,
+            populism: 25,
             vetos: {}
         }, {
             name: "Parti Baath",
@@ -485,13 +473,13 @@
             vector: {
                 pana: -100,
                 coop: 40,
-                econ: -60,
-                reli: 10,
-                soci: -20,
-                demo: 50,
+                econ: -70,
+                reli: 60,
+                soci: -70,
+                demo: 80,
                 decent: 80
             },
-            populism: 50,
+            populism: 70,
             vetos: {
                 "pana_no_arab": {
                     val: 0.4,
@@ -506,15 +494,15 @@
             name: "Processus du 25-Juillet",
             image: "images/almassar.png",
             vector: {
-                pana: 10,
-                coop: 30,
-                econ: -20,
+                pana: -20,
+                coop: 60,
+                econ: -30,
                 reli: 0,
-                soci: -10,
-                demo: 70,
-                decent: 30
+                soci: -70,
+                demo: 80,
+                decent: -20
             },
-            populism: 95,
+            populism: 90,
             vetos: {
                 "spec_25jul": {
                     val: -0.1,
