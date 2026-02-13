@@ -1,1246 +1,1030 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TunisianValues — Results</title>
     <link rel="icon" type="image/png" href="icon.svg" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Ensure questions.js is in the same folder -->
+    <script src="questions.js"></script>
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: { oswald: ["Oswald", "sans-serif"] },
-          },
-        },
-      };
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        oswald: ["Oswald", "sans-serif"]
+                    },
+                },
+            },
+        };
     </script>
     <style>
-      .bar-shadow {
-        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
-      }
-      input[type="range"].slider-input {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 100%;
-        height: 8px;
-        background: #e5e7eb;
-        border-radius: 9999px;
-        outline: none;
-        opacity: 0.8;
-        transition: opacity 0.2s;
-      }
-      input[type="range"].slider-input:hover {
-        opacity: 1;
-      }
-      input[type="range"].slider-input::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 20px;
-        height: 20px;
-        background: #dc2626;
-        cursor: pointer;
-        border-radius: 50%;
-        border: 2px solid white;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-      }
-      input[type="range"].slider-input::-moz-range-thumb {
-        width: 20px;
-        height: 20px;
-        background: #dc2626;
-        cursor: pointer;
-        border-radius: 50%;
-        border: 2px solid white;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-      }
+        .bar-shadow {
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        input[type="range"].slider-input {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 9999px;
+            outline: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        
+        input[type="range"].slider-input:hover {
+            opacity: 1;
+        }
+        
+        input[type="range"].slider-input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #dc2626;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .ranking-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .ranking-scroll::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 4px;
+        }
+        /* Invisible capture area for the user */
+        
+        #capture-area {
+            position: fixed;
+            left: -9999px;
+            top: 0;
+            width: 1080px;
+            height: auto;
+            z-index: -1;
+        }
     </style>
-  </head>
-  <body class="font-oswald antialiased">
+</head>
+
+<body class="font-oswald antialiased">
     <div class="min-h-screen bg-gradient-to-br from-red-600 to-red-700">
-      <header class="border-b border-red-500/30 bg-red-600/90 backdrop-blur-sm">
-        <div class="container mx-auto px-4 py-4">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center">
-              <img
-                src="../TUNISIAN VALUES.png"
-                alt="TunisianValues logo"
-                class="h-10 w-auto"
-              />
+        <header class="border-b border-red-500/30 bg-red-600/90 backdrop-blur-sm">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <img src="TUNISIAN VALUES.png" alt="TunisianValues logo" class="h-10 w-auto" />
+                    </div>
+                </div>
             </div>
-            <div class="flex items-center gap-4">
-              <a
-                href="https://discord.gg/3HyBH7y23Z"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-white/80 hover:text-white transition-colors"
-                ><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5-1.77-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"
-                  /></svg
-              ></a>
-            </div>
-          </div>
-        </div>
-      </header>
-      <main class="container mx-auto px-4 py-12">
-        <div
-          id="results-container"
-          class="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-xl p-6 md:p-8 shadow-2xl"
-        >
-          <div class="text-center mb-10">
-            <h1 class="text-5xl font-bold text-red-700">Your Results</h1>
-            <p class="text-lg text-slate-600 mt-2">
-              Your closest political match is:
-              <span id="ideology-label" class="font-bold text-red-600"
-                >Calculating...</span
-              >
-            </p>
-          </div>
+        </header>
+        <main class="container mx-auto px-4 py-12">
+            <div id="results-container" class="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-xl p-6 md:p-8 shadow-2xl">
+                <div class="text-center mb-10">
+                    <h1 class="text-5xl font-bold text-red-700">Your Results</h1>
 
-          <div class="space-y-6">
-            <!-- Result bars for each axis -->
-            <div>
-              <h3 class="text-xl font-bold text-gray-800 mb-2">
-                Pan-Arabism Axis
-              </h3>
-              <div class="flex justify-between items-baseline mb-1 text-sm">
-                <span class="font-bold text-red-600">Arab Unity</span
-                ><span class="font-bold text-slate-700">Nationalism</span>
-              </div>
-              <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner">
-                <div class="flex h-full rounded-full">
-                  <div
-                    id="bar-left-pana"
-                    style="background-color: #c52a2a"
-                    class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"
-                  >
-                    <span id="left-pana"></span>
-                  </div>
-                  <div
-                    id="bar-neutral-pana"
-                    style="background-color: #eeeeee"
-                    class="flex items-center justify-center text-black text-sm font-bold pb-0.5"
-                  >
-                    <span id="neutral-pana"></span>
-                  </div>
-                  <div
-                    id="bar-right-pana"
-                    style="background-color: #4b5563"
-                    class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"
-                  >
-                    <span id="right-pana"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold text-gray-800 mb-2">
-                Cooperation Axis
-              </h3>
-              <div class="flex justify-between items-baseline mb-1 text-sm">
-                <span class="font-bold text-orange-600">Internationalism</span
-                ><span class="font-bold text-blue-600">Isolationism</span>
-              </div>
-              <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner">
-                <div class="flex h-full rounded-full">
-                  <div
-                    id="bar-left-coop"
-                    style="background-color: #ea580c"
-                    class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"
-                  >
-                    <span id="left-coop"></span>
-                  </div>
-                  <div
-                    id="bar-neutral-coop"
-                    style="background-color: #eeeeee"
-                    class="flex items-center justify-center text-black text-sm font-bold pb-0.5"
-                  >
-                    <span id="neutral-coop"></span>
-                  </div>
-                  <div
-                    id="bar-right-coop"
-                    style="background-color: #3b82f6"
-                    class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"
-                  >
-                    <span id="right-coop"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold text-gray-800 mb-2">Economy Axis</h3>
-              <div class="flex justify-between items-baseline mb-1 text-sm">
-                <span class="font-bold text-red-600">Socialism</span
-                ><span class="font-bold text-green-600">Capitalism</span>
-              </div>
-              <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner">
-                <div class="flex h-full rounded-full">
-                  <div
-                    id="bar-left-econ"
-                    style="background-color: #c52a2a"
-                    class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"
-                  >
-                    <span id="left-econ"></span>
-                  </div>
-                  <div
-                    id="bar-neutral-econ"
-                    style="background-color: #eeeeee"
-                    class="flex items-center justify-center text-black text-sm font-bold pb-0.5"
-                  >
-                    <span id="neutral-econ"></span>
-                  </div>
-                  <div
-                    id="bar-right-econ"
-                    style="background-color: #16a34a"
-                    class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"
-                  >
-                    <span id="right-econ"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold text-gray-800 mb-2">
-                Religion Axis
-              </h3>
-              <div class="flex justify-between items-baseline mb-1 text-sm">
-                <span class="font-bold text-emerald-600">Political Islam</span
-                ><span class="font-bold text-purple-600">Secularism</span>
-              </div>
-              <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner">
-                <div class="flex h-full rounded-full">
-                  <div
-                    id="bar-left-reli"
-                    style="background-color: #059669"
-                    class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"
-                  >
-                    <span id="left-reli"></span>
-                  </div>
-                  <div
-                    id="bar-neutral-reli"
-                    style="background-color: #eeeeee"
-                    class="flex items-center justify-center text-black text-sm font-bold pb-0.5"
-                  >
-                    <span id="neutral-reli"></span>
-                  </div>
-                  <div
-                    id="bar-right-reli"
-                    style="background-color: #9333ea"
-                    class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"
-                  >
-                    <span id="right-reli"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold text-gray-800 mb-2">
-                Societal Axis
-              </h3>
-              <div class="flex justify-between items-baseline mb-1 text-sm">
-                <span class="font-bold text-amber-600">Conservatism</span
-                ><span class="font-bold text-pink-600">Progressivism</span>
-              </div>
-              <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner">
-                <div class="flex h-full rounded-full">
-                  <div
-                    id="bar-left-soci"
-                    style="background-color: #d97706"
-                    class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"
-                  >
-                    <span id="left-soci"></span>
-                  </div>
-                  <div
-                    id="bar-neutral-soci"
-                    style="background-color: #eeeeee"
-                    class="flex items-center justify-center text-black text-sm font-bold pb-0.5"
-                  >
-                    <span id="neutral-soci"></span>
-                  </div>
-                  <div
-                    id="bar-right-soci"
-                    style="background-color: #db2777"
-                    class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"
-                  >
-                    <span id="right-soci"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold text-gray-800 mb-2">
-                Democracy Axis
-              </h3>
-              <div class="flex justify-between items-baseline mb-1 text-sm">
-                <span class="font-bold text-blue-600">Democracy</span
-                ><span class="font-bold text-red-700">Authoritarianism</span>
-              </div>
-              <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner">
-                <div class="flex h-full rounded-full">
-                  <div
-                    id="bar-left-demo"
-                    style="background-color: #2563eb"
-                    class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"
-                  >
-                    <span id="left-demo"></span>
-                  </div>
-                  <div
-                    id="bar-neutral-demo"
-                    style="background-color: #eeeeee"
-                    class="flex items-center justify-center text-black text-sm font-bold pb-0.5"
-                  >
-                    <span id="neutral-demo"></span>
-                  </div>
-                  <div
-                    id="bar-right-demo"
-                    style="background-color: #c52a2a"
-                    class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"
-                  >
-                    <span id="right-demo"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold text-gray-800 mb-2">
-                Governance Axis
-              </h3>
-              <div class="flex justify-between items-baseline mb-1 text-sm">
-                <span class="font-bold text-indigo-600">Decentralization</span
-                ><span class="font-bold text-slate-600">Centralization</span>
-              </div>
-              <div class="w-full bg-gray-200 rounded-full h-6 shadow-inner">
-                <div class="flex h-full rounded-full">
-                  <div
-                    id="bar-left-decent"
-                    style="background-color: #4f46e5"
-                    class="flex items-center justify-center text-white text-sm font-bold rounded-l-full pb-0.5"
-                  >
-                    <span id="left-decent"></span>
-                  </div>
-                  <div
-                    id="bar-neutral-decent"
-                    style="background-color: #eeeeee"
-                    class="flex items-center justify-center text-black text-sm font-bold pb-0.5"
-                  >
-                    <span id="neutral-decent"></span>
-                  </div>
-                  <div
-                    id="bar-right-decent"
-                    style="background-color: #64748b"
-                    class="flex items-center justify-center text-white text-sm font-bold rounded-r-full pb-0.5"
-                  >
-                    <span id="right-decent"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                    <div class="my-8 p-6 bg-slate-50 border border-slate-200 rounded-xl shadow-sm flex flex-col items-center">
+                        <p class="text-lg text-slate-600 uppercase tracking-widest font-medium mb-4">Closest Match</p>
 
-          <div id="special-icons-container" class="text-center mt-10"></div>
+                        <!-- Winner Image Container -->
+                        <div id="winner-image-container" class="h-32 w-32 mb-4 flex items-center justify-center">
+                            <!-- Image injected via JS -->
+                        </div>
 
-          <div class="border-t-2 border-gray-200 mt-10 pt-6 space-y-4">
-            <div>
-              <button
-                id="toggle-refinement"
-                class="w-full flex justify-between items-center text-left py-2 px-1"
-              >
-                <span class="text-xl font-bold text-gray-800"
-                  >Fine-tune Your Profile and Priorities</span
-                >
-                <svg
-                  id="refinement-arrow"
-                  class="w-6 h-6 transition-transform text-red-600"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="3"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-              <div
-                id="refinement-content"
-                class="hidden mt-4 p-6 bg-gray-100/80 rounded-xl border border-gray-200 overflow-hidden"
-              >
-                <p class="text-center text-slate-600 mb-8 max-w-2xl mx-auto">
-                  Assign an importance to each political axis to get a ranking
-                  that reflects your priorities.
-                </p>
-                <div id="weights-container" class="space-y-5"></div>
-                <div class="text-center mt-8">
-                  <button
-                    id="recalculate-button"
-                    class="bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-3 rounded-lg transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5"
-                  >
-                    Recalculate Ranking
-                  </button>
+                        <p id="ideology-label" class="text-4xl font-bold text-red-600">Calculating...</p>
+
+                        <!-- NEUTRALITY WARNING -->
+                        <div id="neutrality-warning" class="hidden mt-4 max-w-lg p-4 bg-amber-50 border-l-4 border-amber-500 text-amber-800 text-sm text-left rounded shadow-sm">
+                            <p class="font-bold mb-1">⚠️ Uncertain Result</p>
+                            <p>You answered "Neutral" or "No Opinion" to a majority of questions (>50%). The result displayed above is indicative, but you are likely politically <strong>Independent</strong>.</p>
+                        </div>
+
+                        <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-gray-500">
+                            <div id="populism-meter" class="px-4 py-2 bg-white rounded-lg border border-gray-300 shadow-sm">
+                                Populism Score: <span class="font-bold text-gray-800">--%</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div>
-              <button
-                id="toggle-ranking"
-                class="w-full flex justify-between items-center text-left py-2 px-1"
-              >
-                <span class="text-xl font-bold text-gray-800"
-                  >View Detailed Proximity Ranking</span
-                >
-                <svg
-                  id="ranking-arrow"
-                  class="w-6 h-6 transition-transform text-red-600"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="3"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-              <div
-                id="ranking-content"
-                class="hidden mt-4 p-6 bg-gray-100/80 rounded-xl border border-gray-200 overflow-hidden"
-              ></div>
-            </div>
-          </div>
 
-          <div
-            class="mt-12 text-center flex flex-col sm:flex-row justify-center items-center gap-4"
-          >
-            <button
-              id="download-button"
-              onclick="downloadResults();"
-              class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-bold text-lg px-8 py-3 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-            >
-              Download Results
-            </button>
-            <button
-              onclick="location.href='quiz.html';"
-              class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-3 rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-            >
-              Take the Quiz Again
-            </button>
-          </div>
-        </div>
-      </main>
+                <!-- AXES BARS -->
+                <div class="space-y-8" id="bars-container">
+                    <!-- Bars generated via JS -->
+                </div>
+
+                <!-- SPECIAL ICONS -->
+                <div id="special-icons-container" class="text-center mt-12 pt-8 border-t border-gray-200"></div>
+
+                <!-- REFINEMENT & RANKING UI -->
+                <div class="border-t-2 border-gray-200 mt-10 pt-6 space-y-4">
+                    <div>
+                        <button id="toggle-refinement" class="w-full flex justify-between items-center text-left py-2 px-1 hover:bg-gray-50 rounded-lg transition-colors">
+                            <span class="text-xl font-bold text-gray-800">Refine your profile and priorities</span>
+                            <svg id="refinement-arrow" class="w-6 h-6 transition-transform text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        <div id="refinement-content" class="hidden mt-4 p-6 bg-gray-100/80 rounded-xl border border-gray-200 overflow-hidden">
+                            <p class="text-center text-slate-600 mb-8 max-w-2xl mx-auto">
+                                Assign an importance to each axis. This will adjust the proximity calculation.
+                            </p>
+                            <div id="weights-container" class="space-y-5"></div>
+                            <div class="text-center mt-8">
+                                <button id="recalculate-button" class="bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-3 rounded-lg transition-all shadow-md">Recalculate</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button id="toggle-ranking" class="w-full flex justify-between items-center text-left py-2 px-1 hover:bg-gray-50 rounded-lg transition-colors">
+                            <span class="text-xl font-bold text-gray-800">View detailed ranking</span>
+                            <svg id="ranking-arrow" class="w-6 h-6 transition-transform text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        <div id="ranking-content" class="hidden mt-4 p-6 bg-gray-100/80 rounded-xl border border-gray-200 overflow-hidden ranking-scroll max-h-[600px] overflow-y-auto"></div>
+                    </div>
+                </div>
+
+                <div class="mt-12 text-center flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <button id="download-btn" class="w-full sm:w-auto bg-slate-800 hover:bg-slate-900 text-white font-bold text-lg px-8 py-3 rounded-lg transition-colors shadow-lg flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download
+                    </button>
+                    <button onclick="location.href='quiz.html';" class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-3 rounded-lg transition-colors shadow-lg">Retake Quiz</button>
+                </div>
+            </div>
+        </main>
     </div>
 
-    <!-- Hidden share card for download -->
-    <div
-      id="share-card-container"
-      class="fixed top-0 z-[-1]"
-      style="left: -9999px; width: 1080px; height: 1350px"
-    >
-      <style>
-        #share-card .bar-value {
-          text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.7);
-        }
-      </style>
-      <div
-        id="share-card"
-        class="w-full h-full p-12 flex flex-col justify-center font-oswald relative text-white bg-zinc-900"
-        style="
-          font-family: 'Oswald', sans-serif;
-          background-image: radial-gradient(
-            circle at top,
-            rgba(153, 27, 27, 0.4),
-            transparent 70%
-          );
-        "
-      >
-        <header class="text-center border-b-2 border-white/20 pb-6 mb-10">
-          <img
-            src="../TUNISIAN VALUES.png"
-            alt="Logo"
-            class="h-24 w-auto mx-auto mb-4"
-          />
-          <h1
-            class="text-6xl font-bold uppercase tracking-widest"
-            style="text-shadow: 0 0 15px rgba(255, 50, 50, 0.5)"
-          >
-            My Results
-          </h1>
-          <h2 class="text-4xl font-light text-white/80 mt-2">
-            Closest Match:
-            <span id="share-ideology" class="font-bold text-red-400"></span>
-          </h2>
-        </header>
-        <main
-          class="w-full max-w-2xl mx-auto flex flex-col justify-center space-y-7 my-4"
-        >
-          <div class="axis-item">
-            <div class="flex justify-between items-baseline mb-1 text-xl">
-              <span class="font-semibold text-white/80">Arab Unity</span
-              ><span class="font-semibold text-white/80">Nationalism</span>
+    <!-- HIDDEN CAPTURE AREA FOR IMAGE GENERATION -->
+    <div id="capture-area" class="bg-slate-50 p-12">
+        <div class="bg-white rounded-3xl shadow-xl overflow-hidden border-4 border-red-600">
+            <!-- Header -->
+            <div class="bg-red-600 p-8 flex justify-between items-center text-white">
+                <div>
+                    <h1 class="text-6xl font-bold uppercase tracking-tighter">Tunisian Values</h1>
+                    <p class="text-2xl opacity-90 mt-2">My political profile</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-xl opacity-80" id="capture-date">04/02/2026</p>
+                </div>
             </div>
-            <div
-              class="w-full bg-black/40 rounded-full h-8 shadow-inner bar-shadow"
-            >
-              <div
-                class="flex rounded-full h-full text-base font-bold items-center"
-              >
-                <div
-                  id="share-bar-left-pana"
-                  class="bg-gradient-to-r from-red-500 to-red-600 rounded-l-full h-full flex items-center justify-center pl-2"
-                >
-                  <span id="share-val-left-pana" class="bar-value"></span>
+
+            <div class="p-10">
+                <!-- Winner Section -->
+                <div class="flex items-center justify-center gap-8 mb-12 bg-slate-50 rounded-2xl p-6 border border-slate-200">
+                    <div id="capture-winner-img" class="h-48 w-48 flex-shrink-0 flex items-center justify-center bg-white rounded-full shadow-md border-4 border-white overflow-hidden">
+                        <!-- Img injected -->
+                    </div>
+                    <div class="text-left">
+                        <p class="text-2xl text-slate-500 font-medium uppercase tracking-widest">Primary Result</p>
+                        <h2 id="capture-winner-name" class="text-7xl font-bold text-slate-800 leading-tight">Party Name</h2>
+                        <div class="mt-2 inline-block px-4 py-1 bg-red-100 text-red-700 rounded-lg font-bold text-2xl" id="capture-match-score">Match: 95%</div>
+                    </div>
                 </div>
-                <div
-                  id="share-bar-neutral-pana"
-                  class="bg-gray-500/50 h-full flex items-center justify-center"
-                >
-                  <span id="share-val-neutral-pana" class="bar-value"></span>
+
+                <!-- Bars Section -->
+                <div id="capture-bars" class="space-y-6">
+                    <!-- Bars injected -->
                 </div>
-                <div
-                  id="share-bar-right-pana"
-                  class="bg-gradient-to-l from-slate-600 to-slate-700 rounded-r-full h-full flex items-center justify-center pr-2"
-                >
-                  <span id="share-val-right-pana" class="bar-value"></span>
-                </div>
-              </div>
             </div>
-          </div>
-          <div class="axis-item">
-            <div class="flex justify-between items-baseline mb-1 text-xl">
-              <span class="font-semibold text-white/80">Internationalism</span
-              ><span class="font-semibold text-white/80">Isolationism</span>
+
+            <!-- Footer -->
+            <div class="bg-slate-800 text-white p-6 text-center">
+                <p class="text-xl font-light tracking-widest">TUNISIANVALUES.GITHUB.IO</p>
             </div>
-            <div
-              class="w-full bg-black/40 rounded-full h-8 shadow-inner bar-shadow"
-            >
-              <div
-                class="flex rounded-full h-full text-base font-bold items-center"
-              >
-                <div
-                  id="share-bar-left-coop"
-                  class="bg-gradient-to-r from-orange-400 to-orange-500 rounded-l-full h-full flex items-center justify-center pl-2"
-                >
-                  <span id="share-val-left-coop" class="bar-value"></span>
-                </div>
-                <div
-                  id="share-bar-neutral-coop"
-                  class="bg-gray-500/50 h-full flex items-center justify-center"
-                >
-                  <span id="share-val-neutral-coop" class="bar-value"></span>
-                </div>
-                <div
-                  id="share-bar-right-coop"
-                  class="bg-gradient-to-l from-sky-500 to-sky-600 rounded-r-full h-full flex items-center justify-center pr-2"
-                >
-                  <span id="share-val-right-coop" class="bar-value"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="axis-item">
-            <div class="flex justify-between items-baseline mb-1 text-xl">
-              <span class="font-semibold text-white/80">Socialism</span
-              ><span class="font-semibold text-white/80">Capitalism</span>
-            </div>
-            <div
-              class="w-full bg-black/40 rounded-full h-8 shadow-inner bar-shadow"
-            >
-              <div
-                class="flex rounded-full h-full text-base font-bold items-center"
-              >
-                <div
-                  id="share-bar-left-econ"
-                  class="bg-gradient-to-r from-red-500 to-red-600 rounded-l-full h-full flex items-center justify-center pl-2"
-                >
-                  <span id="share-val-left-econ" class="bar-value"></span>
-                </div>
-                <div
-                  id="share-bar-neutral-econ"
-                  class="bg-gray-500/50 h-full flex items-center justify-center"
-                >
-                  <span id="share-val-neutral-econ" class="bar-value"></span>
-                </div>
-                <div
-                  id="share-bar-right-econ"
-                  class="bg-gradient-to-l from-green-500 to-green-600 rounded-r-full h-full flex items-center justify-center pr-2"
-                >
-                  <span id="share-val-right-econ" class="bar-value"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="axis-item">
-            <div class="flex justify-between items-baseline mb-1 text-xl">
-              <span class="font-semibold text-white/80">Political Islam</span
-              ><span class="font-semibold text-white/80">Secularism</span>
-            </div>
-            <div
-              class="w-full bg-black/40 rounded-full h-8 shadow-inner bar-shadow"
-            >
-              <div
-                class="flex rounded-full h-full text-base font-bold items-center"
-              >
-                <div
-                  id="share-bar-left-reli"
-                  class="bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-l-full h-full flex items-center justify-center pl-2"
-                >
-                  <span id="share-val-left-reli" class="bar-value"></span>
-                </div>
-                <div
-                  id="share-bar-neutral-reli"
-                  class="bg-gray-500/50 h-full flex items-center justify-center"
-                >
-                  <span id="share-val-neutral-reli" class="bar-value"></span>
-                </div>
-                <div
-                  id="share-bar-right-reli"
-                  class="bg-gradient-to-l from-purple-500 to-purple-600 rounded-r-full h-full flex items-center justify-center pr-2"
-                >
-                  <span id="share-val-right-reli" class="bar-value"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="axis-item">
-            <div class="flex justify-between items-baseline mb-1 text-xl">
-              <span class="font-semibold text-white/80">Conservatism</span
-              ><span class="font-semibold text-white/80">Progressivism</span>
-            </div>
-            <div
-              class="w-full bg-black/40 rounded-full h-8 shadow-inner bar-shadow"
-            >
-              <div
-                class="flex rounded-full h-full text-base font-bold items-center"
-              >
-                <div
-                  id="share-bar-left-soci"
-                  class="bg-gradient-to-r from-amber-500 to-amber-600 rounded-l-full h-full flex items-center justify-center pl-2"
-                >
-                  <span id="share-val-left-soci" class="bar-value"></span>
-                </div>
-                <div
-                  id="share-bar-neutral-soci"
-                  class="bg-gray-500/50 h-full flex items-center justify-center"
-                >
-                  <span id="share-val-neutral-soci" class="bar-value"></span>
-                </div>
-                <div
-                  id="share-bar-right-soci"
-                  class="bg-gradient-to-l from-pink-500 to-pink-600 rounded-r-full h-full flex items-center justify-center pr-2"
-                >
-                  <span id="share-val-right-soci" class="bar-value"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="axis-item">
-            <div class="flex justify-between items-baseline mb-1 text-xl">
-              <span class="font-semibold text-white/80">Democracy</span
-              ><span class="font-semibold text-white/80">Authoritarianism</span>
-            </div>
-            <div
-              class="w-full bg-black/40 rounded-full h-8 shadow-inner bar-shadow"
-            >
-              <div
-                class="flex rounded-full h-full text-base font-bold items-center"
-              >
-                <div
-                  id="share-bar-left-demo"
-                  class="bg-gradient-to-r from-sky-500 to-sky-600 rounded-l-full h-full flex items-center justify-center pl-2"
-                >
-                  <span id="share-val-left-demo" class="bar-value"></span>
-                </div>
-                <div
-                  id="share-bar-neutral-demo"
-                  class="bg-gray-500/50 h-full flex items-center justify-center"
-                >
-                  <span id="share-val-neutral-demo" class="bar-value"></span>
-                </div>
-                <div
-                  id="share-bar-right-demo"
-                  class="bg-gradient-to-l from-red-500 to-red-600 rounded-r-full h-full flex items-center justify-center pr-2"
-                >
-                  <span id="share-val-right-demo" class="bar-value"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="axis-item">
-            <div class="flex justify-between items-baseline mb-1 text-xl">
-              <span class="font-semibold text-white/80">Decentralization</span
-              ><span class="font-semibold text-white/80">Centralization</span>
-            </div>
-            <div
-              class="w-full bg-black/40 rounded-full h-8 shadow-inner bar-shadow"
-            >
-              <div
-                class="flex rounded-full h-full text-base font-bold items-center"
-              >
-                <div
-                  id="share-bar-left-decent"
-                  class="bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-l-full h-full flex items-center justify-center pl-2"
-                >
-                  <span id="share-val-left-decent" class="bar-value"></span>
-                </div>
-                <div
-                  id="share-bar-neutral-decent"
-                  class="bg-gray-500/50 h-full flex items-center justify-center"
-                >
-                  <span id="share-val-neutral-decent" class="bar-value"></span>
-                </div>
-                <div
-                  id="share-bar-right-decent"
-                  class="bg-gradient-to-l from-slate-500 to-slate-600 rounded-r-full h-full flex items-center justify-center pr-2"
-                >
-                  <span id="share-val-right-decent" class="bar-value"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </main>
-        <footer class="text-center mt-10">
-          <div id="share-special-icons-wrapper" class="mb-4">
-            <h3 class="font-bold text-xl uppercase text-red-300">
-              Notable Positions
-            </h3>
-            <div
-              id="share-special-icons"
-              class="flex gap-4 justify-center flex-wrap mt-3 h-16 items-center"
-            ></div>
-          </div>
-          <p class="text-2xl text-white/70 font-semibold">
-            Take the test at
-            <span class="font-bold text-white tracking-wider"
-              >tunisianvalues.github.io</span
-            >
-          </p>
-        </footer>
-      </div>
+        </div>
     </div>
 
     <script>
-      const ideologies = [
-        {
-          name: "Ennahdha Movement",
-          stats: {
-            pana: { left: 45, neutral: 20, right: 35 },
-            coop: { left: 70, neutral: 20, right: 10 },
-            econ: { left: 40, neutral: 20, right: 40 },
-            reli: { left: 85, neutral: 10, right: 5 },
-            soci: { left: 85, neutral: 10, right: 5 },
-            demo: { left: 50, neutral: 20, right: 30 },
-            decent: { left: 40, neutral: 30, right: 20 },
-          },
-          weights: {
-            pana: 1.5,
-            coop: 1,
-            econ: 2,
-            reli: 5,
-            soci: 5,
-            demo: 1,
-            decent: 1,
-          },
-        },
-        {
-          name: "Free Destourian Party (PDL)",
-          stats: {
-            pana: { left: 35, neutral: 0, right: 65 },
-            coop: { left: 25, neutral: 10, right: 65 },
-            econ: { left: 45, neutral: 5, right: 40 },
-            reli: { left: 10, neutral: 15, right: 75 },
-            soci: { left: 70, neutral: 10, right: 20 },
-            demo: { left: 10, neutral: 15, right: 75 },
-            decent: { left: 15, neutral: 10, right: 75 },
-          },
-          weights: {
-            pana: 3,
-            coop: 2,
-            econ: 1,
-            reli: 3,
-            soci: 2,
-            demo: 3,
-            decent: 2,
-          },
-        },
-        {
-          name: "Echaab Movement",
-          stats: {
-            pana: { left: 70, neutral: 20, right: 10 },
-            coop: { left: 25, neutral: 0, right: 65 },
-            econ: { left: 65, neutral: 10, right: 15 },
-            reli: { left: 10, neutral: 20, right: 70 },
-            soci: { left: 70, neutral: 10, right: 20 },
-            demo: { left: 15, neutral: 25, right: 60 },
-            decent: { left: 20, neutral: 10, right: 70 },
-          },
-          weights: {
-            pana: 3,
-            coop: 1,
-            econ: 2,
-            reli: 3,
-            soci: 3,
-            demo: 3,
-            decent: 1,
-          },
-        },
-        {
-          name: "Afek Tounes",
-          stats: {
-            pana: { left: 20, neutral: 20, right: 60 },
-            coop: { left: 80, neutral: 0, right: 20 },
-            econ: { left: 25, neutral: 15, right: 60 },
-            reli: { left: 5, neutral: 25, right: 70 },
-            soci: { left: 5, neutral: 15, right: 80 },
-            demo: { left: 85, neutral: 10, right: 5 },
-            decent: { left: 40, neutral: 30, right: 30 },
-          },
-          weights: {
-            pana: 1,
-            coop: 2,
-            econ: 3,
-            reli: 2,
-            soci: 2,
-            demo: 3,
-            decent: 1,
-          },
-        },
-        {
-          name: "Workers' Party",
-          stats: {
-            pana: { left: 40, neutral: 20, right: 40 },
-            coop: { left: 40, neutral: 20, right: 40 },
-            econ: { left: 85, neutral: 10, right: 0 },
-            reli: { left: 5, neutral: 5, right: 90 },
-            soci: { left: 5, neutral: 10, right: 85 },
-            demo: { left: 50, neutral: 30, right: 20 },
-            decent: { left: 35, neutral: 30, right: 35 },
-          },
-          weights: {
-            pana: 1,
-            coop: 1,
-            econ: 3,
-            reli: 3,
-            soci: 3,
-            demo: 2,
-            decent: 1,
-          },
-        },
-        {
-          name: "Al Karama Coalition",
-          stats: {
-            pana: { left: 70, neutral: 20, right: 10 },
-            coop: { left: 25, neutral: 10, right: 65 },
-            econ: { left: 40, neutral: 20, right: 40 },
-            reli: { left: 95, neutral: 5, right: 0 },
-            soci: { left: 95, neutral: 5, right: 0 },
-            demo: { left: 20, neutral: 10, right: 70 },
-            decent: { left: 15, neutral: 15, right: 70 },
-          },
-          weights: {
-            pana: 2,
-            coop: 1,
-            econ: 0.5,
-            reli: 3,
-            soci: 3,
-            demo: 3,
-            decent: 1,
-          },
-        },
-        {
-          name: "Democratic Current (Attayar)",
-          stats: {
-            pana: { left: 35, neutral: 10, right: 55 },
-            coop: { left: 75, neutral: 20, right: 5 },
-            econ: { left: 70, neutral: 5, right: 25 },
-            reli: { left: 15, neutral: 25, right: 60 },
-            soci: { left: 20, neutral: 30, right: 50 },
-            demo: { left: 70, neutral: 10, right: 20 },
-            decent: { left: 55, neutral: 10, right: 35 },
-          },
-          weights: {
-            pana: 1,
-            coop: 2,
-            econ: 3,
-            reli: 2,
-            soci: 2,
-            demo: 3,
-            decent: 1,
-          },
-        },
-        {
-          name: "Tunisian Ba'ath Movement",
-          stats: {
-            pana: { left: 95, neutral: 5, right: 0 },
-            coop: { left: 20, neutral: 5, right: 75 },
-            econ: { left: 70, neutral: 20, right: 10 },
-            reli: { left: 15, neutral: 20, right: 65 },
-            soci: { left: 60, neutral: 20, right: 20 },
-            demo: { left: 5, neutral: 10, right: 85 },
-            decent: { left: 5, neutral: 5, right: 90 },
-          },
-          weights: {
-            pana: 3,
-            coop: 2,
-            econ: 1,
-            reli: 1,
-            soci: 1,
-            demo: 3,
-            decent: 2,
-          },
-        },
-        {
-          name: "Ettakatol (FDTL)",
-          stats: {
-            pana: { left: 25, neutral: 45, right: 30 },
-            coop: { left: 70, neutral: 5, right: 25 },
-            econ: { left: 45, neutral: 10, right: 45 },
-            reli: { left: 10, neutral: 20, right: 70 },
-            soci: { left: 25, neutral: 15, right: 60 },
-            demo: { left: 85, neutral: 10, right: 5 },
-            decent: { left: 40, neutral: 30, right: 30 },
-          },
-          weights: {
-            pana: 1,
-            coop: 2,
-            econ: 2,
-            reli: 3,
-            soci: 2,
-            demo: 3,
-            decent: 1,
-          },
-        },
-        {
-          name: "Al Joumhouri (Republican Party)",
-          stats: {
-            pana: { left: 20, neutral: 50, right: 30 },
-            coop: { left: 60, neutral: 10, right: 30 },
-            econ: { left: 30, neutral: 10, right: 55 },
-            reli: { left: 15, neutral: 25, right: 60 },
-            soci: { left: 25, neutral: 35, right: 40 },
-            demo: { left: 70, neutral: 15, right: 15 },
-            decent: { left: 55, neutral: 25, right: 20 },
-          },
-          weights: {
-            pana: 1,
-            coop: 1,
-            econ: 3,
-            reli: 2,
-            soci: 2,
-            demo: 3,
-            decent: 1,
-          },
-        },
-        {
-        name: "July 25 Process (Political Party)",
-        stats: {
-          pana: { left: 40, neutral: 5, right: 55 },
-          coop: { left: 30, neutral: 10, right: 60 },
-          econ: { left: 30, neutral: 10, right: 55 },
-          reli: { left: 40, neutral: 20, right: 40 },
-          soci: { left: 60, neutral: 10, right: 30 },
-          demo: { left: 25, neutral: 10, right: 65 },
-          decent: { left: 55, neutral: 5, right: 40 }
-        },
-        weights: {
-          pana: 2,
-          coop: 2,
-          econ: 1,
-          reli: 1,
-          soci: 3,
-          demo: 3,
-          decent: 2
-        }
-      }
-      ];
+        // --- CONFIGURATION ---
+        const axes = ["pana", "coop", "econ", "reli", "soci", "demo", "decent"];
 
-      const axes = ["pana", "coop", "econ", "reli", "soci", "demo", "decent"];
-      const final_pct = {};
-      let total_neutral_score = 0,
-        total_max_score = 0;
-
-      function getQueryVariable(variable) {
-        const query = window.location.search.substring(1);
-        const vars = query.split("&");
-        for (let i = 0; i < vars.length; i++) {
-          const pair = vars[i].split("=");
-          if (decodeURIComponent(pair[0]) == variable) {
-            return variable === "icons"
-              ? decodeURIComponent(pair[1])
-              : parseFloat(decodeURIComponent(pair[1]));
-          }
-        }
-        return null;
-      }
-
-      function updateUserIdeology() {
-        const averageNeutrality =
-          total_max_score > 0
-            ? (total_neutral_score / total_max_score) * 100
-            : 100;
-        const NEUTRALITY_THRESHOLD = 60.0;
-        const rankingContainer = document.getElementById("ranking-content");
-
-        if (averageNeutrality >= NEUTRALITY_THRESHOLD) {
-          const undeterminedProfile =
-            "Undetermined Profile (too many neutral answers)";
-          document.getElementById("ideology-label").innerHTML =
-            undeterminedProfile;
-          document.getElementById("share-ideology").innerHTML = "Undetermined";
-          rankingContainer.innerHTML = `<h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Proximity Ranking</h2><p class="text-center text-slate-700">The ranking cannot be calculated because your profile is undetermined.</p>`;
-          return;
-        }
-
-        const userWeights = {};
-        axes.forEach((axis) => {
-          userWeights[axis] = parseInt(
-            document.getElementById(`weight-${axis}`).value,
-            10
-          );
-        });
-
-        let partyScores = [];
-        for (const party of ideologies) {
-          let dist = 0;
-          axes.forEach((axis) => {
-            const user_axis = final_pct[axis],
-              ideology_axis = party.stats[axis];
-            if (!ideology_axis) return;
-            const axis_dist =
-              Math.pow(user_axis.left - ideology_axis.left, 2) +
-              Math.pow(user_axis.neutral - ideology_axis.neutral, 2) +
-              Math.pow(user_axis.right - ideology_axis.right, 2);
-            dist += axis_dist * (party.weights[axis] || 1) * userWeights[axis];
-          });
-          partyScores.push({ name: party.name, distance: dist });
-        }
-
-        partyScores.sort((a, b) => a.distance - b.distance);
-
-        const MAX_DISTANCE_CEILING = 450000;
-        const rankedParties = partyScores.map((party) => ({
-          name: party.name,
-          compatibility: Math.max(
-            0,
-            Math.round(100 * (1 - party.distance / MAX_DISTANCE_CEILING))
-          ),
-        }));
-
-        const topProfile = rankedParties[0];
-        document.getElementById(
-          "ideology-label"
-        ).innerHTML = `${topProfile.name} (${topProfile.compatibility}%)`;
-        document.getElementById("share-ideology").innerHTML = topProfile.name;
-
-        let rankingHTML = `<h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Proximity Ranking</h2><div class="space-y-4">`;
-        const top5Parties = rankedParties.slice(0, 5);
-        top5Parties.forEach((party) => {
-          rankingHTML += `<div><div class="flex justify-between items-center mb-1"><span class="font-bold text-gray-700">${party.name}</span><span class="font-semibold text-red-600">${party.compatibility}%</span></div><div class="w-full bg-gray-200 rounded-full h-4 shadow-inner"><div class="bg-gradient-to-r from-red-500 to-red-700 h-4 rounded-full transition-all duration-500" style="width: ${party.compatibility}%;"></div></div></div>`;
-        });
-        rankingHTML += `</div>`;
-        rankingContainer.innerHTML = rankingHTML;
-      }
-
-      window.onload = function () {
-        axes.forEach((axis) => {
-          const s = getQueryVariable("s_" + axis) || 0,
-            n = getQueryVariable("n_" + axis) || 0,
-            m = getQueryVariable("m_" + axis) || 0;
-          total_neutral_score += n;
-          total_max_score += m;
-          let neutral = 0,
-            left = 0,
-            right = 0;
-          if (m > 0) {
-            neutral = (n / m) * 100;
-            const decided_max = m - n;
-            if (decided_max > 0) {
-              const decided_pct = 100 - neutral;
-              const norm_s = (s + decided_max) / (2 * decided_max);
-              left = norm_s * decided_pct;
-              right = (1 - norm_s) * decided_pct;
+        const axesConfig = {
+            pana: {
+                name: "Pan-Arabism",
+                leftLabel: "Pan-Arabism",
+                rightLabel: "Nationalism",
+                leftColor: "#047857",
+                rightColor: "#dc2626"
+            },
+            coop: {
+                name: "Cooperation",
+                leftLabel: "Internationalism",
+                rightLabel: "Sovereignty",
+                leftColor: "#2563eb",
+                rightColor: "#4b5563"
+            },
+            econ: {
+                name: "Economy",
+                leftLabel: "Socialism",
+                rightLabel: "Liberalism",
+                leftColor: "#b91c1c",
+                rightColor: "#eab308"
+            },
+            reli: {
+                name: "Religion",
+                leftLabel: "Islamism",
+                rightLabel: "Secularism",
+                leftColor: "#15803d",
+                rightColor: "#9333ea"
+            },
+            soci: {
+                name: "Society",
+                leftLabel: "Conservatism",
+                rightLabel: "Progressivism",
+                leftColor: "#d97706",
+                rightColor: "#db2777"
+            },
+            demo: {
+                name: "Democracy",
+                leftLabel: "Democracy",
+                rightLabel: "Authoritarianism",
+                leftColor: "#0ea5e9",
+                rightColor: "#1e293b"
+            },
+            decent: {
+                name: "Governance",
+                leftLabel: "Decentralization",
+                rightLabel: "Centralization",
+                leftColor: "#4f46e5",
+                rightColor: "#64748b"
             }
-          } else {
-            neutral = 100;
-          }
-          final_pct[axis] = { left, neutral, right };
-          document.getElementById(`bar-left-${axis}`).style.width = `${left}%`;
-          document.getElementById(
-            `bar-neutral-${axis}`
-          ).style.width = `${neutral}%`;
-          document.getElementById(
-            `bar-right-${axis}`
-          ).style.width = `${right}%`;
-          if (left > 12)
-            document.getElementById(`left-${axis}`).innerText = `${Math.round(
-              left
-            )}%`;
-          if (neutral > 12)
-            document.getElementById(
-              `neutral-${axis}`
-            ).innerText = `${Math.round(neutral)}%`;
-          if (right > 12)
-            document.getElementById(`right-${axis}`).innerText = `${Math.round(
-              right
-            )}%`;
-          document.getElementById(
-            `share-bar-left-${axis}`
-          ).style.width = `${left}%`;
-          document.getElementById(
-            `share-bar-neutral-${axis}`
-          ).style.width = `${neutral}%`;
-          document.getElementById(
-            `share-bar-right-${axis}`
-          ).style.width = `${right}%`;
-          if (left > 10)
-            document.getElementById(
-              `share-val-left-${axis}`
-            ).innerText = `${Math.round(left)}%`;
-          if (neutral > 10)
-            document.getElementById(
-              `share-val-neutral-${axis}`
-            ).innerText = `${Math.round(neutral)}%`;
-          if (right > 10)
-            document.getElementById(
-              `share-val-right-${axis}`
-            ).innerText = `${Math.round(right)}%`;
-        });
-
-        const axes_labels = {
-          pana: "Pan-Arabism",
-          coop: "Cooperation",
-          econ: "Economy",
-          reli: "Religion",
-          soci: "Society",
-          demo: "Democracy",
-          decent: "Governance",
         };
-        const weightsContainer = document.getElementById("weights-container");
-        axes.forEach((axis) => {
-          weightsContainer.innerHTML += `<div class="grid grid-cols-1 sm:grid-cols-3 items-center gap-2 sm:gap-4"><label for="weight-${axis}" class="font-bold text-gray-800 text-center sm:text-left">${axes_labels[axis]}</label><div class="col-span-2 flex items-center gap-3"><span class="text-sm text-gray-500">Less Important</span><input type="range" id="weight-${axis}" min="1" max="5" value="3" class="slider-input w-full cursor-pointer"><span class="text-sm text-gray-500">Very Important</span></div></div>`;
-        });
 
-        updateUserIdeology();
-        document
-          .getElementById("recalculate-button")
-          .addEventListener("click", updateUserIdeology);
-
-        const icons_param = getQueryVariable("icons");
-        if (icons_param && icons_param.length > 0) {
-          const container = document.getElementById("special-icons-container"),
-            shareIconContainer = document.getElementById("share-special-icons"),
-            icons = icons_param.split(",");
-          const title = document.createElement("h3");
-          title.innerText = "Notable Positions";
-          title.className = "text-2xl font-bold text-gray-800 mb-4";
-          container.appendChild(title);
-          const iconWrapper = document.createElement("div");
-          iconWrapper.className =
-            "flex justify-center items-center gap-4 flex-wrap";
-          container.appendChild(iconWrapper);
-          icons.forEach((iconId) => {
-            if (iconId) {
-              const img = document.createElement("img");
-              img.src = `../icons/${iconId}.png`;
-              img.title = iconId;
-              img.className =
-                "h-20 w-20 object-contain transition-transform hover:scale-110";
-              iconWrapper.appendChild(img);
-              const shareImg = img.cloneNode(true);
-              shareImg.className = "h-16 w-16 object-contain";
-              shareIconContainer.appendChild(shareImg);
+        const ideologies = [{
+            name: "Ennahdha",
+            image: "images/ennahdha.png",
+            range_vector: {
+                pana: [-30, 10],
+                coop: [-60, -10],
+                econ: [-10, 20],
+                reli: [-90, -60],
+                soci: [-90, -60],
+                demo: [-60, -10],
+                decent: [-40, 10]
+            },
+            populism: 70,
+            vetos: {
+                "reli_separation": {
+                    val: 0.9,
+                    type: "greater"
+                },
+                "soci_lgbt": {
+                    val: 0.4,
+                    type: "greater"
+                }
             }
-          });
+        }, {
+            name: "Free Destourian Party (PDL)",
+            image: "images/pdl.png",
+            range_vector: {
+                pana: [60, 100],
+                coop: [-20, 20],
+                econ: [-20, 30],
+                reli: [40, 90],
+                soci: [-60, 20],
+                demo: [40, 90],
+                decent: [40, 90]
+            },
+            populism: 70,
+            vetos: {
+                "spec_2011": {
+                    val: -0.1,
+                    type: "less"
+                },
+                "reli_parties": {
+                    val: 0.4,
+                    type: "greater"
+                },
+                "decent_election_gov": {
+                    val: 0.4,
+                    type: "greater"
+                }
+            }
+        }, {
+            name: "Echaâb Movement",
+            image: "images/echaab.png",
+            range_vector: {
+                pana: [-90, -60],
+                coop: [-10, 20],
+                econ: [-80, -20],
+                reli: [30, 80],
+                soci: [-60, 20],
+                demo: [20, 60],
+                decent: [-10, 20]
+            },
+            populism: 70,
+            vetos: {
+                "pana_no_arab": {
+                    val: 0.4,
+                    type: "greater"
+                }
+            }
+        }, {
+            name: "Afek Tounes",
+            image: "images/afektounes.png",
+            range_vector: {
+                pana: [20, 100],
+                coop: [-100, -60],
+                econ: [60, 100],
+                reli: [60, 100],
+                soci: [60, 100],
+                demo: [-100, -60],
+                decent: [-80, -20]
+            },
+            populism: 10,
+            vetos: {
+                "econ_no_private": {
+                    val: 0.4,
+                    type: "greater"
+                },
+                "econ_corrupt_elite": {
+                    val: 0.9,
+                    type: "greater"
+                }
+            }
+        }, {
+            name: "Workers' Party",
+            image: "images/pt.png",
+            range_vector: {
+                pana: [-50, 0],
+                coop: [-10, 50],
+                econ: [-100, -80],
+                reli: [80, 100],
+                soci: [70, 100],
+                demo: [-80, -30],
+                decent: [-40, 0]
+            },
+            populism: 60,
+            vetos: {
+                "econ_competition": {
+                    val: 0.4,
+                    type: "greater"
+                },
+                "econ_privatization": {
+                    val: 0.4,
+                    type: "greater"
+                },
+                "spec_ugtt": {
+                    val: -0.1,
+                    type: "less"
+                }
+            }
+        }, {
+            name: "Al Karama Coalition",
+            image: "images/alkarama.png",
+            range_vector: {
+                pana: [-90, -50],
+                coop: [-20, 20],
+                econ: [-5, 30],
+                reli: [-100, -80],
+                soci: [-100, -80],
+                demo: [-30, 0],
+                decent: [-40, 0]
+            },
+            populism: 70,
+            vetos: {
+                "reli_separation": {
+                    val: 0.4,
+                    type: "greater"
+                },
+                "soci_lgbt": {
+                    val: 0.4,
+                    type: "greater"
+                }
+            }
+        }, {
+            name: "Democratic Current (Attayar)",
+            image: "images/attayar.png",
+            range_vector: {
+                pana: [-20, 20],
+                coop: [-20, 10],
+                econ: [-80, -20],
+                reli: [40, 70],
+                soci: [20, 70],
+                demo: [-100, -80],
+                decent: [-40, 10]
+            },
+            populism: 50,
+            vetos: {}
+        }, {
+            name: "Ettakatol (FDTL)",
+            image: "images/ettakatol.png",
+            range_vector: {
+                pana: [-10, 30],
+                coop: [-100, -20],
+                econ: [-40, 15],
+                reli: [60, 100],
+                soci: [60, 100],
+                demo: [-100, -70],
+                decent: [-80, -20]
+            },
+            populism: 15,
+            vetos: {
+                "demo_strong_leader": {
+                    val: 0.9,
+                    type: "greater"
+                },
+            }
+        }, {
+            name: "Al Joumhouri",
+            image: "images/aljoumhouri.png",
+            range_vector: {
+                pana: [0, 40],
+                coop: [-30, 10],
+                econ: [-20, 20],
+                reli: [40, 80],
+                soci: [20, 60],
+                demo: [-90, -50],
+                decent: [-30, 10]
+            },
+            populism: 25,
+            vetos: {}
+        }, {
+            name: "Ba'ath Party",
+            image: "images/baath.png",
+            range_vector: {
+                pana: [-100, -80],
+                coop: [20, 100],
+                econ: [-80, -40],
+                reli: [0, 80],
+                soci: [-50, 50],
+                demo: [80, 100],
+                decent: [50, 100]
+            },
+            populism: 70,
+            vetos: {
+                "pana_no_arab": {
+                    val: 0.4,
+                    type: "greater"
+                }
+            }
+        }, {
+            name: "July 25 Movement",
+            image: "images/almassar.png",
+            range_vector: {
+                pana: [-60, 20],
+                coop: [40, 100],
+                econ: [-60, 10],
+                reli: [-20, 30],
+                soci: [-80, -30],
+                demo: [70, 100],
+                decent: [-60, 60]
+            },
+            populism: 90,
+            vetos: {
+                "spec_25jul": {
+                    val: -0.1,
+                    type: "less"
+                },
+                "decent_election_gov": {
+                    val: 0.4,
+                    type: "greater"
+                }
+            }
+        }, {
+            name: "Tunisian Nationalist Party",
+            image: "images/tnp.png",
+            range_vector: {
+                pana: [80, 100],
+                coop: [60, 100],
+                econ: [-60, -20],
+                reli: [-20, 30],
+                soci: [-80, -30],
+                demo: [80, 100],
+                decent: [0, 80]
+            },
+            populism: 90,
+            vetos: {
+                "spec_25jul": {
+                    val: -0.1,
+                    type: "less"
+                },
+                "pana_unity": {
+                    val: -0.1,
+                    type: "less"
+                },
+                "pana_afro": {
+                    val: 0.4,
+                    type: "greater"
+                }
+            }
+        }, {
+            name: "Free Patriotic Union",
+            image: "images/UPL.png",
+            range_vector: {
+                pana: [20, 100],
+                coop: [-40, 20],
+                econ: [40, 80],
+                reli: [40, 80],
+                soci: [20, 70],
+                demo: [-40, 0],
+                decent: [-40, 20]
+            },
+            populism: 50,
+        }, {
+            name: "Tunisian Liberal Party",
+            image: "images/pl.png",
+            range_vector: {
+                pana: [80, 100],
+                coop: [-100, -90],
+                econ: [80, 100],
+                reli: [80, 100],
+                soci: [80, 100],
+                demo: [-100, -80],
+                decent: [-30, 30]
+            },
+            populism: 10,
+            vetos: {
+                "pana_diplo": {
+                    val: -0.1,
+                    type: "less"
+                },
+                "pana_national_interest": {
+                    val: -0.1,
+                    type: "less"
+                },
+                "pana_unity": {
+                    val: 0.9,
+                    type: "greater"
+                },
+                "pana_conflict": {
+                    val: 0.9,
+                    type: "greater"
+                },
+                "pana_alliances": {
+                    val: 0.9,
+                    type: "greater"
+                },
+            }
+        }];
+
+        const specialLabels = {
+            "25juillet": "Support for July 25th",
+            "maghreb": "Maghreb Union",
+            "monarchie": "Monarchist",
+            "ugtt": "Support for UGTT",
+            "ks": "Pro-Kaïs Saïed",
+            "2011": "Critical of 2011",
+            "afrique": "African Union"
+        };
+
+        // --- HELPER FUNCTIONS ---
+        function getQueryVariable(variable) {
+            const query = window.location.search.substring(1);
+            const vars = query.split("&");
+            for (let i = 0; i < vars.length; i++) {
+                const pair = vars[i].split("=");
+                if (decodeURIComponent(pair[0]) == variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+            return null;
         }
 
-        const toggleRefinementBtn =
-          document.getElementById("toggle-refinement");
-        const refinementContent = document.getElementById("refinement-content");
-        const refinementArrow = document.getElementById("refinement-arrow");
-        toggleRefinementBtn.addEventListener("click", () => {
-          refinementContent.classList.toggle("hidden");
-          refinementArrow.classList.toggle("rotate-180");
-        });
-
-        const toggleRankingBtn = document.getElementById("toggle-ranking");
-        const rankingContent = document.getElementById("ranking-content");
-        const rankingArrow = document.getElementById("ranking-arrow");
-        toggleRankingBtn.addEventListener("click", () => {
-          rankingContent.classList.toggle("hidden");
-          rankingArrow.classList.toggle("rotate-180");
-        });
-      };
-
-      async function imageToBase64(imgElement) {
-        try {
-          if (!imgElement.src || imgElement.src.startsWith("data:")) {
-            return imgElement.src;
-          }
-          const response = await fetch(imgElement.src);
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          const blob = await response.blob();
-          return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onloadend = () => resolve(reader.result);
-            reader.onerror = reject;
-            reader.readAsDataURL(blob);
-          });
-        } catch (error) {
-          console.error(`Could not load image ${imgElement.src}:`, error);
-          return null;
+        function parseAnswers(ansStr) {
+            if (!ansStr) return {};
+            let map = {};
+            ansStr.split(',').forEach(pair => {
+                let [k, v] = pair.split(':');
+                map[k] = parseFloat(v);
+            });
+            return map;
         }
-      }
 
-      async function downloadResults() {
-        const downloadButton = document.getElementById("download-button");
-        downloadButton.disabled = true;
-        downloadButton.innerText = "Generating...";
-        const card = document.getElementById("share-card");
-        const imagesToConvert = Array.from(card.getElementsByTagName("img"));
-        try {
-          await document.fonts.ready;
-          await Promise.all(
-            imagesToConvert.map(async (img) => {
-              const base64Src = await imageToBase64(img);
-              if (base64Src) {
-                img.src = base64Src;
-              }
-            })
-          );
-          const canvas = await html2canvas(card, {
-            scale: 2,
-            useCORS: true,
-            width: 1080,
-            height: 1350,
-            logging: false,
-            backgroundColor: "#18181B",
-          });
-          const link = document.createElement("a");
-          link.download = "My-TunisianValues-Results.png";
-          link.href = canvas.toDataURL("image/png");
-          link.click();
-        } catch (err) {
-          console.error("Error during image generation:", err);
-          alert(
-            "Sorry, an error occurred while creating the image. Please try again."
-          );
-        } finally {
-          downloadButton.disabled = false;
-          downloadButton.innerText = "Download Results";
+        function pctToVector(leftPct, rightPct) {
+            return rightPct - leftPct;
         }
-      }
+
+        function calculatePopulismScore(answers, questionsMeta) {
+            let total = 0;
+            let count = 0;
+            let absTotal = 0;
+
+            questionsMeta.forEach(q => {
+                if (q.tags && q.tags.includes('is_populist') && answers[q.id] !== undefined) {
+                    total += answers[q.id];
+                    absTotal += Math.abs(answers[q.id]);
+                    count++;
+                }
+            });
+
+            if (count === 0) return 0;
+            if (absTotal === 0) return 0;
+
+            let rawAvg = total / count;
+            return Math.round((rawAvg + 1) * 50);
+        }
+
+        /**
+         * Weighted Cosine Similarity
+         * Compares the "Direction" (Angle) of two vectors
+         * @returns {number} -1 (opposite) to 1 (identical)
+         */
+        function cosineSimilarity(vecA, vecB, weights) {
+            let dot = 0;
+            let magA = 0;
+            let magB = 0;
+
+            for (let key in vecA) {
+                // Apply user weight on the axis
+                let w = weights ? weights[key] : 1;
+
+                let valA = vecA[key] * w;
+                let valB = vecB[key] * w;
+
+                dot += valA * valB;
+                magA += valA * valA;
+                magB += valB * valB;
+            }
+
+            if (magA === 0 || magB === 0) return 0;
+            return dot / (Math.sqrt(magA) * Math.sqrt(magB));
+        }
+
+        // --- MAIN LOGIC ---
+        window.onload = function() {
+            const final_pct = {};
+            const userVector = {}; // Values from -100 to +100 for each axis
+            let totalNeutralitySum = 0;
+
+            const barsContainer = document.getElementById("bars-container");
+            const wContainer = document.getElementById("weights-container");
+            const captureBars = document.getElementById("capture-bars");
+
+            // 1. Reconstruction of user scores
+            axes.forEach((axis) => {
+                const config = axesConfig[axis];
+                const s = parseFloat(getQueryVariable("s_" + axis) || 0);
+                const n = parseFloat(getQueryVariable("n_" + axis) || 0);
+                const m = parseFloat(getQueryVariable("m_" + axis) || 0);
+
+                let neutral = 0,
+                    left = 0,
+                    right = 0;
+
+                if (m > 0) {
+                    neutral = (n / m) * 100;
+                    const decided_max = m - n;
+                    if (decided_max > 0) {
+                        const decided_pct = 100 - neutral;
+                        const norm_s = (s + decided_max) / (2 * decided_max);
+                        left = norm_s * decided_pct;
+                        right = (1 - norm_s) * decided_pct;
+                    }
+                } else {
+                    neutral = 100;
+                }
+
+                totalNeutralitySum += neutral;
+
+                final_pct[axis] = {
+                    left,
+                    neutral,
+                    right
+                };
+
+                userVector[axis] = pctToVector(left, right);
+
+                // --- UI BAR HTML ---
+                const barHtml = `
+                    <div class="mb-2">
+                      <div class="flex justify-between items-end mb-1">
+                          <span class="text-lg font-bold" style="color: ${config.leftColor}">${config.name}</span>
+                      </div>
+                      <div class="w-full bg-gray-200 rounded-full h-8 shadow-inner flex overflow-hidden bar-shadow">
+                          <div style="width: ${left}%; background-color: ${config.leftColor}" class="h-full"></div>
+                          <div style="width: ${neutral}%; background-color: #f3f4f6" class="h-full"></div>
+                          <div style="width: ${right}%; background-color: ${config.rightColor}" class="h-full"></div>
+                      </div>
+                      <div class="flex justify-between items-center text-sm mt-1 font-medium">
+                         <div class="text-left w-1/3 leading-tight">
+                            <span class="text-xl font-bold" style="color: ${config.leftColor}">${Math.round(left)}%</span>
+                            <span class="text-gray-600 block text-xs uppercase">${config.leftLabel}</span>
+                         </div>
+                         <div class="text-center w-1/3 text-gray-400 text-xs">Neutral: ${Math.round(neutral)}%</div>
+                         <div class="text-right w-1/3 leading-tight">
+                            <span class="text-xl font-bold" style="color: ${config.rightColor}">${Math.round(right)}%</span>
+                            <span class="text-gray-600 block text-xs uppercase">${config.rightLabel}</span>
+                         </div>
+                      </div>
+                    </div>
+                `;
+                barsContainer.innerHTML += barHtml;
+
+                // --- CAPTURE BAR HTML ---
+                captureBars.innerHTML += `
+                    <div class="mb-4">
+                        <div class="flex justify-between items-end mb-2">
+                             <h3 class="text-3xl font-bold uppercase text-slate-700">${config.name}</h3>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-12 flex overflow-hidden">
+                             <div style="width: ${left}%; background-color: ${config.leftColor}" class="h-full flex items-center justify-start pl-4 text-white font-bold text-xl">${Math.round(left) > 10 ? Math.round(left)+'%' : ''}</div>
+                             <div style="width: ${neutral}%; background-color: #e2e8f0" class="h-full"></div>
+                             <div style="width: ${right}%; background-color: ${config.rightColor}" class="h-full flex items-center justify-end pr-4 text-white font-bold text-xl">${Math.round(right) > 10 ? Math.round(right)+'%' : ''}</div>
+                        </div>
+                         <div class="flex justify-between mt-2">
+                             <span class="text-xl font-bold uppercase" style="color: ${config.leftColor}">${config.leftLabel}</span>
+                             <span class="text-xl font-bold uppercase" style="color: ${config.rightColor}">${config.rightLabel}</span>
+                         </div>
+                    </div>
+                `;
+
+                wContainer.innerHTML += `
+                    <div class="flex flex-col">
+                       <label class="font-bold text-gray-700">${config.name}</label>
+                       <input type="range" id="weight-${axis}" min="0.5" max="2" step="0.5" value="1" class="slider-input">
+                    </div>
+                `;
+            });
+
+            // 2. Populism
+            const ansStr = getQueryVariable("ans");
+            const userAnswers = parseAnswers(ansStr);
+            const userPopulism = calculatePopulismScore(userAnswers, questions);
+            document.getElementById("populism-meter").innerHTML = `Populism Score: <span class="font-bold text-${userPopulism > 60 ? 'red' : 'blue'}-600">${userPopulism}%</span>`;
+
+            // 3. Special Icons
+            const icons_param = getQueryVariable("icons");
+            if (icons_param) {
+                const container = document.getElementById("special-icons-container");
+                const iconsList = icons_param.split(',').filter(i => i.length > 0);
+                if (iconsList.length > 0) {
+                    let html = `<h3 class="text-3xl font-bold mb-8 text-gray-800">Special Positions</h3><div class="flex justify-center gap-8 flex-wrap">`;
+                    iconsList.forEach(iconName => {
+                        const labelText = specialLabels[iconName] || iconName;
+                        html += `
+                        <div class="flex flex-col items-center group w-40">
+                            <div class="bg-white p-3 rounded-xl shadow-md border border-gray-100 group-hover:shadow-lg transition-all mb-2">
+                                <img src="icons/${iconName}.png" alt="${labelText}" class="h-20 w-20 object-contain" onerror="this.style.display='none'">
+                            </div>
+                            <div class="text-center">
+                                <span class="text-gray-700 font-semibold">${labelText}</span>
+                            </div>
+                        </div>`;
+                    });
+                    html += `</div>`;
+                    container.innerHTML = html;
+                }
+            }
+
+            // 4. MATCHING FUNCTION (SMART FUSION V3)
+            function calculateMatch() {
+                let scores = [];
+
+                // Retrieve user weights
+                let userWeights = {};
+                axes.forEach(ax => {
+                    userWeights[ax] = parseFloat(document.getElementById(`weight-${ax}`).value);
+                });
+
+                // Helper to get a party's center point
+                const getPartyMidpoint = (range) => {
+                    let midpoint = {};
+                    for (let ax in range) {
+                        midpoint[ax] = (range[ax][0] + range[ax][1]) / 2;
+                    }
+                    return midpoint;
+                };
+
+                ideologies.forEach(party => {
+                    let isVetoed = false;
+                    const partyMidpoint = getPartyMidpoint(party.range_vector);
+
+                    // --- 1. RUPTURE SYSTEM (VETO) ---
+                    // "Ideological Rupture": If distance is extreme (>100) on critical axes, it's incompatible.
+                    const criticalAxes = ["demo", "reli", "econ"];
+                    const ruptureThreshold = 100;
+
+                    criticalAxes.forEach(ax => {
+                        const uPos = userVector[ax];
+                        const [pMin, pMax] = party.range_vector[ax];
+                        let dist = 0;
+                        if (uPos < pMin) dist = pMin - uPos;
+                        else if (uPos > pMax) dist = uPos - pMax;
+
+                        if (dist > ruptureThreshold) isVetoed = true;
+                    });
+
+                    // Vetos on specific questions
+                    if (party.vetos) {
+                        for (let qId in party.vetos) {
+                            const rule = party.vetos[qId];
+                            const userVal = userAnswers[qId] || 0;
+                            if ((rule.type === "greater" && userVal > rule.val) ||
+                                (rule.type === "less" && userVal < rule.val)) isVetoed = true;
+                        }
+                    }
+
+                    if (isVetoed) {
+                        scores.push({
+                            name: party.name,
+                            score: 0,
+                            veto: true,
+                            image: party.image
+                        });
+                        return;
+                    }
+
+                    // --- 2. HYBRID SCORE CALCULATION ---
+
+                    // A. Direction Similarity (V1)
+                    // Compare user vector direction with party vector.
+                    // Pass userWeights so "Refine" works on the angle too.
+                    let sim = cosineSimilarity(userVector, partyMidpoint, userWeights);
+                    // Transform -1..1 to 0..100
+                    let baseScore = (sim + 1) * 50;
+
+                    // B. Zone Adjustment (Soft V2)
+                    // Only lower score if user is outside the interval.
+                    // If inside, no penalty (implicit bonus).
+                    let totalDistPenalty = 0;
+                    axes.forEach(ax => {
+                        const uPos = userVector[ax];
+                        const [pMin, pMax] = party.range_vector[ax];
+                        const weight = userWeights[ax];
+
+                        let dist = 0;
+                        if (uPos < pMin) {
+                            dist = pMin - uPos;
+                        } else if (uPos > pMax) {
+                            dist = uPos - pMax;
+                        }
+
+                        // Soft penalty: multiply by 0.2
+                        // Example: being 20 points out of zone loses 4 points.
+                        totalDistPenalty += (dist * 0.2) * weight;
+                    });
+
+                    // C. Final Score
+                    // Base (Direction) - Penalty (Zone)
+                    let finalScore = Math.round(baseScore - totalDistPenalty);
+
+                    // D. Populism Penalty
+                    let popDiff = Math.abs(userPopulism - party.populism);
+                    finalScore -= Math.round(popDiff * 0.2); // Light penalty
+
+                    // Clamping
+                    if (finalScore < 0) finalScore = 0;
+                    if (finalScore > 100) finalScore = 100;
+
+                    scores.push({
+                        name: party.name,
+                        score: finalScore,
+                        veto: false,
+                        image: party.image
+                    });
+                });
+
+                // Sort
+                scores.sort((a, b) => b.score - a.score);
+
+                // --- INDEPENDENT & NEUTRALITY LOGIC ---
+                let top = scores[0];
+                let isIndependent = false;
+                const avgNeutrality = totalNeutralitySum / axes.length;
+
+                // Show Warning if Neutrality > 50%
+                const warningEl = document.getElementById("neutrality-warning");
+                if (avgNeutrality > 50) {
+                    warningEl.classList.remove("hidden");
+                } else {
+                    warningEl.classList.add("hidden");
+                }
+
+                // Detect Independent: Neutrality > 60% OR best score < 50%
+                if (avgNeutrality > 60 || !top || top.score < 50) {
+                    isIndependent = true;
+                }
+
+                if (isIndependent) {
+                    top = {
+                        name: "Independent / No Affiliation",
+                        score: top ? top.score : 0,
+                        veto: false,
+                        image: null
+                    };
+                }
+
+                // Display UI
+                const labelEl = document.getElementById("ideology-label");
+                const imgContainer = document.getElementById("winner-image-container");
+                const captureName = document.getElementById("capture-winner-name");
+                const captureImg = document.getElementById("capture-winner-img");
+                const captureScore = document.getElementById("capture-match-score");
+
+                if (isIndependent) {
+                    labelEl.innerText = "Independent / No Affiliation";
+                    labelEl.classList.remove("text-red-600");
+                    labelEl.classList.add("text-gray-600");
+
+                    imgContainer.innerHTML = `<span class="text-7xl">🇹🇳</span>`;
+                    captureName.innerText = "Independent";
+                    captureImg.innerHTML = `<span class="text-8xl">🇹🇳</span>`;
+                    captureScore.innerText = "No close match (>50%)";
+                    captureScore.className = "mt-2 inline-block px-4 py-1 bg-gray-200 text-gray-700 rounded-lg font-bold text-2xl";
+                } else {
+                    labelEl.innerText = top.name;
+                    labelEl.classList.add("text-red-600");
+                    labelEl.classList.remove("text-gray-600");
+
+                    if (top.image) {
+                        imgContainer.innerHTML = `<img src="${top.image}" alt="${top.name}" class="h-full w-full object-contain drop-shadow-xl">`;
+                        captureImg.innerHTML = `<img src="${top.image}" class="h-full w-full object-contain">`;
+                    } else {
+                        imgContainer.innerHTML = `<span class="text-6xl">🏛️</span>`;
+                        captureImg.innerHTML = `<span class="text-8xl">🏛️</span>`;
+                    }
+
+                    captureName.innerText = top.name;
+                    captureScore.innerText = `Match: ${top.score}%`;
+                    captureScore.className = "mt-2 inline-block px-4 py-1 bg-red-100 text-red-700 rounded-lg font-bold text-2xl";
+                }
+
+                // Detailed List
+                let html = "";
+                scores.forEach(s => {
+                    let color = s.veto ? "bg-gray-400" : (s.score > 85 ? "bg-green-600" : (s.score > 65 ? "bg-green-500" : (s.score > 45 ? "bg-yellow-500" : "bg-red-500")));
+                    let width = s.veto ? 100 : s.score;
+                    let text = s.veto ? "Incompatible" : s.score + "%";
+                    let opacity = s.veto ? "opacity-50" : "opacity-100";
+                    let imgHtml = s.image ? `<img src="${s.image}" class="h-10 w-10 object-contain mr-4 rounded-md bg-white p-1 shadow-sm border border-gray-100" onerror="this.style.display='none'">` : `<div class="h-10 w-10 mr-4 bg-gray-200 rounded-full flex items-center justify-center text-xs">?</div>`;
+
+                    html += `
+                   <div class="mb-6 ${opacity} transition-all hover:bg-gray-50 p-2 rounded-lg">
+                     <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center">
+                            ${imgHtml}
+                            <span class="text-lg font-bold text-gray-800">${s.name}</span>
+                        </div>
+                        <span class="text-sm font-bold text-gray-600 bg-gray-100 px-2 py-1 rounded">${text}</span>
+                     </div>
+                     <div class="w-full bg-gray-200 rounded-full h-4 shadow-inner overflow-hidden">
+                        <div class="${color} h-4 rounded-full shadow-sm transition-all duration-1000 ease-out" style="width: ${width}%"></div>
+                     </div>
+                   </div>
+                 `;
+                });
+                document.getElementById("ranking-content").innerHTML = html;
+            }
+
+            calculateMatch();
+
+            // --- EVENTS ---
+            document.getElementById("recalculate-button").addEventListener("click", calculateMatch);
+            document.getElementById("toggle-refinement").onclick = () => {
+                const content = document.getElementById("refinement-content");
+                const arrow = document.getElementById("refinement-arrow");
+                content.classList.toggle("hidden");
+                arrow.classList.toggle("rotate-180");
+            };
+            document.getElementById("toggle-ranking").onclick = () => {
+                const content = document.getElementById("ranking-content");
+                const arrow = document.getElementById("ranking-arrow");
+                content.classList.toggle("hidden");
+                arrow.classList.toggle("rotate-180");
+            };
+
+            // --- DOWNLOAD FEATURE ---
+            document.getElementById("download-btn").addEventListener("click", function() {
+                const captureArea = document.getElementById("capture-area");
+                const btn = this;
+
+                const originalText = btn.innerHTML;
+                btn.innerHTML = `<span class="animate-pulse">Generating...</span>`;
+                document.getElementById("capture-date").innerText = new Date().toLocaleDateString('en-GB');
+
+                html2canvas(captureArea, {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: "#f8fafc"
+                }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = 'my-tunisianvalues-results.png';
+                    link.href = canvas.toDataURL("image/png");
+                    link.click();
+                    btn.innerHTML = originalText;
+                }).catch(err => {
+                    console.error(err);
+                    alert("Error generating image.");
+                    btn.innerHTML = originalText;
+                });
+            });
+        };
     </script>
-  </body>
+</body>
+
 </html>
-
-
-
