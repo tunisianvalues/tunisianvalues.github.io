@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TunisianValues — Instructions</title>
+    <link rel="icon" type="image/png" href="icon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styless.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'oswald': ['Oswald', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- TRADUCTION -->
+    <script src="translations.js"></script>
+</head>
+<body class="font-oswald antialiased">
+    <div class="min-h-screen bg-gradient-to-br from-red-600 to-red-700 flex flex-col">
+        <header class="border-b border-red-500/30 bg-red-600/90 backdrop-blur-sm">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <img src="TUNISIAN VALUES.png" alt="TunisianValues logo" class="h-10 w-auto">
+                    </div>
+                    <!-- Le bouton FR/EN est injecté automatiquement ici par translations.js -->
+                </div>
+            </div>
+        </header>
+
+        <main class="container mx-auto px-4 py-16 flex-grow">
+            <div class="max-w-2xl mx-auto bg-white/95 backdrop-blur-sm rounded-lg p-8 shadow-lg text-center">
+                <h2 class="text-4xl font-bold text-red-700 mb-4 tracking-tight" data-tv="instructions_title">INSTRUCTIONS</h2>
+                <p class="text-slate-700 text-lg mb-8" data-tv="instructions_body">
+                    On vous présentera une série d'énoncés. Pour chacun, choisissez l'option qui correspond le mieux à votre opinion.
+                </p>
+                <div class="flex flex-col items-center gap-4">
+                    <button onclick="location.href='quiz.html';" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-4 rounded-lg transition-all duration-300 hover:shadow-lg" data-tv="btn_start">
+                        COMMENCER
+                    </button>
+                    <button onclick="location.href='index.html';" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold text-lg px-8 py-3 rounded-lg transition-colors" data-tv="btn_back_home">
+                        Retour à l'accueil
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="border-t border-red-500/30 bg-red-600/90 backdrop-blur-sm">
+            <div class="container mx-auto px-4 py-8">
+                <div class="text-center text-white/90">
+                    <p data-tv="footer_copy">&copy; 2026 TunisianValues.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

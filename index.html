@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TunisianValues - Test Politique Tunisien</title>
+    <meta name="description" content="Un questionnaire politique tunisien avec 7 axes : Panarabisme, Coopération internationale, Économie, Religion, Société, Démocratie, Gouvernance.">
+    <link rel="icon" type="image/png" href="icon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styless.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'oswald': ['Oswald', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VLR0BL4XM3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VLR0BL4XM3');
+    </script>
+    <!-- TRADUCTION -->
+    <script src="translations.js"></script>
+</head>
+<body class="font-oswald antialiased">
+    <div class="min-h-screen bg-gradient-to-br from-red-600 to-red-700">
+        <!-- Header -->
+        <header class="border-b border-red-500/30 bg-red-600/90 backdrop-blur-sm">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <img src="TUNISIAN VALUES.png" alt="Logo TunisianValues" class="h-10 w-auto">
+                    </div>
+                    <!-- Le bouton FR/EN est injecté automatiquement ici par translations.js -->
+                </div>
+            </div>
+        </header>
+
+        <!-- Contenu principal -->
+        <main class="container mx-auto px-4 py-16">
+            <div class="max-w-4xl mx-auto">
+                <!-- Section héro -->
+                <div class="text-center mb-16">
+                    <h2 class="text-6xl font-bold text-white mb-6 tracking-tight">TUNISIAN VALUES</h2>
+                    <h3 class="text-2xl font-semibold text-white/90 mb-4 tracking-wide" data-tv="site_subtitle">TEST POLITIQUE TUNISIEN</h3>
+                    <p class="text-xl text-white/80 mb-8 max-w-2xl mx-auto font-light" data-tv="hero_description">
+                        Découvrez vos orientations politiques à travers un questionnaire adapté au contexte tunisien.
+                    </p>
+                    <div class="flex justify-center">
+                        <a href="instructions.html" class="inline-block bg-white text-red-600 hover:bg-white/90 font-bold text-lg px-10 py-4 rounded-lg transition-all duration-300 hover:shadow-lg" data-tv="cta_start">
+                            FAIRE LE TEST
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cartes de présentation -->
+                <div class="grid md:grid-cols-2 gap-8 mb-16">
+                    <!-- Carte test -->
+                    <div class="border-2 border-white/20 bg-white/95 backdrop-blur-sm rounded-lg p-6 card-hover">
+                        <div class="mb-4">
+                            <h3 class="text-2xl text-red-700 font-bold mb-2" data-tv="card_what_title">QU'EST-CE QUE TUNISIAN VALUES ?</h3>
+                            <p class="text-red-600" data-tv="card_what_meta">81 questions • 7 axes politiques • 10 minutes</p>
+                        </div>
+                        <div>
+                            <p class="text-slate-700" data-tv="card_what_body">
+                                TunisianValues est un quiz politique adapté au contexte tunisien. Vous répondrez à 81 affirmations
+                                selon votre niveau d'accord, de "Tout à fait d'accord" à "Pas du tout d'accord."
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Carte axes -->
+                    <div class="border-2 border-white/20 bg-white/95 backdrop-blur-sm rounded-lg p-6 card-hover">
+                        <div class="mb-4">
+                            <h3 class="text-2xl text-red-700 font-bold mb-2" data-tv="card_axes_title">7 AXES POLITIQUES</h3>
+                            <p class="text-red-600" data-tv="card_axes_meta">Une analyse multidimensionnelle de vos valeurs</p>
+                        </div>
+                        <div>
+                            <p class="text-slate-700" data-tv="card_axes_body">
+                                À la fin, vos réponses vous placeront sur 7 grands axes reflétant les différentes sensibilités politiques
+                                présentes en Tunisie : Panarabisme, Coopération internationale, Économie, Religion, Société,
+                                Démocratie et Gouvernance.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section axes -->
+                <div class="mb-16">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl font-bold text-white mb-4 tracking-tight" data-tv="section_axes_title">LES 7 AXES ANALYSÉS</h2>
+                        <p class="text-xl text-white/80 max-w-2xl mx-auto" data-tv="section_axes_sub">
+                            Votre position sur les grands enjeux de la politique tunisienne
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="border-2 border-white/20 bg-white/95 backdrop-blur-sm rounded-lg p-6 card-hover">
+                            <h3 class="text-lg font-bold text-gray-900 mb-2" data-tv="ax_pana">PANARABISME</h3>
+                            <p class="text-sm text-gray-600">
+                                <span class="font-semibold text-red-600" data-tv="ax_pana_left">Unité arabe</span> vs
+                                <span class="font-semibold text-slate-700" data-tv="ax_pana_right">Nationalisme tunisien</span>
+                            </p>
+                        </div>
+
+                        <div class="border-2 border-white/20 bg-white/95 backdrop-blur-sm rounded-lg p-6 card-hover">
+                            <h3 class="text-lg font-bold text-gray-900 mb-2" data-tv="ax_coop">COOPÉRATION</h3>
+                            <p class="text-sm text-gray-600">
+                                <span class="font-semibold text-orange-600" data-tv="ax_coop_left">Internationalisme</span> vs
+                                <span class="font-semibold text-blue-600" data-tv="ax_coop_right">Souverainisme</span>
+                            </p>
+                        </div>
+
+                        <div class="border-2 border-white/20 bg-white/95 backdrop-blur-sm rounded-lg p-6 card-hover">
+                            <h3 class="text-lg font-bold text-gray-900 mb-2" data-tv="ax_econ">ÉCONOMIE</h3>
+                            <p class="text-sm text-gray-600">
+                                <span class="font-semibold text-red-600" data-tv="ax_econ_left">Socialisme</span> vs
+                                <span class="font-semibold text-green-600" data-tv="ax_econ_right">Libéralisme</span>
+                            </p>
+                        </div>
+
+                        <div class="border-2 border-white/20 bg-white/95 backdrop-blur-sm rounded-lg p-6 card-hover">
+                            <h3 class="text-lg font-bold text-gray-900 mb-2" data-tv="ax_reli">RELIGION</h3>
+                            <p class="text-sm text-gray-600">
+                                <span class="font-semibold text-emerald-600" data-tv="ax_reli_left">Islam politique</span> vs
+                                <span class="font-semibold text-purple-600" data-tv="ax_reli_right">Laïcité</span>
+                            </p>
+                        </div>
+
+                        <div class="border-2 border-white/20 bg-white/95 backdrop-blur-sm rounded-lg p-6 card-hover">
+                            <h3 class="text-lg font-bold text-gray-900 mb-2" data-tv="ax_soci">SOCIÉTÉ</h3>
+                            <p class="text-sm text-gray-600">
+                                <span class="font-semibold text-amber-600" data-tv="ax_soci_left">Conservatisme</span> vs
+                                <span class="font-semibold text-pink-600" data-tv="ax_soci_right">Progressisme</span>
+                            </p>
+                        </div>
+
+                        <div class="border-2 border-white/20 bg-white/95 backdrop-blur-sm rounded-lg p-6 card-hover">
+                            <h3 class="text-lg font-bold text-gray-900 mb-2" data-tv="ax_demo">DÉMOCRATIE</h3>
+                            <p class="text-sm text-gray-600">
+                                <span class="font-semibold text-blue-600" data-tv="ax_demo_left">Démocratie</span> vs
+                                <span class="font-semibold text-red-600" data-tv="ax_demo_right">Autoritarisme</span>
+                            </p>
+                        </div>
+
+                        <div class="border-2 border-white/20 bg-white/95 backdrop-blur-sm rounded-lg p-6 card-hover lg:col-start-2">
+                            <h3 class="text-lg font-bold text-gray-900 mb-2" data-tv="ax_decent">GOUVERNANCE</h3>
+                            <p class="text-sm text-gray-600">
+                                <span class="font-semibold text-indigo-600" data-tv="ax_decent_left">Décentralisation</span> vs
+                                <span class="font-semibold text-slate-600" data-tv="ax_decent_right">Centralisation</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Pied de page -->
+        <footer class="border-t border-red-500/30 bg-red-600/90 backdrop-blur-sm mt-auto">
+            <div class="container mx-auto px-4 py-8">
+                <div class="text-center text-white/90">
+                    <p data-tv="footer_copy">&copy; 2026 TunisianValues.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

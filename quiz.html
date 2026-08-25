@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TunisianValues — Quiz</title>
+    <link rel="icon" type="image/png" href="icon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styless.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'oswald': ['Oswald', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="font-oswald antialiased">
+    <script src="questions.js"></script>
+    <script src="translations.js"></script>
+
+    <div class="min-h-screen bg-gradient-to-br from-red-600 to-red-700 flex flex-col">
+        <header class="border-b border-red-500/30 bg-red-600/90 backdrop-blur-sm">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <img src="TUNISIAN VALUES.png" alt="TunisianValues logo" class="h-10 w-auto">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="min-h-screen bg-gradient-to-br from-red-600 to-red-700 flex flex-col justify-center items-center px-4 py-8">
+            <main class="w-full max-w-3xl">
+
+                <!-- BOITE 1: LE QUIZ (Questions) -->
+                <div id="quiz-box" class="bg-white/95 backdrop-blur-sm rounded-xl p-6 md:p-10 shadow-2xl">
+                    <div class="text-center mb-6">
+                        <h2 id="question-number" class="text-xl font-semibold text-red-600 tracking-wider">Chargement...</h2>
+                    </div>
+
+                    <p id="question-text" class="text-2xl md:text-3xl font-bold text-gray-800 text-center mb-8 min-h-[120px] flex items-center justify-center"></p>
+
+                    <div class="space-y-3 mb-8">
+                        <button class="w-full text-lg font-bold py-4 px-6 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 shadow-md bg-green-700 hover:bg-green-800 text-white" onclick="next_question(1.0)" data-tv="ans_agree_strong">Tout à fait d'accord</button>
+                        <button class="w-full text-lg font-bold py-3 px-6 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 shadow-md bg-green-500 hover:bg-green-600 text-white" onclick="next_question(0.5)" data-tv="ans_agree">Plutôt d'accord</button>
+                        <button class="w-full text-lg font-bold py-3 px-6 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 shadow-md bg-gray-400 hover:bg-gray-500 text-white" onclick="next_question(0.0)" data-tv="ans_neutral">Neutre / Partagé</button>
+                        <button class="w-full text-lg font-bold py-3 px-6 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 shadow-md bg-red-500 hover:bg-red-600 text-white" onclick="next_question(-0.5)" data-tv="ans_disagree">Plutôt pas d'accord</button>
+                        <button class="w-full text-lg font-bold py-4 px-6 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 shadow-md bg-red-700 hover:bg-red-800 text-white" onclick="next_question(-1.0)" data-tv="ans_disagree_strong">Pas du tout d'accord</button>
+                    </div>
+
+                    <div class="text-center">
+                        <button id="back_button" onclick="prev_question()" class="text-gray-600 hover:text-red-700 font-semibold py-2 px-5 rounded-lg transition-colors" data-tv="btn_prev">← Précédent</button>
+                        <button id="back_button_off" class="text-gray-400 font-semibold py-2 px-5 rounded-lg cursor-not-allowed" data-tv="btn_prev">← Précédent</button>
+                    </div>
+                </div>
+
+                <!-- BOITE 2: INTERMISSION (Affiner les résultats) -->
+                <div id="intermission-box" class="hidden bg-white/95 backdrop-blur-sm rounded-xl p-8 md:p-12 shadow-2xl text-center">
+                    <h2 class="text-3xl font-bold text-red-700 mb-6 uppercase tracking-wider" data-tv="quiz_intermission_title">PARTIE PRINCIPALE TERMINÉE !</h2>
+                    <p class="text-lg text-slate-700 mb-10 leading-relaxed max-w-xl mx-auto" data-tv="quiz_intermission_text">
+                        Vous avez répondu à toutes les questions de base. Vous pouvez dès à présent voir vos résultats, ou continuer avec quelques questions contextuelles (optionnelles) sur des sujets spécifiques (Palestine, environnement, héritage historique...) pour affiner
+                        votre profil.
+                    </p>
+                    <div class="flex flex-col items-center gap-4">
+                        <button onclick="startPhase2()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold text-lg px-8 py-4 rounded-lg shadow-md transition-all duration-300 transform hover:scale-[1.02]" data-tv="btn_continue_context">
+                            Affiner avec les questions contextuelles
+                        </button>
+                        <button onclick="skipToResults()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-3 rounded-lg shadow-md transition-all duration-300" data-tv="btn_results_now">
+                            Voir mes résultats
+                        </button>
+                        <button onclick="goBackFromIntermission()" class="mt-4 text-gray-500 hover:text-red-600 text-sm font-bold uppercase tracking-widest transition-colors" data-tv="btn_prev">
+                            ← Retourner à la dernière question
+                        </button>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Séparation des questions en 2 phases
+        let normalQuestions = questions.filter(q => q.category !== 'contextual');
+        let contextQuestions = questions.filter(q => q.category === 'contextual');
+
+        shuffle(normalQuestions);
+        shuffle(contextQuestions);
+
+        let activeQuestions = [...normalQuestions];
+        let phase = 1;
+
+        let pana_array = new Array(questions.length).fill(0);
+        let coop_array = new Array(questions.length).fill(0);
+        let econ_array = new Array(questions.length).fill(0);
+        let reli_array = new Array(questions.length).fill(0);
+        let soci_array = new Array(questions.length).fill(0);
+        let demo_array = new Array(questions.length).fill(0);
+        let decent_array = new Array(questions.length).fill(0);
+
+        let neutral_pana_array = new Array(questions.length).fill(0);
+        let neutral_coop_array = new Array(questions.length).fill(0);
+        let neutral_econ_array = new Array(questions.length).fill(0);
+        let neutral_reli_array = new Array(questions.length).fill(0);
+        let neutral_soci_array = new Array(questions.length).fill(0);
+        let neutral_demo_array = new Array(questions.length).fill(0);
+        let neutral_decent_array = new Array(questions.length).fill(0);
+
+        let answers_map = {};
+        var qn = 0;
+
+        function init_question() {
+            // Frontières du flux
+            if (qn === normalQuestions.length && phase === 1) {
+                showIntermission();
+                return;
+            }
+            if (qn === activeQuestions.length) {
+                results();
+                return;
+            }
+
+            // Affiche la boite de quiz
+            document.getElementById('intermission-box').style.display = 'none';
+            document.getElementById('quiz-box').style.display = 'block';
+
+            const q = activeQuestions[qn];
+
+            // Texte de la question
+            let text = q.question;
+            if (window.TV && window.TV.getLang() === 'en') {
+                const enText = window.TV.getQuestion(q.id);
+                if (enText) text = enText;
+            }
+            document.getElementById("question-text").innerHTML = text;
+
+            // Numéro de la question
+            const pattern = window.TV ? window.TV.tr('quiz_question_of') : 'Question {n} sur {total}';
+            document.getElementById("question-number").innerHTML =
+                pattern.replace('{n}', qn + 1).replace('{total}', activeQuestions.length);
+
+            // Bouton Précédent
+            if (qn === 0) {
+                document.getElementById("back_button").style.display = 'none';
+                document.getElementById("back_button_off").style.display = 'block';
+            } else {
+                document.getElementById("back_button").style.display = 'block';
+                document.getElementById("back_button_off").style.display = 'none';
+            }
+        }
+
+        document.addEventListener('tv:langchange', function() {
+            if (document.getElementById('quiz-box').style.display !== 'none') {
+                init_question();
+            }
+        });
+
+        init_question();
+
+        function next_question(mult) {
+            const currentQ = activeQuestions[qn];
+            if (currentQ.id) {
+                answers_map[currentQ.id] = mult;
+            }
+
+            if (mult === 0.0) {
+                pana_array[qn] = 0;
+                coop_array[qn] = 0;
+                econ_array[qn] = 0;
+                reli_array[qn] = 0;
+                soci_array[qn] = 0;
+                demo_array[qn] = 0;
+                decent_array[qn] = 0;
+
+                neutral_pana_array[qn] = Math.abs(currentQ.effect.pana || 0);
+                neutral_coop_array[qn] = Math.abs(currentQ.effect.coop || 0);
+                neutral_econ_array[qn] = Math.abs(currentQ.effect.econ || 0);
+                neutral_reli_array[qn] = Math.abs(currentQ.effect.reli || 0);
+                neutral_soci_array[qn] = Math.abs(currentQ.effect.soci || 0);
+                neutral_demo_array[qn] = Math.abs(currentQ.effect.demo || 0);
+                neutral_decent_array[qn] = Math.abs(currentQ.effect.decent || 0);
+            } else {
+                pana_array[qn] = mult * (currentQ.effect.pana || 0);
+                coop_array[qn] = mult * (currentQ.effect.coop || 0);
+                econ_array[qn] = mult * (currentQ.effect.econ || 0);
+                reli_array[qn] = mult * (currentQ.effect.reli || 0);
+                soci_array[qn] = mult * (currentQ.effect.soci || 0);
+                demo_array[qn] = mult * (currentQ.effect.demo || 0);
+                decent_array[qn] = mult * (currentQ.effect.decent || 0);
+
+                neutral_pana_array[qn] = 0;
+                neutral_coop_array[qn] = 0;
+                neutral_econ_array[qn] = 0;
+                neutral_reli_array[qn] = 0;
+                neutral_soci_array[qn] = 0;
+                neutral_demo_array[qn] = 0;
+                neutral_decent_array[qn] = 0;
+            }
+
+            qn++;
+            init_question();
+        }
+
+        function prev_question() {
+            if (qn === 0) return;
+            qn--;
+            init_question();
+        }
+
+        // ---- FONCTIONS DE L'INTERMISSION ----
+        function showIntermission() {
+            document.getElementById('quiz-box').style.display = 'none';
+            document.getElementById('intermission-box').style.display = 'block';
+        }
+
+        function goBackFromIntermission() {
+            qn--;
+            init_question();
+        }
+
+        function startPhase2() {
+            if (contextQuestions.length === 0) {
+                results();
+                return;
+            }
+            phase = 2;
+            activeQuestions = activeQuestions.concat(contextQuestions);
+            init_question();
+        }
+
+        function skipToResults() {
+            results();
+        }
+
+        function results() {
+            // Le maximum d'affinité est calculé UNIQUEMENT sur les questions qui ont réellement été vues
+            var max_pana = 0,
+                max_coop = 0,
+                max_econ = 0,
+                max_reli = 0,
+                max_soci = 0,
+                max_demo = 0,
+                max_decent = 0;
+            for (let i = 0; i < qn; i++) {
+                max_pana += Math.abs(activeQuestions[i].effect.pana || 0);
+                max_coop += Math.abs(activeQuestions[i].effect.coop || 0);
+                max_econ += Math.abs(activeQuestions[i].effect.econ || 0);
+                max_reli += Math.abs(activeQuestions[i].effect.reli || 0);
+                max_soci += Math.abs(activeQuestions[i].effect.soci || 0);
+                max_demo += Math.abs(activeQuestions[i].effect.demo || 0);
+                max_decent += Math.abs(activeQuestions[i].effect.decent || 0);
+            }
+
+            let final_pana = pana_array.reduce((a, b) => a + b, 0);
+            let final_coop = coop_array.reduce((a, b) => a + b, 0);
+            let final_econ = econ_array.reduce((a, b) => a + b, 0);
+            let final_reli = reli_array.reduce((a, b) => a + b, 0);
+            let final_soci = soci_array.reduce((a, b) => a + b, 0);
+            let final_demo = demo_array.reduce((a, b) => a + b, 0);
+            let final_decent = decent_array.reduce((a, b) => a + b, 0);
+
+            let final_n_pana = neutral_pana_array.reduce((a, b) => a + b, 0);
+            let final_n_coop = neutral_coop_array.reduce((a, b) => a + b, 0);
+            let final_n_econ = neutral_econ_array.reduce((a, b) => a + b, 0);
+            let final_n_reli = neutral_reli_array.reduce((a, b) => a + b, 0);
+            let final_n_soci = neutral_soci_array.reduce((a, b) => a + b, 0);
+            let final_n_demo = neutral_demo_array.reduce((a, b) => a + b, 0);
+            let final_n_decent = neutral_decent_array.reduce((a, b) => a + b, 0);
+
+            let special_icons = [];
+            for (let i = 0; i < qn; i++) {
+                if (activeQuestions[i].special && answers_map[activeQuestions[i].id] > 0) {
+                    special_icons.push(activeQuestions[i].special);
+                }
+            }
+            const icons_param = special_icons.join(',');
+
+            let ans_str = "";
+            for (let key in answers_map) {
+                ans_str += key + ":" + answers_map[key] + ",";
+            }
+            ans_str = ans_str.slice(0, -1);
+
+            location.href = `results.html` +
+                `?s_pana=${final_pana}&n_pana=${final_n_pana}&m_pana=${max_pana}` +
+                `&s_coop=${final_coop}&n_coop=${final_n_coop}&m_coop=${max_coop}` +
+                `&s_econ=${final_econ}&n_econ=${final_n_econ}&m_econ=${max_econ}` +
+                `&s_reli=${final_reli}&n_reli=${final_n_reli}&m_reli=${max_reli}` +
+                `&s_soci=${final_soci}&n_soci=${final_n_soci}&m_soci=${max_soci}` +
+                `&s_demo=${final_demo}&n_demo=${final_n_demo}&m_demo=${max_demo}` +
+                `&s_decent=${final_decent}&n_decent=${final_n_decent}&m_decent=${max_decent}` +
+                `&icons=${icons_param}` +
+                `&ans=${encodeURIComponent(ans_str)}`;
+        }
+    </script>
+</body>
+
+</html>
