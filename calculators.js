@@ -49,7 +49,7 @@ function calculatePopulismScore(ans, qm) {
 }
 
 // ════════════════════════════════════════════════
-// ENCODAGE & DÉCODAGE ULTRA-COMPACT POUR LE PARTAGE
+// ENCODAGE & DÉCODAGE EXACT & COMPACT POUR LE PARTAGE
 // ════════════════════════════════════════════════
 
 const _B64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
@@ -59,34 +59,41 @@ const _codeToVal = [undefined, -1, -0.5, 0, 0.5, 1];
 function encodeResultsShare(payload) {
     try {
         if (!payload) return "";
+        const name = payload.name ? String(payload.name).trim().substring(0, 30) : "";
+        const axesObj = payload.axes || {};
+        const icons = Array.isArray(payload.icons) ? payload.icons : [];
         const answers = payload.answers || {};
 
-        // S'il n'y a pas d'objets questions, fallback
-        if (typeof questions === "undefined" || !questions.length) {
-            return "";
+        const axesKeys = (typeof axes !== 'undefined') ? axes : ["pana", "coop", "econ", "reli", "soci", "demo", "decent"];
+
+        // 1. Encodage exact des scores d'axes (s, n, m)
+        const axesStr = axesKeys.map(ax => {
+            const a = axesObj[ax] || { s: 0, n: 0, m: 0 };
+            return `${Math.round(parseFloat(a.s || 0) * 10) / 10},${Math.round(parseFloat(a.n || 0) * 10) / 10},${Math.round(parseFloat(a.m || 0) * 10) / 10}`;
+        }).join(";");
+
+        // 2. Encodage des badges spéciaux
+        const iconsStr = icons.join(",");
+
+        // 3. Encodage compact des réponses aux questions (3 bits par question)
+        let ansPacked = "";
+        if (typeof questions !== "undefined" && questions.length > 0) {
+            let vals = questions.map(q => {
+                const v = answers[q.id];
+                return (v !== undefined && _valToCode[String(v)] !== undefined) ? _valToCode[String(v)] : 0;
+            });
+            while (vals.length > 0 && vals[vals.length - 1] === 0) {
+                vals.pop();
+            }
+            for (let i = 0; i < vals.length; i += 2) {
+                const v1 = vals[i];
+                const v2 = (i + 1 < vals.length) ? vals[i + 1] : 0;
+                ansPacked += _B64[(v1 << 3) | v2];
+            }
         }
 
-        let vals = questions.map(q => {
-            const v = answers[q.id];
-            return (v !== undefined && _valToCode[String(v)] !== undefined) ? _valToCode[String(v)] : 0;
-        });
-
-        // Enlever les zéros finaux (questions optionnelles non répondues)
-        while (vals.length > 0 && vals[vals.length - 1] === 0) {
-            vals.pop();
-        }
-
-        let packed = "";
-        for (let i = 0; i < vals.length; i += 2) {
-            const v1 = vals[i];
-            const v2 = (i + 1 < vals.length) ? vals[i + 1] : 0;
-            const code = (v1 << 3) | v2;
-            packed += _B64[code];
-        }
-
-        const rawName = payload.name ? String(payload.name).trim().substring(0, 30) : "";
-        const encName = encodeURIComponent(rawName);
-        return encName ? `${encName}~${packed}` : packed;
+        const encName = encodeURIComponent(name);
+        return `v2~${encName}~${axesStr}~${iconsStr}~${ansPacked}`;
     } catch(e) {
         console.error("Erreur lors de l'encodage du partage :", e);
         return "";
@@ -100,7 +107,59 @@ function decodeResultsShare(str) {
         if (str.startsWith("s=")) str = str.substring(2);
         if (str.startsWith("share=")) str = str.substring(6);
 
-        // 1. Rétrocompatibilité : Ancien format JSON base64 (e.g. eyJ...)
+        const axesKeys = (typeof axes !== 'undefined') ? axes : ["pana", "coop", "econ", "reli", "soci", "demo", "decent"];
+
+        // ── FORMAT V2 (SOLUTION 1 : Scores exacts + Réponses compactées) ──
+        if (str.startsWith("v2~")) {
+            const parts = str.split("~");
+            let name = "";
+            try { name = decodeURIComponent(parts[1] || ""); } catch(e) { name = parts[1] || ""; }
+            const axesPart = parts[2] || "";
+            const iconsPart = parts[3] || "";
+            const ansPart = parts[4] || "";
+
+            const resAxes = {};
+            const axesList = axesPart.split(";");
+            axesKeys.forEach((ax, idx) => {
+                const raw = axesList[idx] ? axesList[idx].split(",") : [0, 0, 0];
+                resAxes[ax] = {
+                    s: parseFloat(raw[0]) || 0,
+                    n: parseFloat(raw[1]) || 0,
+                    m: parseFloat(raw[2]) || 0
+                };
+            });
+
+            const icons = iconsPart ? iconsPart.split(",").filter(Boolean) : [];
+
+            const answersMap = {};
+            if (typeof questions !== "undefined") {
+                let idx = 0;
+                for (let i = 0; i < ansPart.length; i++) {
+                    const code = _B64.indexOf(ansPart[i]);
+                    if (code === -1) continue;
+                    const v1 = (code >> 3) & 7;
+                    const v2 = code & 7;
+                    if (idx < questions.length && v1 > 0 && _codeToVal[v1] !== undefined) {
+                        answersMap[questions[idx].id] = _codeToVal[v1];
+                    }
+                    idx++;
+                    if (idx < questions.length && v2 > 0 && _codeToVal[v2] !== undefined) {
+                        answersMap[questions[idx].id] = _codeToVal[v2];
+                    }
+                    idx++;
+                }
+            }
+
+            return {
+                name: name,
+                axes: resAxes,
+                icons: icons,
+                answers: answersMap,
+                isShared: true
+            };
+        }
+
+        // ── FORMAT V1 JSON BASE64 (Rétrocompatibilité : eyJ...) ──
         if (str.startsWith("eyJ") || (str.length > 60 && !str.includes("~") && !str.includes("."))) {
             try {
                 let base64 = str.replace(/-/g, "+").replace(/_/g, "/");
@@ -111,7 +170,6 @@ function decodeResultsShare(str) {
                 }).join(""));
                 const obj = JSON.parse(jsonStr);
                 if (obj && obj.ax) {
-                    const axesKeys = (typeof axes !== 'undefined') ? axes : ["pana", "coop", "econ", "reli", "soci", "demo", "decent"];
                     const resAxes = {};
                     axesKeys.forEach((ax, idx) => {
                         const tuple = obj.ax[idx] || [0, 0, 0];
@@ -140,11 +198,11 @@ function decodeResultsShare(str) {
                     };
                 }
             } catch (err) {
-                // continuer vers le décodeur ultra-compact
+                // continuer
             }
         }
 
-        // 2. Nouveau format ultra-compact : [Nom]~[PackedBase64]
+        // ── FORMAT V1 COMPACT BASE64 ANSWERS ([Nom]~[PackedBase64]) ──
         let name = "";
         let packed = str;
         if (str.includes("~")) {
@@ -177,8 +235,7 @@ function decodeResultsShare(str) {
             }
         }
 
-        // Calcul exact des scores d'axes et des icônes spéciales
-        const axesKeys = (typeof axes !== 'undefined') ? axes : ["pana", "coop", "econ", "reli", "soci", "demo", "decent"];
+        // Calcul des axes pour le format V1
         const calculatedAxes = {};
         axesKeys.forEach(ax => {
             calculatedAxes[ax] = { s: 0, n: 0, m: 0 };
