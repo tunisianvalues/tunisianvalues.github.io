@@ -12,13 +12,17 @@ let _rawResultData = null;
 // CHARGEMENT DES DONNÉES (HASH / PARAMS / LOCALSTORAGE)
 // ════════════════════════════════════════════════
 function loadResultsData() {
-    // 1. Hash de partage (#s=... ou #share=...)
+    // 1. Hash de partage (#s=... ou #share=... ou #[Nom]~...)
     let hashStr = window.location.hash ? window.location.hash.substring(1) : "";
     let sharePayload = null;
-    if (hashStr.startsWith("s=")) {
-        sharePayload = hashStr.substring(2);
-    } else if (hashStr.startsWith("share=")) {
-        sharePayload = hashStr.substring(6);
+    if (hashStr) {
+        if (hashStr.startsWith("s=")) {
+            sharePayload = hashStr.substring(2);
+        } else if (hashStr.startsWith("share=")) {
+            sharePayload = hashStr.substring(6);
+        } else if (hashStr.includes("~") || hashStr.startsWith("eyJ") || hashStr.length >= 10) {
+            sharePayload = hashStr;
+        }
     }
 
     // 2. Query param de partage (?share=... ou ?s=...)
