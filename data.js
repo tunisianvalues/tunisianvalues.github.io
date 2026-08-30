@@ -7,7 +7,7 @@ const axesConfig = {
     pana: { name: "Panarabisme", leftLabel: "Panarabisme", rightLabel: "Nationalisme", leftColor: "#047857", rightColor: "#dc2626" },
     coop: { name: "Coopération", leftLabel: "Internationalisme", rightLabel: "Souverainisme", leftColor: "#2563eb", rightColor: "#4b5563" },
     econ: { name: "Économie", leftLabel: "Socialisme", rightLabel: "Libéralisme", leftColor: "#b91c1c", rightColor: "#eab308" },
-    reli: { name: "Religion", leftLabel: "Islamisme", rightLabel: "Laïcité", leftColor: "#15803d", rightColor: "#9333ea" },
+    reli: { name: "Religion", leftLabel: "Islamisme", rightLabel: "Sécularisme", leftColor: "#15803d", rightColor: "#9333ea" },
     soci: { name: "Sociétal", leftLabel: "Conservatisme", rightLabel: "Progressisme", leftColor: "#d97706", rightColor: "#db2777" },
     demo: { name: "Démocratie", leftLabel: "Démocratie", rightLabel: "Autoritarisme", leftColor: "#0ea5e9", rightColor: "#1e293b" },
     decent: { name: "Gouvernance", leftLabel: "Décentralisation", rightLabel: "Centralisation", leftColor: "#4f46e5", rightColor: "#64748b" }

@@ -9,8 +9,9 @@
     const cbCompass = document.getElementById('opt-compass');
 
     function initIconChips() {
-        const iconsParam = getParam('icons') || '';
-        const iconsList  = iconsParam.split(',').filter(i => i.length > 0);
+        const iconsList = (window._tvIconsList && Array.isArray(window._tvIconsList))
+            ? window._tvIconsList
+            : (getParam('icons') || '').split(',').filter(i => i.length > 0);
         const container  = document.getElementById('icons-chips-container');
         container.innerHTML = '';
         if (iconsList.length === 0) {

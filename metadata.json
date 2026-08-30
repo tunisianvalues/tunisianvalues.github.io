@@ -1,0 +1,8 @@
+{
+  "name": "TunisianValues - Test Politique Tunisien",
+  "description": "Un questionnaire politique tunisien avec 7 axes : Panarabisme, Coopération internationale, Économie, Religion, Société, Démocratie, Gouvernance.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

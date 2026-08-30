@@ -287,24 +287,29 @@
                     special_icons.push(activeQuestions[i].special);
                 }
             }
-            const icons_param = special_icons.join(',');
 
-            let ans_str = "";
-            for (let key in answers_map) {
-                ans_str += key + ":" + answers_map[key] + ",";
+            const resultsPayload = {
+                axes: {
+                    pana: { s: final_pana, n: final_n_pana, m: max_pana },
+                    coop: { s: final_coop, n: final_n_coop, m: max_coop },
+                    econ: { s: final_econ, n: final_n_econ, m: max_econ },
+                    reli: { s: final_reli, n: final_n_reli, m: max_reli },
+                    soci: { s: final_soci, n: final_n_soci, m: max_soci },
+                    demo: { s: final_demo, n: final_n_demo, m: max_demo },
+                    decent: { s: final_decent, n: final_n_decent, m: max_decent }
+                },
+                icons: special_icons,
+                answers: Object.assign({}, answers_map),
+                timestamp: Date.now()
+            };
+
+            try {
+                localStorage.setItem('tv_latest_results', JSON.stringify(resultsPayload));
+            } catch (e) {
+                console.error("Erreur d'enregistrement dans localStorage:", e);
             }
-            ans_str = ans_str.slice(0, -1);
 
-            location.href = `results.html` +
-                `?s_pana=${final_pana}&n_pana=${final_n_pana}&m_pana=${max_pana}` +
-                `&s_coop=${final_coop}&n_coop=${final_n_coop}&m_coop=${max_coop}` +
-                `&s_econ=${final_econ}&n_econ=${final_n_econ}&m_econ=${max_econ}` +
-                `&s_reli=${final_reli}&n_reli=${final_n_reli}&m_reli=${max_reli}` +
-                `&s_soci=${final_soci}&n_soci=${final_n_soci}&m_soci=${max_soci}` +
-                `&s_demo=${final_demo}&n_demo=${final_n_demo}&m_demo=${max_demo}` +
-                `&s_decent=${final_decent}&n_decent=${final_n_decent}&m_decent=${max_decent}` +
-                `&icons=${icons_param}` +
-                `&ans=${encodeURIComponent(ans_str)}`;
+            location.href = 'results.html';
         }
     </script>
 </body>
