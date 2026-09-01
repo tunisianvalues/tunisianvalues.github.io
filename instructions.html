@@ -38,14 +38,54 @@
         <main class="container mx-auto px-4 py-16 flex-grow">
             <div class="max-w-2xl mx-auto bg-white/95 backdrop-blur-sm rounded-lg p-8 shadow-lg text-center">
                 <h2 class="text-4xl font-bold text-red-700 mb-4 tracking-tight" data-tv="instructions_title">INSTRUCTIONS</h2>
-                <p class="text-slate-700 text-lg mb-8" data-tv="instructions_body">
+                <p class="text-slate-700 text-lg mb-6" data-tv="instructions_body">
                     On vous présentera une série d'énoncés. Pour chacun, choisissez l'option qui correspond le mieux à votre opinion.
                 </p>
+
+                <!-- SÉLECTEUR DE PERSPECTIVE / PAYS -->
+                <div class="mb-8 p-5 bg-slate-50 rounded-xl border border-slate-200 text-left">
+                    <p class="text-xs font-bold text-slate-500 uppercase tracking-widest font-oswald mb-3">
+                        Perspective pour vos résultats :
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="country-selector">
+                        <!-- Tunisie -->
+                        <button type="button" data-country="tn" class="country-choice-btn active relative p-3 rounded-xl border-2 border-red-600 bg-red-50 hover:bg-red-100 flex flex-col items-center gap-2 text-center transition-all cursor-pointer">
+                            <img src="images/flag_tn.svg" alt="Tunisie" class="w-8 h-5 object-cover rounded shadow-xs border border-slate-200">
+                            <span class="text-xs font-bold font-oswald uppercase tracking-wider text-red-950">Tunisie</span>
+                            <span class="text-[9px] font-bold text-red-600 font-sans">Standard</span>
+                        </button>
+
+                        <!-- France -->
+                        <button type="button" data-country="fr" class="country-choice-btn relative p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 flex flex-col items-center gap-2 text-center transition-all cursor-pointer">
+                            <img src="images/flag_fr.svg" alt="France" class="w-8 h-5 object-cover rounded shadow-xs border border-slate-200">
+                            <span class="text-xs font-bold font-oswald uppercase tracking-wider text-slate-700">France</span>
+                            <span class="text-[9px] font-bold text-slate-400 font-sans">Équivalent</span>
+                        </button>
+
+                        <!-- Belgique -->
+                        <button type="button" data-country="be" class="country-choice-btn relative p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 flex flex-col items-center gap-2 text-center transition-all cursor-pointer">
+                            <img src="images/flag_be.svg" alt="Belgique" class="w-8 h-5 object-cover rounded shadow-xs border border-slate-200">
+                            <span class="text-xs font-bold font-oswald uppercase tracking-wider text-slate-700">Belgique</span>
+                            <span class="text-[9px] font-bold text-slate-400 font-sans">Équivalent</span>
+                        </button>
+
+                        <!-- Québec -->
+                        <button type="button" data-country="qc" class="country-choice-btn relative p-3 rounded-xl border-2 border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 flex flex-col items-center gap-2 text-center transition-all cursor-pointer">
+                            <img src="images/flag_qc.svg" alt="Québec" class="w-8 h-5 object-cover rounded shadow-xs border border-slate-200">
+                            <span class="text-xs font-bold font-oswald uppercase tracking-wider text-slate-700">Québec</span>
+                            <span class="text-[9px] font-bold text-slate-400 font-sans">Équivalent</span>
+                        </button>
+                    </div>
+                    <p class="text-[11px] text-slate-500 font-sans mt-2.5">
+                        * En choisissant France, Belgique ou Québec, le logo du parti équivalent local s'affichera directement à côté du logo tunisien sur vos résultats.
+                    </p>
+                </div>
+
                 <div class="flex flex-col items-center gap-4">
-                    <button onclick="location.href='quiz.html';" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-4 rounded-lg transition-all duration-300 hover:shadow-lg" data-tv="btn_start">
+                    <button id="btn-commencer" onclick="startQuiz();" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-4 rounded-lg transition-all duration-300 hover:shadow-lg cursor-pointer" data-tv="btn_start">
                         COMMENCER
                     </button>
-                    <button onclick="location.href='index.html';" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold text-lg px-8 py-3 rounded-lg transition-colors" data-tv="btn_back_home">
+                    <button onclick="location.href='index.html';" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold text-lg px-8 py-3 rounded-lg transition-colors cursor-pointer" data-tv="btn_back_home">
                         Retour à l'accueil
                     </button>
                 </div>
@@ -60,5 +100,38 @@
             </div>
         </footer>
     </div>
+
+    <script>
+        let currentCountry = localStorage.getItem("tv_user_country") || "tn";
+
+        function updateCountrySelection(code) {
+            currentCountry = code;
+            localStorage.setItem("tv_user_country", code);
+            const btns = document.querySelectorAll(".country-choice-btn");
+            btns.forEach(btn => {
+                const isSelected = btn.getAttribute("data-country") === code;
+                btn.classList.toggle("active", isSelected);
+                btn.classList.toggle("border-red-600", isSelected);
+                btn.classList.toggle("bg-red-50", isSelected);
+                btn.classList.toggle("border-slate-200", !isSelected);
+                btn.classList.toggle("bg-white", !isSelected);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            updateCountrySelection(currentCountry);
+            const btns = document.querySelectorAll(".country-choice-btn");
+            btns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    updateCountrySelection(btn.getAttribute("data-country"));
+                });
+            });
+        });
+
+        function startQuiz() {
+            localStorage.setItem("tv_user_country", currentCountry);
+            window.location.href = "quiz.html";
+        }
+    </script>
 </body>
 </html>

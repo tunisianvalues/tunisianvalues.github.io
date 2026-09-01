@@ -330,15 +330,44 @@
 
                     <div class="p-6 bg-white border border-slate-200 rounded-xl shadow-sm flex flex-col md:flex-row items-stretch justify-center gap-6 md:gap-8">
 
-                        <!-- COLONNE GAUCHE : PARTI -->
+                        <!-- COLONNE GAUCHE : PARTI (Tunisie + Équivalent International côte à côte si choisi) -->
                         <div class="flex flex-col items-center justify-between text-center flex-1 py-2">
                             <div>
                                 <p class="text-xs text-slate-400 uppercase tracking-widest font-bold mb-4" data-tv="results_closest_party">Parti le plus proche</p>
-                                <div id="winner-image-container" class="h-28 w-28 mx-auto mb-4 flex items-center justify-center bg-slate-50 border border-slate-100 rounded-xl shadow-inner p-2">
-                                    <!-- Image JS -->
+                                
+                                <div class="flex items-center justify-center gap-3 mb-4">
+                                    <!-- Parti Tunisien -->
+                                    <div class="flex flex-col items-center">
+                                        <div id="winner-image-container" class="h-28 w-28 flex items-center justify-center bg-slate-50 border-2 border-slate-100 rounded-xl shadow-inner p-2 relative">
+                                            <!-- Image JS -->
+                                        </div>
+                                        <span id="tn-party-country-label" class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1 font-oswald flex items-center gap-1">
+                                            <img src="images/flag_tn.svg" class="w-3.5 h-2.5 rounded shadow-2xs object-cover" alt="Tunisie"> Tunisie
+                                        </span>
+                                    </div>
+
+                                    <!-- Connecteur International -->
+                                    <div id="intl-party-separator" class="hidden flex-col items-center justify-center px-1">
+                                        <span class="text-slate-300 text-xl font-bold">⇄</span>
+                                        <span class="text-[8px] font-bold uppercase tracking-wider text-red-600 font-oswald bg-red-50 px-1 py-0.5 rounded border border-red-200">Équivalent</span>
+                                    </div>
+
+                                    <!-- Parti International Équivalent -->
+                                    <div id="intl-party-col" class="hidden flex-col items-center">
+                                        <div id="intl-winner-image-container" class="h-28 w-28 flex items-center justify-center bg-slate-50 border-2 border-slate-100 rounded-xl shadow-inner p-2 relative">
+                                            <img id="intl-party-logo-img" class="h-full w-full object-contain" src="" alt="Parti Équivalent">
+                                            <div id="intl-party-logo-placeholder" class="hidden text-center p-2 text-[11px] font-bold text-slate-600 font-oswald uppercase"></div>
+                                        </div>
+                                        <span id="intl-party-country-label" class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1 font-oswald flex items-center gap-1">
+                                            <img id="intl-party-country-flag-icon" class="w-3.5 h-2.5 rounded shadow-2xs object-cover" src="" alt="Pays"> <span id="intl-country-name-txt"></span>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                            <p id="ideology-label" class="text-3xl font-bold text-red-600 leading-tight">Calcul...</p>
+                            
+                            <div class="w-full">
+                                <p id="ideology-label" class="text-2xl sm:text-3xl font-bold text-red-600 leading-tight">Calcul...</p>
+                            </div>
                         </div>
 
                         <!-- SÉPARATEUR VISUEL (Desktop) -->

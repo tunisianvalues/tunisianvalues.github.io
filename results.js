@@ -456,6 +456,76 @@ window.onload = function() {
 
         const rankPersoContent = document.getElementById("ranking-perso-content");
         if (rankPersoContent) rankPersoContent.innerHTML = hPerso;
+
+        // ── 5. AFFICHAGE DU DUO DE LOGOS INTERNATIONAL EN HAUT ──
+        renderTopInternationalMatch(top, indep);
+    }
+
+    function renderTopInternationalMatch(topParty, isIndep) {
+        const userCountry = localStorage.getItem("tv_user_country") || "tn";
+        const intlSeparator = document.getElementById("intl-party-separator");
+        const intlCol = document.getElementById("intl-party-col");
+        const intlLogoImg = document.getElementById("intl-party-logo-img");
+        const intlPlaceholder = document.getElementById("intl-party-logo-placeholder");
+        const intlFlagIcon = document.getElementById("intl-party-country-flag-icon");
+        const intlCountryNameTxt = document.getElementById("intl-country-name-txt");
+
+        if (userCountry === "tn" || isIndep || !topParty || !topParty.id) {
+            // Mode Tunisie standard : masquer le parti international
+            if (intlSeparator) intlSeparator.style.display = "none";
+            if (intlCol) intlCol.style.display = "none";
+            return;
+        }
+
+        const countryMeta = (typeof internationalEquivalents !== "undefined" && internationalEquivalents._countryMeta)
+            ? internationalEquivalents._countryMeta[userCountry]
+            : null;
+
+        const partyId = topParty.id;
+        const eqData = (typeof internationalEquivalents !== "undefined" && internationalEquivalents[partyId])
+            ? internationalEquivalents[partyId][userCountry]
+            : null;
+
+        const flagSrc = countryMeta ? countryMeta.flag : "images/flag_" + userCountry + ".svg";
+        const countryName = countryMeta ? countryMeta.name : userCountry.toUpperCase();
+
+        if (intlCountryNameTxt) intlCountryNameTxt.textContent = countryName;
+        if (intlFlagIcon && flagSrc) intlFlagIcon.src = flagSrc;
+
+        if (intlSeparator) intlSeparator.style.display = "flex";
+        if (intlCol) intlCol.style.display = "flex";
+
+        if (!eqData) {
+            // Pas d'équivalent direct (ex: Ennahdha en France)
+            if (intlLogoImg) intlLogoImg.style.display = "none";
+            if (intlPlaceholder) {
+                intlPlaceholder.style.display = "block";
+                intlPlaceholder.textContent = "Spécificité tunisienne";
+            }
+            return;
+        }
+
+        // Équivalent trouvé avec logo ou nom
+        if (eqData.logo) {
+            if (intlLogoImg) {
+                intlLogoImg.src = eqData.logo;
+                intlLogoImg.style.display = "block";
+                intlLogoImg.onerror = () => {
+                    intlLogoImg.style.display = "none";
+                    if (intlPlaceholder) {
+                        intlPlaceholder.style.display = "block";
+                        intlPlaceholder.textContent = eqData.name;
+                    }
+                };
+            }
+            if (intlPlaceholder) intlPlaceholder.style.display = "none";
+        } else {
+            if (intlLogoImg) intlLogoImg.style.display = "none";
+            if (intlPlaceholder) {
+                intlPlaceholder.style.display = "block";
+                intlPlaceholder.textContent = eqData.name;
+            }
+        }
     }
 
     const btnRecalculate = document.getElementById("recalculate-button");

@@ -1010,6 +1010,236 @@ const ideologies = [
     }
 ];
 
+// ════════════════════════════════════════════════
+// ÉQUIVALENTS INTERNATIONAUX (France 🇫🇷, Belgique 🇧🇪, Québec ⚜️)
+// ════════════════════════════════════════════════
+const internationalEquivalents = {
+    _countryMeta: {
+        tn: { name: "Tunisie", flag: "images/flag_tn.svg" },
+        fr: { name: "France", flag: "images/flag_fr.svg" },
+        be: { name: "Belgique", flag: "images/flag_be.svg" },
+        qc: { name: "Québec", flag: "images/flag_qc.svg" }
+    },
+    ennahdha: {
+        fr: null,
+        be: null,
+        qc: null
+    },
+    pdl: {
+        fr: {
+            name: "Les Républicains (LR)",
+            desc: "Droite républicaine d'autorité, laïcité stricte, filiation historique RPR/UMP et centralisme d'État."
+        },
+        be: null,
+        qc: {
+            name: "Coalition Avenir Québec (CAQ)",
+            desc: "Nationalisme civique, autorité de l'État et laïcité stricte des institutions (Loi 21)."
+        }
+    },
+    echaab: {
+        fr: null,
+        be: null,
+        qc: null
+    },
+    afek: {
+        fr: {
+            name: "Renaissance / MoDem",
+            desc: "Libéralisme économique, réformisme pro-marché et intégration internationale."
+        },
+        be: {
+            name: "Mouvement Réformateur (MR) / Open VLD",
+            desc: "Libéralisme institutionnel, compétitivité économique et ouverture européenne."
+        },
+        qc: {
+            name: "Parti Libéral du Québec (PLQ)",
+            desc: "Pragmatisme des affaires, libre-marché et réformisme institutionnel."
+        }
+    },
+    pt: {
+        fr: {
+            name: "Nouveau Parti Anticapitaliste (NPA)",
+            desc: "Lutte des classes, marxisme révolutionnaire et syndicalisme ouvrier combatif."
+        },
+        be: {
+            name: "Parti du Travail de Belgique (PTB-PVDA)",
+            desc: "Marxisme combatif, défense intransigeante de la classe travailleuse et justice sociale."
+        },
+        qc: {
+            name: "Parti Communiste du Québec (PCQ)",
+            desc: "Socialisme anticapitaliste, internationalisme prolétarien et rupture avec le libéralisme."
+        }
+    },
+    alkarama: {
+        fr: null,
+        be: {
+            name: "Parti ISLAM",
+            desc: "Revendication politique confessionnelle et conservatisme religieux."
+        },
+        qc: null
+    },
+    attayar: {
+        fr: {
+            name: "Parti Socialiste (PS)",
+            desc: "Social-démocratie républicaine, combat anticorruption, moralisation publique et primauté de l'État de droit."
+        },
+        be: {
+            name: "Parti Socialiste (PS belge) / Vooruit",
+            desc: "Social-démocratie réformatrice, défense des services publics et gouvernance éthique."
+        },
+        qc: {
+            name: "Québec Solidaire (QS)",
+            desc: "Justice sociale, intégrité politique, redistribution et institutions démocratiques."
+        }
+    },
+    ettakatol: {
+        fr: {
+            name: "Place Publique (PP) / Parti Socialiste (PS)",
+            desc: "Social-démocratie réformiste européenne, humanisme civique et centre-gauche démocrate."
+        },
+        be: {
+            name: "Parti Socialiste (PS belge)",
+            desc: "Social-démocratie modérée, concertation sociale et progressisme équilibré."
+        },
+        qc: {
+            name: "Parti Québécois (PQ - aile sociale-démocrate)",
+            desc: "Tradition sociale-démocrate réformiste, interventionnisme étatique modéré et modèle civique."
+        }
+    },
+    aljoumhouri: {
+        fr: {
+            name: "MoDem (Mouvement Démocrate)",
+            desc: "Centrisme républicain, modération démocratique, humanisme et réformisme institutionnel."
+        },
+        be: {
+            name: "Les Engagés / DéFI",
+            desc: "Centrisme rénové, équilibre des pouvoirs et défense des libertés civiles."
+        },
+        qc: {
+            name: "Parti Libéral du Québec (aile centriste)",
+            desc: "Centrisme institutionnel réformateur et modération politique."
+        }
+    },
+    baath: {
+        fr: null,
+        be: null,
+        qc: null
+    },
+    "25jul": {
+        fr: null,
+        be: null,
+        qc: null
+    },
+    tnp: {
+        fr: {
+            name: "Reconquête!",
+            desc: "Nationalisme identitaire sans concession, priorité nationale et discours sécuritaire anti-immigration."
+        },
+        be: {
+            name: "Chez Nous / Vlaams Belang",
+            desc: "Nationalisme identitaire radical, souverainisme strict et contrôle dur des frontières."
+        },
+        qc: {
+            name: "Courants nationalistes identitaires",
+            desc: "Nationalisme identitaire strict et préservation culturelle sans compromis."
+        }
+    },
+    upl: {
+        fr: {
+            name: "Parti Radical / Aile libérale-pragmatique",
+            desc: "Centrisme pragmatique, libéralisme économique et politique d'investissements."
+        },
+        be: {
+            name: "Mouvement Réformateur (MR)",
+            desc: "Gestion pragmatique, promotion de l'entrepreneuriat et libéralisme économique."
+        },
+        qc: {
+            name: "Coalition Avenir Québec (CAQ - volet économique)",
+            desc: "Pragmatisme des affaires, relance économique et gestion entrepreneuriale."
+        }
+    },
+    pl: {
+        fr: {
+            name: "Parti Libéral Démocrate / Mouvements libertariens",
+            desc: "Libertarianisme, libertés individuelles maximales, laïcité totale et marché dérégulé."
+        },
+        be: {
+            name: "Parti Libertarien Belge / Open VLD (aile libertarienne)",
+            desc: "Défense absolue des droits individuels, anti-étatisme et liberté totale de conscience."
+        },
+        qc: {
+            name: "Parti Libertarien du Québec",
+            desc: "Libertés individuelles absolues, gouvernement minimal et libéralisme sociétal intégral."
+        }
+    },
+    watad: {
+        fr: {
+            name: "PRCF (Pôle de Renaissance Communiste en France)",
+            desc: "Marxisme-léninisme orthodoxe, anti-impérialisme radical, laïcité sans compromis et souverainisme populaire."
+        },
+        be: {
+            name: "Parti Communiste de Belgique (PCB-CPB)",
+            desc: "Marxisme révolutionnaire, anti-impérialisme et engagement ouvrier historique."
+        },
+        qc: {
+            name: "Parti Communiste du Québec",
+            desc: "Marxisme conséquent, anticolonialisme et émancipation des classes laborieuses."
+        }
+    },
+    massar: {
+        fr: {
+            name: "Parti Communiste Français (PCF)",
+            desc: "Gauche républicaine historique, progrès social, défense des services publics et laïcité."
+        },
+        be: {
+            name: "Parti Socialiste (aile gauche)",
+            desc: "Gauche républicaine et syndicale, transformation sociale et justice distributive."
+        },
+        qc: {
+            name: "Québec Solidaire (QS)",
+            desc: "Gauche progressiste, justice sociale, égalité des droits et réformisme démocratique."
+        }
+    },
+    tahya: {
+        fr: {
+            name: "Renaissance",
+            desc: "Centre moderniste gestionnaire, technocratie d'État et continuité des réformes libérales."
+        },
+        be: {
+            name: "Mouvement Réformateur (MR)",
+            desc: "Centre-droit gestionnaire, modernisation administrative et soutien à l'activité économique."
+        },
+        qc: {
+            name: "Parti Libéral du Québec (PLQ)",
+            desc: "Gestion gouvernementale pragmatique, modernisme institutionnel et modération."
+        }
+    },
+    beni: {
+        fr: {
+            name: "MoDem (Mouvement Démocrate)",
+            desc: "Centrisme républicain, éthique publique et réformes douces."
+        },
+        be: {
+            name: "Les Engagés",
+            desc: "Centrisme progressiste, participation citoyenne et modération."
+        },
+        qc: {
+            name: "Parti Libéral du Québec (aile centriste)",
+            desc: "Centrisme pragmatique et modération politique."
+        }
+    },
+    frontpopulaire: {
+        fr: {
+            name: "Nouveau Front Populaire (NFP)",
+            desc: "Rassemblement des gauches sociales, écologistes et républicaines contre l'austérité et pour la justice sociale."
+        },
+        be: null,
+        qc: {
+            name: "Québec Solidaire (QS)",
+            desc: "Coalition unitaire des mouvements citoyens, syndicaux et de gauche écologiste."
+        }
+    }
+};
+
 const personalities = [
     {
         "id": "rached_ghannouchi",
