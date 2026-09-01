@@ -33,6 +33,11 @@ window.TV = (function() {
             ans_disagree: "Plutôt pas d'accord",
             ans_disagree_strong: "Pas du tout d'accord",
             btn_prev: "← Précédent",
+            quiz_context_badge: "Note explicative",
+            quiz_context_btn: "Consulter la note de contexte",
+            quiz_context_hint: "Afficher les repères historiques et politiques",
+            quiz_context_close: "Fermer",
+            opt_context_mode: "Activer les notes d'aide contextuelle (histoire politique et institutions)",
 
             // --- TRADUCTIONS DE L'INTERMISSION ---
             quiz_intermission_title: "PARTIE PRINCIPALE TERMINÉE !",
@@ -185,6 +190,11 @@ window.TV = (function() {
             ans_disagree: "Disagree",
             ans_disagree_strong: "Strongly Disagree",
             btn_prev: "← Previous",
+            quiz_context_badge: "Contextual Note",
+            quiz_context_btn: "View contextual background",
+            quiz_context_hint: "Show political & historical context",
+            quiz_context_close: "Close",
+            opt_context_mode: "Enable contextual background notes (political history & institutions)",
 
             quiz_intermission_title: "MAIN PART COMPLETED!",
             quiz_intermission_text: "You have answered all the basic questions. You can now view your results, or continue with a few optional contextual questions on specific topics (Palestine, environment, historical heritage...) to refine your profile.",

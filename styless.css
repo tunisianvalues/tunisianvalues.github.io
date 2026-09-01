@@ -6,3 +6,58 @@
   transform: translateY(-4px);
   box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.2);
 }
+
+/* Subtle animation for context helper */
+.tv-context-fade {
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Contextual highlight in question */
+.tv-context-highlight {
+  display: inline;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: #dc2626;
+  text-decoration-thickness: 2.5px;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.tv-context-highlight:hover {
+  color: #dc2626;
+  text-decoration-color: #991b1b;
+  text-decoration-style: solid;
+}
+
+.tv-context-badge-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.15em;
+  height: 1.15em;
+  margin-left: 0.25em;
+  vertical-align: 0.1em;
+  font-size: 0.6em;
+  font-weight: 700;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  border-radius: 9999px;
+  background-color: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tv-context-highlight:hover .tv-context-badge-icon {
+  background-color: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
+}
+

@@ -24,14 +24,15 @@
 
 <body class="font-oswald antialiased">
     <script src="questions.js"></script>
+    <script src="context_data.js"></script>
     <script src="translations.js"></script>
 
     <div class="min-h-screen bg-gradient-to-br from-red-600 to-red-700 flex flex-col">
         <header class="border-b border-red-500/30 bg-red-600/90 backdrop-blur-sm">
-            <div class="container mx-auto px-4 py-4">
+            <div class="container mx-auto px-4 py-3">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
-                        <img src="TUNISIAN VALUES.png" alt="TunisianValues logo" class="h-10 w-auto">
+                        <img src="TUNISIAN VALUES.png" alt="TunisianValues logo" class="h-9 w-auto">
                     </div>
                 </div>
             </div>
@@ -42,11 +43,39 @@
 
                 <!-- BOITE 1: LE QUIZ (Questions) -->
                 <div id="quiz-box" class="bg-white/95 backdrop-blur-sm rounded-xl p-6 md:p-10 shadow-2xl">
-                    <div class="text-center mb-6">
+                    <div class="text-center mb-4">
                         <h2 id="question-number" class="text-xl font-semibold text-red-600 tracking-wider">Chargement...</h2>
                     </div>
 
-                    <p id="question-text" class="text-2xl md:text-3xl font-bold text-gray-800 text-center mb-8 min-h-[120px] flex items-center justify-center"></p>
+                    <!-- Question Container -->
+                    <div class="mb-6">
+                        <div class="min-h-[90px] flex items-center justify-center text-center">
+                            <p id="question-text" class="text-2xl md:text-3xl font-bold text-gray-800 leading-relaxed tracking-normal"></p>
+                        </div>
+
+                        <!-- Context Info Card (expanded on click of the highlighted term) -->
+                        <div id="context-card" class="hidden mt-5 p-5 md:p-6 rounded-xl bg-white border-2 border-red-500/20 shadow-xl text-left tv-context-fade">
+                            <div class="flex items-start justify-between gap-4 mb-3 pb-3 border-b border-red-100">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-white flex-shrink-0 shadow-sm">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <span class="text-xs uppercase tracking-wider text-red-600 font-bold font-oswald" data-tv="quiz_context_badge">Repère contextuel</span>
+                                        <h4 id="context-card-title" class="text-lg md:text-xl font-bold text-gray-900 font-oswald leading-tight"></h4>
+                                    </div>
+                                </div>
+                                <button onclick="toggleContext(event)" class="text-gray-400 hover:text-red-600 p-1.5 rounded-lg hover:bg-red-50 transition-colors cursor-pointer" title="Fermer">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <p id="context-card-desc" class="text-gray-700 text-sm md:text-base leading-relaxed font-sans"></p>
+                        </div>
+                    </div>
 
                     <div class="space-y-3 mb-8">
                         <button class="w-full text-lg font-bold py-4 px-6 rounded-lg transition-transform duration-200 ease-in-out transform hover:scale-105 shadow-md bg-green-700 hover:bg-green-800 text-white" onclick="next_question(1.0)" data-tv="ans_agree_strong">Tout à fait d'accord</button>
@@ -122,6 +151,60 @@
 
         let answers_map = {};
         var qn = 0;
+        let isContextOpen = false;
+
+        function isNonTunisianContextEnabled() {
+            const saved = localStorage.getItem("tv_show_context");
+            if (saved !== null) {
+                return saved === "true";
+            }
+            const country = localStorage.getItem("tv_user_country") || "tn";
+            const lang = (window.TV && window.TV.getLang()) || "fr";
+            return country !== "tn" || lang === "en";
+        }
+
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function formatQuestionWithContextHighlight(rawText, qId, lang) {
+            if (!isNonTunisianContextEnabled() || !window.TV_CONTEXT || !window.TV_CONTEXT[qId]) {
+                return rawText;
+            }
+            const ctx = window.TV_CONTEXT[qId];
+            const keywords = (lang === 'en' ? ctx.keywords_en : ctx.keywords_fr) || [];
+            if (!keywords || keywords.length === 0) return rawText;
+
+            let formattedText = rawText;
+            const sortedKeywords = [...keywords].sort((a, b) => b.length - a.length);
+
+            for (const kw of sortedKeywords) {
+                const regex = new RegExp(`(${escapeRegExp(kw)})`, 'i');
+                if (regex.test(formattedText)) {
+                    formattedText = formattedText.replace(regex, `<span class="tv-context-highlight" onclick="toggleContext(event)" title="Consulter la note de contexte">$1<span class="tv-context-badge-icon" aria-hidden="true">i</span></span>`);
+                    break;
+                }
+            }
+            return formattedText;
+        }
+
+        function toggleContext(e) {
+            if (e) {
+                e.stopPropagation();
+            }
+            const currentQ = activeQuestions[qn];
+            if (!currentQ || !window.TV_CONTEXT || !window.TV_CONTEXT[currentQ.id]) return;
+
+            const card = document.getElementById('context-card');
+            if (!card) return;
+            if (card.classList.contains('hidden')) {
+                card.classList.remove('hidden');
+                isContextOpen = true;
+            } else {
+                card.classList.add('hidden');
+                isContextOpen = false;
+            }
+        }
 
         function init_question() {
             // Frontières du flux
@@ -139,14 +222,33 @@
             document.getElementById('quiz-box').style.display = 'block';
 
             const q = activeQuestions[qn];
+            const currentLang = (window.TV && window.TV.getLang()) || 'fr';
 
-            // Texte de la question
+            // Reset context box for each new question
+            const contextCard = document.getElementById('context-card');
+            if (contextCard) contextCard.classList.add('hidden');
+            isContextOpen = false;
+
+            // Check if context data is available for current question and enabled for user
+            const hasContext = Boolean(window.TV_CONTEXT && window.TV_CONTEXT[q.id]);
+            const showContext = isNonTunisianContextEnabled() && hasContext;
+
+            if (showContext) {
+                const ctx = window.TV_CONTEXT[q.id];
+                const title = currentLang === 'en' ? (ctx.title_en || ctx.title_fr) : ctx.title_fr;
+                const desc = currentLang === 'en' ? (ctx.desc_en || ctx.desc_fr) : ctx.desc_fr;
+
+                document.getElementById('context-card-title').textContent = title;
+                document.getElementById('context-card-desc').textContent = desc;
+            }
+
+            // Question text with subtle inline highlight when enabled
             let text = q.question;
-            if (window.TV && window.TV.getLang() === 'en') {
+            if (currentLang === 'en') {
                 const enText = window.TV.getQuestion(q.id);
                 if (enText) text = enText;
             }
-            document.getElementById("question-text").innerHTML = text;
+            document.getElementById("question-text").innerHTML = formatQuestionWithContextHighlight(text, q.id, currentLang);
 
             // Numéro de la question
             const pattern = window.TV ? window.TV.tr('quiz_question_of') : 'Question {n} sur {total}';

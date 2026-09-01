@@ -79,6 +79,16 @@
                     <p class="text-[11px] text-slate-500 font-sans mt-2.5">
                         * En choisissant France, Belgique ou Québec, le logo du parti équivalent local s'affichera directement à côté du logo tunisien sur vos résultats.
                     </p>
+
+                    <!-- Option d'aide contextuelle -->
+                    <div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between gap-3">
+                        <label for="context-toggle" class="flex items-center gap-2.5 cursor-pointer select-none">
+                            <input type="checkbox" id="context-toggle" class="w-4 h-4 text-red-600 rounded border-slate-300 focus:ring-red-500 cursor-pointer">
+                            <span class="text-xs font-medium text-slate-700 font-sans" data-tv="opt_context_mode">
+                                Activer les notes d'aide contextuelle (histoire politique et institutions)
+                            </span>
+                        </label>
+                    </div>
                 </div>
 
                 <div class="flex flex-col items-center gap-4">
@@ -103,8 +113,9 @@
 
     <script>
         let currentCountry = localStorage.getItem("tv_user_country") || "tn";
+        let showContext = localStorage.getItem("tv_show_context");
 
-        function updateCountrySelection(code) {
+        function updateCountrySelection(code, manual) {
             currentCountry = code;
             localStorage.setItem("tv_user_country", code);
             const btns = document.querySelectorAll(".country-choice-btn");
@@ -116,20 +127,44 @@
                 btn.classList.toggle("border-slate-200", !isSelected);
                 btn.classList.toggle("bg-white", !isSelected);
             });
+
+            // Automatically check context box for foreign countries if user hasn't explicitly set it
+            const toggle = document.getElementById("context-toggle");
+            if (toggle && manual) {
+                const autoCheck = code !== "tn";
+                toggle.checked = autoCheck;
+                localStorage.setItem("tv_show_context", autoCheck ? "true" : "false");
+            }
         }
 
         document.addEventListener("DOMContentLoaded", () => {
-            updateCountrySelection(currentCountry);
+            updateCountrySelection(currentCountry, false);
+            const toggle = document.getElementById("context-toggle");
+            if (toggle) {
+                if (showContext !== null) {
+                    toggle.checked = showContext === "true";
+                } else {
+                    toggle.checked = currentCountry !== "tn" || (window.TV && window.TV.getLang() === 'en');
+                }
+                toggle.addEventListener("change", (e) => {
+                    localStorage.setItem("tv_show_context", e.target.checked ? "true" : "false");
+                });
+            }
+
             const btns = document.querySelectorAll(".country-choice-btn");
             btns.forEach(btn => {
                 btn.addEventListener("click", () => {
-                    updateCountrySelection(btn.getAttribute("data-country"));
+                    updateCountrySelection(btn.getAttribute("data-country"), true);
                 });
             });
         });
 
         function startQuiz() {
             localStorage.setItem("tv_user_country", currentCountry);
+            const toggle = document.getElementById("context-toggle");
+            if (toggle) {
+                localStorage.setItem("tv_show_context", toggle.checked ? "true" : "false");
+            }
             window.location.href = "quiz.html";
         }
     </script>
