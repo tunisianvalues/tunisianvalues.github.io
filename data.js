@@ -738,7 +738,7 @@ const internationalEquivalents = {
     qc: {
       name: "Parti Québécois (PQ)",
       desc: "Tradition sociale-démocrate réformiste, interventionnisme étatique modéré et modèle civique.",
-      logo: "images/foreign/pq.jpg",
+      logo: "images/foreign/pq.png",
     },
   },
   aljoumhouri: {
@@ -755,7 +755,7 @@ const internationalEquivalents = {
     qc: {
       name: "Parti Québécois (PQ)",
       desc: "Tradition sociale-démocrate réformiste, interventionnisme étatique modéré et modèle civique.",
-      logo: "images/foreign/pq.jpg",
+      logo: "images/foreign/pq.png",
     },
   },
   baath: {
