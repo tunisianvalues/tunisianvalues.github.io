@@ -866,17 +866,6 @@ const internationalEquivalents = {
       desc: "Gestion gouvernementale pragmatique, modernisme institutionnel et modération.",
     },
   },
-    be: {
-      name: "Les Engagés",
-      desc: "Centrisme progressiste, participation citoyenne et modération.",
-      logo: "images/foreign/le.jpeg",
-    },
-    qc: {
-      name: "Parti Libéral du Québec",
-      logo: "images/foreign/plq.webp",
-      desc: "Centrisme pragmatique et modération politique.",
-    },
-  },
   frontpopulaire: {
     fr: {
       name: "Nouveau Front Populaire (NFP)",
