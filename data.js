@@ -598,31 +598,6 @@ const ideologies = [
     },
   },
   {
-    id: "beni",
-    name: "Beni Watani",
-    image: "images/beniwatani.png",
-    range_vector: {
-      pana: [15, 50],
-      coop: [-50, 0],
-      econ: [-10, 30],
-      reli: [20, 70],
-      soci: [20, 70],
-      demo: [-70, -15],
-      decent: [-30, -5],
-    },
-    populism: 5,
-    vetos: {
-      econ_services: {
-        val: -0.1,
-        type: "less",
-      },
-      spec_bourguiba: {
-        val: -0.9,
-        type: "less",
-      },
-    },
-  },
-  {
     id: "frontpopulaire",
     name: "Front Populaire",
     image: "images/fp.png",
@@ -891,12 +866,6 @@ const internationalEquivalents = {
       desc: "Gestion gouvernementale pragmatique, modernisme institutionnel et modération.",
     },
   },
-  beni: {
-    fr: {
-      name: "Horizons",
-      desc: "Centrisme républicain, éthique publique et réformes douces.",
-      logo: "images/foreign/horizons.jpeg",
-    },
     be: {
       name: "Les Engagés",
       desc: "Centrisme progressiste, participation citoyenne et modération.",
