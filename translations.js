@@ -383,6 +383,14 @@ window.TV = (function () {
         "Launched in early 2019, Tahya Tounes functioned primarily as a personal political vehicle engineered by and for then-Prime Minister Youssef Chahed. Emerging from an internal power struggle within Nidaa Tounes against Hafedh Caïd Essebsi's faction, the party was built from within state apparatus by recruiting parliamentary defectors (National Coalition bloc) and former regime figures (Al Moubadara). Running on an economically liberal and technocratic platform, it secured 14 seats in the 2019 elections before rapidly disintegrating and vanishing from the political arena after 2021.",
       hist_frontpopulaire:
         "Established in October 2012, the Popular Front was a broad and diverse coalition uniting radical leftists (Marxists from the Workers' Party and Watad, Trotskyists), Arab nationalists (Nasserists from the Popular Current, Ba'athists), as well as social-democrats (Al Qotb) and environmentalists. Acting as the core opposition to the Troika and Islamist governance—especially following the 2013 assassinations of Chokri Belaid and Mohamed Brahmi—it won 15 seats in 2014 on an anti-austerity, state-interventionist platform. The coalition ultimately imploded in 2019 due to bitter personal rivalries and strategic divergences among its factions.",
+      btn_hemicycle: "Voir mon hémicycle",
+      hemicycle_title: "Votre hémicycle",
+      hemicycle_back_results: "← Résultats",
+      hemicycle_hover_hint:
+        "Touchez ou survolez une famille pour mettre en évidence ses sièges.",
+      hemicycle_coalitions_title: "Majorités possibles",
+      hemicycle_coalitions_sub:
+        "Combinaisons totalisant au moins 109 sièges sans parti superflu, parmi les familles idéologiquement compatibles.",
     },
   };
 
@@ -559,6 +567,13 @@ window.TV = (function () {
       "Today, the UGTT behaves like a “state within the state” and represents the main obstacle to the country’s economic reforms.",
     ctx_party:
       "All political parties that took part in governing during the 2011–2021 decade should be permanently excluded from Tunisian political life.",
+    btn_hemicycle: "View my parliament",
+    hemicycle_title: "Your Parliament",
+    hemicycle_back_results: "← Results",
+    hemicycle_hover_hint: "Hover or tap a group to highlight its seats.",
+    hemicycle_coalitions_title: "Viable Majorities",
+    hemicycle_coalitions_sub:
+      "Combinations reaching at least 109 seats without superfluous parties, among compatible factions.",
   };
 
   function tr(key) {

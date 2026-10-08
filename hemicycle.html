@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TunisianValues — Votre Hémicycle</title>
+    <link rel="icon" type="image/png" href="icon.svg" />
+
+    <!-- Polices & Tailwind -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Bibliothèque pour générer le PNG de l'export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+
+    <link rel="stylesheet" href="styless.css" />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              oswald: ["Oswald", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      .seat-dot {
+        transition:
+          transform 0.15s ease,
+          opacity 0.2s ease,
+          filter 0.15s ease;
+        cursor: pointer;
+      }
+      .seat-dot:hover {
+        transform: scale(1.5);
+        filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.35));
+      }
+      .party-row {
+        transition: background-color 0.15s ease;
+        user-select: none;
+      }
+      .priority-btn.active {
+        background-color: #dc2626 !important;
+        color: #ffffff !important;
+        border-color: #dc2626 !important;
+      }
+      .coalition-card {
+        transition:
+          border-color 0.15s ease,
+          box-shadow 0.15s ease,
+          transform 0.15s ease;
+        cursor: pointer;
+      }
+      .coalition-card:hover {
+        transform: translateY(-2px);
+        border-color: #cbd5e1;
+      }
+      .coalition-card.active-coalition {
+        border-color: #dc2626 !important;
+        background-color: #fef2f2 !important;
+        box-shadow: 0 0 0 2px #dc2626;
+      }
+
+      /* Styles de la modale d'export */
+      #export-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(6px);
+        overflow-y: auto;
+        padding: 2rem 1rem;
+      }
+      .modal-box {
+        max-width: 760px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+      }
+      #export-preview-inner {
+        transform-origin: top left;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+
+  <body class="font-oswald antialiased">
+    <div
+      class="min-h-screen bg-gradient-to-br from-red-600 to-red-700 flex flex-col"
+    >
+      <!-- HEADER OFFICIEL -->
+      <header
+        class="border-b border-red-500/30 bg-red-600/90 backdrop-blur-sm sticky top-0 z-50"
+      >
+        <div
+          class="container mx-auto px-4 py-3 sm:py-4 flex items-center justify-between"
+        >
+          <a href="index.html" class="flex items-center">
+            <img
+              src="TUNISIAN VALUES.png"
+              alt="TunisianValues logo"
+              class="h-9 sm:h-10 w-auto"
+            />
+          </a>
+          <div class="flex items-center gap-3">
+            <a
+              href="results.html"
+              id="nav-back-results"
+              class="bg-white/20 hover:bg-white/30 text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-3.5 py-1.5 sm:py-2 rounded-lg transition-colors flex items-center font-oswald"
+            >
+              <span>← Résultats</span>
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <!-- CONTENU PRINCIPAL -->
+      <main class="container mx-auto px-3 sm:px-4 py-6 sm:py-10 flex-1">
+        <div
+          id="hemicycle-container"
+          class="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-8 shadow-2xl"
+        >
+          <!-- EN-TÊTE -->
+          <div class="text-center mb-6">
+            <h1
+              class="text-3xl sm:text-5xl font-bold text-red-700 mb-1 uppercase tracking-tight"
+            >
+              Votre Hémicycle
+            </h1>
+            <p
+              class="text-xs font-bold uppercase tracking-widest text-slate-400 font-oswald mb-3"
+            >
+              Assemblée des Représentants du Peuple (217 Sièges)
+            </p>
+            <div
+              id="parliament-lead-box"
+              class="p-3 sm:p-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 text-xs sm:text-sm font-oswald leading-relaxed"
+            >
+              Calcul de la composition parlementaire en cours...
+            </div>
+          </div>
+
+          <!-- CARTE 1 : HÉMICYCLE + GROUPES -->
+          <div
+            class="p-4 sm:p-6 bg-white border border-slate-200 rounded-xl shadow-xs mb-6"
+          >
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+              <!-- Gauche : Diagramme de l'hémicycle -->
+              <div
+                class="md:col-span-7 flex flex-col items-center justify-center"
+              >
+                <div class="w-full max-w-[460px] aspect-[540/320]">
+                  <svg
+                    id="hemicycle-svg"
+                    viewBox="0 0 540 320"
+                    class="w-full h-full overflow-visible"
+                  ></svg>
+                </div>
+                <div class="flex items-center justify-center gap-3 mt-3">
+                  <button
+                    id="btn-reset-view"
+                    onclick="resetCoalitionFilter()"
+                    class="hidden text-xs font-bold uppercase tracking-wider text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 px-3 py-1 rounded-md transition-colors"
+                  >
+                    Afficher tous les partis
+                  </button>
+                </div>
+              </div>
+
+              <!-- Droite : Liste des partis avec logos agrandis -->
+              <div class="md:col-span-5 flex flex-col justify-center">
+                <div
+                  class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2"
+                >
+                  Groupes parlementaires
+                </div>
+                <div
+                  id="parties-list"
+                  class="space-y-2 max-h-[340px] overflow-y-auto pr-1"
+                >
+                  <!-- Injecté en JS -->
+                </div>
+                <div
+                  class="mt-3 pt-2 border-t border-slate-100 text-xs text-slate-400 font-oswald uppercase tracking-wider"
+                >
+                  Touchez un parti pour isoler ses sièges.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARTE 2 : MAJORITÉS POSSIBLES -->
+          <div
+            class="p-4 sm:p-6 bg-white border border-slate-200 rounded-xl shadow-xs mb-6"
+          >
+            <div class="mb-4">
+              <h2
+                class="text-xl sm:text-2xl font-bold uppercase tracking-wide text-slate-800"
+              >
+                Majorités possibles
+              </h2>
+              <p
+                class="text-xs text-slate-500 font-oswald uppercase tracking-wider"
+              >
+                Cliquez sur une coalition pour l'activer et l'examiner sur
+                l'hémicycle.
+              </p>
+            </div>
+
+            <div
+              id="coalitions-grid"
+              class="grid grid-cols-1 md:grid-cols-2 gap-4"
+            >
+              <!-- Injecté en JS -->
+            </div>
+          </div>
+
+          <!-- CARTE 3 : VOS PRIORITÉS PAR AXE -->
+          <div
+            class="p-4 sm:p-6 bg-white border border-slate-200 rounded-xl shadow-xs mb-6"
+          >
+            <div class="mb-4">
+              <h2
+                class="text-xl sm:text-2xl font-bold uppercase tracking-wide text-slate-800"
+              >
+                Vos priorités par axe
+              </h2>
+              <p
+                class="text-xs text-slate-500 font-oswald uppercase tracking-wider"
+              >
+                Ajustez l'importance de chaque axe politique pour moduler les
+                sièges en jeu (total = 217 sièges).
+              </p>
+            </div>
+
+            <div id="priorities-container" class="space-y-2">
+              <!-- Injecté en JS -->
+            </div>
+          </div>
+
+          <!-- ACTIONS DU BAS AVEC LE BOUTON D'EXPORTATION -->
+          <div
+            class="flex flex-col sm:flex-row justify-center items-center gap-3 pt-2"
+          >
+            <button
+              id="btn-export-card"
+              class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold text-base sm:text-lg px-6 py-3 rounded-lg shadow-lg flex items-center justify-center gap-2 transition-colors cursor-pointer"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                />
+              </svg>
+              <span>Exporter la carte</span>
+            </button>
+            <a
+              href="results.html"
+              id="btn-footer-back-results"
+              class="w-full sm:w-auto bg-slate-800 hover:bg-slate-900 text-white font-bold text-base sm:text-lg px-6 py-3 rounded-lg shadow-lg flex items-center justify-center transition-colors"
+            >
+              <span>← Retour aux résultats</span>
+            </a>
+            <a
+              href="quiz.html"
+              class="w-full sm:w-auto bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-bold text-base sm:text-lg px-6 py-3 rounded-lg shadow-md transition-colors text-center"
+            >
+              <span>Refaire le Quiz</span>
+            </a>
+          </div>
+        </div>
+      </main>
+
+      <!-- FOOTER -->
+      <footer
+        class="border-t border-red-500/30 bg-red-600/90 backdrop-blur-sm mt-auto"
+      >
+        <div
+          class="container mx-auto px-4 py-4 text-center text-white/90 text-xs sm:text-sm font-oswald"
+        >
+          <p>
+            &copy; 2026 TunisianValues — Assemblée des Représentants du Peuple.
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- ZONE DE CAPTURE CACHÉE POUR LA GÉNÉRATION DU PNG -->
+    <div
+      id="capture-area"
+      style="
+        position: absolute;
+        left: -10000px;
+        top: 0;
+        width: 1000px;
+        z-index: -1;
+        overflow: hidden;
+      "
+    ></div>
+
+    <!-- FENÊTRE MODALE D'APERÇU DE L'EXPORTATION -->
+    <div id="export-modal">
+      <div class="modal-box font-oswald">
+        <div
+          class="bg-slate-800 p-4 text-white flex justify-between items-center"
+        >
+          <div>
+            <h3 class="font-bold text-lg uppercase tracking-wide">
+              Exporter la carte de l'hémicycle
+            </h3>
+            <p class="text-xs text-slate-400 uppercase tracking-widest">
+              Aperçu avant téléchargement
+            </p>
+          </div>
+          <button
+            id="export-modal-close"
+            class="text-white hover:text-red-400 text-xl font-bold p-1"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div class="p-4 bg-slate-100">
+          <div
+            id="export-preview-wrap"
+            class="overflow-hidden bg-slate-200 rounded-lg border border-slate-300"
+          >
+            <div id="export-preview-inner"></div>
+          </div>
+        </div>
+
+        <div
+          class="p-4 bg-white flex justify-end gap-3 border-t border-slate-200"
+        >
+          <button
+            id="export-modal-cancel"
+            class="px-5 py-2 rounded-lg border border-slate-300 text-slate-700 font-bold uppercase text-sm hover:bg-slate-50 transition-colors"
+          >
+            Annuler
+          </button>
+          <button
+            id="export-modal-dl"
+            class="px-6 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold uppercase text-sm shadow-md transition-colors flex items-center gap-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+              />
+            </svg>
+            <span>Télécharger en PNG</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCRIPTS DANS L'ORDRE REQUIS -->
+    <script src="translations.js"></script>
+    <script src="questions.js"></script>
+    <script src="data.js"></script>
+    <script src="calculators.js"></script>
+    <script src="hemicycle.js"></script>
+    <!-- MODULE D'EXPORT SÉPARÉ -->
+    <script src="hemicycle_export.js"></script>
+  </body>
+</html>
